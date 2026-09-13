@@ -9,6 +9,7 @@ six inputs, not that the report could not be produced.
 
 import argparse
 import ctypes
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -144,8 +145,7 @@ class Experiment:
                 continue
             for key in options:
                 setting = group + "." + key
-                # Baseline needs this workaround; measure disabling it separately.
-                value = setting != "extensions.expression_syntax"
+                value = True
                 result, outputs = self.builds(stage, flags + [f"--set={setting}={str(value).lower()}"])
                 result.update(setting=setting, value=value,
                               comparisons={name: comparison(data[name], outputs[name]) for name, _ in ENTRIES})
@@ -154,7 +154,9 @@ class Experiment:
         return dict(baseline=baseline, settings=settings), data
 
     def run(self):
-        report = dict(assembler_sha256=sha(self.assembler.read_bytes()),
+        version = subprocess.check_output([str(self.assembler), "--no-config", "--version"], timeout=15).decode("utf-8").strip()
+        report = dict(assembler_version=version, run_at_utc=datetime.now(timezone.utc).isoformat(),
+                      assembler_sha256=sha(self.assembler.read_bytes()),
                       reference_sha256=sha(self.reference.read_bytes()),
                       config_sha256=sha(self.config.read_bytes()), source_manifest=self.manifest,
                       source_file_count=len(self.manifest), entries=ENTRIES,
@@ -171,15 +173,16 @@ class Experiment:
                                     fixes_off=compatibility,
                                     comparisons={name: comparison(native[name], default_data[name]) for name, _ in ENTRIES},
                                     compiled_and_config_results_agree=defaults["builds"] == compiled["builds"] and default_data == compiled_data)
-        matrix, data = self.matrix(stage, ["--no-config", "--bug-fixes=false", "--set=extensions.expression_syntax=true"])
+        matrix, data = self.matrix(stage, ["--no-config", "--bug-fixes=false"])
         matrix["packaged_comparisons"] = {name: comparison(native[name], data[name]) for name, _ in ENTRIES}
+        report["compatibility_matches_packaged"] = all(c is not None and c["identical"] for c in matrix["packaged_comparisons"].values())
         report["unmodified_matrix"] = matrix
         if self.adapted:
             stage = self.stage("adapted", self.adapted)
             adapted_manifest = {name: sha((stage/name).read_bytes()) for name in self.manifest}
             packaged, native = self.builds(stage, [], reference=True)
             defaults, _ = self.builds(stage, ["--no-config"])
-            matrix, data = self.matrix(stage, ["--no-config", "--set=extensions.expression_syntax=true"])
+            matrix, data = self.matrix(stage, ["--no-config"])
             report["adapted"] = dict(packaged=packaged, defaults=defaults, matrix=matrix,
                                      modified_source_hashes={name: value for name, value in adapted_manifest.items() if value != self.manifest[name]},
                                      comparisons={name: comparison(native[name], data[name]) for name, _ in ENTRIES})
@@ -193,7 +196,7 @@ class Experiment:
             profiles = [("packaged", [], True), ("defaults", ["--no-config"], False),
                         ("fixes_off", ["--no-config", "--bug-fixes=false"], False)]
             profiles += [(setting, ["--no-config", f"--set={setting}=true"], False) for setting in
-                         ["extensions.expression_syntax", "encoding.alternative_float_nan",
+                         ["extensions.expression_syntax", "extensions.floating_point_data", "encoding.alternative_float_nan",
                           "encoding.alternative_double_nan", "encoding.gnu_branch_hints",
                           "validation.strict_register_prefixes"]]
             results = []

@@ -41,6 +41,8 @@ func setChoice(f *flags, key string, value bool) error {
 		f.branchExpressions = value
 	case "extensions.expression_syntax":
 		f.expressionSyntax = value
+	case "extensions.floating_point_data":
+		f.floatingPointData = value
 	case "extensions.implicit_sections":
 		f.implicitSections = value
 	case "extensions.non_console_instructions":

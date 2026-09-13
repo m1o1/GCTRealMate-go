@@ -88,7 +88,7 @@ func TestDialectChoices(t *testing.T) {
 	} {
 		for _, mode := range []Dialect{Legacy, Modern} {
 			source := "Test\nCODE @ $80001000\n{\n" + tc.body + "\n}\n"
-			r, err := Assemble(context.Background(), "test.asm", []byte(source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: mode})
+			r, err := Assemble(context.Background(), "test.asm", []byte(source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, FloatingPointData: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: mode})
 			want := tc.legacy
 			if mode == Modern {
 				want = tc.modern

@@ -1,6 +1,6 @@
 # Instruction target restriction
 
-In **0.15.0-go**, broader PowerPC support is an optional extension:
+In **0.16.0-go**, broader PowerPC support is an optional extension:
 
 ```toml
 [bug_fixes]

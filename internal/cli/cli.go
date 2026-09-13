@@ -16,7 +16,7 @@ import (
 	"gctrm/fixes"
 )
 
-const Version = "0.15.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
+const Version = "0.16.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
 const help = `Usage: gctrm [options] source.asm [options] another.asm
 
 Assemble Gecko and PowerPC source into a .GCT beside each input.
@@ -57,6 +57,7 @@ type flags struct {
 	dotOp                                             bool
 	branchExpressions                                 bool
 	expressionSyntax                                  bool
+	floatingPointData                                 bool
 	implicitSections                                  bool
 	additionalConsoleInstructions                     bool
 	validation                                        assembler.Validation
@@ -93,7 +94,7 @@ func Run(ctx context.Context, args []string, executable string, stdout, stderr i
 	}
 	status := 0
 	for _, j := range jobs {
-		result, err := assembler.Compile(ctx, j.file, assembler.Options{Fixes: j.flags.fixes, DotOp: &j.flags.dotOp, ExpressionSyntax: j.flags.expressionSyntax, ImplicitSections: j.flags.implicitSections, AdditionalConsoleInstructions: j.flags.additionalConsoleInstructions, Validation: j.flags.validation, BranchExpressions: j.flags.branchExpressions, AllowNonConsoleInstructions: j.flags.allowNonConsoleInstructions, Compatibility: j.flags.compatibility, BaseAddress: j.flags.base, ConvertAbsolute: j.flags.inline, RepairPathCase: j.flags.repair})
+		result, err := assembler.Compile(ctx, j.file, assembler.Options{Fixes: j.flags.fixes, DotOp: &j.flags.dotOp, ExpressionSyntax: j.flags.expressionSyntax, FloatingPointData: j.flags.floatingPointData, ImplicitSections: j.flags.implicitSections, AdditionalConsoleInstructions: j.flags.additionalConsoleInstructions, Validation: j.flags.validation, BranchExpressions: j.flags.branchExpressions, AllowNonConsoleInstructions: j.flags.allowNonConsoleInstructions, Compatibility: j.flags.compatibility, BaseAddress: j.flags.base, ConvertAbsolute: j.flags.inline, RepairPathCase: j.flags.repair})
 		if err != nil {
 			fmt.Fprintln(stderr, err)
 			// The reference reports missing inputs/includes but returns success.

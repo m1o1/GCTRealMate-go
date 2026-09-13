@@ -30,6 +30,7 @@ type Overrides struct {
 // Rules is a resolved, immutable value passed to the expression/data encoders.
 type Rules struct {
 	ExpressionSyntax       bool
+	FloatingPointData      bool
 	RejectDataOverflow     bool
 	Fixes                  fixes.Policy
 	LeftToRightExpressions bool

@@ -55,7 +55,10 @@ func TestAllDataTypes(t *testing.T) {
 			_ = width
 		})
 	}
-	r := assemble(t, "Example\nCODE @ $80001000\n{\nbyte 1\nhalf 2\nword 3\nfloat 1\nstring \"a@b\"\n}")
+	r, err := Assemble(context.Background(), "test.asm", []byte("Example\nCODE @ $80001000\n{\nbyte 1\nhalf 2\nword 3\nfloat 1\nstring \"a@b\"\n}"), Options{Fixes: fixes.All(), FloatingPointData: true})
+	if err != nil {
+		t.Fatal(err)
+	}
 	if got := hex.EncodeToString(r.Bytes()); got != "00d0c0de00d0c0de06001000000000140000000100000002000000033f8000006140620000000000f000000000000000" {
 		t.Fatal(got)
 	}

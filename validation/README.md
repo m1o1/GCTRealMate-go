@@ -1,10 +1,12 @@
 # Validation records
 
-[project-plus-settings-0.15.0.json](project-plus-settings-0.15.0.json) records the
-fresh packaged-executable comparison, independent option matrices and minimal
-reproductions. Current defaults fail five of six untouched inputs. See the
-[findings](../PROJECT-PLUS-SETTINGS-0.15.0.md) for the expression regression,
-explicit compatibility workaround and measured NaN/branch/register effects.
+[project-plus-settings-0.16.0.json](project-plus-settings-0.16.0.json) records the
+latest packaged-executable comparison and independent option matrices. All six
+untouched inputs match with fixes off and no workaround. Literal defaults build
+all six adapted inputs, retaining 84 known differing words. See the
+[findings](../PROJECT-PLUS-SETTINGS-0.16.0.md) and the 40 new packaged-context
+cases in [source-context-0.16.0.json](source-context-0.16.0.json). The older
+0.15.0 report records the gaps that this release resolves.
 
 These reports retain the versions, hashes, inputs and outcomes of their recorded
 runs. Older reports are historical evidence, not executions of the current build.

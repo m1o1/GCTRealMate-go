@@ -9,7 +9,9 @@ import (
 )
 
 // syntaxScope distinguishes the reference alias grammar from operands and
-// literal data fields. Correcting an evaluator must not expand its language.
+// standalone/array data fields. Scalar block data uses operandSyntax, because
+// the reference parses it as pseudo-instructions with addition support.
+// Correcting an evaluator must not expand its language.
 type syntaxScope uint8
 
 const (
@@ -52,7 +54,7 @@ func checkSyntax(text string, extended bool, scope syntaxScope) error {
 	return nil
 }
 
-// EvalDataRules limits reference data fields to literals and named constants.
+// EvalDataRules limits standalone data and array fields to literals and named constants.
 func EvalDataRules(text string, lookup Lookup, rules dialect.Rules) (int64, error) {
 	if err := checkSyntax(text, rules.ExpressionSyntax, literalSyntax); err != nil {
 		return 0, err

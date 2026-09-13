@@ -4,13 +4,13 @@ A native Go assembler for Gecko codesets and GameCube/Wii PowerPC source,
 based on [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515).
 The upstream source and validation reference are pinned to that commit.
 
-**0.15.0-go defaults: GameCube/Wii target, all individual fixes on, all other flags off.**
+**0.16.0-go defaults: GameCube/Wii target, all individual fixes on, all other flags off.**
 [gctrm.toml](gctrm.toml) groups choices into `[bug_fixes]`, `[extensions]`, `[semantics]`,
 `[encoding]`, `[validation]`, and `[cli]`. It contains no `[legacy]` table.
-All 39 fix settings default true; the 20 other flags default false. For example, octal notation,
+All 39 fix settings default true; the 21 other flags default false. For example, octal notation,
 32-bit unsigned aliases, historical register spellings and NaN bytes remain.
 Missing console mnemonics are enabled by `bug_fixes.additional_console_instructions`.
-`.op`, broader expression grammar and implicit sections require explicit opt-in. Optional source restrictions are separate
+`.op`, broader expression grammar, floating data inside PPC blocks, and implicit sections require explicit opt-in. Existing block addition such as `word Alias+4` needs no extension. Optional source restrictions are separate
 from encoding corrections. Recognized non-console instructions are rejected by default;
 `extensions.non_console_instructions = true` explicitly permits broader PowerPC forms.
 
@@ -205,12 +205,14 @@ non-console opt-in and bug fixes enabled; those are not console execution tests.
 
 The corrected mode passed **218 execution checks in Dolphin** across GameCube/Wii
 interpreter/JIT configurations, including actual MEM1 and MEM2 C2 hook execution.
-The [fresh 0.15.0 Project+ comparison](PROJECT-PLUS-SETTINGS-0.15.0.md) found that
-current defaults fail five of six untouched entrypoints. Besides enabled input
-checks, a Go regression rejects existing data-addition syntax. All six match the
-actual packaged executable with `--no-config --bug-fixes=false
---set=extensions.expression_syntax=true`. Separately adapted builds with fixes
-and that expression workaround retain the 84 explained differing words.
+The [0.16.0 Project+ comparison](PROJECT-PLUS-SETTINGS-0.16.0.md) confirms all six
+untouched outputs match the actual packaged executable with
+`--no-config --bug-fixes=false`, with no expression workaround. Current defaults
+build MDEF/DEFINE identically and diagnose invalid input in the four main entries.
+All six separately adapted builds succeed with literal defaults and retain the
+84 explained differing words. The data-addition regression and ungated floating
+block-data behavior identified in 0.15.0 are resolved; 40 packaged source-context
+captures now run in the regression suite.
 These assembly comparisons are not gameplay tests.
 [CONSOLE-VALIDATION.md](CONSOLE-VALIDATION.md) and
 [PROJECT-PLUS-VALIDATION.md](PROJECT-PLUS-VALIDATION.md) record reproduction,

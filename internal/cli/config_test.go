@@ -69,7 +69,7 @@ func TestAllSourceConfigurations(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		opts := assembler.Options{Fixes: fixes.FromBool(true), Compatibility: f.compatibility}
+		opts := assembler.Options{Fixes: fixes.FromBool(true), FloatingPointData: true, Compatibility: f.compatibility}
 		r, err := assembler.Assemble(context.Background(), "probe.asm", []byte(configProbe), opts)
 		if err != nil {
 			t.Fatalf("configuration %08b: %v", mask, err)
@@ -101,6 +101,7 @@ func TestIndividualSourceSwitchesThroughCLI(t *testing.T) {
 				}
 				legacy[index] = !legacy[index]
 				var settings strings.Builder
+				settings.WriteString("extensions.floating_point_data=true\n")
 				for i, name := range sourceSwitches {
 					fmt.Fprintf(&settings, "%s=%t\n", name, !legacy[i])
 				}

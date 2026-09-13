@@ -1,4 +1,4 @@
-# GCTRealMate Go 0.15.0 configuration. Full guide: CONFIGURATION.md.
+# GCTRealMate Go 0.16.0 configuration. Full guide: CONFIGURATION.md.
 # Select explicitly: .\bin\gctrm.exe --config gctrm.toml source.asm
 # Or copy beside the executable as <executable-basename>.toml.
 # Every [bug_fixes] option defaults true; all other flags default false.
@@ -240,13 +240,27 @@ branch_expressions = false
 # Examples with true:
 #   li r3,0b1010                loads 10 (binary literal).
 #   li r3,(2+3)                 loads 5 (parentheses).
-#   word 2+3                    emits 00000005 (arithmetic in data).
+#   word (2+3)                  emits 00000005 (parenthesized block data).
 #   .alias mask = (1 << 4) - 1   evaluates to 15 (shift).
 #   .alias mask = ~0             evaluates to 0xffffffff (32-bit complement).
 # These added forms are rejected with false. Arithmetic width and precedence
 # are controlled separately by the semantics settings below.
+# Existing block operands such as word 2+3 and word Alias+0x60 work with false.
+# Standalone/addressed data and array counts retain their separate literal grammar.
 # CLI/INI: --set=extensions.expression_syntax=true|false
 expression_syntax = false
+
+# Accept float/double literals and arrays as data inside CODE/HOOK/PULSE blocks,
+# and four-byte float data in op writes. This does not add CPU instructions.
+# Example inside CODE: float NaN emits 7FFFFFFF with true (or 7FC00000 when
+# encoding.alternative_float_nan=true); double 1.0 emits 3FF00000 00000000.
+# With false and bug_fixes.unknown_instructions=true these forms are diagnosed.
+# With both false, preserve the packaged instruction-parser fallback instead:
+# float emits FC000000; double emits one word FFFFFFFF, regardless of NaN options.
+# Ordinary float NaN @ $80001000 and double 1.0 @ $80001000 need no extension.
+# op double still fails with true because op requires exactly four data bytes.
+# CLI/INI: --set=extensions.floating_point_data=true|false
+floating_point_data = false
 
 # Allow source without an initial named section.
 # Example: a file containing only op nop @ $80001000 fails with false;
@@ -289,12 +303,12 @@ gnu_branch_hints = false
 sign_extend_data_slots = false
 
 # Use the alternative quiet float NaN payload.
-# Example: float NaN emits 7FFFFFFF with false or 7FC00000 with true.
+# Example: float NaN @ $80001000 writes 7FFFFFFF with false or 7FC00000 with true.
 # CLI/INI: --set=encoding.alternative_float_nan=true|false
 alternative_float_nan = false
 
 # Use the alternative quiet double NaN payload.
-# Example: double NaN emits 7FFFFFFF FFFFFFFF with false
+# Example: double NaN @ $80001000 writes 7FFFFFFF FFFFFFFF with false
 # or 7FF80000 00000001 with true. Each value occupies eight bytes.
 # CLI/INI: --set=encoding.alternative_double_nan=true|false
 alternative_double_nan = false

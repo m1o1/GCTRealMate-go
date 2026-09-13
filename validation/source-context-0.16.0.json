@@ -1,0 +1,1302 @@
+{
+  "reference_sha256": "05ec46d81d7598e5b011ac2eaef7a2fadfb904b7bb95aec1db8ce75ba94d412a",
+  "assembler_sha256": "e5b0ffc3d50d0c6ba0bc5339239d3cc16a5394b1baadeb8199c4b25205cca18f",
+  "cases": [
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nword 2+3\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000000500000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-0.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-0.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-0.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nword x+4\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000100400000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-1.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-1.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-1.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nword x+0x60\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000106000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-2.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-2.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-2.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nword 0x10+010+-2\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000001600000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-3.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-3.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-3.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nbyte 0xfe+1\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004000000ff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-4.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-4.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-4.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nhalf 0xfffe+1\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000ffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-5.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-5.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000040000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-5.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nfloat NaN\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004fc00000000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004fc00000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-6.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-6.asm:5: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000047fffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-6.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\nfloat 1.0\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004fc00000000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004fc00000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-7.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-7.asm:5: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000043f80000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-7.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\ndouble NaN\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-8.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-8.asm:5: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000087ffffffffffffffff000000000000000",
+          "diagnostic": "<scratch>\\probe-8.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "CODE @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nCODE @ $80001000\n{\ndouble 1.0\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-9.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-9.asm:5: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de06001000000000083ff0000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-9.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nword 2+3\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000000500000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-10.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-10.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-10.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nword x+4\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000100400000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-11.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-11.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-11.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nword x+0x60\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000106000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-12.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-12.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-12.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nword 0x10+010+-2\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000001600000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-13.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-13.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-13.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nbyte 0xfe+1\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001000000ff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-14.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-14.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-14.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nhalf 0xfffe+1\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000ffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-15.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-15.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000010000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-15.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nfloat NaN\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001fc00000000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001fc00000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-16.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-16.asm:5: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000017fffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-16.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\nfloat 1.0\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001fc00000000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001fc00000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-17.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-17.asm:5: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000013f80000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-17.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\ndouble NaN\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001ffffffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001ffffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-18.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-18.asm:5: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000027fffffffffffffff6000000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-18.GCT: 40 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "HOOK @ $80001000",
+      "source": "Probe\n.alias x = 0x1000\nHOOK @ $80001000\n{\ndouble 1.0\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001ffffffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec200100000000001ffffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-19.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-19.asm:5: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec2001000000000023ff00000000000006000000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-19.GCT: 40 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nword 2+3\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000000500000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-20.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-20.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000000500000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-20.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nword x+4\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000100400000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-21.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-21.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000100400000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-21.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nword x+0x60\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000106000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-22.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-22.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000106000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-22.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nword 0x10+010+-2\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000001600000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-23.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-23.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000001600000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-23.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nbyte 0xfe+1\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001000000ff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-24.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-24.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001000000ff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-24.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nhalf 0xfffe+1\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000ffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-25.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-25.GCT: 32 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000010000ffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-25.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nfloat NaN\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001fc00000000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001fc00000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-26.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-26.asm:5: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000017fffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-26.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\nfloat 1.0\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001fc00000000000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001fc00000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-27.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-27.asm:5: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000013f80000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-27.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\ndouble NaN\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001ffffffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001ffffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-28.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-28.asm:5: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000017ffffffffffffffff000000000000000",
+          "diagnostic": "<scratch>\\probe-28.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "PULSE",
+      "source": "Probe\n.alias x = 0x1000\nPULSE\n{\ndouble 1.0\n}\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001ffffffff00000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n16(0x10) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec000000000000001ffffffff00000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-29.GCT: 32 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-29.asm:5: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0dec0000000000000013ff0000000000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-29.GCT: 32 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop word 2+3 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000005f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000005f000000000000000",
+          "diagnostic": "<scratch>\\probe-30.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000005f000000000000000",
+          "diagnostic": "<scratch>\\probe-30.GCT: 24 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000005f000000000000000",
+          "diagnostic": "<scratch>\\probe-30.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop word x+4 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001004f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001004f000000000000000",
+          "diagnostic": "<scratch>\\probe-31.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001004f000000000000000",
+          "diagnostic": "<scratch>\\probe-31.GCT: 24 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001004f000000000000000",
+          "diagnostic": "<scratch>\\probe-31.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop word x+0x60 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001060f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001060f000000000000000",
+          "diagnostic": "<scratch>\\probe-32.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001060f000000000000000",
+          "diagnostic": "<scratch>\\probe-32.GCT: 24 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000001060f000000000000000",
+          "diagnostic": "<scratch>\\probe-32.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop word 0x10+010+-2 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000016f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000016f000000000000000",
+          "diagnostic": "<scratch>\\probe-33.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000016f000000000000000",
+          "diagnostic": "<scratch>\\probe-33.GCT: 24 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de0400100000000016f000000000000000",
+          "diagnostic": "<scratch>\\probe-33.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop byte 0xfe+1 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000000000fff000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000000000fff000000000000000",
+          "diagnostic": "<scratch>\\probe-34.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000000000fff000000000000000",
+          "diagnostic": "<scratch>\\probe-34.GCT: 24 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000000000fff000000000000000",
+          "diagnostic": "<scratch>\\probe-34.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop half 0xfffe+1 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de040010000000fffff000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de040010000000fffff000000000000000",
+          "diagnostic": "<scratch>\\probe-35.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de040010000000fffff000000000000000",
+          "diagnostic": "<scratch>\\probe-35.GCT: 24 bytes, 1 code sections\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de040010000000fffff000000000000000",
+          "diagnostic": "<scratch>\\probe-35.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop float NaN @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fc000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fc000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-36.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-36.asm:3: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de040010007ffffffff000000000000000",
+          "diagnostic": "<scratch>\\probe-36.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop float 1.0 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fc000000f000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fc000000f000000000000000",
+          "diagnostic": "<scratch>\\probe-37.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-37.asm:3: float data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de040010003f800000f000000000000000",
+          "diagnostic": "<scratch>\\probe-37.GCT: 24 bytes, 1 code sections\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true,
+        "extended_data": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop double NaN @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+          "diagnostic": "<scratch>\\probe-38.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-38.asm:3: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-38.asm:3: op data must occupy exactly one instruction word\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    },
+    {
+      "form": "op",
+      "source": "Probe\n.alias x = 0x1000\nop double 1.0 @ $80001000\n",
+      "outputs": {
+        "packaged": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+          "diagnostic": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+        },
+        "fixes_off": {
+          "exit": 0,
+          "hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+          "diagnostic": "<scratch>\\probe-39.GCT: 24 bytes, 1 code sections\n"
+        },
+        "defaults": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-39.asm:3: double data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead\n"
+        },
+        "floating_data": {
+          "exit": 1,
+          "hex": null,
+          "diagnostic": "<scratch>\\probe-39.asm:3: op data must occupy exactly one instruction word\n"
+        }
+      },
+      "checks": {
+        "reference_succeeded": true,
+        "compatibility_identical": true,
+        "default_policy": true,
+        "extension_policy": true
+      }
+    }
+  ],
+  "case_count": 40,
+  "passed": true
+}

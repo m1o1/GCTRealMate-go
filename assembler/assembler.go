@@ -42,6 +42,7 @@ type Options struct {
 	Fixes                         fixes.Policy // Individual corrections; zero preserves known C++ quirks.
 	DotOp                         *bool        // Accept .op as an alias for op; nil defaults to false.
 	ExpressionSyntax              bool         // Additional expression forms beyond the reference grammar.
+	FloatingPointData             bool         // Permit float/double data in PPC blocks and op writes.
 	ImplicitSections              bool         // Permit source without an initial section name.
 	AdditionalConsoleInstructions bool         // Enable the missing-console-instruction fix; CLI defaults true.
 	Validation                    Validation
@@ -162,6 +163,7 @@ func Assemble(ctx context.Context, filename string, source []byte, opts Options)
 	}
 	rules.Fixes = opts.Fixes
 	rules.ExpressionSyntax = opts.ExpressionSyntax
+	rules.FloatingPointData = opts.FloatingPointData
 	rules.RejectDataOverflow = opts.Validation.RejectDataOverflow
 	opts.rules = rules
 	if err := ctx.Err(); err != nil {

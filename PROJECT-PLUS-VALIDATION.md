@@ -1,10 +1,11 @@
 # Project+ full-source assembly comparison
 
-**Latest: [0.15.0 defaults and option comparison](PROJECT-PLUS-SETTINGS-0.15.0.md).**
-Current defaults fail five of six untouched entrypoints. A Go data-expression
-regression means fixes-off alone is also insufficient; fixes-off plus explicit
-`extensions.expression_syntax=true` reproduces all six packaged GCTs. The older
-runs below used different binaries/profiles and are not current results.
+**Latest: [0.16.0 defaults and option comparison](PROJECT-PLUS-SETTINGS-0.16.0.md).**
+The 0.15.0 source-context gaps are resolved. All six untouched GCTs match the
+packaged executable with fixes off and no expression workaround. Current defaults
+build two entries and diagnose invalid input in four; all six adapted entries
+build with defaults, retaining 84 explained differing words. Older runs below
+used different binaries/profiles and are not current results.
 
 Current configuration is documented in [CONFIGURATION.md](CONFIGURATION.md).
 All category flags default false; only bug fixes default true. Policies and

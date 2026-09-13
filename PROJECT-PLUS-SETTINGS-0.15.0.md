@@ -1,5 +1,9 @@
 # Project+ defaults and option comparison: 0.15.0
 
+This is a historical record. Both gaps described here are resolved in
+[0.16.0](PROJECT-PLUS-SETTINGS-0.16.0.md). Use the harness at commit `f55d001` to
+reproduce the profiles of this older run.
+
 **Current defaults do not reproduce the packaged assembler byte for byte.**
 On 2026-09-13, the packaged executable assembled all six untouched entrypoints;
 Go 0.15.0 assembled only `DEFINE.txt`, whose output matched. This run also found

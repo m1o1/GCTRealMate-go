@@ -1,0 +1,16 @@
+{
+  "version": "0.16.0-go",
+  "assembler_sha256": "e5b0ffc3d50d0c6ba0bc5339239d3cc16a5394b1baadeb8199c4b25205cca18f",
+  "config_sha256": "5884c791bb2c3bcf40f2e696ca393180026e7505a4e7355d1a799243c9ae4a51",
+  "checks": {
+    "go test ./...": "passed",
+    "go vet ./...": "passed",
+    "packaged_source_context_cases": 40,
+    "untouched_compatibility_identical": 6,
+    "untouched_defaults_success": 2,
+    "adapted_defaults_success": 6,
+    "adapted_different_words": 84,
+    "optional_settings_tested_independently": 21,
+    "original_source_files_unchanged": 168
+  }
+}

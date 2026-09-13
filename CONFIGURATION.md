@@ -1,6 +1,6 @@
 # Configuration
 
-Version **0.15.0-go** defaults every `[bug_fixes]` option to **true**, including implemented GameCube/Wii instructions missing from C++. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
+Version **0.16.0-go** defaults every `[bug_fixes]` option to **true**, including implemented GameCube/Wii instructions missing from C++. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
 
 ## Loading and overrides
 
@@ -42,7 +42,11 @@ All 39 keys default true. See the [complete fix reference and examples](BUG-FIXE
 
 ### expression_syntax
 
-**Default: false.** True enables binary `0b` literals, parentheses, shifts and unary complement in expressions, arithmetic in data/count fields, and broader operand/address expressions. False retains basic alias operators `+ - * / % & ^ |`, literals/named constants in data, and reference-style addition in operands. It does not change precedence, arithmetic width or literal radix. `bug_fixes.alias_terms` and the scanner fixes repair evaluation of supported expressions; it does not enable new grammar. With fixes off, the historical alias evaluator and scanner still retain their characterized quirks, so enabling syntax does not guarantee corrected evaluation. For example, `.alias x = (2 + 3) * 4` requires this extension and corrected evaluation; `word 2+3` also requires it.
+**Default: false.** True enables binary `0b` literals, parentheses, shifts and unary complement in expressions, arithmetic in standalone data/count fields, and broader operand/address expressions. False retains basic alias operators `+ - * / % & ^ |`, literals/named constants in standalone data and arrays, and reference-style addition in operands. Scalar block data uses that operand grammar: `word 2+3` and `word Alias+0x60` inside CODE/HOOK/PULSE already work with false, as does `op word 2+3 @ $80001000`. By contrast, `word 2+3 @ $80001000` is a standalone data write and requires the extension. This does not change precedence, arithmetic width or literal radix. `bug_fixes.alias_terms` and the scanner fixes repair evaluation of supported expressions; they do not enable new grammar. With fixes off, the historical alias evaluator and scanner still retain their characterized quirks. For example, `.alias x = (2 + 3) * 4` requires this extension and corrected evaluation; `word (2+3)` inside CODE requires this extension for its parentheses.
+
+### floating_point_data
+
+**Default: false.** True permits `float` and `double` data literals/arrays inside CODE, HOOK and PULSE, plus four-byte float data in `op` writes. False preserves the reference instruction-parser context: with `bug_fixes.unknown_instructions=true` these forms produce a diagnostic; with that check false, `float` emits the packaged fallback word `FC000000` and `double` emits one word `FFFFFFFF`. These fallback words are not floating-point data. NaN payload settings affect actual data only and never change those fallbacks. With true, block `float NaN` emits `7FFFFFFF` (or `7FC00000` with the alternative float NaN option), and block `double 1.0` emits `3FF00000 00000000`. Label offsets account for the selected size. `op double` still fails with true because an op write must occupy one four-byte word. Ordinary `float NaN @ $80001000`, `double 1.0 @ $80001000`, and floating data outside PPC blocks need no extension. This flag neither enables CPU opcodes nor changes native block `scalar` fixed-point data.
 
 ### implicit_sections
 

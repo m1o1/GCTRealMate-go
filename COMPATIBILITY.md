@@ -1,16 +1,17 @@
-# Compatibility contract — 0.15.0-go
+# Compatibility contract — 0.16.0-go
 
-**Known current gaps:** the [fresh Project+ audit](PROJECT-PLUS-SETTINGS-0.15.0.md)
-found that reference-supported data addition incorrectly requires
-`extensions.expression_syntax=true`. Current defaults fail five of six untouched
-Project+ entrypoints; disabling fixes alone is insufficient. All six match the
-packaged executable with fixes disabled and expression syntax enabled. Separate
-probes also found ungated float/double data acceptance inside CODE blocks.
+The two source-context gaps found in 0.15.0 are resolved. Existing scalar block
+addition works without an extension; float/double data inside PPC blocks now
+requires the independent default-off `extensions.floating_point_data` choice.
+The [fresh 0.16.0 comparison](PROJECT-PLUS-SETTINGS-0.16.0.md) matches all six
+untouched Project+ GCTs against the packaged executable with fixes disabled and
+no other options changed. Current defaults retain the intended input checks and
+encoding corrections, so they are not a byte-identical compatibility profile.
 
 The pinned reference is [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515),
 built with MSVC on Windows. Its retained source/executable are unchanged.
 
-CLI/config defaults target GameCube/Wii and enable bug fixes; all 39 `[bug_fixes]` keys default true, and all 20 other flags default false.
+CLI/config defaults target GameCube/Wii and enable bug fixes; all 39 `[bug_fixes]` keys default true, and all 21 other flags default false.
 `[extensions]` adds language/instruction features; `[semantics]` changes numeric
 interpretation; `[encoding]` selects byte conventions; `[validation]` adds
 restrictions; `[cli]` selects INI/output alternatives. The template has no legacy
@@ -46,8 +47,9 @@ defect corpora explicitly enable non-console support where those cases require i
   permissive prefix handling and the malformed odd-word `.GOTO_F` command.
 - Historical runs matched all six unmodified Project+ entrypoints against both
   retained C++ and actual packaged executables; see the
-  [older report](validation/project-plus-bundled.json). A fresh 0.15.0 run requires
-  the expression workaround described above to reproduce that result.
+  [older report](validation/project-plus-bundled.json). A fresh 0.16.0 run now
+  reproduces that result with `--no-config --bug-fixes=false`; the temporary
+  expression workaround required in 0.15.0 is no longer necessary.
 
 This is output compatibility with a pinned build, not proof that every possible
 input, host compiler, or upstream fork behaves identically. Malformed cases

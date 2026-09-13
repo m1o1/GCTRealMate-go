@@ -31,6 +31,19 @@ func encodeData(n node, inBlock bool, rules dialect.Rules) ([]byte, bool, error)
 	if width == 0 {
 		return nil, false, fmt.Errorf("unknown data type %q", name)
 	}
+	// In instruction context, C++ routes float through its floating-opcode
+	// fallback and double through its unknown-opcode fallback. Actual data
+	// literals here are a language extension, independent of their NaN payload.
+	if inBlock && (name == "float" || name == "double") && !rules.FloatingPointData {
+		if rules.Fixes.UnknownInstructions {
+			return nil, false, fmt.Errorf("%s data in a PPC block or op write requires extensions.floating_point_data=true; use a direct data write or raw word instead", name)
+		}
+		word := uint32(0xffffffff)
+		if name == "float" {
+			word = 0xfc000000
+		}
+		return appendWords(nil, word), false, nil
+	}
 	count, explicit := 1, false
 	if strings.HasPrefix(rest, "[") {
 		end := strings.IndexByte(rest, ']')
@@ -143,6 +156,10 @@ func encodeData(n node, inBlock bool, rules dialect.Rules) ([]byte, bool, error)
 				var a uint32
 				a, e = parseSourceAddress(arg, lookupValues(n.values), rules.ExpressionSyntax, true)
 				v = int64(a)
+			} else if inBlock && !explicit {
+				// C++ handles scalar block data as pseudo-instruction operands;
+				// those already accept addition, including alias-plus-offset.
+				v, e = expr.EvalRules(arg, lookupValues(n.values), rules)
 			} else {
 				v, e = expr.EvalDataRules(arg, lookupValues(n.values), rules)
 			}
