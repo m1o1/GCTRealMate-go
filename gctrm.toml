@@ -3,99 +3,151 @@
 # Or copy beside the executable as <executable-basename>.toml.
 # Bug fixes are enabled; all category flags default false.
 # The default target is GameCube/Wii; other defaults preserve C++ choices.
+# Examples assume bug_fixes = true and other default settings unless noted.
+# Source fragments belong in a named section/block unless the example says otherwise.
 version = 2
+
+# Correct characterized C++ encoding and parsing defects. Full list: BUG-FIXES.md.
+# Example: lha r3,0(r4) emits A0640000 (false) or A8640000 (true).
+# The corrected instruction sign-extends the loaded halfword.
+# CLI/INI: --bug-fixes=true|false
 bug_fixes = true
 
 [extensions]
 # Accept .op as an alias for op. False ignores .op lines like C++.
+# Example: .op nop @ $80001000 is ignored with false; true emits a nop write.
 # CLI/INI: --set=extensions.dot_op=true|false
 dot_op = false
 
-# Accept additional numeric branch forms, such as b 20 or b 16+4.
+# Accept additional numeric branch forms.
+# Example: with true, b 20 and b 16+4 encode the same target as b 0x14.
+# With false, use b 0x14 or a defined label.
 # CLI/INI: --set=extensions.branch_expressions=true|false
 branch_expressions = false
 
 # Accept expanded expressions beyond the reference grammar.
+# Examples with true:
+#   li r3,0b1010                loads 10 (binary literal).
+#   li r3,(2+3)                 loads 5 (parentheses).
+#   word 2+3                    emits 00000005 (arithmetic in data).
+#   .alias mask = (1 << 4) - 1   evaluates to 15 (shift).
+#   .alias mask = ~0             evaluates to 0xffffffff (32-bit complement).
+# These added forms are rejected with false. Arithmetic width and precedence
+# are controlled separately by the semantics settings below.
 # CLI/INI: --set=extensions.expression_syntax=true|false
 expression_syntax = false
 
 # Allow source without an initial named section.
+# Example: a file containing only op nop @ $80001000 fails with false;
+# true creates a section named Codes and assembles the write.
 # CLI/INI: --set=extensions.implicit_sections=true|false
 implicit_sections = false
 
 # Enable the implemented console mnemonics absent from C++.
+# Example: mfsr r3,sr0 is rejected with false; true assembles it as 7C6004A6.
 # CLI/INI: --set=extensions.additional_console_instructions=true|false
 additional_console_instructions = false
 
 # Permit implemented instructions outside GameCube/Wii, including 64-bit integers.
 # False rejects these forms even when bug_fixes is false.
+# Examples: ld r3,8(r4) and mulld r3,r4,r5 require true; they cannot run on Wii.
 # CLI/INI: --set=extensions.non_console_instructions=true|false
 non_console_instructions = false
 
 [semantics]
 # Interpret leading-zero integers as decimal instead of octal.
+# Example: li r3,010 loads 8 with false or 10 with true.
+# The literal 08 is invalid octal with false, but means 8 with true.
 # CLI/INI: --set=semantics.decimal_leading_zeros=true|false
 decimal_leading_zeros = false
 
 # Use C-style operator precedence instead of left-to-right evaluation.
+# Example: .alias x = 2 + 3 * 4 evaluates to 20 with false or 14 with true.
 # CLI/INI: --set=semantics.c_operator_precedence=true|false
 c_operator_precedence = false
 
 # Use signed 64-bit aliases instead of unsigned 32-bit arithmetic.
+# Example: .alias x = 0xffffffff + 1 evaluates to 0 with false (32-bit wrap)
+# or 4294967296 with true. This affects assembler calculations, not CPU width.
 # CLI/INI: --set=semantics.signed_64_bit_aliases=true|false
 signed_64_bit_aliases = false
 
 [encoding]
 # Use GNU prediction-bit conventions instead of C++ conventions.
+# Example: bdnz -0x10 emits 4220FFF0 with false or 4200FFF0 with true.
+# Only the prediction bit changes; the branch condition and target are the same.
 # CLI/INI: --set=encoding.gnu_branch_hints=true|false
 gnu_branch_hints = false
 
 # Sign-extend negative byte/half values occupying 32-bit slots.
+# Example inside CODE: byte -1 emits 000000FF with false or FFFFFFFF with true;
+# half -1 similarly emits 0000FFFF or FFFFFFFF. Packed arrays keep their widths.
 # CLI/INI: --set=encoding.sign_extend_data_slots=true|false
 sign_extend_data_slots = false
 
 # Use the alternative quiet float NaN payload.
+# Example: float NaN emits 7FFFFFFF with false or 7FC00000 with true.
 # CLI/INI: --set=encoding.alternative_float_nan=true|false
 alternative_float_nan = false
 
 # Use the alternative quiet double NaN payload.
+# Example: double NaN emits 7FFFFFFF FFFFFFFF with false
+# or 7FF80000 00000001 with true. Each value occupies eight bytes.
 # CLI/INI: --set=encoding.alternative_double_nan=true|false
 alternative_double_nan = false
 
 [validation]
 # Require register prefixes to match their operand classes.
+# Example: fadd r3,r4,r5 is accepted with false and rejected with true.
+# The matching spelling fadd f3,f4,f5 works in both cases.
 # CLI/INI: --set=validation.strict_register_prefixes=true|false
 strict_register_prefixes = false
 
 # Reject duplicate labels instead of using the first definition.
+# Example: defining loop: twice in the same block keeps the first with false;
+# true reports a duplicate-label error.
 # CLI/INI: --set=validation.reject_duplicate_labels=true|false
 reject_duplicate_labels = false
 
 # Reject extra macro arguments and missing closing parentheses.
+# Example: if Patch is declared with no parameters, %Patch(extra) ignores
+# the extra argument with false; true reports an argument-count error.
 # CLI/INI: --set=validation.strict_macro_calls=true|false
 strict_macro_calls = false
 
 # Reject undefined macros instead of expanding them to nothing.
+# Example: %Missing() with no matching macro is ignored with false;
+# true reports an undefined-macro error.
 # CLI/INI: --set=validation.reject_undefined_macros=true|false
 reject_undefined_macros = false
 
 # Reject trailing annotations after source addresses.
+# Example: op nop @ $80001000 note uses address 80001000 with false;
+# true rejects the trailing note.
 # CLI/INI: --set=validation.reject_address_annotations=true|false
 reject_address_annotations = false
 
 # Reject out-of-range integer data instead of truncating it.
+# Example: byte 256 @ $80001000 writes zero with false;
+# true reports that 256 does not fit in a byte.
 # CLI/INI: --set=validation.reject_data_overflow=true|false
 reject_data_overflow = false
 
 [cli]
 # Match INI basenames exactly instead of matching prefixes.
+# Example: if patch.asm.backup : -g appears before patch.asm : -t in the INI,
+# assembling patch.asm selects -g with false or -t with true.
 # CLI/INI: --set=cli.exact_ini_matching=true|false
 exact_ini_matching = false
 
 # Write a flat code list instead of the include tree.
+# Example: with -l and .include part.asm, false logs the include and nested
+# sections; true lists only section names and offsets.
 # CLI/INI: --set=cli.flat_logs=true|false
 flat_logs = false
 
 # Write LF on every host instead of native text newlines.
+# Example: with -t or -l on Windows, false separates lines with \r\n;
+# true uses \n. On Linux/macOS, both settings use \n.
 # CLI/INI: --set=cli.lf_line_endings=true|false
 lf_line_endings = false
