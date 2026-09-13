@@ -12,7 +12,7 @@ import (
 )
 
 func TestExtensionSchema(t *testing.T) {
-	for _, config := range []string{"", "[extensions]", "[semantics]\ndecimal_leading_zeros=true", strings.TrimSuffix(fixesTOML(false), "\n")} {
+	for _, config := range []string{"", "[extensions]", "[semantics]\nc_operator_precedence=true", strings.TrimSuffix(fixesTOML(false), "\n")} {
 		f, err := decodeConfig([]byte(config))
 		if err != nil || f.dotOp || f.branchExpressions || f.allowNonConsoleInstructions {
 			t.Fatal(f, err)
@@ -33,8 +33,8 @@ func TestBranchConfigAndCLI(t *testing.T) {
 	for _, fixed := range []bool{false, true} {
 		for _, setting := range []string{"", "branch_expressions=false", "branch_expressions=true"} {
 			for _, override := range []string{"", "--set=extensions.branch_expressions=false", "--set=extensions.branch_expressions=true"} {
-				for _, decimal := range []string{"false", "true"} {
-					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, setting, override, decimal), func(t *testing.T) {
+				for _, precedence := range []string{"false", "true"} {
+					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, setting, override, precedence), func(t *testing.T) {
 						dir := t.TempDir()
 						cfg, src := filepath.Join(dir, "settings.toml"), filepath.Join(dir, "probe.asm")
 						writeTestFile(t, cfg, fixesTOML(fixed)+fmt.Sprintf("[extensions]\n%s\n", setting))
@@ -45,7 +45,7 @@ func TestBranchConfigAndCLI(t *testing.T) {
 						if override != "" {
 							args = append(args, override)
 						}
-						args = append(args, "--set=semantics.decimal_leading_zeros="+decimal, fmt.Sprintf("--bug-fixes=%t", fixed), src)
+						args = append(args, "--set=semantics.c_operator_precedence="+precedence, fmt.Sprintf("--bug-fixes=%t", fixed), src)
 						var out, diagnostic bytes.Buffer
 						status := Run(context.Background(), args, "", &out, &diagnostic)
 						data, err := os.ReadFile(outPath)
@@ -81,7 +81,7 @@ func TestBranchINIPrecedenceAndPersistence(t *testing.T) {
 	exe := filepath.Join(dir, "gctrm.exe")
 	writeTestFile(t, filepath.Join(dir, "gctrm.toml"), "[extensions]\nbranch_expressions=true\n")
 	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm : --set=extensions.branch_expressions=false\nsecond.asm : --set=extensions.branch_expressions=true\n")
-	jobs, _, err := plan([]string{"first.asm", "--set=extensions.branch_expressions=false", "second.asm", "--set=semantics.decimal_leading_zeros=true", "--bug-fixes=true", "third.asm"}, exe)
+	jobs, _, err := plan([]string{"first.asm", "--set=extensions.branch_expressions=false", "second.asm", "--set=semantics.c_operator_precedence=true", "--bug-fixes=true", "third.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -90,7 +90,7 @@ func TestBranchINIPrecedenceAndPersistence(t *testing.T) {
 			t.Fatal(j.file)
 		}
 	}
-	jobs, _, err = plan([]string{"--set=extensions.branch_expressions=true", "first.asm", "--set=semantics.decimal_leading_zeros=false", "--bug-fixes=false", "third.asm"}, exe)
+	jobs, _, err = plan([]string{"--set=extensions.branch_expressions=true", "first.asm", "--set=semantics.c_operator_precedence=false", "--bug-fixes=false", "third.asm"}, exe)
 	if err != nil || len(jobs) != 2 || !jobs[0].flags.branchExpressions || !jobs[1].flags.branchExpressions {
 		t.Fatal(jobs, err)
 	}

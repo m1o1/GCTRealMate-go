@@ -45,9 +45,6 @@ func setChoice(f *flags, key string, value bool) error {
 		f.implicitSections = value
 	case "extensions.non_console_instructions":
 		f.allowNonConsoleInstructions = value
-	case "semantics.decimal_leading_zeros":
-		v := !value
-		f.compatibility.OctalLiterals = &v
 	case "semantics.c_operator_precedence":
 		v := !value
 		f.compatibility.LeftToRightExpressions = &v

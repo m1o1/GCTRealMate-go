@@ -4,10 +4,10 @@ A native Go assembler for Gecko codesets and GameCube/Wii PowerPC source,
 based on [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515).
 The upstream source and validation reference are pinned to that commit.
 
-**0.14.0-go defaults: GameCube/Wii target, all individual fixes on, all other flags off.**
+**0.15.0-go defaults: GameCube/Wii target, all individual fixes on, all other flags off.**
 [gctrm.toml](gctrm.toml) groups choices into `[bug_fixes]`, `[extensions]`, `[semantics]`,
 `[encoding]`, `[validation]`, and `[cli]`. It contains no `[legacy]` table.
-All 39 fix settings default true; the 21 other flags default false. For example, octal notation,
+All 39 fix settings default true; the 20 other flags default false. For example, octal notation,
 32-bit unsigned aliases, historical register spellings and NaN bytes remain.
 Missing console mnemonics are enabled by `bug_fixes.additional_console_instructions`.
 `.op`, broader expression grammar and implicit sections require explicit opt-in. Optional source restrictions are separate
@@ -46,8 +46,8 @@ pause, including when an error occurs.
 Options precede the input they affect. Output flags persist between inputs;
 `-a`, `-b`, and `-i` reset for each input. Short boolean flags accept `:0` and `:1`.
 Use `--set=section.key=true|false` for individual choices; these long options
-persist across inputs. For example, `--set=semantics.decimal_leading_zeros=true`
-selects decimal leading zeros without changing bug fixes or other settings.
+persist across inputs. For example, `--set=semantics.c_operator_precedence=true`
+selects C-style expression precedence without changing bug fixes or other settings.
 
 Include-tree logs and native line endings are the default. Alternatives are
 `--set=cli.flat_logs=true`, `--set=cli.lf_line_endings=true`, and
@@ -77,7 +77,7 @@ lha = true # Each fix is individually selectable; all default true.
 dot_op = false
 
 [semantics]
-decimal_leading_zeros = false
+c_operator_precedence = false
 
 ```
 
@@ -108,10 +108,10 @@ Each named section owns its aliases/macros; assembly blocks inherit those
 definitions and can add temporary local definitions.
 
 With `extensions.expression_syntax = true`, integer expressions support `$`/`0x` hexadecimal, `0b` binary, decimal,
-parentheses, unary `+ - ~`, and `* / % + - << >> & ^ |`. Legacy uses octal
-leading-zero literals, left-to-right binary evaluation and unsigned 32-bit
-alias arithmetic; modern uses decimal, C-style precedence and signed 64-bit
-alias arithmetic. With fixes disabled, the C++ scanner and alias quirks also
+parentheses, unary `+ - ~`, and `* / % + - << >> & ^ |`. Leading-zero integer
+literals are always octal (`010` is 8; `08` is invalid). Legacy uses left-to-right
+binary evaluation and unsigned 32-bit alias arithmetic; modern uses C-style
+precedence and signed 64-bit alias arithmetic. With fixes disabled, the C++ scanner and alias quirks also
 apply. See the compatibility contract for operand-field details.
 Strings support quoted Go-style escapes, such as `\n` and `\"`.
 
@@ -207,7 +207,7 @@ The corrected mode passed **218 execution checks in Dolphin** across GameCube/Wi
 interpreter/JIT configurations, including actual MEM1 and MEM2 C2 hook execution.
 The prior comparison with fixes and `.op` disabled matches all six unmodified
 Project+ GCTs byte for byte. Select all `[bug_fixes]` options set to false (or `--bug-fixes=false`) and `extensions.dot_op = false`
-to retain those compatibility settings in 0.14.0-go.
+to retain those compatibility settings in 0.15.0-go.
 Corrected mode builds two unmodified entrypoints and diagnoses malformed input
 in four; separately adapted builds retain 84 explained differences from C++.
 These assembly comparisons are not gameplay tests.

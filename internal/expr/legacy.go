@@ -43,7 +43,7 @@ func legacyAlias(text string, lookup Lookup, rules dialect.Rules) (int64, error)
 		base, offset := 10, 0
 		if strings.HasPrefix(strings.ToLower(s), "0x") {
 			base, offset = 16, 2
-		} else if strings.HasPrefix(s, "0") && rules.OctalLiterals {
+		} else if strings.HasPrefix(s, "0") {
 			base = 8
 		}
 		i := offset

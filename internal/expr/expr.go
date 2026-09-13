@@ -13,15 +13,28 @@ import (
 // Lookup resolves a named constant. Names are passed through unchanged.
 type Lookup func(string) (int64, bool)
 
-// Eval supports decimal, 0x/$ hexadecimal, 0b binary, parentheses, unary
+// Eval supports decimal, leading-zero octal, 0x/$ hexadecimal, 0b binary, parentheses, unary
 // + - ~, and C-style precedence for * / % + - << >> & ^ |.
 // Arithmetic uses signed 64-bit integers; encoding checks field widths later.
 func Eval(text string, lookup Lookup) (int64, error) {
 	return EvalMode(text, lookup, dialect.Modern)
 }
 
-// EvalMode evaluates operands. Legacy uses octal leading-zero literals and
-// left-to-right binary operators; Modern uses decimal and C-style precedence.
+// EvalField evaluates register and numeric fields, whose unprefixed numbers
+// retain their fixed decimal spelling. Ordinary source expressions use EvalRules.
+func EvalField(text string, lookup Lookup) (int64, error) {
+	rules, _ := dialect.Modern.Resolve(dialect.Overrides{})
+	p := parser{s: strings.TrimSpace(text), lookup: lookup, rules: rules, decimalFields: true}
+	v, err := p.parse(1, 0)
+	p.space()
+	if err == nil && p.i != len(p.s) {
+		return 0, fmt.Errorf("unexpected token %q", p.s[p.i:])
+	}
+	return v, err
+}
+
+// EvalMode evaluates operands. Both modes use octal leading-zero literals.
+// Legacy uses left-to-right binary operators; Modern uses C-style precedence.
 func EvalMode(text string, lookup Lookup, mode dialect.Mode) (int64, error) {
 	rules, err := mode.Resolve(dialect.Overrides{})
 	if err != nil {
@@ -71,11 +84,12 @@ func evaluate(text string, lookup Lookup, rules dialect.Rules, word bool) (int64
 }
 
 type parser struct {
-	s      string
-	i      int
-	lookup Lookup
-	rules  dialect.Rules
-	word   bool
+	s             string
+	i             int
+	lookup        Lookup
+	rules         dialect.Rules
+	word          bool
+	decimalFields bool // Fixed register/field grammar, not a configurable source semantic.
 }
 
 func (p *parser) narrow(v int64) int64 {
@@ -220,7 +234,7 @@ func (p *parser) atom(depth int) (int64, error) {
 		base, num = 16, num[2:]
 	} else if strings.HasPrefix(strings.ToLower(num), "0b") {
 		base, num = 2, num[2:]
-	} else if p.rules.OctalLiterals && len(num) > 1 && num[0] == '0' {
+	} else if !p.decimalFields && len(num) > 1 && num[0] == '0' {
 		base = 8
 	}
 	v, e := strconv.ParseUint(num, base, 64)

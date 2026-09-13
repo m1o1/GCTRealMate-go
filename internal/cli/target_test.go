@@ -13,13 +13,13 @@ import (
 
 func TestNonConsoleConfigDefaultsAndOverrides(t *testing.T) {
 	for _, fixed := range []bool{false, true} {
-		for _, decimal := range []string{"false", "true"} {
+		for _, precedence := range []string{"false", "true"} {
 			for _, setting := range []string{"", "non_console_instructions=false\n", "non_console_instructions=true\n"} {
 				for _, override := range []string{"", "--set=extensions.non_console_instructions=false", "--set=extensions.non_console_instructions=true"} {
-					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, decimal, setting, override), func(t *testing.T) {
+					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, precedence, setting, override), func(t *testing.T) {
 						dir := t.TempDir()
 						config, input := filepath.Join(dir, "config.toml"), filepath.Join(dir, "probe.asm")
-						writeTestFile(t, config, fixesTOML(fixed)+strings.ReplaceAll(setting, "non_console_instructions", "extensions.non_console_instructions")+fmt.Sprintf("[semantics]\ndecimal_leading_zeros=%s\n", decimal))
+						writeTestFile(t, config, fixesTOML(fixed)+strings.ReplaceAll(setting, "non_console_instructions", "extensions.non_console_instructions")+fmt.Sprintf("[semantics]\nc_operator_precedence=%s\n", precedence))
 						writeTestFile(t, input, "Probe\nCODE @ $80001000\n{\nld r3,8(r4)\nlha r3,0(r4)\n}\n")
 						output := filepath.Join(dir, "probe.GCT")
 						writeTestFile(t, output, "previous output")
@@ -27,7 +27,7 @@ func TestNonConsoleConfigDefaultsAndOverrides(t *testing.T) {
 						if override != "" {
 							args = append(args, override)
 						}
-						args = append(args, "--set=semantics.decimal_leading_zeros="+decimal, input)
+						args = append(args, "--set=semantics.c_operator_precedence="+precedence, input)
 						var out, diagnostic bytes.Buffer
 						status := Run(context.Background(), args, "", &out, &diagnostic)
 						allowed := strings.Contains(setting, "=true")
@@ -59,7 +59,7 @@ func TestNonConsoleConfigDefaultsAndOverrides(t *testing.T) {
 			}
 		}
 	}
-	for _, source := range []string{"", strings.TrimSuffix(fixesTOML(true), "\n"), "[semantics]\ndecimal_leading_zeros=true"} {
+	for _, source := range []string{"", strings.TrimSuffix(fixesTOML(true), "\n"), "[semantics]\nc_operator_precedence=true"} {
 		f, err := decodeConfig([]byte(source))
 		if err != nil || f.allowNonConsoleInstructions {
 			t.Fatal(f, err)
@@ -81,7 +81,7 @@ func TestNonConsoleINIPrecedenceAndPersistence(t *testing.T) {
 	exe := filepath.Join(dir, "gctrm.exe")
 	writeTestFile(t, filepath.Join(dir, "gctrm.toml"), "[extensions]\nnon_console_instructions=true\n")
 	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm : --set=extensions.non_console_instructions=false\nsecond.asm : --set=extensions.non_console_instructions=true\n")
-	jobs, _, err := plan([]string{"first.asm", "--set=extensions.non_console_instructions=false", "second.asm", "--set=bug_fixes.lha=true", "--set=semantics.decimal_leading_zeros=true", "third.asm"}, exe)
+	jobs, _, err := plan([]string{"first.asm", "--set=extensions.non_console_instructions=false", "second.asm", "--set=bug_fixes.lha=true", "--set=semantics.c_operator_precedence=true", "third.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -90,7 +90,7 @@ func TestNonConsoleINIPrecedenceAndPersistence(t *testing.T) {
 			t.Fatalf("unexpected opt-in for %s", job.file)
 		}
 	}
-	jobs, _, err = plan([]string{"--set=extensions.non_console_instructions=true", "first.asm", "--set=semantics.decimal_leading_zeros=true", "--set=bug_fixes.lha=true", "third.asm"}, exe)
+	jobs, _, err = plan([]string{"--set=extensions.non_console_instructions=true", "first.asm", "--set=semantics.c_operator_precedence=true", "--set=bug_fixes.lha=true", "third.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}

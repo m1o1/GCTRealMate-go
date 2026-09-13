@@ -83,7 +83,7 @@ func TestSetOverridePrecedenceAndPersistence(t *testing.T) {
 	exe := filepath.Join(dir, "gctrm.exe")
 	writeTestFile(t, filepath.Join(dir, "gctrm.toml"), "[validation]\nstrict_macro_calls=true\n[extensions]\nexpression_syntax=true")
 	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm.extra : --set=validation.strict_macro_calls=false\nfirst.asm : --set=extensions.dot_op=true --set=validation.strict_macro_calls=false")
-	jobs, _, err := plan([]string{"--set=cli.exact_ini_matching=true", "--set=validation.strict_macro_calls=true", "first.asm", "--set=semantics.decimal_leading_zeros=true", "second.asm"}, exe)
+	jobs, _, err := plan([]string{"--set=cli.exact_ini_matching=true", "--set=validation.strict_macro_calls=true", "first.asm", "--set=semantics.c_operator_precedence=true", "second.asm"}, exe)
 	if err != nil || len(jobs) != 2 {
 		t.Fatal(jobs, err)
 	}

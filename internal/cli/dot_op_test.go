@@ -13,19 +13,19 @@ import (
 
 func TestDotOpConfigAndOverrides(t *testing.T) {
 	for _, fixed := range []bool{false, true} {
-		for _, decimal := range []string{"false", "true"} {
+		for _, precedence := range []string{"false", "true"} {
 			for _, setting := range []string{"", "dot_op=false\n", "dot_op=true\n"} {
 				for _, override := range []string{"", "--set=extensions.dot_op=false", "--set=extensions.dot_op=true"} {
-					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, decimal, setting, override), func(t *testing.T) {
+					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, precedence, setting, override), func(t *testing.T) {
 						dir := t.TempDir()
 						config, input := filepath.Join(dir, "settings.toml"), filepath.Join(dir, "probe.asm")
-						writeTestFile(t, config, fixesTOML(fixed)+fmt.Sprintf("[semantics]\ndecimal_leading_zeros=%s\n[extensions]\n%s", decimal, setting))
+						writeTestFile(t, config, fixesTOML(fixed)+fmt.Sprintf("[semantics]\nc_operator_precedence=%s\n[extensions]\n%s", precedence, setting))
 						writeTestFile(t, input, "Probe\n.op lha r3,0(r4) @ $80001000\n")
 						args := []string{"--config", config, "-i"}
 						if override != "" {
 							args = append(args, override)
 						}
-						args = append(args, "--set=semantics.decimal_leading_zeros="+decimal, fmt.Sprintf("--bug-fixes=%t", fixed), input)
+						args = append(args, "--set=semantics.c_operator_precedence="+precedence, fmt.Sprintf("--bug-fixes=%t", fixed), input)
 						var out, diagnostic bytes.Buffer
 						if code := Run(context.Background(), args, "", &out, &diagnostic); code != 0 {
 							t.Fatal(code, diagnostic.String())
@@ -67,7 +67,7 @@ func TestDotOpDefaultsAndPrecedence(t *testing.T) {
 			t.Fatal(path, f, err)
 		}
 	}
-	for _, config := range []string{"", strings.TrimSuffix(fixesTOML(false), "\n"), "[semantics]\ndecimal_leading_zeros=true"} {
+	for _, config := range []string{"", strings.TrimSuffix(fixesTOML(false), "\n"), "[semantics]\nc_operator_precedence=true"} {
 		f, err := decodeConfig([]byte(config))
 		if err != nil || f.dotOp {
 			t.Fatal(config, f, err)
@@ -80,7 +80,7 @@ func TestDotOpDefaultsAndPrecedence(t *testing.T) {
 	}
 	writeTestFile(t, filepath.Join(dir, "gctrm.toml"), "[extensions]\ndot_op=true\n")
 	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm : --set=extensions.dot_op=false\nsecond.asm : --set=extensions.dot_op=true\n")
-	jobs, _, err := plan([]string{"first.asm", "--set=extensions.dot_op=false", "second.asm", "--bug-fixes=true", "--set=semantics.decimal_leading_zeros=true", "third.asm"}, exe)
+	jobs, _, err := plan([]string{"first.asm", "--set=extensions.dot_op=false", "second.asm", "--bug-fixes=true", "--set=semantics.c_operator_precedence=true", "third.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -89,7 +89,7 @@ func TestDotOpDefaultsAndPrecedence(t *testing.T) {
 			t.Fatalf("lost explicit opt-out for %s", j.file)
 		}
 	}
-	jobs, _, err = plan([]string{"--set=extensions.dot_op=true", "first.asm", "--bug-fixes=false", "--set=semantics.decimal_leading_zeros=true", "third.asm"}, exe)
+	jobs, _, err = plan([]string{"--set=extensions.dot_op=true", "first.asm", "--bug-fixes=false", "--set=semantics.c_operator_precedence=true", "third.asm"}, exe)
 	if err != nil || len(jobs) != 2 || !jobs[0].flags.dotOp || !jobs[1].flags.dotOp {
 		t.Fatal(jobs, err)
 	}

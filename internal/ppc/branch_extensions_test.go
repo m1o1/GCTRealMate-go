@@ -16,9 +16,6 @@ func TestBranchExtensionsIndependentPolicy(t *testing.T) {
 					ctx := Context{Fixes: fixes.FromBool(fixed), BranchExpressions: extended, ExpressionSyntax: true, Dialect: mode}
 					for _, target := range []string{"20", "16+4", "0b10100", "024"} {
 						want := uint32(20)
-						if target == "024" && mode == dialect.Modern {
-							want = 24
-						}
 						for _, branch := range []struct {
 							name string
 							base uint32

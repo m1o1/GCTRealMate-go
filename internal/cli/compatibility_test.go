@@ -78,12 +78,12 @@ func TestCompatibilityOptions(t *testing.T) {
 	if err := os.WriteFile(strings.TrimSuffix(exe, ".exe")+".ini", []byte("x.asm.extra : -g\nx.asm : -l\n"), 0600); err != nil {
 		t.Fatal(err)
 	}
-	jobs, _, err := plan([]string{"--set=cli.exact_ini_matching=true", "--set=semantics.decimal_leading_zeros=true", "--set=cli.flat_logs=true", "--set=cli.lf_line_endings=true", "x.asm", "--set=semantics.decimal_leading_zeros=false", "y.asm"}, exe)
+	jobs, _, err := plan([]string{"--set=cli.exact_ini_matching=true", "--set=semantics.c_operator_precedence=true", "--set=cli.flat_logs=true", "--set=cli.lf_line_endings=true", "x.asm", "--set=semantics.c_operator_precedence=false", "y.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}
 	a, b := jobs[0].flags, jobs[1].flags
-	if a.convert || !a.log || !a.exactINI || !a.flatLog || !a.lf || a.compatibility.OctalLiterals == nil || *a.compatibility.OctalLiterals || b.compatibility.OctalLiterals == nil || !*b.compatibility.OctalLiterals || !b.flatLog || !b.lf {
+	if a.convert || !a.log || !a.exactINI || !a.flatLog || !a.lf || a.compatibility.LeftToRightExpressions == nil || *a.compatibility.LeftToRightExpressions || b.compatibility.LeftToRightExpressions == nil || !*b.compatibility.LeftToRightExpressions || !b.flatLog || !b.lf {
 		t.Fatal(jobs)
 	}
 	for _, arg := range []string{"--dialect", "--dialect=other", "--ini-match=bad", "--log-format=bad", "--line-endings=bad", "--unknown=yes"} {
@@ -103,14 +103,14 @@ func TestAlternativeCLIOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	var out, diagnostic bytes.Buffer
-	if code := runWithFixes(context.Background(), []string{"--set=semantics.decimal_leading_zeros=true", "--set=cli.flat_logs=true", "--set=cli.lf_line_endings=true", "-t", "-l", path}, "", &out, &diagnostic); code != 0 {
+	if code := runWithFixes(context.Background(), []string{"--set=semantics.c_operator_precedence=true", "--set=cli.flat_logs=true", "--set=cli.lf_line_endings=true", "-t", "-l", path}, "", &out, &diagnostic); code != 0 {
 		t.Fatal(code, diagnostic.String())
 	}
 	data, err := os.ReadFile(filepath.Join(dir, "main.GCT"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	if got := binary.BigEndian.Uint32(data[12:]); got != 0x3860000a {
+	if got := binary.BigEndian.Uint32(data[12:]); got != 0x38600008 {
 		t.Fatalf("%08x", got)
 	}
 	data, err = os.ReadFile(filepath.Join(dir, "main_log.txt"))

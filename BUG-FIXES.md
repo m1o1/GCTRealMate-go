@@ -1,6 +1,6 @@
 # Individual fixes
 
-Version **0.14.0-go** defaults every option in `[bug_fixes]` to **true**.
+Version **0.15.0-go** defaults every option in `[bug_fixes]` to **true**.
 All options in the other five tables default to **false**. An omitted key keeps
 its default; the table is not an all-or-nothing switch.
 

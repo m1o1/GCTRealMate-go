@@ -35,11 +35,11 @@ lha r3,0(r4)
 `
 
 var sourceSwitches = []string{
-	"semantics.decimal_leading_zeros", "semantics.c_operator_precedence", "semantics.signed_64_bit_aliases",
+	"semantics.c_operator_precedence", "semantics.signed_64_bit_aliases",
 	"encoding.gnu_branch_hints", "validation.strict_register_prefixes", "encoding.sign_extend_data_slots", "encoding.alternative_float_nan", "encoding.alternative_double_nan",
 }
 
-func probeWords(legacy [8]bool) []uint32 {
+func probeWords(legacy [7]bool) []uint32 {
 	choose := func(index int, old, modern uint32) uint32 {
 		if legacy[index] {
 			return old
@@ -47,18 +47,18 @@ func probeWords(legacy [8]bool) []uint32 {
 		return modern
 	}
 	return []uint32{
-		choose(0, 0x38600008, 0x3860000a), choose(1, 1, 7), choose(2, 0, 0x80000000),
-		choose(3, 0x4220fff0, 0x4200fff0), choose(5, 0xff, 0xffffffff),
-		choose(6, 0x7fffffff, 0x7fc00000), choose(7, 0x7fffffff, 0x7ff80000),
-		choose(7, 0xffffffff, 1), 0xfc64282a, 0xa8640000,
+		0x38600008, choose(0, 1, 7), choose(1, 0, 0x80000000),
+		choose(2, 0x4220fff0, 0x4200fff0), choose(4, 0xff, 0xffffffff),
+		choose(5, 0x7fffffff, 0x7fc00000), choose(6, 0x7fffffff, 0x7ff80000),
+		choose(6, 0xffffffff, 1), 0xfc64282a, 0xa8640000,
 	}
 }
 
 // Every combination is checked against observable assembly results, including
-// register-spelling acceptance. Width, radix and precedence must be independent.
+// register-spelling acceptance. Width and precedence remain independent; radix is always octal for leading zeros.
 func TestAllSourceConfigurations(t *testing.T) {
 	for mask := 0; mask < 1<<len(sourceSwitches); mask++ {
-		var legacy [8]bool
+		var legacy [7]bool
 		var config strings.Builder
 		config.WriteString("version=2\n")
 		for i, key := range sourceSwitches {
@@ -78,8 +78,8 @@ func TestAllSourceConfigurations(t *testing.T) {
 			t.Fatalf("configuration %08b: %08x != %08x", mask, got, want)
 		}
 		_, err = assembler.Assemble(context.Background(), "register.asm", []byte("Registers\nop fadd r3,r4,r5 @ $80001000"), opts)
-		if (err == nil) != legacy[4] {
-			t.Fatalf("register prefix switch %t: %v", legacy[4], err)
+		if (err == nil) != legacy[3] {
+			t.Fatalf("register prefix switch %t: %v", legacy[3], err)
 		}
 		_, err = assembler.Assemble(context.Background(), "invalid.asm", []byte("Invalid\nop lwzu r3,4(r3) @ $80001000"), opts)
 		if err == nil {
@@ -95,7 +95,7 @@ func TestIndividualSourceSwitchesThroughCLI(t *testing.T) {
 				dir := t.TempDir()
 				path, config := filepath.Join(dir, "probe.asm"), filepath.Join(dir, "config.toml")
 				writeTestFile(t, path, configProbe)
-				var legacy [8]bool
+				var legacy [7]bool
 				for i := range legacy {
 					legacy[i] = !baseline
 				}
@@ -133,22 +133,22 @@ func writeTestFile(t *testing.T, path, text string) {
 func TestTOMLValidation(t *testing.T) {
 	for _, config := range []string{
 		"version=1", "version=3", "version='2'", "unknown=true", "[unknown]",
-		"[semantcs]\ndecimal_leading_zeros=true", "[encoding]\nunknown=true",
-		"[semantics]\ndecimal_leading_zeros='false'", "[semantics]\ndecimal_leading_zeros=1",
-		"[semantics]\ndecimal_leading_zeros=false\ndecimal_leading_zeros=true", "semantics=false",
-		"[semantics\ndecimal_leading_zeros=false", "[encoding]\nalternative_float_nan=[]", strings.Repeat(" ", maxConfigSize+1),
+		"[semantcs]\nc_operator_precedence=true", "[encoding]\nunknown=true",
+		"[semantics]\nc_operator_precedence='false'", "[semantics]\nc_operator_precedence=1",
+		"[semantics]\nc_operator_precedence=false\nc_operator_precedence=true", "semantics=false",
+		"[semantics\nc_operator_precedence=false", "[encoding]\nalternative_float_nan=[]", strings.Repeat(" ", maxConfigSize+1),
 	} {
 		if _, err := decodeConfig([]byte(config)); err == nil {
 			t.Errorf("accepted %q", config[:min(len(config), 100)])
 		}
 	}
 	// Quoted keys, comments, dotted keys and inline tables use ordinary TOML.
-	f, err := decodeConfig([]byte("# mixed\nsemantics = { 'decimal_leading_zeros' = true }\nencoding.alternative_float_nan = false\n"))
+	f, err := decodeConfig([]byte("# mixed\nsemantics = { 'c_operator_precedence' = true }\nencoding.alternative_float_nan = false\n"))
 	if err != nil {
 		t.Fatal(err)
 	}
 	r, err := assembler.Legacy.Resolve(f.compatibility)
-	if err != nil || r.OctalLiterals || !r.FloatNaN || !r.DoubleNaN {
+	if err != nil || r.LeftToRightExpressions || !r.FloatNaN || !r.DoubleNaN {
 		t.Fatal(r, err)
 	}
 	for _, config := range []string{"", "version=2", "[semantics]"} {
@@ -191,7 +191,7 @@ func TestExampleConfigAndIndependentLibraryCalls(t *testing.T) {
 }
 
 func FuzzConfig(f *testing.F) {
-	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true", "[encoding]\nalternative_float_nan=true", "[bug_fixes]\nconsole_only=true", "version=99"} {
+	for _, source := range []string{"", "[semantics]\nc_operator_precedence=true", "[encoding]\nalternative_float_nan=true", "[bug_fixes]\nconsole_only=true", "version=99"} {
 		f.Add(source)
 	}
 	f.Fuzz(func(t *testing.T, source string) {
@@ -205,23 +205,23 @@ func FuzzConfig(f *testing.F) {
 func TestConfigSelectionAndPrecedence(t *testing.T) {
 	dir := t.TempDir()
 	exe, config := filepath.Join(dir, "gctrm.exe"), filepath.Join(dir, "gctrm.toml")
-	writeTestFile(t, config, "[semantics]\ndecimal_leading_zeros=false\n[cli]\nexact_ini_matching=true\nflat_logs=true\nlf_line_endings=true\n")
-	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm.extra : -g\nfirst.asm : --set=semantics.decimal_leading_zeros=true -t\n")
+	writeTestFile(t, config, "[semantics]\nc_operator_precedence=false\n[cli]\nexact_ini_matching=true\nflat_logs=true\nlf_line_endings=true\n")
+	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm.extra : -g\nfirst.asm : --set=semantics.c_operator_precedence=true -t\n")
 	jobs, _, err := plan([]string{"first.asm"}, exe)
-	if err != nil || jobs[0].flags.convert || !jobs[0].flags.text || jobs[0].flags.compatibility.OctalLiterals == nil || *jobs[0].flags.compatibility.OctalLiterals {
+	if err != nil || jobs[0].flags.convert || !jobs[0].flags.text || jobs[0].flags.compatibility.LeftToRightExpressions == nil || *jobs[0].flags.compatibility.LeftToRightExpressions {
 		t.Fatal(jobs, err)
 	}
-	jobs, _, err = plan([]string{"--set=semantics.decimal_leading_zeros=false", "first.asm", "second.asm"}, exe)
+	jobs, _, err = plan([]string{"--set=semantics.c_operator_precedence=false", "first.asm", "second.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}
 	for _, j := range jobs {
-		if j.flags.compatibility.OctalLiterals == nil || !*j.flags.compatibility.OctalLiterals || !j.flags.flatLog || !j.flags.lf {
+		if j.flags.compatibility.LeftToRightExpressions == nil || !*j.flags.compatibility.LeftToRightExpressions || !j.flags.flatLog || !j.flags.lf {
 			t.Fatal(j)
 		}
 	}
 	jobs, _, err = plan([]string{"-i", "first.asm"}, exe)
-	if err != nil || jobs[0].flags.compatibility.OctalLiterals == nil || !*jobs[0].flags.compatibility.OctalLiterals {
+	if err != nil || jobs[0].flags.compatibility.LeftToRightExpressions == nil || !*jobs[0].flags.compatibility.LeftToRightExpressions {
 		t.Fatal(jobs, err)
 	}
 	jobs, _, err = plan([]string{"--no-config", "first.asm"}, exe)
@@ -232,7 +232,7 @@ func TestConfigSelectionAndPrecedence(t *testing.T) {
 	other := filepath.Join(dir, "other.toml")
 	writeTestFile(t, other, strings.TrimSuffix(fixesTOML(true), "\n"))
 	jobs, _, err = plan([]string{"--config=" + other, "-i", "first.asm"}, exe)
-	if err != nil || jobs[0].flags.compatibility.OctalLiterals != nil || jobs[0].flags.exactINI {
+	if err != nil || jobs[0].flags.compatibility.LeftToRightExpressions != nil || jobs[0].flags.exactINI {
 		t.Fatal(jobs, err)
 	}
 	for _, args := range [][]string{

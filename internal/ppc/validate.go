@@ -93,7 +93,7 @@ func (e *encoder) number(i, bits int, prefixes ...string) uint32 {
 	var v int64
 	var err error
 	if e.ctx.Fixes.NumericFields {
-		v, err = expr.Eval(s, e.ctx.Lookup)
+		v, err = expr.EvalField(s, e.ctx.Lookup)
 	} else {
 		v, err = legacyNumber(s)
 	}

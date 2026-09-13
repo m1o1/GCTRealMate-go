@@ -1,9 +1,9 @@
-# Compatibility contract — 0.14.0-go
+# Compatibility contract — 0.15.0-go
 
 The pinned reference is [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515),
 built with MSVC on Windows. Its retained source/executable are unchanged.
 
-CLI/config defaults target GameCube/Wii and enable bug fixes; all 39 `[bug_fixes]` keys default true, and all 21 other flags default false.
+CLI/config defaults target GameCube/Wii and enable bug fixes; all 39 `[bug_fixes]` keys default true, and all 20 other flags default false.
 `[extensions]` adds language/instruction features; `[semantics]` changes numeric
 interpretation; `[encoding]` selects byte conventions; `[validation]` adds
 restrictions; `[cli]` selects INI/output alternatives. The template has no legacy
@@ -65,7 +65,7 @@ the default `non_console_instructions=false` restricts the target to GameCube/Wi
 The language choices remain independent. Defaults retain octal values,
 unsigned aliases, permissive register prefixes, direction-adjusted branch hints,
 zero-extended data slots, and the C++ NaN representations while correcting bugs.
-Individual flags select decimal leading zeros, C-style precedence, signed 64-bit
+Leading-zero integer literals are always octal. Individual flags select C-style precedence, signed 64-bit
 aliases, strict prefixes, GNU hints, sign-extended negative slots, and alternative
 quiet-NaN representations. These choices are not themselves CPU bug fixes.
 

@@ -1,4 +1,4 @@
-# GCTRealMate Go 0.14.0 configuration. Full guide: CONFIGURATION.md.
+# GCTRealMate Go 0.15.0 configuration. Full guide: CONFIGURATION.md.
 # Select explicitly: .\bin\gctrm.exe --config gctrm.toml source.asm
 # Or copy beside the executable as <executable-basename>.toml.
 # Every [bug_fixes] option defaults true; all other flags default false.
@@ -66,7 +66,7 @@ numeric_fields = true
 
 # Correct generic comparison operand selection, cmpli routing, and comparison L encoding.
 # Example: cmpli 0,0,r3,1: true compares r3 to immediate 1; false follows the incorrect
-# register-comparison path. L=1 still requires console_only=false.
+# register-comparison path. L=1 still requires extensions.non_console_instructions=true.
 # CLI/INI: --set=bug_fixes.comparisons=true|false
 comparisons = true
 
@@ -207,7 +207,7 @@ psa_index_range = true
 gecko_line_framing = true
 
 # Encode DS-form offsets as aligned byte displacements rather than multiplying by four.
-# Example: With console_only=false, ld r3,8(r4) emits E8640020 with false or E8640008 with true.
+# Example: With extensions.non_console_instructions=true, ld r3,8(r4) emits E8640020 with false or E8640008 with true.
 # Misaligned offsets are rejected with true.
 # CLI/INI: --set=bug_fixes.ds_displacement=true|false
 ds_displacement = true
@@ -261,11 +261,8 @@ implicit_sections = false
 non_console_instructions = false
 
 [semantics]
-# Interpret leading-zero integers as decimal instead of octal.
-# Example: li r3,010 loads 8 with false or 10 with true.
-# The literal 08 is invalid octal with false, but means 8 with true.
-# CLI/INI: --set=semantics.decimal_leading_zeros=true|false
-decimal_leading_zeros = false
+# Leading-zero integer literals are always octal: 010 means 8; 08 is invalid.
+# This is fixed syntax, not a configuration option.
 
 # Use C-style operator precedence instead of left-to-right evaluation.
 # Example: .alias x = 2 + 3 * 4 evaluates to 20 with false or 14 with true.

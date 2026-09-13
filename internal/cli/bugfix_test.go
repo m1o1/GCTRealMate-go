@@ -22,20 +22,20 @@ func runWithFixes(ctx context.Context, args []string, executable string, stdout,
 }
 
 func TestBugFixDefaultsAndOverrides(t *testing.T) {
-	for _, decimal := range []string{"false", "true"} {
+	for _, precedence := range []string{"false", "true"} {
 		for _, setting := range []string{"", fixesTOML(false), fixesTOML(true)} {
 			for _, override := range []string{"", "--bug-fixes=false", "--bug-fixes=true"} {
-				t.Run(decimal+"/"+setting+"/"+override, func(t *testing.T) {
+				t.Run(precedence+"/"+setting+"/"+override, func(t *testing.T) {
 					dir := t.TempDir()
 					config, input := filepath.Join(dir, "config.toml"), filepath.Join(dir, "probe.asm")
-					writeTestFile(t, config, setting+fmt.Sprintf("[semantics]\ndecimal_leading_zeros=%s\n", decimal))
+					writeTestFile(t, config, setting+fmt.Sprintf("[semantics]\nc_operator_precedence=%s\n", precedence))
 					writeTestFile(t, input, "Probe\nop lha r3,0(r4) @ $80001000\n")
 					args := []string{"--config", config, "-i"}
 					if override != "" {
 						args = append(args, override)
 					}
 					// A semantics option must not reset the independent fixes choice.
-					args = append(args, "--set=semantics.decimal_leading_zeros="+decimal, input)
+					args = append(args, "--set=semantics.c_operator_precedence="+precedence, input)
 					var out, diagnostic bytes.Buffer
 					if code := Run(context.Background(), args, "", &out, &diagnostic); code != 0 {
 						t.Fatal(code, diagnostic.String())
@@ -59,7 +59,7 @@ func TestBugFixDefaultsAndOverrides(t *testing.T) {
 			}
 		}
 	}
-	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true"} {
+	for _, source := range []string{"", "[semantics]\nc_operator_precedence=true"} {
 		f, err := decodeConfig([]byte(source))
 		if err != nil || !f.fixes.LHA {
 			t.Fatal("fixes must default to enabled", f, err)
@@ -127,7 +127,7 @@ func TestBugFixINIPrecedenceAndPersistence(t *testing.T) {
 	config := filepath.Join(dir, "config.toml")
 	writeTestFile(t, config, fixesTOML(true))
 	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm : --bug-fixes=false\nsecond.asm : --bug-fixes=true\n")
-	jobs, _, err := plan([]string{"--config", config, "first.asm", "--bug-fixes=false", "second.asm", "third.asm", "--set=semantics.decimal_leading_zeros=true", "fourth.asm"}, exe)
+	jobs, _, err := plan([]string{"--config", config, "first.asm", "--bug-fixes=false", "second.asm", "third.asm", "--set=semantics.c_operator_precedence=true", "fourth.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}

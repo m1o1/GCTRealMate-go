@@ -24,7 +24,7 @@ type Compatibility = dialect.Overrides
 
 const (
 	Legacy Dialect = dialect.Legacy // Default: compatible v0.2.6 source semantics.
-	Modern Dialect = dialect.Modern // Decimal literals, C precedence, GNU hints.
+	Modern Dialect = dialect.Modern // C precedence, GNU hints; integer radix stays unchanged.
 )
 
 // Validation selects optional restrictions on reference-accepted source.

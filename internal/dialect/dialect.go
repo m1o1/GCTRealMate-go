@@ -18,7 +18,6 @@ const (
 // true selects the legacy behavior and false selects the modern behavior.
 // The independent Fixes policy belongs to the assembly/encoding context.
 type Overrides struct {
-	OctalLiterals          *bool
 	LeftToRightExpressions *bool
 	Unsigned32BitAliases   *bool
 	BranchHints            *bool
@@ -33,7 +32,6 @@ type Rules struct {
 	ExpressionSyntax       bool
 	RejectDataOverflow     bool
 	Fixes                  fixes.Policy
-	OctalLiterals          bool
 	LeftToRightExpressions bool
 	Unsigned32BitAliases   bool
 	BranchHints            bool
@@ -58,7 +56,6 @@ func (m Mode) Resolve(o Overrides) (Rules, error) {
 		ExpressionSyntax:       true, // Internal expression helpers expose the full grammar; assembler options narrow it.
 		RejectDataOverflow:     true,
 		Fixes:                  fixes.All(),
-		OctalLiterals:          choice(o.OctalLiterals),
 		LeftToRightExpressions: choice(o.LeftToRightExpressions),
 		Unsigned32BitAliases:   choice(o.Unsigned32BitAliases),
 		BranchHints:            choice(o.BranchHints),

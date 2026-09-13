@@ -16,7 +16,7 @@ import (
 	"gctrm/fixes"
 )
 
-const Version = "0.14.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
+const Version = "0.15.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
 const help = `Usage: gctrm [options] source.asm [options] another.asm
 
 Assemble Gecko and PowerPC source into a .GCT beside each input.

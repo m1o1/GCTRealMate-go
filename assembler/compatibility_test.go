@@ -71,7 +71,7 @@ func TestDialectChoices(t *testing.T) {
 		body           string
 		legacy, modern uint32
 	}{
-		{"li r3,010", 0x38600008, 0x3860000a},
+		{"li r3,010", 0x38600008, 0x38600008},
 		{".alias x = 6 ^ 3 & 1\nword x", 1, 7},
 		{".alias x = 0xffffffff + 1\n.alias y = x / 2\nword y", 0, 0x80000000},
 		{".alias x = 0 - 1\n.alias y = x / 2\nword y", 0x7fffffff, 0},
@@ -186,7 +186,9 @@ func TestRetainedAuditCases(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if change, ok := legacyChanges[tc.Name]; ok && mode == Legacy {
+			// Leading-zero decimal interpretation was removed from both modes;
+			// retain the historical capture, but expect octal in either mode now.
+			if change, ok := legacyChanges[tc.Name]; ok && (mode == Legacy || tc.Name == "leading_zero_radix") {
 				binary.BigEndian.PutUint32(want[change.offset:], change.word)
 			}
 			if hex.EncodeToString(r.Bytes()) != hex.EncodeToString(want) {

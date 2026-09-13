@@ -2,7 +2,7 @@
 
 These reports retain the versions, hashes, inputs and outcomes of their recorded
 runs. Older reports are historical evidence, not executions of the current build.
-See [individual-fixes-0.14.0.json](individual-fixes-0.14.0.json) for the current config checks, [checks.json](checks.json) for earlier checks, and
+See [octal-only-0.15.0.json](octal-only-0.15.0.json) for the latest config checks, [checks.json](checks.json) for earlier checks, and
 [the compatibility contract](../COMPATIBILITY.md) for their scope.
 
 Personal filesystem paths in reports and fixture diagnostics have been replaced
@@ -32,3 +32,13 @@ independent, default-false `extensions.non_console_instructions`. Unit tests
 also verify that bulk fix settings do not change the broader target selection.
 The 0.13 report used the earlier fixture at commit `c0bae90`, which included
 `console_only` instead; its results are historical. Tests and `go vet` pass.
+
+## Fixed octal syntax (0.15.0)
+
+[octal-only-0.15.0.json](octal-only-0.15.0.json) records 22 passing executable
+checks: octal literals across both precedence/alias-width/fix settings, invalid
+octal rejection, unchanged register and float spelling, and rejection of the
+removed decimal-leading-zero option through TOML, CLI and INI. `go test ./...`
+and `go vet ./...` pass. Historical reports retain the settings actually tested;
+the current source-semantics matrix has seven configurable choices, with octal
+leading-zero literals fixed in all 128 combinations.

@@ -1,6 +1,6 @@
 # Configuration
 
-Version **0.14.0-go** defaults every `[bug_fixes]` option to **true**, including implemented GameCube/Wii instructions missing from C++. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
+Version **0.15.0-go** defaults every `[bug_fixes]` option to **true**, including implemented GameCube/Wii instructions missing from C++. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
 
 ## Loading and overrides
 
@@ -54,9 +54,17 @@ All 39 keys default true. See the [complete fix reference and examples](BUG-FIXE
 
 ## semantics
 
-### decimal_leading_zeros
+Leading-zero integer literals are always octal: `010` is eight, and `08` is invalid.
+This applies to ordinary integer expressions, corrected aliases, data literals,
+and enabled branch expressions regardless of the other settings. Decimal literals
+without a leading zero and explicit hexadecimal/binary forms retain their meanings.
+Register/numeric-field spellings, hexadecimal source addresses, and floating-point
+literals keep their existing grammars. The old alias parser can still partially
+consume malformed input when `bug_fixes.alias_terms=false`.
 
-**Default: false.** False: `010` is eight and `08` is invalid octal. True: `010` is ten and `08` is eight. Applies to ordinary integer expressions and aliases, including enabled branch expressions. Explicit hexadecimal, register numbering, address radix and floating literals are unaffected. This changes meanings, not merely accepted spelling.
+The removed `semantics.decimal_leading_zeros` key is an error in TOML, CLI and INI;
+remove it from existing settings. There is no replacement toggle. The library's
+`Compatibility.OctalLiterals` override is also removed.
 
 ### c_operator_precedence
 
@@ -130,7 +138,6 @@ The library does not read config/INI. Set `Options.Fixes = fixes.All()` (from `g
 
 | Category flag | Inverse `Compatibility` field |
 | --- | --- |
-| `semantics.decimal_leading_zeros` | `OctalLiterals` |
 | `semantics.c_operator_precedence` | `LeftToRightExpressions` |
 | `semantics.signed_64_bit_aliases` | `Unsigned32BitAliases` |
 | `encoding.gnu_branch_hints` | `BranchHints` |

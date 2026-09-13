@@ -1,0 +1,150 @@
+{
+  "version": "0.15.0-go",
+  "assembler_sha256": "b9481f16427329a5bc1c6c52285ba88eb63d5594afed7bbfbe83e33c812b8908",
+  "checks": 22,
+  "passed": 22,
+  "results": [
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": false,
+      "fixes": false,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": false,
+      "fixes": false,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": false,
+      "fixes": true,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": false,
+      "fixes": true,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": true,
+      "fixes": false,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": true,
+      "fixes": false,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": true,
+      "fixes": true,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": false,
+      "signed_64_bit_aliases": true,
+      "fixes": true,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": false,
+      "fixes": false,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": false,
+      "fixes": false,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": false,
+      "fixes": true,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": false,
+      "fixes": true,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": true,
+      "fixes": false,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": true,
+      "fixes": false,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": true,
+      "fixes": true,
+      "valid": false,
+      "passed": true
+    },
+    {
+      "precedence": true,
+      "signed_64_bit_aliases": true,
+      "fixes": true,
+      "valid": true,
+      "passed": true
+    },
+    {
+      "removed_key": "true",
+      "mode": "cli",
+      "passed": true
+    },
+    {
+      "removed_key": "true",
+      "mode": "toml",
+      "passed": true
+    },
+    {
+      "removed_key": "true",
+      "mode": "ini",
+      "passed": true
+    },
+    {
+      "removed_key": "false",
+      "mode": "cli",
+      "passed": true
+    },
+    {
+      "removed_key": "false",
+      "mode": "toml",
+      "passed": true
+    },
+    {
+      "removed_key": "false",
+      "mode": "ini",
+      "passed": true
+    }
+  ]
+}
