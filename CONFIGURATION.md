@@ -1,6 +1,6 @@
 # Configuration
 
-Version **0.13.0-go** defaults every `[bug_fixes]` option to **true**, including the GameCube/Wii target restriction. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
+Version **0.14.0-go** defaults every `[bug_fixes]` option to **true**, including implemented GameCube/Wii instructions missing from C++. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
 
 ## Loading and overrides
 
@@ -16,7 +16,7 @@ Precedence: defaults < TOML < matching INI < CLI options preceding the input. Us
 
 All these choices persist across inputs until changed. `-a`, `-b`, and `-i` remain per-input. `--set=cli.exact_ini_matching=...` takes effect before looking up that input’s INI. Explicit CLI options win over that INI line.
 
-`--bug-fixes=true|false` sets all fixes and `console_only` together; later `--set=bug_fixes.KEY=...` options override individual choices. All category overrides use `--set`; unknown options are errors in both CLI and INI.
+`--bug-fixes=true|false` sets all fixes, including `additional_console_instructions`, together; it does not change `extensions.non_console_instructions`; later `--set=bug_fixes.KEY=...` options override individual choices. All category overrides use `--set`; unknown options are errors in both CLI and INI.
 
 ## Complete flag reference
 
@@ -24,7 +24,11 @@ All defaults below are false except the individual `[bug_fixes]` options. Each f
 
 ## bug_fixes
 
-All 39 keys default true. See the [complete fix reference and examples](BUG-FIXES.md) and commented [template](gctrm.toml). Setting one key never changes another key. Target restriction is `bug_fixes.console_only`; the old non-console extension key is rejected.
+All 39 keys default true. See the [complete fix reference and examples](BUG-FIXES.md) and commented [template](gctrm.toml). Setting one key never changes another key. Missing console instructions use `bug_fixes.additional_console_instructions`; broader PowerPC support uses `extensions.non_console_instructions`. The old `console_only` and `extensions.additional_console_instructions` keys are rejected.
+
+### additional_console_instructions
+
+**Default: true.** This also covers additions made in the initial rewrite: `clrlwi`, `clrrwi`, `rotlwi`, `dcbf`, `dcbi`, `dcbst`, `dcbt`, `dcbtst`, `dcbz`, `eieio`, `sync`, `sc`, `lwarx`, `stwcx.`; `bso`/`bns` branch aliases; and synthesized named-SPR move aliases beyond the original LR/CTR/XER forms. True permits `dcbz_l`, `eciwx`, `ecowx`, `mcrf`, `mcrfs`, `mcrxr`, `mfmsr`, `mfsr`, `mfsrin`, `mftb`, `mtfsb0`, `mtfsb1`, `mtfsf`, `mtfsfi`, `mtmsr`, `mtsr`, `mtsrin`, `tlbie`, `tlbsync`, with implemented record forms and `mftbl/mftbu/mttbl/mttbu` aliases. False treats them as absent: with `unknown_instructions=true`, it reports an error; with that check disabled, it retains the characterized reference fallback (including prefix interpretation or an unknown-instruction word). Broader PowerPC forms require `extensions.non_console_instructions=true`. Repairs to already-implemented instructions, including indexed paired-single forms, remain bug fixes.
 
 ## extensions
 
@@ -44,9 +48,9 @@ All 39 keys default true. See the [complete fix reference and examples](BUG-FIXE
 
 **Default: false.** False requires a section title before emitted code/data; a missing title produces a bounded diagnostic. True creates an initial section named `Codes`. Declarations/includes can precede the first section, but emitted content must meet this rule. This affects section names/logs and acceptance; it does not add bytes to an otherwise identical named section.
 
-### additional_console_instructions
+### non_console_instructions
 
-**Default: false.** This also covers additions made in the initial rewrite: `clrlwi`, `clrrwi`, `rotlwi`, `dcbf`, `dcbi`, `dcbst`, `dcbt`, `dcbtst`, `dcbz`, `eieio`, `sync`, `sc`, `lwarx`, `stwcx.`; `bso`/`bns` branch aliases; and synthesized named-SPR move aliases beyond the original LR/CTR/XER forms. True permits `dcbz_l`, `eciwx`, `ecowx`, `mcrf`, `mcrfs`, `mcrxr`, `mfmsr`, `mfsr`, `mfsrin`, `mftb`, `mtfsb0`, `mtfsb1`, `mtfsf`, `mtfsfi`, `mtmsr`, `mtsr`, `mtsrin`, `tlbie`, `tlbsync`, with implemented record forms and `mftbl/mftbu/mttbl/mttbu` aliases. False treats them as absent: with fixes on, it reports an error; with fixes off, it retains the characterized reference fallback (including prefix interpretation or an unknown-instruction word). Target restriction is controlled by `bug_fixes.console_only`. Repairs to already-implemented instructions, including indexed paired-single forms, remain bug fixes.
+**Default: false.** False rejects recognized non-GameCube/Wii instructions such as `ld`, `mulld`, `fsqrt`, and explicit L=1 comparisons. True permits the implemented broader PowerPC forms retained from C++; it does not make them executable on Wii. Relevant encoding fixes still apply independently. Raw word/Gecko data is not decoded. Double-precision Wii instructions and assembler arithmetic remain unaffected. This is not a complete general PowerPC target profile. See [NON-CONSOLE.md](NON-CONSOLE.md).
 
 ## semantics
 
@@ -122,7 +126,7 @@ All 39 keys default true. See the [complete fix reference and examples](BUG-FIXE
 
 ## Library API
 
-The library does not read config/INI. Set `Options.Fixes = fixes.All()` (from `gctrm/fixes`) to match the CLI correction default; the zero `fixes.Policy` leaves corrections off. Each exported policy field selects one correction. `DotOp` is a pointer with nil meaning false. `BranchExpressions`, `ExpressionSyntax`, `ImplicitSections`, and `AdditionalConsoleInstructions` select extensions. `AllowNonConsoleInstructions` is the inverse of `bug_fixes.console_only` and defaults false. Set true only to permit implemented broader PowerPC forms. `Options.Validation` has `RejectDuplicateLabels`, `StrictMacroCalls`, `RejectUndefinedMacros`, `RejectAddressAnnotations`, and `RejectDataOverflow` booleans. The library's `Compatibility` fields select C++ behavior when true, so they invert the corresponding category flags. Nil inherits `Options.Dialect` (default `assembler.Legacy`); `assembler.Modern` is a library profile for the alternative source choices. TOML and CLI expose individual settings only.
+The library does not read config/INI. Set `Options.Fixes = fixes.All()` (from `gctrm/fixes`) and `Options.AdditionalConsoleInstructions = true` to match the CLI correction defaults; the zero `fixes.Policy` leaves corrections off. Each exported policy field selects one correction. `DotOp` is a pointer with nil meaning false. `BranchExpressions`, `ExpressionSyntax`, and `ImplicitSections` select extensions. `AdditionalConsoleInstructions` controls the missing-console-instruction fix. `AllowNonConsoleInstructions` maps directly to `extensions.non_console_instructions` and defaults false. Set true only to permit implemented broader PowerPC forms. `Options.Validation` has `RejectDuplicateLabels`, `StrictMacroCalls`, `RejectUndefinedMacros`, `RejectAddressAnnotations`, and `RejectDataOverflow` booleans. The library's `Compatibility` fields select C++ behavior when true, so they invert the corresponding category flags. Nil inherits `Options.Dialect` (default `assembler.Legacy`); `assembler.Modern` is a library profile for the alternative source choices. TOML and CLI expose individual settings only.
 
 | Category flag | Inverse `Compatibility` field |
 | --- | --- |

@@ -1,4 +1,4 @@
-# Compatibility contract — 0.13.0-go
+# Compatibility contract — 0.14.0-go
 
 The pinned reference is [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515),
 built with MSVC on Windows. Its retained source/executable are unchanged.
@@ -10,9 +10,9 @@ restrictions; `[cli]` selects INI/output alternatives. The template has no legac
 table. Only the current schema and categorized keys are accepted.
 
 This preserves C++ octal, arithmetic, representation and permissive source
-policies by default. `.op`, expanded expressions, implicit sections and additional
-console instructions require opt-in. Broader instructions already implemented
-by C++ require `bug_fixes.console_only = false`; the default rejects them.
+policies by default. `.op`, expanded expressions and implicit sections require opt-in. Missing console
+instructions are enabled by `bug_fixes.additional_console_instructions`. Broader instructions already implemented
+by C++ require `extensions.non_console_instructions = true`; the default rejects them.
 See [CONFIGURATION.md](CONFIGURATION.md) for defaults, individual switches,
 CLI/INI overrides and examples.
 
@@ -59,8 +59,8 @@ PSA tags, label fixups, `.GOTO_F`, and ELSE handling.
 Corrections check actual machine-operand counts/widths, branch alignment/range,
 illegal suffixes and register relationships, and missing labels. Optional source
 checks and grammar additions are selected independently under the new categories.
-`bug_fixes.console_only = false` separately permits recognized non-console forms;
-the default `console_only=true` restricts the target to GameCube/Wii. Raw words are not decoded.
+`extensions.non_console_instructions = true` separately permits recognized non-console forms;
+the default `non_console_instructions=false` restricts the target to GameCube/Wii. Raw words are not decoded.
 
 The language choices remain independent. Defaults retain octal values,
 unsigned aliases, permissive register prefixes, direction-adjusted branch hints,

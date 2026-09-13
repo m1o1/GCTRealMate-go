@@ -43,7 +43,7 @@ type Options struct {
 	DotOp                         *bool        // Accept .op as an alias for op; nil defaults to false.
 	ExpressionSyntax              bool         // Additional expression forms beyond the reference grammar.
 	ImplicitSections              bool         // Permit source without an initial section name.
-	AdditionalConsoleInstructions bool         // Permit implemented console mnemonics absent from the reference.
+	AdditionalConsoleInstructions bool         // Enable the missing-console-instruction fix; CLI defaults true.
 	Validation                    Validation
 	BranchExpressions             bool // Accept additional numeric branch target forms; default false.
 	AllowNonConsoleInstructions   bool // Permit retained non-Gekko/Broadway forms; default false.

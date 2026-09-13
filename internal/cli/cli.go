@@ -16,7 +16,7 @@ import (
 	"gctrm/fixes"
 )
 
-const Version = "0.13.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
+const Version = "0.14.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
 const help = `Usage: gctrm [options] source.asm [options] another.asm
 
 Assemble Gecko and PowerPC source into a .GCT beside each input.
@@ -32,15 +32,15 @@ Assemble Gecko and PowerPC source into a .GCT beside each input.
   -o PATH     Set GCT output path (one input only)
   --config PATH     Use this TOML instead of <executable-basename>.toml
   --no-config       Ignore TOML; INI remains separate
-  --bug-fixes=true|false       Set all fixes, including console_only
+  --bug-fixes=true|false       Set all fixes, including missing console instructions
   --set=section.key=true|false Set any categorized option
   --help            Show help
   --version         Show version
 
 TOML groups: [bug_fixes], [extensions], [semantics], [encoding], [validation], [cli].
 Every [bug_fixes] option defaults true; every other option defaults false.
-Syntax extensions, additional console mnemonics and optional validation are opt-ins.
-Set bug_fixes.console_only=false to permit implemented broader
+Missing console mnemonics are enabled; syntax and validation extensions are opt-ins.
+Set extensions.non_console_instructions=true to permit implemented broader
 PowerPC forms. Other fixes and additional console mnemonics remain independent.
 Full flag descriptions and examples: CONFIGURATION.md.
 
@@ -282,7 +282,7 @@ func apply(f *flags, arg string) error {
 				return fmt.Errorf("--bug-fixes expects true or false")
 			}
 			f.fixes = fixes.FromBool(value == "true")
-			f.allowNonConsoleInstructions = value != "true"
+			f.additionalConsoleInstructions = value == "true"
 		default:
 			return fmt.Errorf("unknown option %q", arg)
 		}

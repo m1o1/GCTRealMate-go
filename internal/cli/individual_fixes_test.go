@@ -48,7 +48,7 @@ func TestIndividualFixBehavior(t *testing.T) {
 					config := filepath.Join(dir, "config.toml")
 					input := filepath.Join(dir, "probe.asm")
 					var cfg strings.Builder
-					cfg.WriteString("[bug_fixes]\n")
+
 					for key, value := range tc.Settings {
 						fmt.Fprintf(&cfg, "%s=%t\n", key, value)
 					}
@@ -56,7 +56,7 @@ func TestIndividualFixBehavior(t *testing.T) {
 					if override {
 						configured = !enabled
 					}
-					fmt.Fprintf(&cfg, "%s=%t\n", tc.Key, configured)
+					fmt.Fprintf(&cfg, "bug_fixes.%s=%t\n", tc.Key, configured)
 					writeTestFile(t, config, cfg.String())
 					writeTestFile(t, input, tc.Source)
 					args := []string{"--config", config, "-i", "-t"}
@@ -139,17 +139,17 @@ func TestIndividualFixIsolationAndINI(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if defaults.fixes != fixes.All() || defaults.allowNonConsoleInstructions {
+	if defaults.fixes != fixes.All() || !defaults.additionalConsoleInstructions || defaults.allowNonConsoleInstructions {
 		t.Fatal("incorrect defaults")
 	}
-	for _, key := range strings.Fields("lha eqv console_only") {
+	for _, key := range strings.Fields("lha eqv additional_console_instructions") {
 		f, err := decodeConfig([]byte("[bug_fixes]\n" + key + "=false"))
 		if err != nil {
 			t.Fatal(err)
 		}
 		want := defaults
-		if key == "console_only" {
-			want.allowNonConsoleInstructions = true
+		if key == "additional_console_instructions" {
+			want.additionalConsoleInstructions = false
 		} else if err := want.fixes.Set(key, false); err != nil {
 			t.Fatal(err)
 		}
@@ -170,13 +170,34 @@ func TestIndividualFixIsolationAndINI(t *testing.T) {
 			t.Fatal(job.flags)
 		}
 	}
-	for _, bad := range []string{"bug_fixes=true", "[extensions]\nnon_console_instructions=false", "[bug_fixes]\nunknown=true", "[bug_fixes]\nlha='false'", "[bug_fixes]\nlha=true\nlha=false"} {
+	for _, bad := range []string{"bug_fixes=true", "[bug_fixes]\nconsole_only=true", "[extensions]\nadditional_console_instructions=true", "[bug_fixes]\nunknown=true", "[bug_fixes]\nlha='false'", "[bug_fixes]\nlha=true\nlha=false"} {
 		if _, err := decodeConfig([]byte(bad)); err == nil {
 			t.Fatalf("accepted %s", bad)
 		}
 	}
-	jobs, _, err = plan([]string{"--bug-fixes=false", "--set=bug_fixes.lha=true", "--set=bug_fixes.console_only=true", "one.asm"}, "")
+	jobs, _, err = plan([]string{"--bug-fixes=false", "--set=bug_fixes.lha=true", "--set=extensions.non_console_instructions=false", "one.asm"}, "")
 	if err != nil || !jobs[0].flags.fixes.LHA || jobs[0].flags.fixes.EQV || jobs[0].flags.allowNonConsoleInstructions {
 		t.Fatal(err, jobs)
+	}
+}
+
+func TestConsoleSupportClassification(t *testing.T) {
+	for _, enabled := range []bool{false, true} {
+		for _, broader := range []bool{false, true} {
+			// Applying the bulk correction setting after the extension must not
+			// change the target, regardless of either setting's value.
+			jobs, _, err := plan([]string{
+				"--no-config",
+				fmt.Sprintf("--set=extensions.non_console_instructions=%t", broader),
+				fmt.Sprintf("--bug-fixes=%t", enabled), "probe.asm",
+			}, "")
+			if err != nil {
+				t.Fatal(err)
+			}
+			f := jobs[0].flags
+			if f.additionalConsoleInstructions != enabled || f.allowNonConsoleInstructions != broader {
+				t.Fatal("instruction-support policies are coupled", f)
+			}
+		}
 	}
 }

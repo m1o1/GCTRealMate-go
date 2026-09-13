@@ -1,19 +1,18 @@
-# GCTRealMate Go 0.13.0 configuration. Full guide: CONFIGURATION.md.
+# GCTRealMate Go 0.14.0 configuration. Full guide: CONFIGURATION.md.
 # Select explicitly: .\bin\gctrm.exe --config gctrm.toml source.asm
 # Or copy beside the executable as <executable-basename>.toml.
 # Every [bug_fixes] option defaults true; all other flags default false.
-# The default target is GameCube/Wii; other defaults preserve C++ choices.
+# Defaults include missing GameCube/Wii instructions and preserve other C++ choices.
 # Examples assume all fixes enabled and other default settings unless noted.
 # Source fragments belong in a named section/block unless the example says otherwise.
 version = 2
 
 [bug_fixes]
-# Restrict recognized instructions to GameCube/Wii. False permits implemented broader PowerPC
-# forms; it does not make them Wii-compatible.
-# Example: ld r3,8(r4) and cmpd r3,r4 are rejected with true and permitted with false. Raw word
-# data is not decoded.
-# CLI/INI: --set=bug_fixes.console_only=true|false
-console_only = true
+# Enable implemented GameCube/Wii instructions missing from the C++ reference.
+# Example: mfsr r3,sr0 emits 7C6004A6 with true. With false and unknown_instructions=true,
+# it is rejected; with both false, the characterized C++ fallback is retained.
+# CLI/INI: --set=bug_fixes.additional_console_instructions=true|false
+additional_console_instructions = true
 
 # Encode algebraic halfword loads instead of zero-extending loads.
 # Example: lha r3,0(r4): false emits A0640000; true emits A8640000.
@@ -255,10 +254,11 @@ expression_syntax = false
 # CLI/INI: --set=extensions.implicit_sections=true|false
 implicit_sections = false
 
-# Enable the implemented console mnemonics absent from C++.
-# Example: mfsr r3,sr0 is rejected with false; true assembles it as 7C6004A6.
-# CLI/INI: --set=extensions.additional_console_instructions=true|false
-additional_console_instructions = false
+# Permit implemented PowerPC instructions that cannot run on GameCube/Wii.
+# Example: ld r3,8(r4) and mulld r3,r4,r5 require true; false rejects them.
+# This does not change their encoding fixes or add missing console instructions.
+# CLI/INI: --set=extensions.non_console_instructions=true|false
+non_console_instructions = false
 
 [semantics]
 # Interpret leading-zero integers as decimal instead of octal.

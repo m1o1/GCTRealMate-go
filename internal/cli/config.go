@@ -28,8 +28,8 @@ type configuration struct {
 // setChoice is shared by TOML and --set=section.key=true|false.
 func setChoice(f *flags, key string, value bool) error {
 	if strings.HasPrefix(key, "bug_fixes.") {
-		if key == "bug_fixes.console_only" {
-			f.allowNonConsoleInstructions = !value
+		if key == "bug_fixes.additional_console_instructions" {
+			f.additionalConsoleInstructions = value
 			return nil
 		}
 		return f.fixes.Set(strings.TrimPrefix(key, "bug_fixes."), value)
@@ -43,8 +43,8 @@ func setChoice(f *flags, key string, value bool) error {
 		f.expressionSyntax = value
 	case "extensions.implicit_sections":
 		f.implicitSections = value
-	case "extensions.additional_console_instructions":
-		f.additionalConsoleInstructions = value
+	case "extensions.non_console_instructions":
+		f.allowNonConsoleInstructions = value
 	case "semantics.decimal_leading_zeros":
 		v := !value
 		f.compatibility.OctalLiterals = &v
@@ -104,7 +104,7 @@ func decodeConfig(data []byte) (flags, error) {
 	if config.Version != 2 {
 		return flags{}, fmt.Errorf("unsupported configuration version %d (expected 2)", config.Version)
 	}
-	f := flags{fixes: fixes.All()}
+	f := flags{fixes: fixes.All(), additionalConsoleInstructions: true}
 	for _, table := range []struct {
 		name   string
 		values map[string]bool

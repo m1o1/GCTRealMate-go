@@ -1,31 +1,37 @@
 # Instruction target restriction
 
-In **0.13.0-go**, `[bug_fixes].console_only = true` restricts recognized
-instructions to GameCube/Wii. To permit the implemented broader forms:
+In **0.14.0-go**, broader PowerPC support is an optional extension:
 
 ```toml
 [bug_fixes]
-console_only = false
+additional_console_instructions = true
+[extensions]
+non_console_instructions = false
 ```
 
-Use `--set=bug_fixes.console_only=false` in CLI/INI. Other fixes retain their
-settings. The bulk `--bug-fixes=false` also disables this restriction. The library
-uses the inverse `Options.AllowNonConsoleInstructions` (default false).
-Additional console mnemonics remain a separate disabled extension.
+`additional_console_instructions=true` fills implemented GameCube/Wii instruction
+gaps in C++. `non_console_instructions=false` rejects recognized instructions
+that cannot run on these consoles. Set the latter to true to permit the
+implemented broader forms. `--bug-fixes=true|false` only controls fixes; it
+never changes this extension. Both choices have independent CLI/INI `--set` overrides.
+
+The library exposes `Options.AdditionalConsoleInstructions` and
+`Options.AllowNonConsoleInstructions` respectively. Its explicit booleans both
+have zero value false; set the first true to match CLI defaults.
 
 This setting does not disable double-precision floating-point support on Wii,
 double data, or wider intermediate constant calculations in the assembler.
 
 ## Interaction with bug fixes
 
-| `bug_fixes.console_only` | Relevant encoding fixes | Behavior |
+| `extensions.non_console_instructions` | Relevant encoding fixes | Behavior |
 | --- | --- | --- |
-| true | either | Reject recognized non-console forms. |
-| false | enabled | Permit implemented broader forms with corrected encodings. |
-| false | disabled | Permit them with characterized reference encodings. |
+| false | either | Reject recognized non-console forms. |
+| true | enabled | Permit implemented broader forms with corrected encodings. |
+| true | disabled | Permit them with characterized reference encodings. |
 
-For example, `ld r3,8(r4)` is rejected when `console_only` is true.
-With `console_only=false` and `ds_displacement=false`, it emits `e8640020`, preserving the old
+For example, `ld r3,8(r4)` is rejected when `non_console_instructions` is false.
+With `non_console_instructions=true` and `ds_displacement=false`, it emits `e8640020`, preserving the old
 displacement-times-four convention. With `ds_displacement=true`, it treats 8 as a byte
 displacement and emits `e8640008`; it checks four-byte alignment and field width.
 Corrected mode also encodes the L bit in 64-bit comparisons; compatibility mode
@@ -48,7 +54,7 @@ cmpd cmpdi cmpld cmpldi
 ```
 
 Their applicable record/overflow suffixes and explicit L=1 comparisons also
-require `bug_fixes.console_only = false`. Legacy floating-prefix acceptance cannot bypass the target
+require `extensions.non_console_instructions = true`. Legacy floating-prefix acceptance cannot bypass the target
 restriction for recognized non-console encodings.
 
 This is a permission to use implemented broader forms, not a complete general
@@ -67,7 +73,7 @@ a guarantee that every emitted word is a valid console instruction.
 
 To reproduce the complete historical C++ instruction corpus, including its
 non-console cases, select all relevant fixes disabled and
-`bug_fixes.console_only = false`. All 327 captured words remain tested.
+`extensions.non_console_instructions = true`. All 327 captured words remain tested.
 
 Tests cover defaults, both fix settings, independent semantics, TOML/CLI/INI precedence,
 source forms/includes/macros, explicit L=1 requests, prefix matching, and output

@@ -25,7 +25,7 @@ func TestNonConsolePolicyThroughSourceForms(t *testing.T) {
 						return []byte("Child\nop fsqrt f3,f4 @ $80001000\n"), nil
 					}}
 					_, err := Assemble(context.Background(), "probe.asm", []byte(source), opts)
-					if allow && err != nil || !allow && (err == nil || !strings.Contains(err.Error(), "bug_fixes.console_only=false")) {
+					if allow && err != nil || !allow && (err == nil || !strings.Contains(err.Error(), "extensions.non_console_instructions=true")) {
 						t.Fatal(err)
 					}
 				})

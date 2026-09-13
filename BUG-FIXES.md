@@ -1,42 +1,41 @@
 # Individual fixes
 
-Version **0.13.0-go** defaults every option in `[bug_fixes]` to **true**.
+Version **0.14.0-go** defaults every option in `[bug_fixes]` to **true**.
 All options in the other five tables default to **false**. An omitted key keeps
 its default; the table is not an all-or-nothing switch.
 
 ```toml
 version = 2
 [bug_fixes]
-console_only = true
+additional_console_instructions = true
 lha = false # Restore only this C++ opcode defect; other fixes stay enabled.
 ```
 
-`console_only` is a target restriction grouped here by policy, not a claim that
-supporting other PowerPC CPUs is inherently a C++ defect. Its default rejects
-recognized non-GameCube/Wii instructions. False permits the broader implemented
-forms; it does not add missing console mnemonics or make those forms run on Wii.
+`additional_console_instructions` fills gaps in the C++ reference's GameCube/Wii
+instruction support and defaults true. Broader PowerPC support is the separate
+`extensions.non_console_instructions` option, which defaults false.
 
 Use `--set=bug_fixes.lha=false` for an individual CLI/INI override.
 `--bug-fixes=true|false` is a bulk CLI/INI convenience: it sets **every** option
-in this table, including `console_only`, at that point in option order. A later
+in this table, including `additional_console_instructions`, at that point in option order. A later
 `--set` overrides just one choice. There is no master TOML boolean; old scalar
-`bug_fixes` and `extensions.non_console_instructions` keys are rejected.
+`bug_fixes`, `bug_fixes.console_only`, and `extensions.additional_console_instructions` keys are rejected. The bulk switch never changes non-console support.
 
 ```powershell
 # All corrections enabled, with just the lha correction disabled.
 .\bin\gctrm.exe --no-config --set=bug_fixes.lha=false -i source.asm
 # All characterized quirks, while still restricting the target to GameCube/Wii.
-.\bin\gctrm.exe --no-config --bug-fixes=false --set=bug_fixes.console_only=true -i source.asm
+.\bin\gctrm.exe --no-config --bug-fixes=false --set=extensions.non_console_instructions=false -i source.asm
 ```
 
 The following is the complete current list. Each key is independently selectable.
 Detailed C++ evidence remains in [CPP-BUGS.md](CPP-BUGS.md).
 
-## console_only
+## additional_console_instructions
 
-**Default: true.** Restrict recognized instructions to GameCube/Wii. False permits implemented broader PowerPC forms; it does not make them Wii-compatible.
+**Default: true.** Enable implemented GameCube/Wii mnemonics absent from the C++ reference. This includes the additional cache, synchronization, system/segment-register, atomic-memory and floating-status instructions, plus the implemented aliases. The [configuration reference](CONFIGURATION.md#additional_console_instructions) lists the full set.
 
-Example: ld r3,8(r4) and cmpd r3,r4 are rejected with true and permitted with false. Raw word data is not decoded.
+Example: `mfsr r3,sr0` emits `7C6004A6` with true. With false it is unavailable: `unknown_instructions=true` reports an error, while false preserves the characterized C++ fallback. It does not enable non-console forms.
 
 ## lha
 
@@ -102,7 +101,7 @@ Example: cmpw r5,0xD: false selects register 0; true selects register 13.
 
 **Default: true.** Correct generic comparison operand selection, cmpli routing, and comparison L encoding.
 
-Example: cmpli 0,0,r3,1: true compares r3 to immediate 1; false follows the incorrect register-comparison path. L=1 still requires console_only=false.
+Example: cmpli 0,0,r3,1: true compares r3 to immediate 1; false follows the incorrect register-comparison path. L=1 still requires extensions.non_console_instructions=true.
 
 ## branch_prediction
 
@@ -252,7 +251,7 @@ Example: With goto_false=false, a lone .GOTO_F can leave an odd word count: true
 
 **Default: true.** Encode DS-form offsets as aligned byte displacements rather than multiplying by four.
 
-Example: With console_only=false, ld r3,8(r4) emits E8640020 with false or E8640008 with true. Misaligned offsets are rejected with true.
+Example: With extensions.non_console_instructions=true, ld r3,8(r4) emits E8640020 with false or E8640008 with true. Misaligned offsets are rejected with true.
 
 ## missing_file_status
 
@@ -275,15 +274,15 @@ or `gecko_line_framing`. Reproducing that malformed output requires disabling th
 checks too; `text_line_termination` affects only its text rendering. Restoring
 scanner operator loss can prevent the alias evaluator from receiving an expression.
 
-No correction enables a syntax extension, new console mnemonic, alternative
+The missing-console-instruction fix enables the implemented console mnemonics.
+Other corrections do not enable a syntax extension, alternative
 numeric semantics, NaN representation, or optional source validation policy.
-Disabling `console_only` affects recognized instructions; raw words are never
+Enabling `extensions.non_console_instructions` affects recognized instructions; raw words are never
 decoded to enforce a CPU target.
 
 The library uses `Options.Fixes` (`fixes.Policy`). `fixes.All()` enables the
 corrections; the zero policy preserves characterized quirks. Target availability
-remains `Options.AllowNonConsoleInstructions`: false corresponds to
-`bug_fixes.console_only=true`. The CLI additionally applies `missing_file_status`.
+remains `Options.AllowNonConsoleInstructions`: it maps to `extensions.non_console_instructions` and defaults false. `Options.AdditionalConsoleInstructions=true` enables the missing-console-instruction fix. The CLI additionally applies `missing_file_status`.
 
 All-off reference behavior and all-on corrected behavior remain covered by the
 existing instruction/source fixtures. Earlier GNU/Dolphin and Project+ reports

@@ -46,7 +46,7 @@ func Encode(text string, ctx Context) (uint32, error) {
 		if !ctx.Fixes.UnknownInstructions {
 			return legacyAddedInstruction(text, baseName, ctx)
 		}
-		return 0, fmt.Errorf("%s requires extensions.additional_console_instructions=true", name)
+		return 0, fmt.Errorf("%s requires bug_fixes.additional_console_instructions=true", name)
 	}
 	if !ctx.AllowNonConsoleInstructions && (unsupportedInstructions[baseName] || strings.HasSuffix(baseName, "o") && unsupportedInstructions[strings.TrimSuffix(baseName, "o")]) {
 		return 0, nonConsoleError(name)
