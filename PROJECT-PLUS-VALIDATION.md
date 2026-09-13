@@ -1,5 +1,11 @@
 # Project+ full-source assembly comparison
 
+**Latest: [0.15.0 defaults and option comparison](PROJECT-PLUS-SETTINGS-0.15.0.md).**
+Current defaults fail five of six untouched entrypoints. A Go data-expression
+regression means fixes-off alone is also insufficient; fixes-off plus explicit
+`extensions.expression_syntax=true` reproduces all six packaged GCTs. The older
+runs below used different binaries/profiles and are not current results.
+
 Current configuration is documented in [CONFIGURATION.md](CONFIGURATION.md).
 All category flags default false; only bug fixes default true. Policies and
 validation results below retain their original versions unless stated otherwise.

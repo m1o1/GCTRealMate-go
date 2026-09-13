@@ -1,5 +1,12 @@
 # Compatibility contract — 0.15.0-go
 
+**Known current gaps:** the [fresh Project+ audit](PROJECT-PLUS-SETTINGS-0.15.0.md)
+found that reference-supported data addition incorrectly requires
+`extensions.expression_syntax=true`. Current defaults fail five of six untouched
+Project+ entrypoints; disabling fixes alone is insufficient. All six match the
+packaged executable with fixes disabled and expression syntax enabled. Separate
+probes also found ungated float/double data acceptance inside CODE blocks.
+
 The pinned reference is [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515),
 built with MSVC on Windows. Its retained source/executable are unchanged.
 
@@ -37,10 +44,10 @@ defect corpora explicitly enable non-console support where those cases require i
 - The three captured CLI cases match GCT, codeset text, and include-tree logs.
 - Seven additional fresh C++ source captures match GCT/text/log output, including
   permissive prefix handling and the malformed odd-word `.GOTO_F` command.
-- All six unmodified Project+ entrypoints match the retained C++ GCTs byte for
-  byte. A separate run also matches the actual executable bundled with the
-  local Project+ installation; see the [report](validation/project-plus-bundled.json).
-  No source adaptations are needed for either unmodified comparison.
+- Historical runs matched all six unmodified Project+ entrypoints against both
+  retained C++ and actual packaged executables; see the
+  [older report](validation/project-plus-bundled.json). A fresh 0.15.0 run requires
+  the expression workaround described above to reproduce that result.
 
 This is output compatibility with a pinned build, not proof that every possible
 input, host compiler, or upstream fork behaves identically. Malformed cases

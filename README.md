@@ -205,11 +205,12 @@ non-console opt-in and bug fixes enabled; those are not console execution tests.
 
 The corrected mode passed **218 execution checks in Dolphin** across GameCube/Wii
 interpreter/JIT configurations, including actual MEM1 and MEM2 C2 hook execution.
-The prior comparison with fixes and `.op` disabled matches all six unmodified
-Project+ GCTs byte for byte. Select all `[bug_fixes]` options set to false (or `--bug-fixes=false`) and `extensions.dot_op = false`
-to retain those compatibility settings in 0.15.0-go.
-Corrected mode builds two unmodified entrypoints and diagnoses malformed input
-in four; separately adapted builds retain 84 explained differences from C++.
+The [fresh 0.15.0 Project+ comparison](PROJECT-PLUS-SETTINGS-0.15.0.md) found that
+current defaults fail five of six untouched entrypoints. Besides enabled input
+checks, a Go regression rejects existing data-addition syntax. All six match the
+actual packaged executable with `--no-config --bug-fixes=false
+--set=extensions.expression_syntax=true`. Separately adapted builds with fixes
+and that expression workaround retain the 84 explained differing words.
 These assembly comparisons are not gameplay tests.
 [CONSOLE-VALIDATION.md](CONSOLE-VALIDATION.md) and
 [PROJECT-PLUS-VALIDATION.md](PROJECT-PLUS-VALIDATION.md) record reproduction,
