@@ -1,32 +1,35 @@
 # Instruction target restriction
 
-In **0.11.0-go**, C++ instruction availability is the default. To restrict
-recognized forms to GameCube/Wii, opt in:
+In **0.12.0-go**, GameCube/Wii is the default target. Broader PowerPC forms
+require an explicit extension:
 
 ```toml
 bug_fixes = true
-[validation]
-console_only = true
+[extensions]
+non_console_instructions = true
 ```
 
-The default is false, preserving C++ instruction availability. This does not
-enable newly added console mnemonics: those require
-`extensions.additional_console_instructions`. Use
-`--set=validation.console_only=true|false` in CLI/INI. The library's explicit
-`AllowNonConsoleInstructions` boolean is inverse to this restriction.
-Encoding corrections remain independent. See [CONFIGURATION.md](CONFIGURATION.md).
+The default false rejects recognized non-console forms. Set true to permit the
+implemented broader forms retained from C++; this does not make them executable
+on Wii. Use `--set=extensions.non_console_instructions=true|false` in CLI/INI.
+The library's `Options.AllowNonConsoleInstructions` boolean maps directly to this
+setting and also defaults false. The separate `additional_console_instructions`
+extension controls new console mnemonics. See [CONFIGURATION.md](CONFIGURATION.md).
+
+This setting does not disable double-precision floating-point support on Wii,
+double data, or wider intermediate constant calculations in the assembler.
 
 ## Interaction with bug fixes
 
-| `validation.console_only` | `bug_fixes` | Behavior |
+| `extensions.non_console_instructions` | `bug_fixes` | Behavior |
 | --- | --- | --- |
-| `true` | `false` | Reject recognized non-console forms; preserve other characterized C++ quirks. |
-| `true` | `true` | Reject recognized non-console forms; apply encoding and machine-operand fixes. |
-| `false` | `false` | Permit retained broader forms using characterized C++ encodings and parsing. |
-| `false` | `true` | CLI/config default: permit implemented broader forms with encoding and machine-operand fixes. |
+| `false` | `false` | Reject recognized non-console forms; preserve other characterized C++ quirks. |
+| `false` | `true` | CLI/config default: reject recognized non-console forms; apply encoding and machine-operand fixes. |
+| `true` | `false` | Permit retained broader forms using characterized C++ encodings and parsing. |
+| `true` | `true` | Permit implemented broader forms with encoding and machine-operand fixes. |
 
-For example, `ld r3,8(r4)` is rejected whenever `validation.console_only` is true.
-When it is false, C++ compatibility mode emits `e8640020`, preserving the old
+For example, `ld r3,8(r4)` is rejected when this extension is false.
+With it enabled, C++ compatibility mode emits `e8640020`, preserving the old
 displacement-times-four convention. Corrected mode treats 8 as a byte
 displacement and emits `e8640008`; it checks four-byte alignment and field width.
 Corrected mode also encodes the L bit in 64-bit comparisons; compatibility mode
@@ -49,7 +52,7 @@ cmpd cmpdi cmpld cmpldi
 ```
 
 Their applicable record/overflow suffixes and explicit L=1 comparisons also
-require `validation.console_only = false`. Legacy floating-prefix acceptance cannot bypass the target
+require `extensions.non_console_instructions = true`. Legacy floating-prefix acceptance cannot bypass the target
 restriction for recognized non-console encodings.
 
 This is a permission to use implemented broader forms, not a complete general
@@ -68,7 +71,7 @@ a guarantee that every emitted word is a valid console instruction.
 
 To reproduce the complete historical C++ instruction corpus, including its
 non-console cases, select `bug_fixes = false` and
-`validation.console_only = false`. All 327 captured words remain tested.
+`extensions.non_console_instructions = true`. All 327 captured words remain tested.
 
 Tests cover defaults, both fix settings, independent semantics, TOML/CLI/INI precedence,
 source forms/includes/macros, explicit L=1 requests, prefix matching, and output

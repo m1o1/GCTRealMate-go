@@ -38,13 +38,13 @@ func TestNonConsoleInstructionsRequireOptIn(t *testing.T) {
 			ctx := Context{BugFixes: fixed, Dialect: mode}
 			for name := range unsupportedInstructions {
 				for _, suffix := range []string{"", ".", "o", "o."} {
-					if _, err := Encode(name+suffix+" 3,4,5", ctx); err == nil || !strings.Contains(err.Error(), "validation.console_only=false") {
+					if _, err := Encode(name+suffix+" 3,4,5", ctx); err == nil || !strings.Contains(err.Error(), "extensions.non_console_instructions=true") {
 						t.Fatalf("fixed=%t mode=%d %s%s: expected target rejection, got %v", fixed, mode, name, suffix, err)
 					}
 				}
 			}
 			for _, source := range []string{"cmp cr0,1,r3,r4", "cmpi 0,0x1,r3,4", "cmpl cr0,1,r3,r4", "cmpli 0,1,r3,4"} {
-				if _, err := Encode(source, ctx); err == nil || !strings.Contains(err.Error(), "validation.console_only=false") {
+				if _, err := Encode(source, ctx); err == nil || !strings.Contains(err.Error(), "extensions.non_console_instructions=true") {
 					t.Fatalf("fixed=%t mode=%d %s: %v", fixed, mode, source, err)
 				}
 			}
@@ -52,7 +52,7 @@ func TestNonConsoleInstructionsRequireOptIn(t *testing.T) {
 	}
 	// Legacy prefix matching must not bypass the target restriction.
 	for _, source := range []string{"fsqrtmisspelled f3,f4", "frsqrtesx f3,f4", "fselsx f3,f4,f5,f6"} {
-		if _, err := Encode(source, Context{}); err == nil || !strings.Contains(err.Error(), "validation.console_only=false") {
+		if _, err := Encode(source, Context{}); err == nil || !strings.Contains(err.Error(), "extensions.non_console_instructions=true") {
 			t.Fatalf("%s: %v", source, err)
 		}
 	}

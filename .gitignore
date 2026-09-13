@@ -1,5 +1,6 @@
 /bin/
 /reference/
+/scratch/
 /coverage.out
 *.GCT
 *_codeset.txt

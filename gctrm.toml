@@ -1,7 +1,8 @@
-# GCTRealMate Go 0.11.0 configuration. Full guide: CONFIGURATION.md.
+# GCTRealMate Go 0.12.0 configuration. Full guide: CONFIGURATION.md.
 # Select explicitly: .\bin\gctrm.exe --config gctrm.toml source.asm
 # Or copy beside the executable as <executable-basename>.toml.
-# Every false below preserves reference behavior; bug_fixes is the exception.
+# Bug fixes are enabled; all category flags default false.
+# The default target is GameCube/Wii; other defaults preserve C++ choices.
 version = 2
 bug_fixes = true
 
@@ -25,6 +26,11 @@ implicit_sections = false
 # Enable the implemented console mnemonics absent from C++.
 # CLI/INI: --set=extensions.additional_console_instructions=true|false
 additional_console_instructions = false
+
+# Permit implemented instructions outside GameCube/Wii, including 64-bit integers.
+# False rejects these forms even when bug_fixes is false.
+# CLI/INI: --set=extensions.non_console_instructions=true|false
+non_console_instructions = false
 
 [semantics]
 # Interpret leading-zero integers as decimal instead of octal.
@@ -80,10 +86,6 @@ reject_address_annotations = false
 # Reject out-of-range integer data instead of truncating it.
 # CLI/INI: --set=validation.reject_data_overflow=true|false
 reject_data_overflow = false
-
-# Reject recognized instruction forms outside GameCube/Wii.
-# CLI/INI: --set=validation.console_only=true|false
-console_only = false
 
 [cli]
 # Match INI basenames exactly instead of matching prefixes.

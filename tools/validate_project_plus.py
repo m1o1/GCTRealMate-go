@@ -50,7 +50,7 @@ def run(args):
             output.unlink(missing_ok=True)
             flags = ["-q", "-i"]
             if implementation == "go":
-                flags += ["--no-config", "--bug-fixes="+args.bug_fixes, "--set=extensions.dot_op="+args.bug_fixes, "--set=extensions.branch_expressions="+args.bug_fixes, "--set=validation.console_only=true"] + ["--set="+key+"="+args.bug_fixes for key in ['extensions.expression_syntax', 'extensions.implicit_sections', 'extensions.additional_console_instructions', 'validation.reject_duplicate_labels', 'validation.strict_macro_calls', 'validation.reject_undefined_macros', 'validation.reject_address_annotations', 'validation.reject_data_overflow']]
+                flags += ["--no-config", "--bug-fixes="+args.bug_fixes, "--set=extensions.dot_op="+args.bug_fixes, "--set=extensions.branch_expressions="+args.bug_fixes, "--set=extensions.non_console_instructions=false"] + ["--set="+key+"="+args.bug_fixes for key in ['extensions.expression_syntax', 'extensions.implicit_sections', 'extensions.additional_console_instructions', 'validation.reject_duplicate_labels', 'validation.strict_macro_calls', 'validation.reject_undefined_macros', 'validation.reject_address_annotations', 'validation.reject_data_overflow']]
             if base:
                 flags += ["-a", "-b:"+base]
             row = dict(implementation=implementation, entry=entry)
@@ -141,7 +141,7 @@ def run(args):
             output.unlink(missing_ok=True)
             flags = ["-q", "-i", "-l", "-t"]
             if implementation == "go":
-                flags += ["--no-config", "--bug-fixes="+args.bug_fixes, "--set=extensions.dot_op="+args.bug_fixes, "--set=extensions.branch_expressions="+args.bug_fixes, "--set=validation.console_only=true"] + ["--set="+key+"="+args.bug_fixes for key in ['extensions.expression_syntax', 'extensions.implicit_sections', 'extensions.additional_console_instructions', 'validation.reject_duplicate_labels', 'validation.strict_macro_calls', 'validation.reject_undefined_macros', 'validation.reject_address_annotations', 'validation.reject_data_overflow']]
+                flags += ["--no-config", "--bug-fixes="+args.bug_fixes, "--set=extensions.dot_op="+args.bug_fixes, "--set=extensions.branch_expressions="+args.bug_fixes, "--set=extensions.non_console_instructions=false"] + ["--set="+key+"="+args.bug_fixes for key in ['extensions.expression_syntax', 'extensions.implicit_sections', 'extensions.additional_console_instructions', 'validation.reject_duplicate_labels', 'validation.strict_macro_calls', 'validation.reject_undefined_macros', 'validation.reject_address_annotations', 'validation.reject_data_overflow']]
             if base:
                 flags += ["-a", "-b:"+base]
             result = subprocess.run([str(Path(executable).resolve()), *flags, str(path)],

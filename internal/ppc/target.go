@@ -6,7 +6,7 @@ import (
 )
 
 func nonConsoleError(name string) error {
-	return fmt.Errorf("%s is not supported by GameCube/Wii (Gekko/Broadway); non-console forms require validation.console_only=false", name)
+	return fmt.Errorf("%s is not supported by GameCube/Wii (Gekko/Broadway); non-console forms require extensions.non_console_instructions=true", name)
 }
 
 // Check explicit 64-bit comparison requests before legacy operand selection

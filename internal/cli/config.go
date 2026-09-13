@@ -36,6 +36,8 @@ func setChoice(f *flags, key string, value bool) error {
 		f.implicitSections = value
 	case "extensions.additional_console_instructions":
 		f.additionalConsoleInstructions = value
+	case "extensions.non_console_instructions":
+		f.allowNonConsoleInstructions = value
 	case "semantics.decimal_leading_zeros":
 		v := !value
 		f.compatibility.OctalLiterals = &v
@@ -70,8 +72,6 @@ func setChoice(f *flags, key string, value bool) error {
 		f.validation.RejectAddressAnnotations = value
 	case "validation.reject_data_overflow":
 		f.validation.RejectDataOverflow = value
-	case "validation.console_only":
-		f.allowNonConsoleInstructions = !value
 	case "cli.exact_ini_matching":
 		f.exactINI = value
 	case "cli.flat_logs":
@@ -97,7 +97,7 @@ func decodeConfig(data []byte) (flags, error) {
 	if config.Version != 2 {
 		return flags{}, fmt.Errorf("unsupported configuration version %d (expected 2)", config.Version)
 	}
-	f := flags{bugFixes: config.BugFixes, allowNonConsoleInstructions: true}
+	f := flags{bugFixes: config.BugFixes}
 	for _, table := range []struct {
 		name   string
 		values map[string]bool

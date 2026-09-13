@@ -1,6 +1,6 @@
 {
-  "assembler_version": "0.11.0-go",
-  "assembler_sha256": "83d4c5877e3b4ade7fbaf09eabac640da0511dff53e231a942832649732ab147",
+  "assembler_version": "0.12.0-go",
+  "assembler_sha256": "214e04995140be098f0a99caab36c7cf021983421daaf11335eb25ff10c5fe26",
   "schema_version": 2,
   "accepted_schema_versions": [
     2
@@ -11,6 +11,7 @@
     "extensions.expression_syntax",
     "extensions.implicit_sections",
     "extensions.additional_console_instructions",
+    "extensions.non_console_instructions",
     "semantics.decimal_leading_zeros",
     "semantics.c_operator_precedence",
     "semantics.signed_64_bit_aliases",
@@ -24,17 +25,20 @@
     "validation.reject_undefined_macros",
     "validation.reject_address_annotations",
     "validation.reject_data_overflow",
-    "validation.console_only",
     "cli.exact_ini_matching",
     "cli.flat_logs",
     "cli.lf_line_endings"
   ],
   "bug_fixes_default": true,
   "all_category_flag_defaults": false,
+  "default_target": "GameCube/Wii",
+  "non_console_instructions_default": false,
   "source_combination_checks": 256,
   "cli_combination_checks": 8,
   "source_validation_independence_cases": 40,
-  "obsolete_settings_rejected": 59,
+  "target_config_matrix_cases": 36,
+  "target_loading_path_cases": 14,
+  "obsolete_settings_rejected": 65,
   "rejection_report": "configuration-rejections.json",
   "generic_cli_override": "TOML < matching INI < CLI; persistence and pre-lookup INI matching verified",
   "validation": "go test ./... and current executable probes passed"

@@ -1,8 +1,8 @@
 {
   "date": "2026-09-13",
   "go": "go1.27.1 windows/amd64",
-  "assembler_version": "0.11.0-go",
-  "assembler_sha256": "83d4c5877e3b4ade7fbaf09eabac640da0511dff53e231a942832649732ab147",
+  "assembler_version": "0.12.0-go",
+  "assembler_sha256": "214e04995140be098f0a99caab36c7cf021983421daaf11335eb25ff10c5fe26",
   "default_bug_fixes": true,
   "category_defaults": {
     "extensions.dot_op": false,
@@ -10,6 +10,7 @@
     "extensions.expression_syntax": false,
     "extensions.implicit_sections": false,
     "extensions.additional_console_instructions": false,
+    "extensions.non_console_instructions": false,
     "semantics.decimal_leading_zeros": false,
     "semantics.c_operator_precedence": false,
     "semantics.signed_64_bit_aliases": false,
@@ -23,16 +24,16 @@
     "validation.reject_undefined_macros": false,
     "validation.reject_address_annotations": false,
     "validation.reject_data_overflow": false,
-    "validation.console_only": false,
     "cli.exact_ini_matching": false,
     "cli.flat_logs": false,
     "cli.lf_line_endings": false
   },
-  "default_cpp_instruction_availability": true,
+  "default_target": "GameCube/Wii",
+  "non_console_instructions_default": false,
   "unit_regression_suite": "passed",
   "go_vet": "passed",
   "windows_build": "passed",
-  "scope": "Removed Go config migration aliases, CLI dialect presets and old schema support. C++ compatibility policies and defaults retained. No new Dolphin or Project+ runs.",
+  "scope": "Replaced validation.console_only with extensions.non_console_instructions, default false. Non-console instructions require opt-in independently of fixes. No new Dolphin or Project+ runs.",
   "toml_configuration": {
     "report": "toml-configuration.json",
     "result": "passed"
@@ -40,30 +41,32 @@
   "documentation_examples": {
     "report": "configuration-examples.json",
     "result": "passed",
-    "executable_checks": 45,
+    "executable_checks": 56,
     "source_setting_pairs": 19,
     "toml_recipes": 3,
-    "local_links_checked": 87
+    "local_links_checked": 87,
+    "target_specific_checks": 11
   },
   "rejected_obsolete_settings": {
     "report": "configuration-rejections.json",
     "result": "passed",
-    "executable_checks": 59,
-    "toml_cases": 31,
-    "cli_cases": 14,
-    "ini_cases": 14,
+    "executable_checks": 65,
+    "toml_cases": 33,
+    "cli_cases": 16,
+    "ini_cases": 16,
     "prior_outputs_preserved": true
   },
-  "cpp_fixture_replay": "Passed in go test ./...; saved oracle inputs and expected bytes unchanged.",
+  "cpp_fixture_replay": "Passed in go test ./...; saved oracle inputs and expected bytes unchanged; broader forms explicitly enabled in compatibility fixtures.",
   "prior_live_cpp_comparisons": {
     "report": "category-reference.json",
     "assembler_version": "0.10.0-go",
     "cases": 37,
     "mismatches": 0
   },
-  "prior_cli_validation": {
-    "assembler_version": "0.10.0-go",
-    "report": "checks-0.10.0.json"
+  "prior_configuration_validation": {
+    "assembler_version": "0.11.0-go",
+    "git_commit": "b40482172cf7e2170097e1d9d429f04762996284",
+    "report_at_that_commit": "validation/checks.json"
   },
   "prior_integration_validation": {
     "assembler_version": "0.6.0-go",

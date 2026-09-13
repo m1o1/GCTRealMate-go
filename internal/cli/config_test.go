@@ -190,7 +190,7 @@ func TestExampleConfigAndIndependentLibraryCalls(t *testing.T) {
 }
 
 func FuzzConfig(f *testing.F) {
-	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true", "[encoding]\nalternative_float_nan=true", "[validation]\nconsole_only=false", "version=99"} {
+	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true", "[encoding]\nalternative_float_nan=true", "[extensions]\nnon_console_instructions=false", "version=99"} {
 		f.Add(source)
 	}
 	f.Fuzz(func(t *testing.T, source string) {

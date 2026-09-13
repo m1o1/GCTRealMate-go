@@ -173,7 +173,7 @@ def validate_handler(remote, args, work, halt, mem2=False):
         write("CODE @ $90020020\n{\nli r3,99\nblr\n}", 0x90020020, "386000634e800020")
     source = work / ("handler-mem2.asm" if mem2 else "handler.asm")
     source.write_text("\n".join(statements)+"\n")
-    subprocess.run([str(Path(args.assembler).resolve()), "--no-config", "--bug-fixes=true", "--set=extensions.branch_expressions=true", "--set=validation.console_only=true", "--set=extensions.expression_syntax=true", "--set=extensions.implicit_sections=true", "--set=extensions.additional_console_instructions=true", "--set=validation.reject_duplicate_labels=true", "--set=validation.strict_macro_calls=true", "--set=validation.reject_undefined_macros=true", "--set=validation.reject_address_annotations=true", "--set=validation.reject_data_overflow=true", "-i", "-q", str(source)], check=True, capture_output=True, timeout=15)
+    subprocess.run([str(Path(args.assembler).resolve()), "--no-config", "--bug-fixes=true", "--set=extensions.branch_expressions=true", "--set=extensions.non_console_instructions=false", "--set=extensions.expression_syntax=true", "--set=extensions.implicit_sections=true", "--set=extensions.additional_console_instructions=true", "--set=validation.reject_duplicate_labels=true", "--set=validation.strict_macro_calls=true", "--set=validation.reject_undefined_macros=true", "--set=validation.reject_address_annotations=true", "--set=validation.reject_data_overflow=true", "-i", "-q", str(source)], check=True, capture_output=True, timeout=15)
     gct = source.with_suffix(".GCT").read_bytes()
     handler = bytearray((Path(args.dolphin).resolve().parent / "Sys" / "codehandler.bin").read_bytes())
     # Match Dolphin's installer: patch the MMIO bank for Wii mode.
@@ -255,7 +255,7 @@ def run(args):
     source = work / "runtime.asm"
     code, expected = program()
     source.write_text("Runtime validation\nCODE @ $80004000\n{\n"+"\n".join(code)+"\n}\n")
-    subprocess.run([str(Path(args.assembler).resolve()), "--no-config", "--bug-fixes=true", "--set=extensions.branch_expressions=true", "--set=validation.console_only=true", "--set=extensions.expression_syntax=true", "--set=extensions.implicit_sections=true", "--set=extensions.additional_console_instructions=true", "--set=validation.reject_duplicate_labels=true", "--set=validation.strict_macro_calls=true", "--set=validation.reject_undefined_macros=true", "--set=validation.reject_address_annotations=true", "--set=validation.reject_data_overflow=true", "-i", "-q", str(source)], check=True, capture_output=True, timeout=15)
+    subprocess.run([str(Path(args.assembler).resolve()), "--no-config", "--bug-fixes=true", "--set=extensions.branch_expressions=true", "--set=extensions.non_console_instructions=false", "--set=extensions.expression_syntax=true", "--set=extensions.implicit_sections=true", "--set=extensions.additional_console_instructions=true", "--set=validation.reject_duplicate_labels=true", "--set=validation.strict_macro_calls=true", "--set=validation.reject_undefined_macros=true", "--set=validation.reject_address_annotations=true", "--set=validation.reject_data_overflow=true", "-i", "-q", str(source)], check=True, capture_output=True, timeout=15)
     gct = source.with_suffix(".GCT").read_bytes()
     size = struct.unpack_from(">I", gct, 12)[0]
     body = gct[16:16+size]

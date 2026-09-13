@@ -1,226 +1,240 @@
 {
-  "assembler_version": "0.11.0-go",
-  "assembler_sha256": "83d4c5877e3b4ade7fbaf09eabac640da0511dff53e231a942832649732ab147",
-  "obsolete_settings_rejected": 59,
-  "toml_cases": 31,
-  "cli_cases": 14,
-  "ini_cases": 14,
+  "assembler_version": "0.12.0-go",
+  "assembler_sha256": "214e04995140be098f0a99caab36c7cf021983421daaf11335eb25ff10c5fe26",
+  "obsolete_settings_rejected": 65,
+  "toml_cases": 33,
+  "cli_cases": 16,
+  "ini_cases": 16,
   "cases": [
     {
       "kind": "toml",
       "setting": "version=1",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\000-toml\\settings.toml: unsupported configuration version 1 (expected 2)",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\000-toml\\settings.toml: unsupported configuration version 1 (expected 2)",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "dialect='legacy'",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\001-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\001-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "dialect='modern'",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\002-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\002-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "dot_op=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\003-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\003-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "dot_op=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\004-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\004-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "allow_non_console_instructions=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\005-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\005-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "allow_non_console_instructions=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\006-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\006-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "extensions.allow_non_console_instructions=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\007-toml\\settings.toml: unknown configuration key extensions.allow_non_console_instructions",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\007-toml\\settings.toml: unknown configuration key extensions.allow_non_console_instructions",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "extensions.allow_non_console_instructions=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\008-toml\\settings.toml: unknown configuration key extensions.allow_non_console_instructions",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\008-toml\\settings.toml: unknown configuration key extensions.allow_non_console_instructions",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.octal_literals=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\009-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\009-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.octal_literals=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\010-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\010-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.left_to_right_expressions=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\011-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\011-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.left_to_right_expressions=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\012-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\012-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.unsigned_32_bit_aliases=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\013-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\013-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.unsigned_32_bit_aliases=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\014-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\014-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.branch_hints=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\015-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\015-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.branch_hints=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\016-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\016-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.register_prefixes=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\017-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\017-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.register_prefixes=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\018-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\018-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.zero_extended_data=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\019-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\019-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.zero_extended_data=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\020-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\020-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.float_nan=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\021-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\021-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.float_nan=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\022-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\022-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.double_nan=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\023-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\023-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.double_nan=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\024-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\024-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.ini_prefix_matching=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\025-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\025-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.ini_prefix_matching=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\026-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\026-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.include_tree_logs=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\027-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\027-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.include_tree_logs=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\028-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\028-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.native_line_endings=false",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\029-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\029-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
       "previous_output_preserved": true
     },
     {
       "kind": "toml",
       "setting": "legacy.native_line_endings=true",
       "exit_code": 2,
-      "diagnostic": "gctrm: configuration <workspace>\\work\\canonical-config-checks\\030-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\030-toml\\settings.toml: strict mode: fields in the document are missing in the target struct",
+      "previous_output_preserved": true
+    },
+    {
+      "kind": "toml",
+      "setting": "validation.console_only=false",
+      "exit_code": 2,
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\031-toml\\settings.toml: unknown configuration key validation.console_only",
+      "previous_output_preserved": true
+    },
+    {
+      "kind": "toml",
+      "setting": "validation.console_only=true",
+      "exit_code": 2,
+      "diagnostic": "gctrm: configuration <workspace>\\work\\target-rejection-checks\\032-toml\\settings.toml: unknown configuration key validation.console_only",
       "previous_output_preserved": true
     },
     {
@@ -417,6 +431,34 @@
       "setting": "--line-endings=lf",
       "exit_code": 2,
       "diagnostic": "gctrm: settings: unknown option \"--line-endings=lf\"",
+      "previous_output_preserved": true
+    },
+    {
+      "kind": "cli",
+      "setting": "--set=validation.console_only=false",
+      "exit_code": 2,
+      "diagnostic": "gctrm: unknown configuration key validation.console_only",
+      "previous_output_preserved": true
+    },
+    {
+      "kind": "ini",
+      "setting": "--set=validation.console_only=false",
+      "exit_code": 2,
+      "diagnostic": "gctrm: settings: unknown configuration key validation.console_only",
+      "previous_output_preserved": true
+    },
+    {
+      "kind": "cli",
+      "setting": "--set=validation.console_only=true",
+      "exit_code": 2,
+      "diagnostic": "gctrm: unknown configuration key validation.console_only",
+      "previous_output_preserved": true
+    },
+    {
+      "kind": "ini",
+      "setting": "--set=validation.console_only=true",
+      "exit_code": 2,
+      "diagnostic": "gctrm: settings: unknown configuration key validation.console_only",
       "previous_output_preserved": true
     }
   ]

@@ -14,7 +14,7 @@ import (
 func TestExtensionSchema(t *testing.T) {
 	for _, config := range []string{"", "[extensions]", "[semantics]\ndecimal_leading_zeros=true", "bug_fixes=false"} {
 		f, err := decodeConfig([]byte(config))
-		if err != nil || f.dotOp || f.branchExpressions || !f.allowNonConsoleInstructions {
+		if err != nil || f.dotOp || f.branchExpressions || f.allowNonConsoleInstructions {
 			t.Fatal(f, err)
 		}
 	}
@@ -24,7 +24,7 @@ func TestExtensionSchema(t *testing.T) {
 		}
 	}
 	f, err := loadConfig("../../gctrm.toml", true)
-	if err != nil || f.dotOp || f.branchExpressions || !f.allowNonConsoleInstructions || !f.bugFixes {
+	if err != nil || f.dotOp || f.branchExpressions || f.allowNonConsoleInstructions || !f.bugFixes {
 		t.Fatal(f, err)
 	}
 }

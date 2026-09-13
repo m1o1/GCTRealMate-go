@@ -14,7 +14,7 @@ import (
 func TestObsoleteConfigurationRejectedBeforeAssembly(t *testing.T) {
 	configs := []string{"version=1", "dialect='legacy'", "dialect='modern'"}
 	for _, key := range []string{
-		"dot_op", "allow_non_console_instructions", "extensions.allow_non_console_instructions",
+		"validation.console_only", "dot_op", "allow_non_console_instructions", "extensions.allow_non_console_instructions",
 		"legacy.octal_literals", "legacy.left_to_right_expressions", "legacy.unsigned_32_bit_aliases",
 		"legacy.branch_hints", "legacy.register_prefixes", "legacy.zero_extended_data",
 		"legacy.float_nan", "legacy.double_nan", "legacy.ini_prefix_matching",
@@ -25,6 +25,7 @@ func TestObsoleteConfigurationRejectedBeforeAssembly(t *testing.T) {
 		}
 	}
 	options := []string{
+		"--set=validation.console_only=false", "--set=validation.console_only=true",
 		"--dialect=legacy", "--dialect=modern",
 		"--dot-op=false", "--dot-op=true",
 		"--branch-expressions=false", "--branch-expressions=true",

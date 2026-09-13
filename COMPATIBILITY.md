@@ -1,10 +1,10 @@
-# Compatibility contract — 0.11.0-go
+# Compatibility contract — 0.12.0-go
 
 The pinned reference is [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515),
 built with MSVC on Windows. Its retained source/executable are unchanged.
 
-CLI/config defaults enable bug fixes; all 22 category flags default false.
-`[extensions]` adds language/instruction features; `[semantics]` changes numeric
+CLI/config defaults target GameCube/Wii and enable bug fixes; all 22 category flags default false.
+`[extensions]` adds language/instruction features, including broader target support; `[semantics]` changes numeric
 interpretation; `[encoding]` selects byte conventions; `[validation]` adds
 restrictions; `[cli]` selects INI/output alternatives. The template has no legacy
 table. Only the current schema and categorized keys are accepted.
@@ -12,7 +12,7 @@ table. Only the current schema and categorized keys are accepted.
 This preserves C++ octal, arithmetic, representation and permissive source
 policies by default. `.op`, expanded expressions, implicit sections and additional
 console instructions require opt-in. Broader instructions already implemented
-by C++ remain available unless `validation.console_only` is true.
+by C++ require `extensions.non_console_instructions = true`; the default rejects them.
 See [CONFIGURATION.md](CONFIGURATION.md) for defaults, individual switches,
 CLI/INI overrides and examples.
 
@@ -59,8 +59,8 @@ PSA tags, label fixups, `.GOTO_F`, and ELSE handling.
 Corrections check actual machine-operand counts/widths, branch alignment/range,
 illegal suffixes and register relationships, and missing labels. Optional source
 checks and grammar additions are selected independently under the new categories.
-`validation.console_only` separately restricts recognized non-console forms;
-its default false retains C++ instruction availability. Raw words are not decoded.
+`extensions.non_console_instructions` separately permits recognized non-console forms;
+its default false restricts the target to GameCube/Wii. Raw words are not decoded.
 
 The language choices remain independent. Defaults retain octal values,
 unsigned aliases, permissive register prefixes, direction-adjusted branch hints,

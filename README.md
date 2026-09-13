@@ -4,15 +4,15 @@ A native Go assembler for Gecko codesets and GameCube/Wii PowerPC source,
 based on [CodecSMW GCTRealMate v0.2.6](https://github.com/CodecSMW/GCTRealMate/tree/9115d23c65c9479e8822968786ac8eec55b7f515).
 The upstream source and validation reference are pinned to that commit.
 
-**0.11.0-go defaults: bug fixes on; all optional departures from C++ off.**
+**0.12.0-go defaults: GameCube/Wii target, bug fixes on, all category flags off.**
 [gctrm.toml](gctrm.toml) groups choices into `[extensions]`, `[semantics]`,
 `[encoding]`, `[validation]`, and `[cli]`. It contains no `[legacy]` table.
 Each of the 22 category flags defaults to false. For example, octal notation,
 32-bit unsigned aliases, historical register spellings and NaN bytes remain.
 `.op`, broader expression grammar, implicit sections and additional console
 mnemonics require explicit opt-in. Optional source restrictions are separate
-from encoding corrections. C++ already accepts broader PowerPC forms;
-`validation.console_only = true` restricts them to GameCube/Wii.
+from encoding corrections. Recognized non-console instructions are rejected by default;
+`extensions.non_console_instructions = true` explicitly permits broader PowerPC forms.
 
 See [CONFIGURATION.md](CONFIGURATION.md) for every flag and its effects,
 [BUG-FIXES.md](BUG-FIXES.md) for corrections, and
@@ -73,12 +73,11 @@ bug_fixes = true
 
 [extensions]
 dot_op = false
+non_console_instructions = false
 
 [semantics]
 decimal_leading_zeros = false
 
-[validation]
-console_only = false
 ```
 
 The CLI reads `<executable-basename>.toml` beside itself. Use `--config` for the
@@ -121,7 +120,7 @@ See [CPP-BUGS.md](CPP-BUGS.md) for the confirmed C++ defects and detailed
 explanations of intentional language and representation differences.
 See [CONSOLE-VALIDATION.md](CONSOLE-VALIDATION.md) for independent GNU comparisons,
 Dolphin execution, the resolved instruction inventory, and remaining hardware limits.
-With `validation.console_only = true`, the assembler rejects recognized non-console forms independently
+With `extensions.non_console_instructions = false` (the default), the assembler rejects recognized non-console forms independently
 of the bug-fix policy. It retains GCTRM
 source syntax and does not provide GNU object files, relocation, or linking.
 
@@ -207,7 +206,7 @@ The corrected mode passed **218 execution checks in Dolphin** across GameCube/Wi
 interpreter/JIT configurations, including actual MEM1 and MEM2 C2 hook execution.
 The prior comparison with fixes and `.op` disabled matches all six unmodified
 Project+ GCTs byte for byte. Select `bug_fixes = false` and `extensions.dot_op = false`
-to retain those compatibility settings in 0.11.0-go.
+to retain those compatibility settings in 0.12.0-go.
 Corrected mode builds two unmodified entrypoints and diagnoses malformed input
 in four; separately adapted builds retain 84 explained differences from C++.
 These assembly comparisons are not gameplay tests.

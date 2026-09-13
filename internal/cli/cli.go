@@ -15,7 +15,7 @@ import (
 	"gctrm/assembler"
 )
 
-const Version = "0.11.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
+const Version = "0.12.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
 const help = `Usage: gctrm [options] source.asm [options] another.asm
 
 Assemble Gecko and PowerPC source into a .GCT beside each input.
@@ -37,10 +37,10 @@ Assemble Gecko and PowerPC source into a .GCT beside each input.
   --version         Show version
 
 TOML groups: [extensions], [semantics], [encoding], [validation], [cli].
-Every categorized option defaults to false, preserving C++ policy. Syntax
-extensions, additional console mnemonics and optional validation are opt-ins.
-Set validation.console_only=true to reject recognized non-GameCube/Wii forms;
-false preserves C++ availability of implemented broader PowerPC instructions.
+Every categorized option defaults to false. GameCube/Wii is the default target.
+Syntax extensions, additional console mnemonics and optional validation are opt-ins.
+Set extensions.non_console_instructions=true to permit implemented broader
+PowerPC forms. This is independent of bug fixes and additional console mnemonics.
 Full flag descriptions and examples: CONFIGURATION.md.
 
 Example: --set=extensions.dot_op=true --set=validation.strict_macro_calls=true

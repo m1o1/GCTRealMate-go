@@ -257,7 +257,7 @@ access or external tools. Run `go vet ./...` for static checks. To deliberately
 regenerate GNU vectors:
 
 ```powershell
-$env:GCTRM_GNU_AS = 'C:\path\to\powerpc-eabi-as.exe'
+$env:GCTRM_GNU_AS = (Resolve-Path 'reference/powerpc-eabi-as.exe').Path
 $env:GCTRM_UPDATE_GNU = '1'
 go test ./internal/ppc -run '^TestRefreshGNUCorpus$' -v
 Remove-Item Env:GCTRM_UPDATE_GNU
@@ -268,7 +268,7 @@ The execution harness uses Python 3.9+ and portable Dolphin with its `Sys`
 directory. It writes inside the supplied work directory and stops its own child:
 
 ```powershell
-python tools/validate_dolphin.py --dolphin C:\path\to\Dolphin.exe --assembler bin/gctrm.exe --work-dir C:\scratch\gctrm-wii --console wii --cpu interpreter
+python tools/validate_dolphin.py --dolphin reference/Dolphin.exe --assembler bin/gctrm.exe --work-dir scratch/gctrm-wii --console wii --cpu interpreter
 ```
 
 The harness explicitly passes `--no-config --bug-fixes=true

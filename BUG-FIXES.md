@@ -1,6 +1,6 @@
 # Bug fixes and compatibility mode
 
-Version **0.11.0-go** enables corrections by default in CLI/configuration:
+Version **0.12.0-go** enables corrections by default in CLI/configuration:
 
 ```toml
 version = 2
@@ -30,7 +30,7 @@ evidence and original probe inputs are in [CPP-BUGS.md](CPP-BUGS.md).
 | Indexed `psq_*x` forms | Returns a bounded error and no GCT, corresponding to the reference's failed compilation. | Encodes the supported indexed load/store forms, including their update selectors. |
 | Paired-single record suffix | Ignores the requested record bit. | Sets Rc for supported record forms. |
 | Hex register/numeric fields | Preserves decimal partial parsing: `0xD` is parsed as zero. | Parses the complete hexadecimal field. |
-| Generic comparisons and `cmpli` | Preserves the C++ argument selection, including `cmpli` reaching the register-comparison encoder and discarded/misinterpreted L operands. | Encodes the intended comparison. `validation.console_only` separately restricts comparisons to L=0. |
+| Generic comparisons and `cmpli` | Preserves the C++ argument selection, including `cmpli` reaching the register-comparison encoder and discarded/misinterpreted L operands. | Encodes the intended comparison. Comparisons are restricted to L=0 unless `extensions.non_console_instructions` is enabled. |
 | Explicit BO plus prediction suffix | Addition can carry out of BO's prediction bit, as in `bc+ 13,2,...`. | Sets only the prediction bit. The independent `encoding.gnu_branch_hints` choice still controls the direction convention. |
 | Raw data at end of input | Drops the pending raw-byte queue, matching the reference. A section transition still flushes it. | Flushes pending bytes at EOF. |
 | Scanner `*` and `\|` | Drops `*` in outer-scanned source and treats `\|` as line continuation. Inline `op ... @` uses the reference's separate scanning behavior. | Preserves multiplication; aliases and GR directives can use OR. |
@@ -47,7 +47,7 @@ evidence and original probe inputs are in [CPP-BUGS.md](CPP-BUGS.md).
 | Missing branch labels | Emits a zero-displacement branch rather than reporting an unresolved symbol. Bare decimal branch targets also follow the old label interpretation. | Diagnoses missing symbols. Additional numeric forms require the separate `extensions.branch_expressions` opt-in. |
 | Unknown/misspelled instructions | Preserves known reference acceptance: unknown instructions can emit `ffffffff`; conditional-register names can emit `4c000000`; floating arithmetic prefix matching can accept a misspelling such as `fmulls`. | Requires a recognized instruction name. |
 | Invalid operands | Permits extra operands, unchecked field overflow, invalid update-load register relationships, and masked branch ranges where the reference does. | Checks operand counts, widths, suffix legality, register relationships, and branch ranges/alignment. |
-| Broader PowerPC encoding (when `validation.console_only = false`) | Retains the reference's encodings, including its DS displacement convention and discarded comparison L bits. | Uses aligned byte displacements for DS forms and encodes the comparison L bit. The target flag controls availability in both modes. |
+| Broader PowerPC encoding (when `extensions.non_console_instructions = true`) | Retains the reference's encodings, including its DS displacement convention and discarded comparison L bits. | Uses aligned byte displacements for DS forms and encodes the comparison L bit. The target flag controls availability in both modes. |
 | Missing input/include status | Reports the missing file and produces no GCT, but returns status 0 like the reference. | Returns a nonzero failure status. |
 
 ## Interaction with the other choices
@@ -65,12 +65,12 @@ is selected by `extensions.expression_syntax`; syntax and arithmetic interpretat
 are separate. Preserving native scanner/alias bugs can obscure enabled expression
 features, so historical full-expression comparisons explicitly enable fixes.
 
-The console restriction is now `validation.console_only`, default false to
-preserve C++ availability.
+GameCube/Wii restrictions apply by default. `extensions.non_console_instructions`
+permits the implemented broader forms when explicitly enabled; bug fixes never enable it.
 See [CONFIGURATION.md](CONFIGURATION.md) for all individual flags.
 
 ```powershell
-# Corrections with reference source/configuration choices.
+# Corrections with GameCube/Wii target and reference language choices.
 .\bin\gctrm.exe --no-config -i source.asm
 # Characterized C++ encoding/parser quirks too.
 .\bin\gctrm.exe --no-config --bug-fixes=false -i source.asm

@@ -1,8 +1,8 @@
 # Configuration
 
-Version **0.11.0-go** defaults to corrected encodings with C++ language, representation and acceptance choices. `bug_fixes = true`; every canonical boolean below defaults to **false**. Use the five categories below; configuration has no aliases or presets.
+Version **0.12.0-go** defaults to corrected encodings for GameCube/Wii, retaining C++ language and representation choices. `bug_fixes = true`; every canonical boolean below defaults to **false**. Use the five categories below; configuration has no aliases or presets.
 
-The template is [gctrm.toml](gctrm.toml). Turning a flag on requests the named departure from reference behavior. Turning fixes off preserves characterized defects; it does not enable extensions. Defaults are identical for omitted keys, empty/missing automatic configuration, and `--no-config`.
+The template is [gctrm.toml](gctrm.toml). Turning a flag on selects the named extension or alternative. Target support is restricted to GameCube/Wii unless non-console instructions are explicitly enabled. Turning fixes off preserves characterized defects; it does not enable extensions. Defaults are identical for omitted keys, empty/missing automatic configuration, and `--no-config`.
 
 ## Loading and overrides
 
@@ -44,7 +44,11 @@ All defaults below are false. Each flag is independently configurable.
 
 ### additional_console_instructions
 
-**Default: false.** This also covers additions made in the initial rewrite: `clrlwi`, `clrrwi`, `rotlwi`, `dcbf`, `dcbi`, `dcbst`, `dcbt`, `dcbtst`, `dcbz`, `eieio`, `sync`, `sc`, `lwarx`, `stwcx.`; `bso`/`bns` branch aliases; and synthesized named-SPR move aliases beyond the original LR/CTR/XER forms. True permits `dcbz_l`, `eciwx`, `ecowx`, `mcrf`, `mcrfs`, `mcrxr`, `mfmsr`, `mfsr`, `mfsrin`, `mftb`, `mtfsb0`, `mtfsb1`, `mtfsf`, `mtfsfi`, `mtmsr`, `mtsr`, `mtsrin`, `tlbie`, `tlbsync`, with implemented record forms and `mftbl/mftbu/mttbl/mttbu` aliases. False treats them as absent: with fixes on, it reports an error; with fixes off, it retains the characterized reference fallback (including prefix interpretation or an unknown-instruction word). This is independent of console-only validation. Repairs to already-implemented instructions, including indexed paired-single forms, remain bug fixes.
+**Default: false.** This also covers additions made in the initial rewrite: `clrlwi`, `clrrwi`, `rotlwi`, `dcbf`, `dcbi`, `dcbst`, `dcbt`, `dcbtst`, `dcbz`, `eieio`, `sync`, `sc`, `lwarx`, `stwcx.`; `bso`/`bns` branch aliases; and synthesized named-SPR move aliases beyond the original LR/CTR/XER forms. True permits `dcbz_l`, `eciwx`, `ecowx`, `mcrf`, `mcrfs`, `mcrxr`, `mfmsr`, `mfsr`, `mfsrin`, `mftb`, `mtfsb0`, `mtfsb1`, `mtfsf`, `mtfsfi`, `mtmsr`, `mtsr`, `mtsrin`, `tlbie`, `tlbsync`, with implemented record forms and `mftbl/mftbu/mttbl/mttbu` aliases. False treats them as absent: with fixes on, it reports an error; with fixes off, it retains the characterized reference fallback (including prefix interpretation or an unknown-instruction word). This is independent of the non-console instruction extension. Repairs to already-implemented instructions, including indexed paired-single forms, remain bug fixes.
+
+### non_console_instructions
+
+**Default: false.** False rejects recognized instructions outside GameCube/Wii, including `ld`, `mulld`, `fsqrt`, and explicit L=1 comparisons. True permits the implemented broader PowerPC forms retained from C++. These forms are not made Wii-compatible by enabling the flag. The restriction applies with `bug_fixes` both on and off; corrections still determine their encoding. Additional console mnemonics use `additional_console_instructions` independently. Double-precision floating-point data/instructions supported by Wii and 64-bit calculations inside the assembler remain available under their own existing rules. Raw word/Gecko data is not decoded. This is not a complete general PowerPC target profile. See [NON-CONSOLE.md](NON-CONSOLE.md).
 
 ## semantics
 
@@ -104,10 +108,6 @@ All defaults below are false. Each flag is independently configurable.
 
 **Default: false.** False preserves declared-width truncation, including `byte 256` becoming zero. The reference conversion range still applies: values outside the native 32-bit unsigned conversion range are rejected rather than accepted as wider literals. True checks the signed-negative/unsigned-positive range before emitting a value: byte permits -128..255, half -32768..65535, word -2147483648..4294967295. Explicit arrays are checked element by element. This does not relax CPU operand/branch checks, PSA index checks, array allocation limits or non-finite scalar rejection.
 
-### console_only
-
-**Default: false.** False preserves C++ availability of the implemented broader PowerPC forms. True rejects recognized non-console operations such as `ld`, `mulld`, `fsqrt`, and explicit L=1 comparisons. This does not control additional console mnemonics. Raw word/Gecko data is not decoded. Corrected broader encodings still follow `bug_fixes`; this is not a complete general PowerPC target profile. See [NON-CONSOLE.md](NON-CONSOLE.md).
-
 ## cli
 
 ### exact_ini_matching
@@ -124,7 +124,7 @@ All defaults below are false. Each flag is independently configurable.
 
 ## Library API
 
-The library does not read config/INI. Set `Options.BugFixes = true` to match the CLI correction default; the explicit Go boolean retains false as its zero value. `DotOp` is a pointer with nil meaning false. `BranchExpressions`, `ExpressionSyntax`, `ImplicitSections`, and `AdditionalConsoleInstructions` select extensions. `AllowNonConsoleInstructions` is explicit; set true to match the C++-availability CLI default. `Options.Validation` has `RejectDuplicateLabels`, `StrictMacroCalls`, `RejectUndefinedMacros`, `RejectAddressAnnotations`, and `RejectDataOverflow` booleans. The library's `Compatibility` fields select C++ behavior when true, so they invert the corresponding category flags. Nil inherits `Options.Dialect` (default `assembler.Legacy`); `assembler.Modern` is a library profile for the alternative source choices. TOML and CLI expose individual settings only.
+The library does not read config/INI. Set `Options.BugFixes = true` to match the CLI correction default; the explicit Go boolean retains false as its zero value. `DotOp` is a pointer with nil meaning false. `BranchExpressions`, `ExpressionSyntax`, `ImplicitSections`, and `AdditionalConsoleInstructions` select extensions. `AllowNonConsoleInstructions` maps directly to `extensions.non_console_instructions`; both default false. Set true only to permit implemented broader PowerPC forms. `Options.Validation` has `RejectDuplicateLabels`, `StrictMacroCalls`, `RejectUndefinedMacros`, `RejectAddressAnnotations`, and `RejectDataOverflow` booleans. The library's `Compatibility` fields select C++ behavior when true, so they invert the corresponding category flags. Nil inherits `Options.Dialect` (default `assembler.Legacy`); `assembler.Modern` is a library profile for the alternative source choices. TOML and CLI expose individual settings only.
 
 | Category flag | Inverse `Compatibility` field |
 | --- | --- |

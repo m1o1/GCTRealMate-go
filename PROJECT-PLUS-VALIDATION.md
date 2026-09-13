@@ -158,7 +158,7 @@ Run from the Go project directory and choose a scratch directory outside the
 source installation:
 
 ```powershell
-python tools/validate_project_plus.py --source-dir C:\path\to\Project+ --assembler bin/gctrm.exe --reference ..\GCTRealMate-source\build\local\GCTRealMate.exe --work-dir C:\scratch\gctrm-project-plus
+python tools/validate_project_plus.py --source-dir reference/Project+ --assembler bin/gctrm.exe --reference reference/GCTRealMate.exe --work-dir scratch/gctrm-project-plus
 ```
 
 The harness defaults to the compatibility comparison (`--bug-fixes false`),
