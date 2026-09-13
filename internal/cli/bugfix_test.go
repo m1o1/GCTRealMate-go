@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -22,7 +23,7 @@ func runWithFixes(ctx context.Context, args []string, executable string, stdout,
 
 func TestBugFixDefaultsAndOverrides(t *testing.T) {
 	for _, decimal := range []string{"false", "true"} {
-		for _, setting := range []string{"", "bug_fixes=false\n", "bug_fixes=true\n"} {
+		for _, setting := range []string{"", fixesTOML(false), fixesTOML(true)} {
 			for _, override := range []string{"", "--bug-fixes=false", "--bug-fixes=true"} {
 				t.Run(decimal+"/"+setting+"/"+override, func(t *testing.T) {
 					dir := t.TempDir()
@@ -39,7 +40,7 @@ func TestBugFixDefaultsAndOverrides(t *testing.T) {
 					if code := Run(context.Background(), args, "", &out, &diagnostic); code != 0 {
 						t.Fatal(code, diagnostic.String())
 					}
-					fixed := setting != "bug_fixes=false\n"
+					fixed := setting != fixesTOML(false)
 					if override != "" {
 						fixed = override == "--bug-fixes=true"
 					}
@@ -60,15 +61,15 @@ func TestBugFixDefaultsAndOverrides(t *testing.T) {
 	}
 	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true"} {
 		f, err := decodeConfig([]byte(source))
-		if err != nil || !f.bugFixes {
+		if err != nil || !f.fixes.LHA {
 			t.Fatal("fixes must default to enabled", f, err)
 		}
 	}
 	f, err := loadConfig("../../gctrm.toml", true)
-	if err != nil || !f.bugFixes {
+	if err != nil || !f.fixes.LHA {
 		t.Fatal("template must enable fixes", f, err)
 	}
-	for _, source := range []string{"bug_fixes='true'", "bug_fixes=1", "bug_fixes=true\nbug_fixes=false", "[legacy]\nbug_fixes=true"} {
+	for _, source := range []string{"bug_fixes='true'", "bug_fixes=1", fixesTOML(true) + strings.TrimSuffix(fixesTOML(false), "\n"), "[legacy]\n" + strings.TrimSuffix(fixesTOML(true), "\n")} {
 		if _, err := decodeConfig([]byte(source)); err == nil {
 			t.Fatalf("accepted invalid config %s", source)
 		}
@@ -90,7 +91,7 @@ func TestBugFixDefaultConfigPaths(t *testing.T) {
 			case "empty automatic":
 				writeTestFile(t, config, "")
 			case "no config":
-				writeTestFile(t, config, "bug_fixes=false\n")
+				writeTestFile(t, config, fixesTOML(false))
 				args = append(args, "--no-config")
 			case "empty explicit":
 				writeTestFile(t, config, "")
@@ -98,7 +99,7 @@ func TestBugFixDefaultConfigPaths(t *testing.T) {
 			case "template":
 				args = append(args, "--config", "../../gctrm.toml")
 			case "explicit false":
-				writeTestFile(t, config, "bug_fixes=false\n")
+				writeTestFile(t, config, fixesTOML(false))
 			}
 			args = append(args, input)
 			var out, diagnostic bytes.Buffer
@@ -124,19 +125,19 @@ func TestBugFixINIPrecedenceAndPersistence(t *testing.T) {
 	dir := t.TempDir()
 	exe := filepath.Join(dir, "gctrm.exe")
 	config := filepath.Join(dir, "config.toml")
-	writeTestFile(t, config, "bug_fixes=true\n")
+	writeTestFile(t, config, fixesTOML(true))
 	writeTestFile(t, filepath.Join(dir, "gctrm.ini"), "first.asm : --bug-fixes=false\nsecond.asm : --bug-fixes=true\n")
 	jobs, _, err := plan([]string{"--config", config, "first.asm", "--bug-fixes=false", "second.asm", "third.asm", "--set=semantics.decimal_leading_zeros=true", "fourth.asm"}, exe)
 	if err != nil {
 		t.Fatal(err)
 	}
 	for _, j := range jobs {
-		if j.flags.bugFixes {
+		if j.flags.fixes.LHA {
 			t.Fatalf("expected disabled fixes for %s", j.file)
 		}
 	}
 	jobs, _, err = plan([]string{"--config", config, "--bug-fixes=true", "first.asm"}, exe)
-	if err != nil || !jobs[0].flags.bugFixes {
+	if err != nil || !jobs[0].flags.fixes.LHA {
 		t.Fatal(jobs, err)
 	}
 }
@@ -159,4 +160,12 @@ func TestLegacyReportedIncludeFailureStatus(t *testing.T) {
 			t.Fatal("failure wrote output", err)
 		}
 	}
+}
+
+func fixesTOML(enabled bool) string {
+	var out strings.Builder
+	for _, key := range []string{"lha", "eqv", "crandc", "crorc", "overflow_suffix", "shift_right_zero", "quantized_displacement", "indexed_quantized", "paired_single_record", "numeric_fields", "comparisons", "branch_prediction", "raw_data_eof", "scanner_multiply", "scanner_or", "alias_terms", "gr_index", "address_qualifiers", "directive_bit31", "mem2_writes", "mem2_hooks", "psa_tags", "goto_false", "gecko_label_offsets", "else_directives", "missing_labels", "unknown_instructions", "operand_counts", "operand_ranges", "suffix_validation", "register_relationships", "branch_ranges", "address_alignment", "psa_index_range", "gecko_line_framing", "ds_displacement", "missing_file_status", "text_line_termination"} {
+		fmt.Fprintf(&out, "bug_fixes.%s=%t\n", key, enabled)
+	}
+	return out.String()
 }

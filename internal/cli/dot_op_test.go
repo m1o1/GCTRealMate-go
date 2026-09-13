@@ -19,7 +19,7 @@ func TestDotOpConfigAndOverrides(t *testing.T) {
 					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, decimal, setting, override), func(t *testing.T) {
 						dir := t.TempDir()
 						config, input := filepath.Join(dir, "settings.toml"), filepath.Join(dir, "probe.asm")
-						writeTestFile(t, config, fmt.Sprintf("bug_fixes=%t\n[semantics]\ndecimal_leading_zeros=%s\n[extensions]\n%s", fixed, decimal, setting))
+						writeTestFile(t, config, fixesTOML(fixed)+fmt.Sprintf("[semantics]\ndecimal_leading_zeros=%s\n[extensions]\n%s", decimal, setting))
 						writeTestFile(t, input, "Probe\n.op lha r3,0(r4) @ $80001000\n")
 						args := []string{"--config", config, "-i"}
 						if override != "" {
@@ -67,7 +67,7 @@ func TestDotOpDefaultsAndPrecedence(t *testing.T) {
 			t.Fatal(path, f, err)
 		}
 	}
-	for _, config := range []string{"", "bug_fixes=false", "[semantics]\ndecimal_leading_zeros=true"} {
+	for _, config := range []string{"", strings.TrimSuffix(fixesTOML(false), "\n"), "[semantics]\ndecimal_leading_zeros=true"} {
 		f, err := decodeConfig([]byte(config))
 		if err != nil || f.dotOp {
 			t.Fatal(config, f, err)

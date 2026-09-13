@@ -1,0 +1,259 @@
+[
+  {
+    "key": "lha",
+    "source": "Probe\nCODE @ $80001000\n{\nlha r3,0(r4)\n}\n",
+    "off": "00d0c0de00d0c0de0600100000000004a064000000000000f000000000000000",
+    "on": "00d0c0de00d0c0de0600100000000004a864000000000000f000000000000000"
+  },
+  {
+    "key": "eqv",
+    "source": "Probe\nCODE @ $80001000\n{\neqv r3,r4,r5\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000047c83223800000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000047c832a3800000000f000000000000000"
+  },
+  {
+    "key": "crandc",
+    "source": "Probe\nCODE @ $80001000\n{\ncrandc 1,2,3\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000044c221a0200000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000044c22190200000000f000000000000000"
+  },
+  {
+    "key": "crorc",
+    "source": "Probe\nCODE @ $80001000\n{\ncrorc 1,2,3\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000044c221b8200000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000044c221b4200000000f000000000000000"
+  },
+  {
+    "key": "overflow_suffix",
+    "source": "Probe\nCODE @ $80001000\n{\naddo. r3,r4,r5\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000047c642ba500000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000047c642e1500000000f000000000000000"
+  },
+  {
+    "key": "shift_right_zero",
+    "source": "Probe\nCODE @ $80001000\n{\nsrwi r3,r4,0\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000045484003e00000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000045483003e00000000f000000000000000"
+  },
+  {
+    "key": "quantized_displacement",
+    "source": "Probe\nCODE @ $80001000\n{\npsq_l f0,-8(r3),0,0\n}\n",
+    "off": "00d0c0de00d0c0de0600100000000004e002fff800000000f000000000000000",
+    "on": "00d0c0de00d0c0de0600100000000004e0030ff800000000f000000000000000"
+  },
+  {
+    "key": "indexed_quantized",
+    "source": "Probe\nCODE @ $80001000\n{\npsq_lx f1,r3,r4,0,0\n}\n",
+    "off": null,
+    "on": "00d0c0de00d0c0de06001000000000041023200c00000000f000000000000000"
+  },
+  {
+    "key": "paired_single_record",
+    "source": "Probe\nCODE @ $80001000\n{\nps_add. f1,f2,f3\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000041022182a00000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000041022182b00000000f000000000000000"
+  },
+  {
+    "key": "numeric_fields",
+    "source": "Probe\nCODE @ $80001000\n{\nrlwinm r0,r0,0x3,0x0,0x1c\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000045400000000000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000045400183800000000f000000000000000"
+  },
+  {
+    "key": "comparisons",
+    "source": "Probe\nCODE @ $80001000\n{\ncmpli 0,0,r3,1\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000047c00184000000000f000000000000000",
+    "on": "00d0c0de00d0c0de06001000000000042803000100000000f000000000000000"
+  },
+  {
+    "key": "raw_data_eof",
+    "source": "Probe\nbyte 0x12\n",
+    "off": "00d0c0de00d0c0def000000000000000",
+    "on": "00d0c0de00d0c0de1200000000000000f000000000000000"
+  },
+  {
+    "key": "scanner_multiply",
+    "source": "Probe\n.GR4 *= 00000002\n",
+    "off": "00d0c0de00d0c0de8000000400000002f000000000000000",
+    "on": "00d0c0de00d0c0de8610000400000002f000000000000000"
+  },
+  {
+    "key": "scanner_or",
+    "source": "Probe\n.GR4 |= 00000002\n",
+    "off": null,
+    "on": "00d0c0de00d0c0de8620000400000002f000000000000000"
+  },
+  {
+    "key": "alias_terms",
+    "source": "Probe\n.ALIAS x = 2 + 3 + 4\nop li r3,x @ $80001000\n",
+    "off": "00d0c0de00d0c0de0400100038600005f000000000000000",
+    "on": "00d0c0de00d0c0de0400100038600009f000000000000000"
+  },
+  {
+    "key": "gr_index",
+    "source": "Probe\n.GR5 <-(16) $00001000\n",
+    "off": "00d0c0de00d0c0de8210000000001000f000000000000000",
+    "on": "00d0c0de00d0c0de8210000500001000f000000000000000"
+  },
+  {
+    "key": "address_qualifiers",
+    "source": "Probe\n.BA = PO+$00001000\n",
+    "off": null,
+    "on": "00d0c0de00d0c0de5201000000001000f000000000000000"
+  },
+  {
+    "key": "directive_bit31",
+    "source": "Probe\n.PO = $90000000\n",
+    "off": "00d0c0de00d0c0de4a00000010000000f000000000000000",
+    "on": "00d0c0de00d0c0de4a00000090000000f000000000000000"
+  },
+  {
+    "key": "mem2_writes",
+    "source": "Probe\nword 0x11223344 @ $90001000\n",
+    "off": "00d0c0de00d0c0de42000000900010000400000011223344e000000080008000f000000000000000",
+    "on": "00d0c0de00d0c0de42000000900000000400100011223344e000000080008000f000000000000000"
+  },
+  {
+    "key": "mem2_hooks",
+    "source": "Probe\nHOOK @ $90001000\n{\nblr\n}\n",
+    "off": "00d0c0de00d0c0de4a00000090001000c2000000000000014e80002000000000e000000080008000f000000000000000",
+    "on": "00d0c0de00d0c0de4200000090000000c2001000000000014e80002000000000e000000080008000f000000000000000"
+  },
+  {
+    "key": "psa_tags",
+    "source": "Probe\nRA_float 3 @ $80001000\n",
+    "off": "00d0c0de00d0c0de0400100000000003f000000000000000",
+    "on": "00d0c0de00d0c0de0400100021000003f000000000000000"
+  },
+  {
+    "key": "goto_false",
+    "source": "Probe\n.GOTO_F->next\n* 04001000 60000000\nnext:\n* 04001004 60000000\n",
+    "off": "00d0c0de00d0c0de6610000004001000600000000400100460000000f000000000000000",
+    "on": "00d0c0de00d0c0de661000010000000004001000600000000400100460000000f000000000000000",
+    "settings": {
+      "gecko_line_framing": false,
+      "gecko_label_offsets": false
+    }
+  },
+  {
+    "key": "gecko_label_offsets",
+    "source": "Probe\nback:\n* 04001000 60000000\n.GOTO->back\n",
+    "off": "00d0c0de00d0c0de0400100060000000661ffffe00000000f000000000000000",
+    "on": "00d0c0de00d0c0de04001000600000006620fffe00000000f000000000000000"
+  },
+  {
+    "key": "else_directives",
+    "source": "Probe\n.ELSE\n",
+    "off": null,
+    "on": "00d0c0de00d0c0dee210000100000000f000000000000000"
+  },
+  {
+    "key": "missing_labels",
+    "source": "Probe\nCODE @ $80001000\n{\nb missing\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000044800000000000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "unknown_instructions",
+    "source": "Probe\nCODE @ $80001000\n{\ngarbage r3,r4,r5\n}\n",
+    "off": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "operand_ranges",
+    "source": "Probe\nCODE @ $80001000\n{\nadd r32,r4,r5\n}\n",
+    "off": "00d0c0de00d0c0de060010000000000480042a1400000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "register_relationships",
+    "source": "Probe\nCODE @ $80001000\n{\nlwzu r3,4(r3)\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000048463000400000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "branch_ranges",
+    "source": "Probe\nCODE @ $80001000\n{\nb 0x2000000\n}\n",
+    "off": "00d0c0de00d0c0de06001000000000044a00000000000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "branch_prediction",
+    "source": "Probe\nop bc+ 13,2,0x10 @ $80001000\n",
+    "off": "00d0c0de00d0c0de0400100041c20010f000000000000000",
+    "on": "00d0c0de00d0c0de0400100041a20010f000000000000000",
+    "settings": {}
+  },
+  {
+    "key": "operand_counts",
+    "source": "Probe\nop add r3,r4,r5,r6 @ $80001000\n",
+    "off": "00d0c0de00d0c0de040010007c642a14f000000000000000",
+    "on": null,
+    "settings": {}
+  },
+  {
+    "key": "suffix_validation",
+    "source": "Probe\nop addi. r3,r4,1 @ $80001000\n",
+    "off": "00d0c0de00d0c0de0400100038640001f000000000000000",
+    "on": null,
+    "settings": {}
+  },
+  {
+    "key": "ds_displacement",
+    "source": "Probe\nop ld r3,8(r4) @ $80001000\n",
+    "off": "00d0c0de00d0c0de04001000e8640020f000000000000000",
+    "on": "00d0c0de00d0c0de04001000e8640008f000000000000000",
+    "settings": {
+      "console_only": false
+    }
+  },
+  {
+    "key": "console_only",
+    "source": "Probe\nop ld r3,8(r4) @ $80001000\n",
+    "off": "00d0c0de00d0c0de04001000e8640008f000000000000000",
+    "on": null,
+    "settings": {}
+  },
+  {
+    "key": "address_alignment",
+    "source": "Probe\nop nop @ $80001001\n",
+    "off": "00d0c0de00d0c0de0400100160000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "psa_index_range",
+    "source": "Probe\nRA_float 0x1000000 @ $80001000\n",
+    "off": "00d0c0de00d0c0de0400100021000000f000000000000000",
+    "on": null
+  },
+  {
+    "key": "gecko_line_framing",
+    "source": "Probe\n.GOTO_F -> end\nend:\n.RESET\n",
+    "off": "00d0c0de00d0c0de66100000e000000080008000f000000000000000",
+    "on": null,
+    "settings": {
+      "goto_false": false,
+      "gecko_label_offsets": false
+    }
+  },
+  {
+    "key": "text_line_termination",
+    "source": "Probe\n.GOTO_F -> end\nend:\n.RESET\n",
+    "off": "00d0c0de00d0c0de66100000e000000080008000f000000000000000",
+    "on": "00d0c0de00d0c0de66100000e000000080008000f000000000000000",
+    "off_text": "Probe\n66100000 E0000000\n80008000\n",
+    "on_text": "Probe\n66100000 E0000000\n80008000\n\n",
+    "settings": {
+      "goto_false": false,
+      "gecko_label_offsets": false,
+      "gecko_line_framing": false
+    }
+  },
+  {
+    "key": "missing_file_status",
+    "source": "Probe\n.include absent.asm\n",
+    "off": null,
+    "on": null,
+    "off_status": 0
+  }
+]

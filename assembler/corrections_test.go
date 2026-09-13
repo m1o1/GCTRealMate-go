@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"reflect"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 func TestIntentionalCorrections(t *testing.T) {
@@ -60,7 +62,7 @@ func TestAllDataTypes(t *testing.T) {
 }
 func TestDataValidation(t *testing.T) {
 	for _, source := range []string{"byte[0] 1", "byte[2000000] 1", "byte[2 1,2", "byte 256", "half -32769", "word[2] 1", "scalar NaN", "scalar +Inf", "scalar 1000000", "RA_float 0x1000000", "string nope", ".macro Bad(<x>,<x>)\n{\nnop\n}"} {
-		if _, e := Assemble(context.Background(), "bad.asm", []byte("Example\n"+source), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()}); e == nil {
+		if _, e := Assemble(context.Background(), "bad.asm", []byte("Example\n"+source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()}); e == nil {
 			t.Errorf("accepted %s", source)
 		}
 	}
@@ -69,7 +71,7 @@ func TestCaseRepair(t *testing.T) {
 	dir := t.TempDir()
 	os.Mkdir(filepath.Join(dir, "Parts"), 0700)
 	os.WriteFile(filepath.Join(dir, "Parts", "Code.asm"), []byte("op nop @ $80001000"), 0600)
-	r, e := Assemble(context.Background(), filepath.Join(dir, "root.asm"), []byte("Example\n.include parts/code.asm"), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), RepairPathCase: true})
+	r, e := Assemble(context.Background(), filepath.Join(dir, "root.asm"), []byte("Example\n.include parts/code.asm"), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), RepairPathCase: true})
 	if e != nil || len(r.Codes[0].Words) != 2 {
 		t.Fatal(r, e)
 	}
@@ -79,7 +81,7 @@ func TestDirectiveVariants(t *testing.T) {
 		assemble(t, "Example\n"+source)
 	}
 	for _, source := range []string{".BA ???", ".GR1 ?= 1", ".GR1 ^= GR99", ".BA = GR9", ".GOTO->!", ".GR1 -> $xyz"} {
-		if _, e := Assemble(context.Background(), "bad.asm", []byte("Example\n"+source), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()}); e == nil {
+		if _, e := Assemble(context.Background(), "bad.asm", []byte("Example\n"+source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()}); e == nil {
 			t.Errorf("accepted %s", source)
 		}
 	}

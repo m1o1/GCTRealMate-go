@@ -6,6 +6,8 @@ import (
 	"math"
 	"reflect"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 func TestProjectPlusSourceForms(t *testing.T) {
@@ -64,7 +66,7 @@ func TestSourceTyposRemainErrors(t *testing.T) {
 		"CODE @ $80001000\n{\nlabel: nop\nlabel: blr\n}",
 		"CODE @ $80001000\n{\nbeq absent\n}",
 	} {
-		if _, err := Assemble(context.Background(), "bad.asm", []byte("Test\n"+source), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()}); err == nil {
+		if _, err := Assemble(context.Background(), "bad.asm", []byte("Test\n"+source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()}); err == nil {
 			t.Errorf("accepted %s", source)
 		}
 	}

@@ -13,6 +13,7 @@ import (
 	"testing"
 
 	"gctrm/assembler"
+	"gctrm/fixes"
 )
 
 const configProbe = `Probe
@@ -68,7 +69,7 @@ func TestAllSourceConfigurations(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		opts := assembler.Options{BugFixes: true, Compatibility: f.compatibility}
+		opts := assembler.Options{Fixes: fixes.FromBool(true), Compatibility: f.compatibility}
 		r, err := assembler.Assemble(context.Background(), "probe.asm", []byte(configProbe), opts)
 		if err != nil {
 			t.Fatalf("configuration %08b: %v", mask, err)
@@ -179,18 +180,18 @@ func TestExampleConfigAndIndependentLibraryCalls(t *testing.T) {
 		t.Fatal(err)
 	}
 	source := []byte("Test\n.alias negative=0-1\nCODE @ $80001000\n{\nbyte negative\n}")
-	r, err := assembler.Assemble(context.Background(), "mixed.asm", source, assembler.Options{BugFixes: true, Compatibility: config.compatibility})
+	r, err := assembler.Assemble(context.Background(), "mixed.asm", source, assembler.Options{Fixes: fixes.FromBool(true), Compatibility: config.compatibility})
 	if err != nil || r.Codes[0].Words[2] != 0xffffffff {
 		t.Fatal(r, err)
 	}
-	r, err = assembler.Assemble(context.Background(), "legacy.asm", source, assembler.Options{BugFixes: true})
+	r, err = assembler.Assemble(context.Background(), "legacy.asm", source, assembler.Options{Fixes: fixes.FromBool(true)})
 	if err != nil || r.Codes[0].Words[2] != 0xff {
 		t.Fatal(r, err)
 	}
 }
 
 func FuzzConfig(f *testing.F) {
-	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true", "[encoding]\nalternative_float_nan=true", "[extensions]\nnon_console_instructions=false", "version=99"} {
+	for _, source := range []string{"", "[semantics]\ndecimal_leading_zeros=true", "[encoding]\nalternative_float_nan=true", "[bug_fixes]\nconsole_only=true", "version=99"} {
 		f.Add(source)
 	}
 	f.Fuzz(func(t *testing.T, source string) {
@@ -229,7 +230,7 @@ func TestConfigSelectionAndPrecedence(t *testing.T) {
 	}
 	// Explicit config replaces the sibling default instead of merging it.
 	other := filepath.Join(dir, "other.toml")
-	writeTestFile(t, other, "bug_fixes=true")
+	writeTestFile(t, other, strings.TrimSuffix(fixesTOML(true), "\n"))
 	jobs, _, err = plan([]string{"--config=" + other, "-i", "first.asm"}, exe)
 	if err != nil || jobs[0].flags.compatibility.OctalLiterals != nil || jobs[0].flags.exactINI {
 		t.Fatal(jobs, err)

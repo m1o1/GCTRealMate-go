@@ -1,17 +1,229 @@
-# GCTRealMate Go 0.12.0 configuration. Full guide: CONFIGURATION.md.
+# GCTRealMate Go 0.13.0 configuration. Full guide: CONFIGURATION.md.
 # Select explicitly: .\bin\gctrm.exe --config gctrm.toml source.asm
 # Or copy beside the executable as <executable-basename>.toml.
-# Bug fixes are enabled; all category flags default false.
+# Every [bug_fixes] option defaults true; all other flags default false.
 # The default target is GameCube/Wii; other defaults preserve C++ choices.
-# Examples assume bug_fixes = true and other default settings unless noted.
+# Examples assume all fixes enabled and other default settings unless noted.
 # Source fragments belong in a named section/block unless the example says otherwise.
 version = 2
 
-# Correct characterized C++ encoding and parsing defects. Full list: BUG-FIXES.md.
-# Example: lha r3,0(r4) emits A0640000 (false) or A8640000 (true).
-# The corrected instruction sign-extends the loaded halfword.
-# CLI/INI: --bug-fixes=true|false
-bug_fixes = true
+[bug_fixes]
+# Restrict recognized instructions to GameCube/Wii. False permits implemented broader PowerPC
+# forms; it does not make them Wii-compatible.
+# Example: ld r3,8(r4) and cmpd r3,r4 are rejected with true and permitted with false. Raw word
+# data is not decoded.
+# CLI/INI: --set=bug_fixes.console_only=true|false
+console_only = true
+
+# Encode algebraic halfword loads instead of zero-extending loads.
+# Example: lha r3,0(r4): false emits A0640000; true emits A8640000.
+# CLI/INI: --set=bug_fixes.lha=true|false
+lha = true
+
+# Use both supplied source registers instead of repeating the first.
+# Example: eqv r3,r4,r5: false uses r4 twice; true uses r4 and r5.
+# CLI/INI: --set=bug_fixes.eqv=true|false
+eqv = true
+
+# Encode CR AND-complement rather than CR AND.
+# Example: crandc 1,2,3: false encodes crand; true complements the second source.
+# CLI/INI: --set=bug_fixes.crandc=true|false
+crandc = true
+
+# Encode CR OR-complement rather than CR OR.
+# Example: crorc 1,2,3: false encodes cror; true complements the second source.
+# CLI/INI: --set=bug_fixes.crorc=true|false
+crorc = true
+
+# Set OE/Rc bits instead of adding decimal 400/401.
+# Example: addo r3,r4,r5: false emits 7C642BA4; true emits 7C642E14.
+# CLI/INI: --set=bug_fixes.overflow_suffix=true|false
+overflow_suffix = true
+
+# Prevent a zero-distance srwi from carrying into the destination field.
+# Example: srwi r3,r4,0: false emits 5484003E; true emits 5483003E.
+# CLI/INI: --set=bug_fixes.shift_right_zero=true|false
+shift_right_zero = true
+
+# Insert only the signed 12-bit quantized displacement.
+# Example: psq_l f0,-8(r3),0,0: false borrows into base/W/I fields; true preserves those fields.
+# CLI/INI: --set=bug_fixes.quantized_displacement=true|false
+quantized_displacement = true
+
+# Encode the existing indexed psq load/store forms and update selectors.
+# Example: psq_lx f1,r3,r4,0,0: false reports a bounded failure; true assembles it.
+# CLI/INI: --set=bug_fixes.indexed_quantized=true|false
+indexed_quantized = true
+
+# Honor supported paired-single record suffixes.
+# Example: ps_add. f1,f2,f3: false ignores the dot; true sets Rc.
+# CLI/INI: --set=bug_fixes.paired_single_record=true|false
+paired_single_record = true
+
+# Parse complete hexadecimal register and numeric fields instead of decimal prefixes.
+# Example: cmpw r5,0xD: false selects register 0; true selects register 13.
+# CLI/INI: --set=bug_fixes.numeric_fields=true|false
+numeric_fields = true
+
+# Correct generic comparison operand selection, cmpli routing, and comparison L encoding.
+# Example: cmpli 0,0,r3,1: true compares r3 to immediate 1; false follows the incorrect
+# register-comparison path. L=1 still requires console_only=false.
+# CLI/INI: --set=bug_fixes.comparisons=true|false
+comparisons = true
+
+# Set the explicit BO prediction bit without carrying into another BO bit.
+# Example: bc+ 13,2,0x10: false increments BO to 14; true keeps BO 13. The GNU hint convention
+# is a separate option.
+# CLI/INI: --set=bug_fixes.branch_prediction=true|false
+branch_prediction = true
+
+# Flush pending raw bytes at the end of input.
+# Example: A final byte 0x12 is dropped with false and padded/emitted with true. Section
+# transitions flush in either mode.
+# CLI/INI: --set=bug_fixes.raw_data_eof=true|false
+raw_data_eof = true
+
+# Preserve multiplication operators in outer-scanned source.
+# Example: A standalone .GR4 *= 00000002 loses its star with false; true emits the multiply
+# operation. Inline op scanning is unchanged.
+# CLI/INI: --set=bug_fixes.scanner_multiply=true|false
+scanner_multiply = true
+
+# Preserve OR operators in aliases and GR directives.
+# Example: A standalone .GR4 |= 00000002 is treated as continuation with false; true emits the
+# OR operation. With unknown_instructions=true, the truncated directive is rejected.
+# CLI/INI: --set=bug_fixes.scanner_or=true|false
+scanner_or = true
+
+# Evaluate every alias term instead of losing later accumulator updates and partially parsing
+# numbers.
+# Example: .alias x = 2 + 3 + 4: false gives 5; true gives 9. Scanner fixes and expression
+# extensions remain separate.
+# CLI/INI: --set=bug_fixes.alias_terms=true|false
+alias_terms = true
+
+# Preserve the selected GR index in load/store directives.
+# Example: .GR5 <-(16) $00001000: false omits index 5; true encodes GR5.
+# CLI/INI: --set=bug_fixes.gr_index=true|false
+gr_index = true
+
+# Parse the supported BA/PO and GR qualifiers correctly.
+# Example: .BA = PO+$1000: false reports a bounded failure; true assembles it.
+# CLI/INI: --set=bug_fixes.address_qualifiers=true|false
+address_qualifiers = true
+
+# Preserve the high bit of BA/PO/GR directive values.
+# Example: .PO = $90000000: false stores 10000000; true stores 90000000.
+# CLI/INI: --set=bug_fixes.directive_bit31=true|false
+directive_bit31 = true
+
+# Split direct-write addresses into BA and the correct offset.
+# Example: word 0x11223344 @ $90001000: false targets the wrong offset; true writes to 90001000.
+# CLI/INI: --set=bug_fixes.mem2_writes=true|false
+mem2_writes = true
+
+# Use BA and the correct offset for MEM2 hooks.
+# Example: HOOK @ $90001000 with a blr body: false sets PO with zero hook offset; true targets
+# 90001000.
+# CLI/INI: --set=bug_fixes.mem2_hooks=true|false
+mem2_hooks = true
+
+# Preserve bank/type tags in direct PSA writes.
+# Example: RA_float 3 @ $80001000: false keeps only index 3; true preserves the RA/float tags.
+# Block data is unchanged.
+# CLI/INI: --set=bug_fixes.psa_tags=true|false
+psa_tags = true
+
+# Emit the second word of .GOTO_F commands.
+# Example: .GOTO_F -> next emits a complete pair with true. False emits only its first word;
+# other checks may reject the malformed result.
+# CLI/INI: --set=bug_fixes.goto_false=true|false
+goto_false = true
+
+# Insert Gecko label offsets into the low field and check their range/alignment.
+# Example: A backward .GOTO -> back preserves command bits with true; false can borrow into them.
+# CLI/INI: --set=bug_fixes.gecko_label_offsets=true|false
+gecko_label_offsets = true
+
+# Emit the supported .ELSE and .ELSE_RESET commands.
+# Example: .ELSE fails safely with false; .ELSE_RESET is omitted. True emits the appropriate
+# pair for either form.
+# CLI/INI: --set=bug_fixes.else_directives=true|false
+else_directives = true
+
+# Diagnose unresolved PPC and Gecko labels instead of retaining zero displacements.
+# Example: b missing with no such label: false emits a zero-distance branch; true reports an error.
+# CLI/INI: --set=bug_fixes.missing_labels=true|false
+missing_labels = true
+
+# Require recognized instruction names rather than reference prefix/fallback acceptance.
+# Example: garbage r3,r4,r5: false emits FFFFFFFF; true reports an error. This also covers
+# fmulls and unknown CR-like names.
+# CLI/INI: --set=bug_fixes.unknown_instructions=true|false
+unknown_instructions = true
+
+# Reject extra machine-instruction operands instead of ignoring them.
+# Example: add r3,r4,r5,r6: false ignores r6; true reports an error. Missing required operands
+# always fail safely.
+# CLI/INI: --set=bug_fixes.operand_counts=true|false
+operand_counts = true
+
+# Check encoded register/numeric field widths and immediate ranges.
+# Example: add r32,r4,r5: false allows the field to overflow; true reports an error. Hex parsing
+# is controlled by numeric_fields.
+# CLI/INI: --set=bug_fixes.operand_ranges=true|false
+operand_ranges = true
+
+# Reject unsupported record/overflow suffixes.
+# Example: addi. r3,r4,1: false ignores the dot; true reports an error. Legal OE and paired-
+# single Rc encoding have separate fixes.
+# CLI/INI: --set=bug_fixes.suffix_validation=true|false
+suffix_validation = true
+
+# Reject statically invalid memory-register combinations and CTR branch conditions.
+# Example: lwzu r3,4(r3): false accepts overlapping registers; true rejects them. bcctr with a
+# BO that tests/decrements CTR is also rejected.
+# CLI/INI: --set=bug_fixes.register_relationships=true|false
+register_relationships = true
+
+# Reject PPC branch displacements that are unaligned or out of range.
+# Example: b 0x2000000: false masks the displacement; true rejects it.
+# CLI/INI: --set=bug_fixes.branch_ranges=true|false
+branch_ranges = true
+
+# Require word-aligned PPC write/block addresses.
+# Example: op nop @ $80001001: false accepts it; true reports an alignment error.
+# CLI/INI: --set=bug_fixes.address_alignment=true|false
+address_alignment = true
+
+# Check that PSA variable indices fit 24 bits.
+# Example: RA_float 0x1000000 @ $80001000: false truncates the index; true rejects it.
+# CLI/INI: --set=bug_fixes.psa_index_range=true|false
+psa_index_range = true
+
+# Reject sections with an incomplete eight-byte Gecko line.
+# Example: With goto_false=false, a lone .GOTO_F can leave an odd word count: true rejects it;
+# false permits that malformed framing.
+# CLI/INI: --set=bug_fixes.gecko_line_framing=true|false
+gecko_line_framing = true
+
+# Encode DS-form offsets as aligned byte displacements rather than multiplying by four.
+# Example: With console_only=false, ld r3,8(r4) emits E8640020 with false or E8640008 with true.
+# Misaligned offsets are rejected with true.
+# CLI/INI: --set=bug_fixes.ds_displacement=true|false
+ds_displacement = true
+
+# Return failure status for missing input/include files.
+# Example: .include absent.asm produces no GCT either way: false returns status 0; true returns
+# nonzero.
+# CLI/INI: --set=bug_fixes.missing_file_status=true|false
+missing_file_status = true
+
+# Terminate a final odd word in text output before the section separator.
+# Example: For a three-word section, false ends the last word with one newline; true adds its
+# line terminator plus the blank separator. Such sections also require gecko_line_framing=false.
+# CLI/INI: --set=bug_fixes.text_line_termination=true|false
+text_line_termination = true
 
 [extensions]
 # Accept .op as an alias for op. False ignores .op lines like C++.
@@ -47,12 +259,6 @@ implicit_sections = false
 # Example: mfsr r3,sr0 is rejected with false; true assembles it as 7C6004A6.
 # CLI/INI: --set=extensions.additional_console_instructions=true|false
 additional_console_instructions = false
-
-# Permit implemented instructions outside GameCube/Wii, including 64-bit integers.
-# False rejects these forms even when bug_fixes is false.
-# Examples: ld r3,8(r4) and mulld r3,r4,r5 require true; they cannot run on Wii.
-# CLI/INI: --set=extensions.non_console_instructions=true|false
-non_console_instructions = false
 
 [semantics]
 # Interpret leading-zero integers as decimal instead of octal.

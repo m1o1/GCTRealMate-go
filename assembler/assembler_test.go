@@ -11,6 +11,8 @@ import (
 	"strings"
 	"sync"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 // Historical corrected-mode fixtures exercised these features and checks
@@ -24,7 +26,7 @@ func enabledDotOp() *bool { enabled := true; return &enabled }
 
 func assemble(t *testing.T, s string) *Result {
 	t.Helper()
-	r, e := Assemble(context.Background(), "test.asm", []byte(s), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
+	r, e := Assemble(context.Background(), "test.asm", []byte(s), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -33,7 +35,7 @@ func assemble(t *testing.T, s string) *Result {
 func TestGoldenFiles(t *testing.T) {
 	for _, name := range []string{"core", "includes"} {
 		t.Run(name, func(t *testing.T) {
-			r, e := Compile(context.Background(), filepath.Join("testdata", name+".asm"), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
+			r, e := Compile(context.Background(), filepath.Join("testdata", name+".asm"), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
 			if e != nil {
 				t.Fatal(e)
 			}
@@ -103,7 +105,7 @@ func TestDiagnostics(t *testing.T) {
 		"Code\n.macro X()\n{\n%X()\n}\n%X()", "Code\nstring \"unterminated", "Code\n/* unterminated",
 	} {
 		t.Run(s, func(t *testing.T) {
-			r, e := Assemble(context.Background(), "bad.asm", []byte(s), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
+			r, e := Assemble(context.Background(), "bad.asm", []byte(s), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
 			if e == nil || r != nil {
 				t.Fatalf("got result %v and error %v", r, e)
 			}
@@ -128,7 +130,7 @@ func TestLocalScope(t *testing.T) {
 func TestIncludeCycle(t *testing.T) {
 	file := filepath.Join(t.TempDir(), "a.asm")
 	source := []byte("Code\n.include a.asm\n")
-	_, e := Assemble(context.Background(), file, source, Options{BugFixes: true, ReadFile: func(string) ([]byte, error) { return source, nil }})
+	_, e := Assemble(context.Background(), file, source, Options{Fixes: fixes.FromBool(true), ReadFile: func(string) ([]byte, error) { return source, nil }})
 	if e == nil || !strings.Contains(e.Error(), "cycle") {
 		t.Fatal(e)
 	}
@@ -136,7 +138,7 @@ func TestIncludeCycle(t *testing.T) {
 func TestCancellation(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
-	_, e := Assemble(ctx, "test.asm", nil, Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
+	_, e := Assemble(ctx, "test.asm", nil, Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
 	if !errors.Is(e, context.Canceled) {
 		t.Fatal(e)
 	}
@@ -145,7 +147,7 @@ func TestConcurrentAssemblies(t *testing.T) {
 	var wg sync.WaitGroup
 	for range 20 {
 		wg.Go(func() {
-			_, e := Assemble(context.Background(), "test.asm", []byte("Code\nop nop @ $80001000"), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
+			_, e := Assemble(context.Background(), "test.asm", []byte("Code\nop nop @ $80001000"), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
 			if e != nil {
 				t.Error(e)
 			}
@@ -155,7 +157,7 @@ func TestConcurrentAssemblies(t *testing.T) {
 }
 func TestBranchBase(t *testing.T) {
 	base := uint32(0x80500000)
-	r, e := Assemble(context.Background(), "test.asm", []byte("Code\nHOOK @ $80001000\n{\nbl $80500030\n}\n"), Options{BugFixes: true, BaseAddress: &base})
+	r, e := Assemble(context.Background(), "test.asm", []byte("Code\nHOOK @ $80001000\n{\nbl $80500030\n}\n"), Options{Fixes: fixes.FromBool(true), BaseAddress: &base})
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -174,7 +176,7 @@ func FuzzAssemble(f *testing.F) {
 		for _, mode := range []Dialect{Legacy, Modern} {
 			for _, fixed := range []bool{false, true} {
 				for _, allow := range []bool{false, true} {
-					_, _ = Assemble(context.Background(), "fuzz.asm", []byte(s), Options{BugFixes: fixed, AllowNonConsoleInstructions: allow, Dialect: mode, ReadFile: func(string) ([]byte, error) { return nil, os.ErrNotExist }})
+					_, _ = Assemble(context.Background(), "fuzz.asm", []byte(s), Options{Fixes: fixes.FromBool(fixed), AllowNonConsoleInstructions: allow, Dialect: mode, ReadFile: func(string) ([]byte, error) { return nil, os.ErrNotExist }})
 				}
 			}
 		}

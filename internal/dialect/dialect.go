@@ -1,7 +1,11 @@
 // Package dialect defines source choices independently of the bug-fix policy.
 package dialect
 
-import "fmt"
+import (
+	"fmt"
+
+	"gctrm/fixes"
+)
 
 type Mode uint8
 
@@ -12,7 +16,7 @@ const (
 
 // Overrides selects individual source behaviors. Nil inherits the preset;
 // true selects the legacy behavior and false selects the modern behavior.
-// The independent BugFixes option belongs to the assembly/encoding context.
+// The independent Fixes policy belongs to the assembly/encoding context.
 type Overrides struct {
 	OctalLiterals          *bool
 	LeftToRightExpressions *bool
@@ -28,7 +32,7 @@ type Overrides struct {
 type Rules struct {
 	ExpressionSyntax       bool
 	RejectDataOverflow     bool
-	BugFixes               bool // Opt-in corrections; independent of the source preset.
+	Fixes                  fixes.Policy
 	OctalLiterals          bool
 	LeftToRightExpressions bool
 	Unsigned32BitAliases   bool
@@ -53,7 +57,7 @@ func (m Mode) Resolve(o Overrides) (Rules, error) {
 	return Rules{
 		ExpressionSyntax:       true, // Internal expression helpers expose the full grammar; assembler options narrow it.
 		RejectDataOverflow:     true,
-		BugFixes:               true,
+		Fixes:                  fixes.All(),
 		OctalLiterals:          choice(o.OctalLiterals),
 		LeftToRightExpressions: choice(o.LeftToRightExpressions),
 		Unsigned32BitAliases:   choice(o.Unsigned32BitAliases),

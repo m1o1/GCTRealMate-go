@@ -1,14 +1,12 @@
 # Configuration
 
-Version **0.12.0-go** defaults to corrected encodings for GameCube/Wii, retaining C++ language and representation choices. `bug_fixes = true`; every canonical boolean below defaults to **false**. Use the five categories below; configuration has no aliases or presets.
-
-The template is [gctrm.toml](gctrm.toml). Turning a flag on selects the named extension or alternative. Target support is restricted to GameCube/Wii unless non-console instructions are explicitly enabled. Turning fixes off preserves characterized defects; it does not enable extensions. Defaults are identical for omitted keys, empty/missing automatic configuration, and `--no-config`.
+Version **0.13.0-go** defaults every `[bug_fixes]` option to **true**, including the GameCube/Wii target restriction. Every option in `[extensions]`, `[semantics]`, `[encoding]`, `[validation]`, and `[cli]` defaults to **false**. The template is [gctrm.toml](gctrm.toml); [BUG-FIXES.md](BUG-FIXES.md) documents every correction with examples.
 
 ## Loading and overrides
 
 The CLI automatically reads `<executable-basename>.toml` beside itself, if present. The root template is not automatically found by `bin/gctrm.exe`; use `--config gctrm.toml` or copy it beside the executable. `--config PATH` replaces the automatic file. `--no-config` skips TOML, while `-i` independently skips INI for the following input. Config selection must precede all inputs, and selectors cannot be combined.
 
-Put `version` and `bug_fixes` before any table header. Booleans must be unquoted `true`/`false`. Unknown or duplicate keys, wrong types, invalid schema versions, missing explicit files and files over 1 MiB fail before assembly. Only schema version 2 is accepted; omitted version means 2. Output paths cannot overwrite selected config or source files.
+Put `version` before any table header. `[bug_fixes]` contains individual boolean keys; the former scalar `bug_fixes` is rejected. Booleans must be unquoted `true`/`false`. Unknown or duplicate keys, wrong types, invalid schema versions, missing explicit files and files over 1 MiB fail before assembly. Only schema version 2 is accepted; omitted version means 2. Output paths cannot overwrite selected config or source files.
 
 Precedence: defaults < TOML < matching INI < CLI options preceding the input. Use `--set=section.key=true|false` for **any** canonical flag, for example:
 
@@ -18,11 +16,15 @@ Precedence: defaults < TOML < matching INI < CLI options preceding the input. Us
 
 All these choices persist across inputs until changed. `-a`, `-b`, and `-i` remain per-input. `--set=cli.exact_ini_matching=...` takes effect before looking up that input’s INI. Explicit CLI options win over that INI line.
 
-`--bug-fixes=true|false` controls corrections. All category overrides use `--set`; unknown options are errors in both CLI and INI.
+`--bug-fixes=true|false` sets all fixes and `console_only` together; later `--set=bug_fixes.KEY=...` options override individual choices. All category overrides use `--set`; unknown options are errors in both CLI and INI.
 
 ## Complete flag reference
 
-All defaults below are false. Each flag is independently configurable.
+All defaults below are false except the individual `[bug_fixes]` options. Each flag is independently configurable.
+
+## bug_fixes
+
+All 39 keys default true. See the [complete fix reference and examples](BUG-FIXES.md) and commented [template](gctrm.toml). Setting one key never changes another key. Target restriction is `bug_fixes.console_only`; the old non-console extension key is rejected.
 
 ## extensions
 
@@ -32,11 +34,11 @@ All defaults below are false. Each flag is independently configurable.
 
 ### branch_expressions
 
-**Default: false.** False uses resolved labels or the existing `0x`, `-0x`, and `$` target forms. True also accepts bare numeric targets: `b 20` and `b 16+4` emit `48000014`, like `b 0x14`. Radix/precedence remain separate. Binary/parenthesized forms additionally need `expression_syntax`. This does not provide local-label arithmetic or relocations. Use compact expressions without operand-splitting whitespace. Missing-label and range/alignment corrections remain under `bug_fixes`.
+**Default: false.** False uses resolved labels or the existing `0x`, `-0x`, and `$` target forms. True also accepts bare numeric targets: `b 20` and `b 16+4` emit `48000014`, like `b 0x14`. Radix/precedence remain separate. Binary/parenthesized forms additionally need `expression_syntax`. This does not provide local-label arithmetic or relocations. Use compact expressions without operand-splitting whitespace. Missing-label and range/alignment checks use `bug_fixes.missing_labels` and `bug_fixes.branch_ranges`.
 
 ### expression_syntax
 
-**Default: false.** True enables binary `0b` literals, parentheses, shifts and unary complement in expressions, arithmetic in data/count fields, and broader operand/address expressions. False retains basic alias operators `+ - * / % & ^ |`, literals/named constants in data, and reference-style addition in operands. It does not change precedence, arithmetic width or literal radix. `bug_fixes` repairs evaluation of supported expressions; it does not enable new grammar. With fixes off, the historical alias evaluator and scanner still retain their characterized quirks, so enabling syntax does not guarantee corrected evaluation. For example, `.alias x = (2 + 3) * 4` requires this extension and corrected evaluation; `word 2+3` also requires it.
+**Default: false.** True enables binary `0b` literals, parentheses, shifts and unary complement in expressions, arithmetic in data/count fields, and broader operand/address expressions. False retains basic alias operators `+ - * / % & ^ |`, literals/named constants in data, and reference-style addition in operands. It does not change precedence, arithmetic width or literal radix. `bug_fixes.alias_terms` and the scanner fixes repair evaluation of supported expressions; it does not enable new grammar. With fixes off, the historical alias evaluator and scanner still retain their characterized quirks, so enabling syntax does not guarantee corrected evaluation. For example, `.alias x = (2 + 3) * 4` requires this extension and corrected evaluation; `word 2+3` also requires it.
 
 ### implicit_sections
 
@@ -44,11 +46,7 @@ All defaults below are false. Each flag is independently configurable.
 
 ### additional_console_instructions
 
-**Default: false.** This also covers additions made in the initial rewrite: `clrlwi`, `clrrwi`, `rotlwi`, `dcbf`, `dcbi`, `dcbst`, `dcbt`, `dcbtst`, `dcbz`, `eieio`, `sync`, `sc`, `lwarx`, `stwcx.`; `bso`/`bns` branch aliases; and synthesized named-SPR move aliases beyond the original LR/CTR/XER forms. True permits `dcbz_l`, `eciwx`, `ecowx`, `mcrf`, `mcrfs`, `mcrxr`, `mfmsr`, `mfsr`, `mfsrin`, `mftb`, `mtfsb0`, `mtfsb1`, `mtfsf`, `mtfsfi`, `mtmsr`, `mtsr`, `mtsrin`, `tlbie`, `tlbsync`, with implemented record forms and `mftbl/mftbu/mttbl/mttbu` aliases. False treats them as absent: with fixes on, it reports an error; with fixes off, it retains the characterized reference fallback (including prefix interpretation or an unknown-instruction word). This is independent of the non-console instruction extension. Repairs to already-implemented instructions, including indexed paired-single forms, remain bug fixes.
-
-### non_console_instructions
-
-**Default: false.** False rejects recognized instructions outside GameCube/Wii, including `ld`, `mulld`, `fsqrt`, and explicit L=1 comparisons. True permits the implemented broader PowerPC forms retained from C++. These forms are not made Wii-compatible by enabling the flag. The restriction applies with `bug_fixes` both on and off; corrections still determine their encoding. Additional console mnemonics use `additional_console_instructions` independently. Double-precision floating-point data/instructions supported by Wii and 64-bit calculations inside the assembler remain available under their own existing rules. Raw word/Gecko data is not decoded. This is not a complete general PowerPC target profile. See [NON-CONSOLE.md](NON-CONSOLE.md).
+**Default: false.** This also covers additions made in the initial rewrite: `clrlwi`, `clrrwi`, `rotlwi`, `dcbf`, `dcbi`, `dcbst`, `dcbt`, `dcbtst`, `dcbz`, `eieio`, `sync`, `sc`, `lwarx`, `stwcx.`; `bso`/`bns` branch aliases; and synthesized named-SPR move aliases beyond the original LR/CTR/XER forms. True permits `dcbz_l`, `eciwx`, `ecowx`, `mcrf`, `mcrfs`, `mcrxr`, `mfmsr`, `mfsr`, `mfsrin`, `mftb`, `mtfsb0`, `mtfsb1`, `mtfsf`, `mtfsfi`, `mtmsr`, `mtsr`, `mtsrin`, `tlbie`, `tlbsync`, with implemented record forms and `mftbl/mftbu/mttbl/mttbu` aliases. False treats them as absent: with fixes on, it reports an error; with fixes off, it retains the characterized reference fallback (including prefix interpretation or an unknown-instruction word). Target restriction is controlled by `bug_fixes.console_only`. Repairs to already-implemented instructions, including indexed paired-single forms, remain bug fixes.
 
 ## semantics
 
@@ -68,7 +66,7 @@ All defaults below are false. Each flag is independently configurable.
 
 ### gnu_branch_hints
 
-**Default: false.** False retains the direction-adjusted C++ convention: `bdnz -0x10` emits `4220fff0`. True emits `4200fff0`, matching the GNU comparison profile. The ordinary branch condition and destination remain the same; prediction/timing and bytes can differ. The separate C++ BO carry defect is corrected by `bug_fixes`. Neither convention promises better performance.
+**Default: false.** False retains the direction-adjusted C++ convention: `bdnz -0x10` emits `4220fff0`. True emits `4200fff0`, matching the GNU comparison profile. The ordinary branch condition and destination remain the same; prediction/timing and bytes can differ. The separate C++ BO carry defect is corrected by `bug_fixes.branch_prediction`. Neither convention promises better performance.
 
 ### sign_extend_data_slots
 
@@ -90,7 +88,7 @@ All defaults below are false. Each flag is independently configurable.
 
 ### reject_duplicate_labels
 
-**Default: false.** False retains the first definition, matching characterized C++ behavior. True reports a source-location error for duplicate PPC or Gecko labels. Missing labels are independently diagnosed by `bug_fixes`.
+**Default: false.** False retains the first definition, matching characterized C++ behavior. True reports a source-location error for duplicate PPC or Gecko labels. Missing labels are independently diagnosed by `bug_fixes.missing_labels`.
 
 ### strict_macro_calls
 
@@ -124,7 +122,7 @@ All defaults below are false. Each flag is independently configurable.
 
 ## Library API
 
-The library does not read config/INI. Set `Options.BugFixes = true` to match the CLI correction default; the explicit Go boolean retains false as its zero value. `DotOp` is a pointer with nil meaning false. `BranchExpressions`, `ExpressionSyntax`, `ImplicitSections`, and `AdditionalConsoleInstructions` select extensions. `AllowNonConsoleInstructions` maps directly to `extensions.non_console_instructions`; both default false. Set true only to permit implemented broader PowerPC forms. `Options.Validation` has `RejectDuplicateLabels`, `StrictMacroCalls`, `RejectUndefinedMacros`, `RejectAddressAnnotations`, and `RejectDataOverflow` booleans. The library's `Compatibility` fields select C++ behavior when true, so they invert the corresponding category flags. Nil inherits `Options.Dialect` (default `assembler.Legacy`); `assembler.Modern` is a library profile for the alternative source choices. TOML and CLI expose individual settings only.
+The library does not read config/INI. Set `Options.Fixes = fixes.All()` (from `gctrm/fixes`) to match the CLI correction default; the zero `fixes.Policy` leaves corrections off. Each exported policy field selects one correction. `DotOp` is a pointer with nil meaning false. `BranchExpressions`, `ExpressionSyntax`, `ImplicitSections`, and `AdditionalConsoleInstructions` select extensions. `AllowNonConsoleInstructions` is the inverse of `bug_fixes.console_only` and defaults false. Set true only to permit implemented broader PowerPC forms. `Options.Validation` has `RejectDuplicateLabels`, `StrictMacroCalls`, `RejectUndefinedMacros`, `RejectAddressAnnotations`, and `RejectDataOverflow` booleans. The library's `Compatibility` fields select C++ behavior when true, so they invert the corresponding category flags. Nil inherits `Options.Dialect` (default `assembler.Legacy`); `assembler.Modern` is a library profile for the alternative source choices. TOML and CLI expose individual settings only.
 
 | Category flag | Inverse `Compatibility` field |
 | --- | --- |

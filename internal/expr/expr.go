@@ -51,7 +51,7 @@ func Alias(text string, lookup Lookup, mode dialect.Mode) (int64, error) {
 
 // AliasRules applies alias arithmetic width separately from radix and order.
 func AliasRules(text string, lookup Lookup, rules dialect.Rules) (int64, error) {
-	if !rules.BugFixes {
+	if !rules.Fixes.AliasTerms {
 		return legacyAlias(strings.Join(strings.Fields(text), ""), lookup, rules)
 	}
 	if err := checkSyntax(text, rules.ExpressionSyntax, aliasSyntax); err != nil {

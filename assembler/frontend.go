@@ -214,7 +214,7 @@ func (f *frontend) parse(tokens []token, local *scope, target *[]node, inBlock b
 			if len(data) > 16<<20 {
 				return at(tok.pos, fmt.Errorf("included file exceeds 16 MiB"))
 			}
-			included, err := scanPolicy(path, data, f.opts.BugFixes)
+			included, err := scanPolicy(path, data, f.opts.Fixes)
 			if err != nil {
 				return err
 			}
@@ -239,7 +239,7 @@ func (f *frontend) parse(tokens []token, local *scope, target *[]node, inBlock b
 			key, val, ok := strings.Cut(rest, "=")
 			key = strings.TrimSpace(key)
 			val = strings.TrimSpace(val)
-			if !f.opts.BugFixes && !strings.HasPrefix(val, "\"") {
+			if !f.opts.Fixes.AliasTerms && !strings.HasPrefix(val, "\"") {
 				val = compact(val)
 			}
 			if !ok || !identifier.MatchString(key) {
@@ -346,7 +346,7 @@ func (f *frontend) parse(tokens []token, local *scope, target *[]node, inBlock b
 			} else if rest != "" {
 				return at(tok.pos, fmt.Errorf("PULSE takes no address"))
 			}
-			if f.opts.BugFixes && address&3 != 0 {
+			if f.opts.Fixes.AddressAlignment && address&3 != 0 {
 				return at(tok.pos, fmt.Errorf("block address is not word-aligned"))
 			}
 			body, end, err := bodyAfter(tokens, i)

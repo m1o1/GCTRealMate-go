@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"gctrm/fixes"
 	"gctrm/internal/dialect"
 	"gctrm/internal/expr"
 )
@@ -14,7 +15,7 @@ import (
 type Context struct {
 	ExpressionSyntax              bool
 	AdditionalConsoleInstructions bool
-	BugFixes                      bool
+	Fixes                         fixes.Policy
 	BranchExpressions             bool
 	AllowNonConsoleInstructions   bool
 	Dialect                       dialect.Mode
@@ -31,7 +32,7 @@ func Encode(text string, ctx Context) (uint32, error) {
 	if err != nil {
 		return 0, err
 	}
-	rules.BugFixes = ctx.BugFixes
+	rules.Fixes = ctx.Fixes
 	rules.ExpressionSyntax = ctx.ExpressionSyntax
 	text = strings.TrimSpace(text)
 	name, rest := text, ""
@@ -42,7 +43,7 @@ func Encode(text string, ctx Context) (uint32, error) {
 	name = strings.ToLower(name)
 	baseName := strings.TrimSuffix(name, ".")
 	if !ctx.AdditionalConsoleInstructions && addedConsoleInstruction(baseName) {
-		if !ctx.BugFixes {
+		if !ctx.Fixes.UnknownInstructions {
 			return legacyAddedInstruction(text, baseName, ctx)
 		}
 		return 0, fmt.Errorf("%s requires extensions.additional_console_instructions=true", name)
@@ -58,7 +59,7 @@ func Encode(text string, ctx Context) (uint32, error) {
 	if word, handled, err := e.extendedMemory(name); handled {
 		return word, err
 	}
-	if !ctx.BugFixes {
+	if !ctx.Fixes.Comparisons {
 		if word, handled, err := e.legacySpecial(name); handled {
 			return word, err
 		}
@@ -105,6 +106,7 @@ func Encode(text string, ctx Context) (uint32, error) {
 		}
 	}
 	// Pseudoinstructions reduce to canonical operand layouts.
+	legacyShiftCarry := false
 	dot := strings.HasSuffix(name, ".")
 	bare := strings.TrimSuffix(name, ".")
 	if bare == "slwi" || bare == "srwi" || bare == "clrlwi" || bare == "clrrwi" || bare == "rotlwi" || bare == "rotlw" {
@@ -125,8 +127,12 @@ func Encode(text string, ctx Context) (uint32, error) {
 				me = 31 - n
 			case "srwi":
 				sh = 32 - n
-				if ctx.BugFixes {
+				if ctx.Fixes.ShiftRightZero {
 					sh &= 31
+				} else if n == 0 {
+					// Model the historical carry after encoding, so restoring it
+					// does not require disabling checks on the user's operands.
+					legacyShiftCarry, sh = true, 0
 				}
 				mb = n
 			case "clrlwi":
@@ -144,15 +150,15 @@ func Encode(text string, ctx Context) (uint32, error) {
 		}
 		e.args = args
 	}
-	s, ok, nonConsole := lookupInstruction(name, ctx.BugFixes)
+	s, ok, nonConsole := lookupInstruction(name, ctx.Fixes.UnknownInstructions)
 	record, overflow := false, false
 	if !ok {
 		name = strings.TrimSuffix(name, ".")
 		record = dot
-		s, ok, nonConsole = lookupInstruction(name, ctx.BugFixes)
+		s, ok, nonConsole = lookupInstruction(name, ctx.Fixes.UnknownInstructions)
 		if !ok && strings.HasSuffix(name, "o") {
 			name = strings.TrimSuffix(name, "o")
-			s, ok, nonConsole = lookupInstruction(name, ctx.BugFixes)
+			s, ok, nonConsole = lookupInstruction(name, ctx.Fixes.UnknownInstructions)
 			overflow = true
 		}
 	}
@@ -160,7 +166,7 @@ func Encode(text string, ctx Context) (uint32, error) {
 		return 0, nonConsoleError(name)
 	}
 	if !ok {
-		if !ctx.BugFixes {
+		if !ctx.Fixes.UnknownInstructions {
 			if strings.HasPrefix(name, "c") && !strings.HasPrefix(name, "cntl") && !strings.HasPrefix(name, "cmp") {
 				return 19 << 26, nil
 			}
@@ -168,35 +174,49 @@ func Encode(text string, ctx Context) (uint32, error) {
 		}
 		return 0, fmt.Errorf("unknown instruction %q", name)
 	}
-	if ctx.BugFixes && record && !s.record {
+	if ctx.Fixes.SuffixValidation && record && !s.record {
 		return 0, fmt.Errorf("%s does not support record suffix", name)
 	}
-	if ctx.BugFixes && overflow && !s.overflow {
+	if ctx.Fixes.SuffixValidation && overflow && !s.overflow {
 		return 0, fmt.Errorf("%s does not support overflow suffix", name)
 	}
-	if !ctx.BugFixes {
-		if !s.record {
-			record = false
-		}
-		switch name {
-		case "lha":
+	if !ctx.Fixes.SuffixValidation && !s.record {
+		record = false
+	}
+	switch name {
+	case "lha":
+		if !ctx.Fixes.LHA {
 			s.base = 40 << 26
-		case "eqv":
+		}
+	case "eqv":
+		if !ctx.Fixes.EQV {
 			s.form = duplicate
-		case "crandc":
+		}
+	case "crandc":
+		if !ctx.Fixes.CRAndC {
 			s.base = 19<<26 | 257<<1
-		case "crorc":
+		}
+	case "crorc":
+		if !ctx.Fixes.CROrC {
 			s.base = 19<<26 | 449<<1
 		}
-		if strings.HasPrefix(name, "ps_") {
-			record = false
-		}
+	}
+	if !ctx.Fixes.PairedSingleRecord && strings.HasPrefix(name, "ps_") {
+		record = false
 	}
 	n := operandCounts[s.form]
+	if name == "eqv" && ctx.Fixes.OperandCounts {
+		n = 3
+	}
 	if err := e.count(n); err != nil {
 		return 0, fmt.Errorf("%s: %w", name, err)
 	}
 	e.validateOperands(name, s)
+	if name == "eqv" && !ctx.Fixes.EQV && ctx.Fixes.OperandRanges && len(args) >= 3 {
+		// The old encoding ignores this source, but its field-width check
+		// remains independently selectable.
+		e.register(2, 'g')
+	}
 	if e.err != nil {
 		return 0, e.err
 	}
@@ -276,11 +296,14 @@ func Encode(text string, ctx Context) (uint32, error) {
 		v |= 1 << 10
 	}
 	word := s.base | v
-	if !ctx.BugFixes {
+	if !ctx.Fixes.OperandRanges {
 		word = s.base + v
-		if overflow {
-			word = word - (1 << 10) + 400
-		}
+	}
+	if overflow && !ctx.Fixes.OverflowSuffix {
+		word = word - (1 << 10) + 400
+	}
+	if legacyShiftCarry {
+		word += 1 << 16
 	}
 	e.validateMemory(name, word)
 	return word, e.err
@@ -346,7 +369,7 @@ func (e *encoder) fail(s string) {
 	}
 }
 func (e *encoder) count(n int) error {
-	if len(e.args) < n || e.ctx.BugFixes && len(e.args) != n {
+	if len(e.args) < n || e.ctx.Fixes.OperandCounts && len(e.args) != n {
 		return fmt.Errorf("expected %d operands, got %d", n, len(e.args))
 	}
 	return nil
@@ -363,7 +386,7 @@ func (e *encoder) immediate(v int64, bits uint) uint32 {
 	if v >= 0x80000000 && v <= 0xffffffff {
 		v = int64(int32(v))
 	}
-	if e.ctx.BugFixes && (v < -(1<<(bits-1)) || v > (1<<bits)-1) {
+	if e.ctx.Fixes.OperandRanges && (v < -(1<<(bits-1)) || v > (1<<bits)-1) {
 		e.fail(fmt.Sprintf("immediate %d does not fit %d bits", v, bits))
 	}
 	return uint32(v) & ((1 << bits) - 1)
@@ -395,7 +418,7 @@ func (e *encoder) compare(name string) (uint32, error) {
 		return 0, nonConsoleError(name + " with L=1")
 	}
 	v := bf<<23 | e.register(0, 'g')<<16
-	if e.ctx.BugFixes {
+	if e.ctx.Fixes.Comparisons {
 		v |= l << 21
 	}
 	if imm {

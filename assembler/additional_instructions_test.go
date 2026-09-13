@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"os"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 // These outputs were freshly captured from the pinned C++ executable. Retain
@@ -44,10 +46,10 @@ func TestAdditionalInstructionReferenceProfile(t *testing.T) {
 			if got := hex.EncodeToString(r.Bytes()); got != tc.CPP.Hex {
 				t.Fatalf("%s != %s", got, tc.CPP.Hex)
 			}
-			if _, err := Assemble(context.Background(), "probe.asm", []byte(tc.Source), Options{BugFixes: true, AllowNonConsoleInstructions: true}); err == nil {
+			if _, err := Assemble(context.Background(), "probe.asm", []byte(tc.Source), Options{Fixes: fixes.FromBool(true), AllowNonConsoleInstructions: true}); err == nil {
 				t.Fatal("accepted added instruction by default")
 			}
-			if _, err := Assemble(context.Background(), "probe.asm", []byte(tc.Source), Options{BugFixes: true, AllowNonConsoleInstructions: true, AdditionalConsoleInstructions: true}); err != nil {
+			if _, err := Assemble(context.Background(), "probe.asm", []byte(tc.Source), Options{Fixes: fixes.FromBool(true), AllowNonConsoleInstructions: true, AdditionalConsoleInstructions: true}); err != nil {
 				t.Fatal(err)
 			}
 		})

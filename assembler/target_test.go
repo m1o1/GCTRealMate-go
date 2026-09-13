@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strings"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 func TestNonConsolePolicyThroughSourceForms(t *testing.T) {
@@ -19,11 +21,11 @@ func TestNonConsolePolicyThroughSourceForms(t *testing.T) {
 		for _, fixed := range []bool{false, true} {
 			for _, allow := range []bool{false, true} {
 				t.Run(fmt.Sprintf("%s/fixed=%t/allow=%t", source, fixed, allow), func(t *testing.T) {
-					opts := Options{BugFixes: fixed, AllowNonConsoleInstructions: allow, ReadFile: func(string) ([]byte, error) {
+					opts := Options{Fixes: fixes.FromBool(fixed), AllowNonConsoleInstructions: allow, ReadFile: func(string) ([]byte, error) {
 						return []byte("Child\nop fsqrt f3,f4 @ $80001000\n"), nil
 					}}
 					_, err := Assemble(context.Background(), "probe.asm", []byte(source), opts)
-					if allow && err != nil || !allow && (err == nil || !strings.Contains(err.Error(), "extensions.non_console_instructions=true")) {
+					if allow && err != nil || !allow && (err == nil || !strings.Contains(err.Error(), "bug_fixes.console_only=false")) {
 						t.Fatal(err)
 					}
 				})
@@ -34,7 +36,7 @@ func TestNonConsolePolicyThroughSourceForms(t *testing.T) {
 
 func TestNonConsolePolicyDoesNotDecodeRawData(t *testing.T) {
 	for _, fixed := range []bool{false, true} {
-		_, err := Assemble(context.Background(), "raw.asm", []byte("Raw\nCODE @ $80001000\n{\nword 0xe8640008\n}\n"), Options{BugFixes: fixed})
+		_, err := Assemble(context.Background(), "raw.asm", []byte("Raw\nCODE @ $80001000\n{\nword 0xe8640008\n}\n"), Options{Fixes: fixes.FromBool(fixed)})
 		if err != nil {
 			t.Fatal(err)
 		}

@@ -75,7 +75,7 @@ func (e *encoder) number(i, bits int, prefixes ...string) uint32 {
 	s := strings.TrimSpace(e.args[i])
 	if e.ctx.Lookup != nil {
 		if v, ok := e.ctx.Lookup(s); ok {
-			if e.ctx.BugFixes && (v < 0 || v >= 1<<bits) {
+			if e.ctx.Fixes.OperandRanges && (v < 0 || v >= 1<<bits) {
 				e.fail(fmt.Sprintf("operand %q outside 0..%d", s, (1<<bits)-1))
 			}
 			return uint32(v)
@@ -92,7 +92,7 @@ func (e *encoder) number(i, bits int, prefixes ...string) uint32 {
 	}
 	var v int64
 	var err error
-	if e.ctx.BugFixes {
+	if e.ctx.Fixes.NumericFields {
 		v, err = expr.Eval(s, e.ctx.Lookup)
 	} else {
 		v, err = legacyNumber(s)
@@ -101,7 +101,7 @@ func (e *encoder) number(i, bits int, prefixes ...string) uint32 {
 		e.fail(fmt.Sprintf("operand %q: %v", e.args[i], err))
 		return 0
 	}
-	if e.ctx.BugFixes && (v < 0 || v >= 1<<bits) {
+	if e.ctx.Fixes.OperandRanges && (v < 0 || v >= 1<<bits) {
 		e.fail(fmt.Sprintf("operand %q outside 0..%d", e.args[i], (1<<bits)-1))
 	}
 	return uint32(v)
@@ -118,7 +118,7 @@ func (e *encoder) validateOperands(name string, s spec) {
 // Validate relationships between encoded registers. Privilege, memory
 // mappings, FPSCR and HID state remain runtime responsibilities.
 func (e *encoder) validateMemory(name string, word uint32) {
-	if !e.ctx.BugFixes {
+	if !e.ctx.Fixes.RegisterRelationships {
 		return
 	}
 	rt, ra := (word>>21)&31, (word>>16)&31

@@ -11,11 +11,12 @@ import (
 	"path/filepath"
 	"strings"
 
+	"gctrm/fixes"
 	"gctrm/internal/dialect"
 	"gctrm/internal/ppc"
 )
 
-// Dialect selects source semantics, independently of the BugFixes policy.
+// Dialect selects source semantics, independently of the correction policy.
 type Dialect = dialect.Mode
 
 // Compatibility overrides individual preset choices; nil fields inherit.
@@ -27,7 +28,7 @@ const (
 )
 
 // Validation selects optional restrictions on reference-accepted source.
-// Zero values preserve reference handling; machine encoding checks use BugFixes.
+// Zero values preserve reference handling; machine encoding checks use Fixes.
 type Validation struct {
 	RejectDuplicateLabels    bool
 	StrictMacroCalls         bool
@@ -38,11 +39,11 @@ type Validation struct {
 
 // Options configure source loading and address-dependent branch resolution.
 type Options struct {
-	BugFixes                      bool  // Opt in to corrections; false preserves known C++ quirks.
-	DotOp                         *bool // Accept .op as an alias for op; nil defaults to false.
-	ExpressionSyntax              bool  // Additional expression forms beyond the reference grammar.
-	ImplicitSections              bool  // Permit source without an initial section name.
-	AdditionalConsoleInstructions bool  // Permit implemented console mnemonics absent from the reference.
+	Fixes                         fixes.Policy // Individual corrections; zero preserves known C++ quirks.
+	DotOp                         *bool        // Accept .op as an alias for op; nil defaults to false.
+	ExpressionSyntax              bool         // Additional expression forms beyond the reference grammar.
+	ImplicitSections              bool         // Permit source without an initial section name.
+	AdditionalConsoleInstructions bool         // Permit implemented console mnemonics absent from the reference.
 	Validation                    Validation
 	BranchExpressions             bool // Accept additional numeric branch target forms; default false.
 	AllowNonConsoleInstructions   bool // Permit retained non-Gekko/Broadway forms; default false.
@@ -64,9 +65,9 @@ type Code struct {
 
 // Result contains the successfully assembled codeset.
 type Result struct {
-	Codes      []Code
-	logEntries []logEntry
-	bugFixes   bool
+	Codes               []Code
+	logEntries          []logEntry
+	textLineTermination bool
 }
 
 type logEntry struct {
@@ -105,7 +106,7 @@ func (r *Result) Text(asterisks, convert bool) string {
 				b.WriteByte('\n')
 			}
 		}
-		if r.bugFixes && len(c.Words)%2 != 0 {
+		if r.textLineTermination && len(c.Words)%2 != 0 {
 			b.WriteByte('\n')
 		}
 		b.WriteByte('\n')
@@ -159,7 +160,7 @@ func Assemble(ctx context.Context, filename string, source []byte, opts Options)
 	if err != nil {
 		return nil, err
 	}
-	rules.BugFixes = opts.BugFixes
+	rules.Fixes = opts.Fixes
 	rules.ExpressionSyntax = opts.ExpressionSyntax
 	rules.RejectDataOverflow = opts.Validation.RejectDataOverflow
 	opts.rules = rules
@@ -176,7 +177,7 @@ func Assemble(ctx context.Context, filename string, source []byte, opts Options)
 	if err != nil {
 		return nil, err
 	}
-	tokens, err := scanPolicy(name, source, opts.BugFixes)
+	tokens, err := scanPolicy(name, source, opts.Fixes)
 	if err != nil {
 		return nil, err
 	}
@@ -184,10 +185,10 @@ func Assemble(ctx context.Context, filename string, source []byte, opts Options)
 	if err = f.parse(tokens, nil, nil, false, 0, 0); err != nil {
 		return nil, err
 	}
-	result := &Result{logEntries: f.logEntries, bugFixes: opts.BugFixes}
+	result := &Result{logEntries: f.logEntries, textLineTermination: opts.Fixes.TextLineTermination}
 	offset := uint32(8)
 	for i, s := range f.sections {
-		s.flushTail = i+1 < len(f.sections) || opts.BugFixes
+		s.flushTail = i+1 < len(f.sections) || opts.Fixes.RawDataEOF
 		words, err := encodeSection(ctx, s, offset, opts)
 		if err != nil {
 			return nil, err
@@ -259,7 +260,7 @@ func encodeSection(ctx context.Context, s section, offset uint32, opts Options) 
 			}
 			words = append(words, w...)
 		case directiveNode:
-			w, fix, err := encodeDirectivePolicy(n, opts.BugFixes)
+			w, fix, err := encodeDirectivePolicy(n, opts.Fixes)
 			if err != nil {
 				return nil, at(n.pos, err)
 			}
@@ -277,28 +278,28 @@ func encodeSection(ctx context.Context, s section, offset uint32, opts Options) 
 	for _, f := range fixes {
 		dest, ok := labels[strings.ToLower(f.name)]
 		if !ok {
-			if !opts.BugFixes {
+			if !opts.Fixes.MissingLabels {
 				continue
 			}
 			return nil, at(f.pos, fmt.Errorf("undefined label %q", f.name))
 		}
 		delta := (dest-f.index)*4 - 8
 		if f.lines {
-			if opts.BugFixes && (dest-f.index)%2 != 0 {
+			if opts.Fixes.GeckoLabelOffsets && (dest-f.index)%2 != 0 {
 				return nil, at(f.pos, fmt.Errorf("GOTO target is not 8-byte aligned"))
 			}
 			delta = int(float64(dest-f.index)/2 - 1)
 		}
-		if opts.BugFixes && (delta < -32768 || delta > 32767) {
+		if opts.Fixes.GeckoLabelOffsets && (delta < -32768 || delta > 32767) {
 			return nil, at(f.pos, fmt.Errorf("label displacement outside signed 16-bit range"))
 		}
-		if opts.BugFixes {
+		if opts.Fixes.GeckoLabelOffsets {
 			words[f.index] = words[f.index]&0xffff0000 | uint32(uint16(delta))
 		} else {
 			words[f.index] = words[f.index]%0xffff0000 + uint32(int32(int16(delta)))
 		}
 	}
-	if opts.BugFixes && len(words)%2 != 0 {
+	if opts.Fixes.GeckoLineFraming && len(words)%2 != 0 {
 		return nil, at(s.pos, fmt.Errorf("Gecko section has an incomplete 8-byte line"))
 	}
 	return words, nil
@@ -309,7 +310,7 @@ func encodeWrite(n node, opts Options) ([]uint32, error) {
 	var array bool
 	var err error
 	if name == "op" {
-		if opts.BugFixes && n.address&3 != 0 {
+		if opts.Fixes.AddressAlignment && n.address&3 != 0 {
 			return nil, fmt.Errorf("instruction write is not word-aligned")
 		}
 		if kind, _ := head(rest); isDataType(kind) {
@@ -320,7 +321,7 @@ func encodeWrite(n node, opts Options) ([]uint32, error) {
 				err = fmt.Errorf("op data must occupy exactly one instruction word")
 			}
 		} else {
-			w, e := ppc.Encode(rest, ppc.Context{BugFixes: opts.BugFixes, ExpressionSyntax: opts.ExpressionSyntax, AdditionalConsoleInstructions: opts.AdditionalConsoleInstructions, BranchExpressions: opts.BranchExpressions, AllowNonConsoleInstructions: opts.AllowNonConsoleInstructions, Dialect: opts.Dialect, Compatibility: opts.Compatibility, Address: &n.address, Lookup: lookupValues(n.values), ConvertAbsolute: opts.ConvertAbsolute})
+			w, e := ppc.Encode(rest, ppc.Context{Fixes: opts.Fixes, ExpressionSyntax: opts.ExpressionSyntax, AdditionalConsoleInstructions: opts.AdditionalConsoleInstructions, BranchExpressions: opts.BranchExpressions, AllowNonConsoleInstructions: opts.AllowNonConsoleInstructions, Dialect: opts.Dialect, Compatibility: opts.Compatibility, Address: &n.address, Lookup: lookupValues(n.values), ConvertAbsolute: opts.ConvertAbsolute})
 			err = e
 			data = appendWords(nil, w)
 		}
@@ -353,7 +354,7 @@ func encodeWrite(n node, opts Options) ([]uint32, error) {
 		} else {
 			// The Gecko handler uses only BA's upper seven bits. The
 			// remaining address bits belong to the write's address field.
-			if opts.BugFixes {
+			if opts.Fixes.MEM2Writes {
 				words = append(words, base, address&0xfe000000)
 			} else {
 				words = append(words, base, address)
@@ -425,7 +426,7 @@ func encodeBlock(ctx context.Context, n node, gctOffset uint32, opts Options) ([
 		} else {
 			prefix = []uint32{0x42000000, n.address & 0xfe000000}
 			first = 0xc2000000 | n.address&0x01ffffff
-			if !opts.BugFixes {
+			if !opts.Fixes.MEM2Hooks {
 				prefix = []uint32{0x4a000000, n.address}
 				first = 0xc2000000
 			}
@@ -468,7 +469,7 @@ func encodeBlock(ctx context.Context, n node, gctOffset uint32, opts Options) ([
 			v, ok := labels[strings.ToLower(name)]
 			return int64((v - current) * 4), ok
 		}
-		w, err := ppc.Encode(item.text, ppc.Context{BugFixes: opts.BugFixes, ExpressionSyntax: opts.ExpressionSyntax, AdditionalConsoleInstructions: opts.AdditionalConsoleInstructions, BranchExpressions: opts.BranchExpressions, AllowNonConsoleInstructions: opts.AllowNonConsoleInstructions, Dialect: opts.Dialect, Compatibility: opts.Compatibility, Address: address, Lookup: lookupValues(item.values), RelativeLabel: resolve, ConvertAbsolute: opts.ConvertAbsolute})
+		w, err := ppc.Encode(item.text, ppc.Context{Fixes: opts.Fixes, ExpressionSyntax: opts.ExpressionSyntax, AdditionalConsoleInstructions: opts.AdditionalConsoleInstructions, BranchExpressions: opts.BranchExpressions, AllowNonConsoleInstructions: opts.AllowNonConsoleInstructions, Dialect: opts.Dialect, Compatibility: opts.Compatibility, Address: address, Lookup: lookupValues(item.values), RelativeLabel: resolve, ConvertAbsolute: opts.ConvertAbsolute})
 		if err != nil {
 			return nil, at(item.pos, err)
 		}

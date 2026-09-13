@@ -1,8 +1,9 @@
 package expr
 
 import (
-	"gctrm/internal/dialect"
 	"testing"
+
+	"gctrm/internal/dialect"
 )
 
 func TestEval(t *testing.T) {

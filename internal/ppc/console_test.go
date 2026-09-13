@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"gctrm/fixes"
 	"gctrm/internal/dialect"
 )
 
@@ -13,7 +14,7 @@ func TestConsoleRejectsNonConsoleInstructions(t *testing.T) {
 	// tables; dcba is only an unimplemented placeholder in Dolphin's table.
 	for _, name := range strings.Fields("ld ldu lwa std stdu ldx ldux lwax lwaux stdx stdux td tdi mulld divd divdu mulhd mulhdu sld srd srad extsw cntlzd fctid fctidz fcfid fsqrt fsqrts frsqrtes fsels cmpd cmpdi cmpld cmpldi dcba") {
 		for _, suffix := range []string{"", ".", "o", "o."} {
-			if _, err := Encode(name+suffix+" 3,4,5", Context{BugFixes: true}); err == nil {
+			if _, err := Encode(name+suffix+" 3,4,5", Context{Fixes: fixes.FromBool(true)}); err == nil {
 				t.Errorf("accepted %s%s", name, suffix)
 			}
 		}
@@ -38,7 +39,7 @@ func TestConsoleOperandRestrictions(t *testing.T) {
 		"crclr 6,6", "mtfsf 1,f3,0,1",
 	} {
 		t.Run(source, func(t *testing.T) {
-			if _, err := Encode(source, Context{BugFixes: true, Dialect: dialect.Modern}); err == nil {
+			if _, err := Encode(source, Context{Fixes: fixes.FromBool(true), Dialect: dialect.Modern}); err == nil {
 				t.Fatalf("accepted invalid console form %s", source)
 			}
 		})
@@ -59,7 +60,7 @@ func TestConsoleMemoryUpdateRegisters(t *testing.T) {
 			if strings.HasPrefix(name, "psq_") {
 				source += ",0,0"
 			}
-			_, err := Encode(source, Context{BugFixes: true})
+			_, err := Encode(source, Context{Fixes: fixes.FromBool(true)})
 			invalid := base == 0 || base == 3 && strings.HasPrefix(name, "l") && reg == "r3"
 			if (err != nil) != invalid {
 				t.Errorf("%s: error %v, invalid=%v", source, err, invalid)
@@ -78,11 +79,11 @@ func TestConsoleValidEdgeCases(t *testing.T) {
 		// z bits in BO are explicitly ignored by these CPUs (manual table 12-6).
 		"bc 31,31,0x4", "bcctr 31,31", "bclr 31,31", "cmp cr7,0,r31,r0",
 	} {
-		if _, err := Encode(source, Context{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true}); err != nil {
+		if _, err := Encode(source, Context{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true}); err != nil {
 			t.Errorf("%s: %v", source, err)
 		}
 	}
-	got, err := Encode("beq crouchCheck", Context{BugFixes: true, RelativeLabel: func(s string) (int64, bool) { return 4, s == "crouchCheck" }})
+	got, err := Encode("beq crouchCheck", Context{Fixes: fixes.FromBool(true), RelativeLabel: func(s string) (int64, bool) { return 4, s == "crouchCheck" }})
 	if err != nil || got != 0x41820004 {
 		t.Fatalf("label starting with cr: %08x %v", got, err)
 	}

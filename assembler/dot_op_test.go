@@ -5,6 +5,8 @@ import (
 	"encoding/binary"
 	"fmt"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 func TestDotOpIndependentPolicy(t *testing.T) {
@@ -17,7 +19,7 @@ func TestDotOpIndependentPolicy(t *testing.T) {
 					"Probe\n.include child.asm\n",
 				} {
 					t.Run(fmt.Sprintf("fixed=%t/mode=%d/dot=%s/%s", fixed, mode, setting, source), func(t *testing.T) {
-						opts := Options{BugFixes: fixed, Dialect: mode, ReadFile: func(string) ([]byte, error) {
+						opts := Options{Fixes: fixes.FromBool(fixed), Dialect: mode, ReadFile: func(string) ([]byte, error) {
 							return []byte(".op lha r3,0(r4) @ $80001000\n"), nil
 						}}
 						enabled := setting == "true"
@@ -51,7 +53,7 @@ func TestDotOpIndependentPolicy(t *testing.T) {
 			}
 		}
 	}
-	if _, err := Assemble(context.Background(), "invalid.asm", []byte("Probe\n.op lha r32,0(r4) @ $80001000\n"), Options{BugFixes: true, DotOp: enabledDotOp()}); err == nil {
+	if _, err := Assemble(context.Background(), "invalid.asm", []byte("Probe\n.op lha r32,0(r4) @ $80001000\n"), Options{Fixes: fixes.FromBool(true), DotOp: enabledDotOp()}); err == nil {
 		t.Fatal("alias bypassed operand validation")
 	}
 }

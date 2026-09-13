@@ -20,7 +20,7 @@ func (e *encoder) branch(name string) (uint32, error) {
 		if err != nil {
 			return 0, err
 		}
-		if e.ctx.BugFixes && (offset&3 != 0 || offset < -(1<<25) || offset >= (1<<25)) {
+		if e.ctx.Fixes.BranchRanges && (offset&3 != 0 || offset < -(1<<25) || offset >= (1<<25)) {
 			return 0, fmt.Errorf("branch displacement %d is unaligned or outside signed 26-bit range", offset)
 		}
 		v := uint32(18<<26) | uint32(offset)&0x03fffffc
@@ -69,7 +69,7 @@ func (e *encoder) branch(name string) (uint32, error) {
 	if indirect {
 		v = 19 << 26
 		if strings.HasPrefix(suffix, "ctr") {
-			if e.ctx.BugFixes && bo&4 == 0 {
+			if e.ctx.Fixes.RegisterRelationships && bo&4 == 0 {
 				return 0, fmt.Errorf("branch to CTR cannot also decrement/test CTR (BO must have bit 2 set)")
 			}
 			v |= 528 << 1
@@ -108,7 +108,7 @@ func (e *encoder) branch(name string) (uint32, error) {
 		if err != nil {
 			return 0, err
 		}
-		if e.ctx.BugFixes && (d&3 != 0 || d < -(1<<15) || d >= (1<<15)) {
+		if e.ctx.Fixes.BranchRanges && (d&3 != 0 || d < -(1<<15) || d >= (1<<15)) {
 			return 0, fmt.Errorf("conditional branch displacement %d is unaligned or outside signed 16-bit range", d)
 		}
 		v |= uint32(d) & 0xfffc
@@ -116,7 +116,7 @@ func (e *encoder) branch(name string) (uint32, error) {
 		// even an unsuffixed explicit bc. Modern follows GNU defaults.
 		if e.rules.BranchHints {
 			if hint {
-				if e.ctx.BugFixes {
+				if e.ctx.Fixes.BranchPrediction {
 					bo |= 1
 				} else {
 					bo++
@@ -131,7 +131,7 @@ func (e *encoder) branch(name string) (uint32, error) {
 		}
 	}
 	if hint {
-		if !e.ctx.BugFixes && e.rules.BranchHints {
+		if !e.ctx.Fixes.BranchPrediction && e.rules.BranchHints {
 			bo++
 		} else {
 			bo |= 1
@@ -156,7 +156,7 @@ func (e *encoder) target(s string, absolute, convert bool) (int64, error) {
 		}
 	}
 	if !e.ctx.BranchExpressions && !strings.HasPrefix(s, "$") && !strings.HasPrefix(s, "0x") && !strings.HasPrefix(s, "-0x") {
-		if !e.ctx.BugFixes {
+		if !e.ctx.Fixes.MissingLabels {
 			return 0, nil
 		}
 		if _, err := expr.EvalRules(s, e.ctx.Lookup, e.rules); err != nil {
@@ -169,7 +169,7 @@ func (e *encoder) target(s string, absolute, convert bool) (int64, error) {
 	if err != nil {
 		// Opting into numeric expressions does not opt into the missing-label
 		// correction. Malformed arithmetic still reports its evaluation error.
-		if !e.ctx.BugFixes && !addressed && branchSymbol.MatchString(s) {
+		if !e.ctx.Fixes.MissingLabels && !addressed && branchSymbol.MatchString(s) {
 			return 0, nil
 		}
 		return 0, err

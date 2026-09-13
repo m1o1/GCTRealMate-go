@@ -1,5 +1,7 @@
 # Validation record
 
+Configuration note: these reports retain historical version/settings names. Current 0.13 configuration uses individual `[bug_fixes]` keys, all enabled by default; see [BUG-FIXES.md](BUG-FIXES.md). The old scalar TOML key is no longer accepted.
+
 Current configuration is documented in [CONFIGURATION.md](CONFIGURATION.md).
 All category flags default false; only bug fixes default true. Policies and
 validation results below retain their original versions unless stated otherwise.

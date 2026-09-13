@@ -95,15 +95,15 @@ func (e *encoder) quantized(name string) (uint32, error) {
 		return 0, err
 	}
 	var v uint32
-	if indexed && !e.ctx.BugFixes {
-		return 0, fmt.Errorf("legacy GCTRealMate cannot encode indexed quantized instructions; enable bug_fixes")
+	if indexed && !e.ctx.Fixes.IndexedQuantized {
+		return 0, fmt.Errorf("legacy GCTRealMate cannot encode indexed quantized instructions; enable bug_fixes.indexed_quantized")
 	}
 	if indexed {
 		v = 4<<26 | op<<1 | e.register(0, 'f')<<21 | e.register(1, 'g')<<16 | e.register(2, 'g')<<11 | e.number(3, 1)<<10 | e.number(4, 3)<<7
 	} else {
 		v = op<<26 | e.register(0, 'f')<<21 | e.register(2, 'g')<<16 | e.number(3, 1)<<15 | e.number(4, 3)<<12 | e.immediate(e.value(1), 12)
 	}
-	if !e.ctx.BugFixes && !indexed {
+	if !e.ctx.Fixes.QuantizedDisplacement && !indexed {
 		v = op<<26 + e.register(0, 'f')<<21 + e.register(2, 'g')<<16 + (e.number(3, 1)%2*8+e.number(4, 3)%8)<<12 + uint32(e.value(1))
 	}
 	e.validateMemory(name, v)

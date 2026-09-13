@@ -6,7 +6,7 @@ import (
 )
 
 func nonConsoleError(name string) error {
-	return fmt.Errorf("%s is not supported by GameCube/Wii (Gekko/Broadway); non-console forms require extensions.non_console_instructions=true", name)
+	return fmt.Errorf("%s is not supported by GameCube/Wii (Gekko/Broadway); non-console forms require bug_fixes.console_only=false", name)
 }
 
 // Check explicit 64-bit comparison requests before legacy operand selection
@@ -18,7 +18,8 @@ func (e *encoder) checkComparisonTarget(name string) error {
 	switch name {
 	case "cmp", "cmpi", "cmpl", "cmpli", "cmpw", "cmpwi", "cmplw", "cmplwi":
 		width := *e
-		width.ctx.BugFixes = true
+		width.ctx.Fixes.NumericFields = true
+		width.ctx.Fixes.OperandRanges = true
 		l := width.number(1, 1)
 		if width.err != nil {
 			return width.err
@@ -53,7 +54,7 @@ func (e *encoder) extendedMemory(name string) (uint32, bool, error) {
 	}
 	value := e.value(1)
 	displacement := uint32(uint16(value * 4))
-	if e.ctx.BugFixes {
+	if e.ctx.Fixes.DSDisplacement {
 		displacement = e.immediate(value, 16)
 		if displacement&3 != 0 {
 			e.fail("DS-form displacement must be a multiple of four bytes")

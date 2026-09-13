@@ -1,8 +1,10 @@
 package ppc
 
 import (
-	"gctrm/internal/dialect"
 	"testing"
+
+	"gctrm/fixes"
+	"gctrm/internal/dialect"
 )
 
 func TestKnownEncodings(t *testing.T) {
@@ -21,7 +23,7 @@ func TestKnownEncodings(t *testing.T) {
 		{"eqv r3,r4,r5", 0x7c832a38}, {"srwi r3,r4,0", 0x5483003e},
 	} {
 		t.Run(tc.s, func(t *testing.T) {
-			got, err := Encode(tc.s, Context{BugFixes: true})
+			got, err := Encode(tc.s, Context{Fixes: fixes.FromBool(true)})
 			if err != nil || got != tc.want {
 				t.Fatalf("got %08X, %v; want %08X", got, err, tc.want)
 			}
@@ -35,12 +37,12 @@ func TestBranchAddresses(t *testing.T) {
 		convert bool
 		want    uint32
 	}{{"bl $80001020", false, 0x48000021}, {"bla 0x1020", true, 0x48000021}, {"ba 0x1020", false, 0x48001022}} {
-		got, err := Encode(tc.s, Context{BugFixes: true, Address: &pc, ConvertAbsolute: tc.convert})
+		got, err := Encode(tc.s, Context{Fixes: fixes.FromBool(true), Address: &pc, ConvertAbsolute: tc.convert})
 		if err != nil || got != tc.want {
 			t.Fatal(tc, got, err)
 		}
 	}
-	got, err := Encode("b end", Context{BugFixes: true, RelativeLabel: func(s string) (int64, bool) { return 8, s == "end" }})
+	got, err := Encode("b end", Context{Fixes: fixes.FromBool(true), RelativeLabel: func(s string) (int64, bool) { return 8, s == "end" }})
 	if err != nil || got != 0x48000008 {
 		t.Fatal(got, err)
 	}
@@ -48,7 +50,7 @@ func TestBranchAddresses(t *testing.T) {
 func TestInstructionErrors(t *testing.T) {
 	for _, s := range []string{"", "bogus r3", "addi r3", "li r32,1", "lwz r3,0(r99)", "li r3,0x10000", "b 3", "b 0x2000000", "beq 0x8000", "bl $80000000", "b missing", "nop.", "orco r3,r4,r5", "mfspr r3,nope", "psq_l f0,0(r3),2,0", "psq_foo f0,0(r3),0,0", "cmpwhat r3,r4", "blr 5", "mtcrf 256,r3"} {
 		t.Run(s, func(t *testing.T) {
-			if _, err := Encode(s, Context{BugFixes: true}); err == nil {
+			if _, err := Encode(s, Context{Fixes: fixes.FromBool(true)}); err == nil {
 				t.Fatalf("accepted %q", s)
 			}
 		})
@@ -66,7 +68,7 @@ func FuzzEncode(f *testing.F) {
 			for _, fixed := range []bool{false, true} {
 				for _, allow := range []bool{false, true} {
 					for _, extended := range []bool{false, true} {
-						_, _ = Encode(s, Context{BugFixes: fixed, BranchExpressions: extended, AllowNonConsoleInstructions: allow, Dialect: mode})
+						_, _ = Encode(s, Context{Fixes: fixes.FromBool(fixed), BranchExpressions: extended, AllowNonConsoleInstructions: allow, Dialect: mode})
 					}
 				}
 			}

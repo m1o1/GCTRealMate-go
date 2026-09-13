@@ -1,42 +1,38 @@
 # Instruction target restriction
 
-In **0.12.0-go**, GameCube/Wii is the default target. Broader PowerPC forms
-require an explicit extension:
+In **0.13.0-go**, `[bug_fixes].console_only = true` restricts recognized
+instructions to GameCube/Wii. To permit the implemented broader forms:
 
 ```toml
-bug_fixes = true
-[extensions]
-non_console_instructions = true
+[bug_fixes]
+console_only = false
 ```
 
-The default false rejects recognized non-console forms. Set true to permit the
-implemented broader forms retained from C++; this does not make them executable
-on Wii. Use `--set=extensions.non_console_instructions=true|false` in CLI/INI.
-The library's `Options.AllowNonConsoleInstructions` boolean maps directly to this
-setting and also defaults false. The separate `additional_console_instructions`
-extension controls new console mnemonics. See [CONFIGURATION.md](CONFIGURATION.md).
+Use `--set=bug_fixes.console_only=false` in CLI/INI. Other fixes retain their
+settings. The bulk `--bug-fixes=false` also disables this restriction. The library
+uses the inverse `Options.AllowNonConsoleInstructions` (default false).
+Additional console mnemonics remain a separate disabled extension.
 
 This setting does not disable double-precision floating-point support on Wii,
 double data, or wider intermediate constant calculations in the assembler.
 
 ## Interaction with bug fixes
 
-| `extensions.non_console_instructions` | `bug_fixes` | Behavior |
+| `bug_fixes.console_only` | Relevant encoding fixes | Behavior |
 | --- | --- | --- |
-| `false` | `false` | Reject recognized non-console forms; preserve other characterized C++ quirks. |
-| `false` | `true` | CLI/config default: reject recognized non-console forms; apply encoding and machine-operand fixes. |
-| `true` | `false` | Permit retained broader forms using characterized C++ encodings and parsing. |
-| `true` | `true` | Permit implemented broader forms with encoding and machine-operand fixes. |
+| true | either | Reject recognized non-console forms. |
+| false | enabled | Permit implemented broader forms with corrected encodings. |
+| false | disabled | Permit them with characterized reference encodings. |
 
-For example, `ld r3,8(r4)` is rejected when this extension is false.
-With it enabled, C++ compatibility mode emits `e8640020`, preserving the old
-displacement-times-four convention. Corrected mode treats 8 as a byte
+For example, `ld r3,8(r4)` is rejected when `console_only` is true.
+With `console_only=false` and `ds_displacement=false`, it emits `e8640020`, preserving the old
+displacement-times-four convention. With `ds_displacement=true`, it treats 8 as a byte
 displacement and emits `e8640008`; it checks four-byte alignment and field width.
 Corrected mode also encodes the L bit in 64-bit comparisons; compatibility mode
 retains the characterized C++ comparison quirks, including discarded L bits.
 
 Target selection does not itself fix console encodings. `lha r3,0(r4)` continues
-to emit `a0640000` with fixes off or `a8640000` with fixes on, regardless of the
+to emit `a0640000` with `lha=false` or `a8640000` with `lha=true`, regardless of the
 non-console setting. Enabling broader forms does not disable corrected-mode
 register bounds, operand counts, or update-load restrictions.
 
@@ -52,7 +48,7 @@ cmpd cmpdi cmpld cmpldi
 ```
 
 Their applicable record/overflow suffixes and explicit L=1 comparisons also
-require `extensions.non_console_instructions = true`. Legacy floating-prefix acceptance cannot bypass the target
+require `bug_fixes.console_only = false`. Legacy floating-prefix acceptance cannot bypass the target
 restriction for recognized non-console encodings.
 
 This is a permission to use implemented broader forms, not a complete general
@@ -70,8 +66,8 @@ a guarantee that every emitted word is a valid console instruction.
 ## Compatibility and validation
 
 To reproduce the complete historical C++ instruction corpus, including its
-non-console cases, select `bug_fixes = false` and
-`extensions.non_console_instructions = true`. All 327 captured words remain tested.
+non-console cases, select all relevant fixes disabled and
+`bug_fixes.console_only = false`. All 327 captured words remain tested.
 
 Tests cover defaults, both fix settings, independent semantics, TOML/CLI/INI precedence,
 source forms/includes/macros, explicit L=1 requests, prefix matching, and output

@@ -3,6 +3,8 @@ package assembler
 import (
 	"fmt"
 	"strings"
+
+	"gctrm/fixes"
 )
 
 // Position identifies the original source location, including included files.
@@ -37,10 +39,10 @@ type token struct {
 // scan splits statements while retaining strings, line numbers, and braces.
 // It deliberately has no knowledge of opcodes or macro semantics.
 func scan(name string, source []byte) ([]token, error) {
-	return scanPolicy(name, source, true)
+	return scanPolicy(name, source, fixes.All())
 }
 
-func scanPolicy(name string, source []byte, bugFixes bool) ([]token, error) {
+func scanPolicy(name string, source []byte, policy fixes.Policy) ([]token, error) {
 	text := strings.TrimPrefix(string(source), "\ufeff")
 	var out []token
 	var b strings.Builder
@@ -96,7 +98,7 @@ func scanPolicy(name string, source []byte, bugFixes bool) ([]token, error) {
 		pipeContinuation := false
 		if c == '|' {
 			prefix := strings.ToLower(strings.TrimSpace(b.String()))
-			pipeContinuation = !bugFixes || !strings.HasPrefix(prefix, ".alias") && !strings.HasPrefix(prefix, ".gr")
+			pipeContinuation = !policy.ScannerOR || !strings.HasPrefix(prefix, ".alias") && !strings.HasPrefix(prefix, ".gr")
 		}
 		if pipeContinuation {
 			// GCTRealMate's | discards the rest of this physical line and
@@ -117,7 +119,7 @@ func scanPolicy(name string, source []byte, bugFixes bool) ([]token, error) {
 			start = line
 			continue
 		}
-		if !bugFixes && c == '*' {
+		if !policy.ScannerMultiply && c == '*' {
 			// Inline op reads through @ without the outer scanner's filtering.
 			if !strings.HasPrefix(strings.ToLower(strings.TrimSpace(b.String())), "op ") {
 				continue

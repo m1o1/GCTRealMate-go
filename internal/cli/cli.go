@@ -13,9 +13,10 @@ import (
 	"strings"
 
 	"gctrm/assembler"
+	"gctrm/fixes"
 )
 
-const Version = "0.12.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
+const Version = "0.13.0-go (GameCube/Wii; GCTRealMate v0.2.6 syntax)"
 const help = `Usage: gctrm [options] source.asm [options] another.asm
 
 Assemble Gecko and PowerPC source into a .GCT beside each input.
@@ -31,16 +32,16 @@ Assemble Gecko and PowerPC source into a .GCT beside each input.
   -o PATH     Set GCT output path (one input only)
   --config PATH     Use this TOML instead of <executable-basename>.toml
   --no-config       Ignore TOML; INI remains separate
-  --bug-fixes=true|false       Corrections (default: true)
+  --bug-fixes=true|false       Set all fixes, including console_only
   --set=section.key=true|false Set any categorized option
   --help            Show help
   --version         Show version
 
-TOML groups: [extensions], [semantics], [encoding], [validation], [cli].
-Every categorized option defaults to false. GameCube/Wii is the default target.
+TOML groups: [bug_fixes], [extensions], [semantics], [encoding], [validation], [cli].
+Every [bug_fixes] option defaults true; every other option defaults false.
 Syntax extensions, additional console mnemonics and optional validation are opt-ins.
-Set extensions.non_console_instructions=true to permit implemented broader
-PowerPC forms. This is independent of bug fixes and additional console mnemonics.
+Set bug_fixes.console_only=false to permit implemented broader
+PowerPC forms. Other fixes and additional console mnemonics remain independent.
 Full flag descriptions and examples: CONFIGURATION.md.
 
 Example: --set=extensions.dot_op=true --set=validation.strict_macro_calls=true
@@ -52,7 +53,7 @@ Precedence: defaults < TOML < matching INI < CLI. INI example:
 `
 
 type flags struct {
-	bugFixes                                          bool
+	fixes                                             fixes.Policy
 	dotOp                                             bool
 	branchExpressions                                 bool
 	expressionSyntax                                  bool
@@ -92,11 +93,11 @@ func Run(ctx context.Context, args []string, executable string, stdout, stderr i
 	}
 	status := 0
 	for _, j := range jobs {
-		result, err := assembler.Compile(ctx, j.file, assembler.Options{BugFixes: j.flags.bugFixes, DotOp: &j.flags.dotOp, ExpressionSyntax: j.flags.expressionSyntax, ImplicitSections: j.flags.implicitSections, AdditionalConsoleInstructions: j.flags.additionalConsoleInstructions, Validation: j.flags.validation, BranchExpressions: j.flags.branchExpressions, AllowNonConsoleInstructions: j.flags.allowNonConsoleInstructions, Compatibility: j.flags.compatibility, BaseAddress: j.flags.base, ConvertAbsolute: j.flags.inline, RepairPathCase: j.flags.repair})
+		result, err := assembler.Compile(ctx, j.file, assembler.Options{Fixes: j.flags.fixes, DotOp: &j.flags.dotOp, ExpressionSyntax: j.flags.expressionSyntax, ImplicitSections: j.flags.implicitSections, AdditionalConsoleInstructions: j.flags.additionalConsoleInstructions, Validation: j.flags.validation, BranchExpressions: j.flags.branchExpressions, AllowNonConsoleInstructions: j.flags.allowNonConsoleInstructions, Compatibility: j.flags.compatibility, BaseAddress: j.flags.base, ConvertAbsolute: j.flags.inline, RepairPathCase: j.flags.repair})
 		if err != nil {
 			fmt.Fprintln(stderr, err)
 			// The reference reports missing inputs/includes but returns success.
-			if j.flags.bugFixes || !errors.Is(err, os.ErrNotExist) {
+			if j.flags.fixes.MissingFileStatus || !errors.Is(err, os.ErrNotExist) {
 				status = 1
 			}
 			continue
@@ -280,7 +281,8 @@ func apply(f *flags, arg string) error {
 			if value != "true" && value != "false" {
 				return fmt.Errorf("--bug-fixes expects true or false")
 			}
-			f.bugFixes = value == "true"
+			f.fixes = fixes.FromBool(value == "true")
+			f.allowNonConsoleInstructions = value != "true"
 		default:
 			return fmt.Errorf("unknown option %q", arg)
 		}

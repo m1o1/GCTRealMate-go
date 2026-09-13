@@ -8,6 +8,8 @@ import (
 	"os"
 	"strings"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 // These full GCTs were captured from the pinned, unmodified C++ executable.
@@ -33,7 +35,7 @@ func TestLegacyCompatibilityCorpus(t *testing.T) {
 				t.Fatal("invalid reference capture")
 			}
 			// This historical comparison explicitly includes the numeric-branch extension.
-			r, err := Assemble(context.Background(), "test.asm", []byte(tc.Source), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), BranchExpressions: true})
+			r, err := Assemble(context.Background(), "test.asm", []byte(tc.Source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), BranchExpressions: true})
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -86,7 +88,7 @@ func TestDialectChoices(t *testing.T) {
 	} {
 		for _, mode := range []Dialect{Legacy, Modern} {
 			source := "Test\nCODE @ $80001000\n{\n" + tc.body + "\n}\n"
-			r, err := Assemble(context.Background(), "test.asm", []byte(source), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: mode})
+			r, err := Assemble(context.Background(), "test.asm", []byte(source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: mode})
 			want := tc.legacy
 			if mode == Modern {
 				want = tc.modern
@@ -108,13 +110,13 @@ func TestDialectIndependentErrors(t *testing.T) {
 		".alias x=1/0\nword x", "psq_l f0,-2049(r3),0,0",
 	} {
 		for _, mode := range []Dialect{Legacy, Modern} {
-			_, err := Assemble(context.Background(), "bad.asm", []byte("Test\nCODE @ $80001000\n{\n"+source+"\n}"), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: mode})
+			_, err := Assemble(context.Background(), "bad.asm", []byte("Test\nCODE @ $80001000\n{\n"+source+"\n}"), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: mode})
 			if err == nil {
 				t.Errorf("mode %d accepted %s", mode, source)
 			}
 		}
 	}
-	_, err := Assemble(context.Background(), "test.asm", nil, Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: 99})
+	_, err := Assemble(context.Background(), "test.asm", nil, Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), Dialect: 99})
 	if err == nil || !strings.Contains(err.Error(), "dialect") {
 		t.Fatal(err)
 	}
@@ -122,7 +124,7 @@ func TestDialectIndependentErrors(t *testing.T) {
 
 func TestLegacyNarrowDataLimits(t *testing.T) {
 	for _, source := range []string{"byte 256", "byte -129", ".alias x=0-129\nbyte x", "half 65536", ".alias x=0-32769\nhalf x"} {
-		_, err := Assemble(context.Background(), "test.asm", []byte("Test\nCODE @ $80001000\n{\n"+source+"\n}"), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
+		_, err := Assemble(context.Background(), "test.asm", []byte("Test\nCODE @ $80001000\n{\n"+source+"\n}"), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation()})
 		if err == nil {
 			t.Errorf("narrowing hid overflow in %s", source)
 		}
@@ -168,7 +170,7 @@ func TestRetainedAuditCases(t *testing.T) {
 	}
 	for _, tc := range report.Cases {
 		for _, mode := range []Dialect{Legacy, Modern} {
-			r, err := Assemble(context.Background(), "audit.asm", []byte(tc.Source), Options{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), BranchExpressions: true,
+			r, err := Assemble(context.Background(), "audit.asm", []byte(tc.Source), Options{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, DotOp: enabledDotOp(), Validation: strictValidation(), BranchExpressions: true,
 				Dialect: mode, ReadFile: func(string) ([]byte, error) { return nil, os.ErrNotExist },
 			})
 			if tc.Go.Exit != 0 {

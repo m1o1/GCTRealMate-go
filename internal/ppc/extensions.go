@@ -3,7 +3,7 @@ package ppc
 import "strings"
 
 // These console encoders were added beyond the reference's implemented
-// repertoire. Correcting an existing mnemonic is controlled by BugFixes.
+// repertoire. Correcting an existing mnemonic is controlled by Fixes.
 func addedConsoleInstruction(name string) bool {
 	if strings.HasPrefix(name, "bso") || strings.HasPrefix(name, "bns") {
 		return true

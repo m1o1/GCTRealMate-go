@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"gctrm/fixes"
+
 	"github.com/pelletier/go-toml/v2"
 )
 
@@ -15,7 +17,7 @@ const maxConfigSize = 1 << 20
 
 type configuration struct {
 	Version    int             `toml:"version"`
-	BugFixes   bool            `toml:"bug_fixes"`
+	BugFixes   map[string]bool `toml:"bug_fixes"`
 	Extensions map[string]bool `toml:"extensions"`
 	Semantics  map[string]bool `toml:"semantics"`
 	Encoding   map[string]bool `toml:"encoding"`
@@ -25,6 +27,13 @@ type configuration struct {
 
 // setChoice is shared by TOML and --set=section.key=true|false.
 func setChoice(f *flags, key string, value bool) error {
+	if strings.HasPrefix(key, "bug_fixes.") {
+		if key == "bug_fixes.console_only" {
+			f.allowNonConsoleInstructions = !value
+			return nil
+		}
+		return f.fixes.Set(strings.TrimPrefix(key, "bug_fixes."), value)
+	}
 	switch key {
 	case "extensions.dot_op":
 		f.dotOp = value
@@ -36,8 +45,6 @@ func setChoice(f *flags, key string, value bool) error {
 		f.implicitSections = value
 	case "extensions.additional_console_instructions":
 		f.additionalConsoleInstructions = value
-	case "extensions.non_console_instructions":
-		f.allowNonConsoleInstructions = value
 	case "semantics.decimal_leading_zeros":
 		v := !value
 		f.compatibility.OctalLiterals = &v
@@ -89,7 +96,7 @@ func decodeConfig(data []byte) (flags, error) {
 	if len(data) > maxConfigSize {
 		return flags{}, fmt.Errorf("configuration exceeds 1 MiB")
 	}
-	config := configuration{Version: 2, BugFixes: true}
+	config := configuration{Version: 2}
 	decoder := toml.NewDecoder(bytes.NewReader(data)).DisallowUnknownFields()
 	if err := decoder.Decode(&config); err != nil {
 		return flags{}, err
@@ -97,12 +104,12 @@ func decodeConfig(data []byte) (flags, error) {
 	if config.Version != 2 {
 		return flags{}, fmt.Errorf("unsupported configuration version %d (expected 2)", config.Version)
 	}
-	f := flags{bugFixes: config.BugFixes}
+	f := flags{fixes: fixes.All()}
 	for _, table := range []struct {
 		name   string
 		values map[string]bool
 	}{
-		{"extensions", config.Extensions}, {"semantics", config.Semantics},
+		{"bug_fixes", config.BugFixes}, {"extensions", config.Extensions}, {"semantics", config.Semantics},
 		{"encoding", config.Encoding}, {"validation", config.Validation}, {"cli", config.CLI},
 	} {
 		for key, value := range table.values {

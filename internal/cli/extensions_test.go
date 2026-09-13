@@ -12,19 +12,19 @@ import (
 )
 
 func TestExtensionSchema(t *testing.T) {
-	for _, config := range []string{"", "[extensions]", "[semantics]\ndecimal_leading_zeros=true", "bug_fixes=false"} {
+	for _, config := range []string{"", "[extensions]", "[semantics]\ndecimal_leading_zeros=true", strings.TrimSuffix(fixesTOML(false), "\n")} {
 		f, err := decodeConfig([]byte(config))
 		if err != nil || f.dotOp || f.branchExpressions || f.allowNonConsoleInstructions {
 			t.Fatal(f, err)
 		}
 	}
-	for _, config := range []string{"branch_expressions=true", "extensions=false", "[extensions]\nunknown=true", "[extensions]\nbug_fixes=true", "[extensions]\ndialect='legacy'", "[extensions]\nbranch_expressions=1", "[extensions]\ndot_op='true'", "[extensions]\nallow_non_console_instructions='false'", "[extensions]\nbranch_expressions=true\nbranch_expressions=false"} {
+	for _, config := range []string{"branch_expressions=true", "extensions=false", "[extensions]\nunknown=true", "[extensions]\n" + strings.TrimSuffix(fixesTOML(true), "\n"), "[extensions]\ndialect='legacy'", "[extensions]\nbranch_expressions=1", "[extensions]\ndot_op='true'", "[extensions]\nallow_non_console_instructions='false'", "[extensions]\nbranch_expressions=true\nbranch_expressions=false"} {
 		if _, err := decodeConfig([]byte(config)); err == nil {
 			t.Fatalf("accepted %s", config)
 		}
 	}
 	f, err := loadConfig("../../gctrm.toml", true)
-	if err != nil || f.dotOp || f.branchExpressions || f.allowNonConsoleInstructions || !f.bugFixes {
+	if err != nil || f.dotOp || f.branchExpressions || f.allowNonConsoleInstructions || !f.fixes.LHA {
 		t.Fatal(f, err)
 	}
 }
@@ -37,7 +37,7 @@ func TestBranchConfigAndCLI(t *testing.T) {
 					t.Run(fmt.Sprintf("fixed=%t/%s/%s/%s", fixed, setting, override, decimal), func(t *testing.T) {
 						dir := t.TempDir()
 						cfg, src := filepath.Join(dir, "settings.toml"), filepath.Join(dir, "probe.asm")
-						writeTestFile(t, cfg, fmt.Sprintf("bug_fixes=%t\n[extensions]\n%s\n", fixed, setting))
+						writeTestFile(t, cfg, fixesTOML(fixed)+fmt.Sprintf("[extensions]\n%s\n", setting))
 						writeTestFile(t, src, "Probe\nop b 20 @ $80001000\nCODE @ $80001020\n{\nb 20\n}\n")
 						outPath := filepath.Join(dir, "probe.GCT")
 						writeTestFile(t, outPath, "previous output")

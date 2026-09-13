@@ -1,108 +1,294 @@
-# Bug fixes and compatibility mode
+# Individual fixes
 
-Version **0.12.0-go** enables corrections by default in CLI/configuration:
+Version **0.13.0-go** defaults every option in `[bug_fixes]` to **true**.
+All options in the other five tables default to **false**. An omitted key keeps
+its default; the table is not an all-or-nothing switch.
 
 ```toml
 version = 2
-bug_fixes = true
+[bug_fixes]
+console_only = true
+lha = false # Restore only this C++ opcode defect; other fixes stay enabled.
 ```
 
-Every categorized flag defaults to false. Missing/empty automatic configuration
-and `--no-config` use these same defaults. `--bug-fixes=false` preserves
-characterized C++ v0.2.6 quirks.
-The library's plain `Options.BugFixes` remains explicit; set true for corrections.
+`console_only` is a target restriction grouped here by policy, not a claim that
+supporting other PowerPC CPUs is inherently a C++ defect. Its default rejects
+recognized non-GameCube/Wii instructions. False permits the broader implemented
+forms; it does not add missing console mnemonics or make those forms run on Wii.
 
-## What the flag controls
-
-This is one switch for the correction set, separate from the categorized
-source, representation, validation and CLI choices. It is not an instruction-by-instruction list of fix toggles.
-The following table explains the observable differences. The detailed C++
-evidence and original probe inputs are in [CPP-BUGS.md](CPP-BUGS.md).
-
-| Area | `false`: compatibility mode | `true`: CLI/config default |
-| --- | --- | --- |
-| `lha` | Uses the C++ `lhz` opcode: `lha r3,0(r4)` emits `a0640000`. | Emits `a8640000`, the algebraic halfword load. |
-| `eqv` | Repeats the first source register, ignoring the third operand. | Encodes both supplied source registers. |
-| `crandc`, `crorc` | Uses `crand`/`cror` encodings from prefix matching. | Encodes the complement operation requested. |
-| Overflow suffixes | Adds decimal 400/401 to the instruction word. | Sets the OE/Rc bits. `addo r3,r4,r5`: `7c642ba4` becomes `7c642e14`. |
-| Zero-distance `srwi` | The shift value 32 carries into another field: `srwi r3,r4,0` emits `5484003e`. | Masks the shift field, emitting `5483003e`. |
-| Negative quantized displacement | Adds the full negative value, borrowing into base/W/I fields. | Inserts only the signed 12-bit displacement. |
-| Indexed `psq_*x` forms | Returns a bounded error and no GCT, corresponding to the reference's failed compilation. | Encodes the supported indexed load/store forms, including their update selectors. |
-| Paired-single record suffix | Ignores the requested record bit. | Sets Rc for supported record forms. |
-| Hex register/numeric fields | Preserves decimal partial parsing: `0xD` is parsed as zero. | Parses the complete hexadecimal field. |
-| Generic comparisons and `cmpli` | Preserves the C++ argument selection, including `cmpli` reaching the register-comparison encoder and discarded/misinterpreted L operands. | Encodes the intended comparison. Comparisons are restricted to L=0 unless `extensions.non_console_instructions` is enabled. |
-| Explicit BO plus prediction suffix | Addition can carry out of BO's prediction bit, as in `bc+ 13,2,...`. | Sets only the prediction bit. The independent `encoding.gnu_branch_hints` choice still controls the direction convention. |
-| Raw data at end of input | Drops the pending raw-byte queue, matching the reference. A section transition still flushes it. | Flushes pending bytes at EOF. |
-| Scanner `*` and `\|` | Drops `*` in outer-scanned source and treats `\|` as line continuation. Inline `op ... @` uses the reference's separate scanning behavior. | Preserves multiplication; aliases and GR directives can use OR. |
-| Alias terms | Preserves the accumulator bug: `2 + 3 + 4` gives 5; later terms affect a different accumulator. C++ partial numeric parsing is retained. | Consumes the complete expression using the selected precedence and width. |
-| GR load/store index | Omits the selected Gecko-register index. | Encodes the requested index. |
-| BA/PO qualifiers | Forms broken in C++, such as `.BA = PO+$1000` and `.BA -> GR3+$1000`, return bounded errors. | Parses the supported qualifiers correctly. |
-| Directive bit 31 | Masks affected BA/PO/GR operand values with `7fffffff`. | Preserves all 32 bits. |
-| MEM2 direct writes | Places the full address in BA and emits zero offset, reproducing the wrong target. | Splits BA and the write offset correctly. |
-| MEM2 hooks | Sets PO and emits zero offset, as the C++ hook bug does. | Uses BA and the correct hook offset. Pointer-based MEM2 CODE is unchanged. |
-| Direct PSA data | Erases bank/type tags, keeping only the index. | Preserves bank/type tags. Block PSA data already preserves them. |
-| `.GOTO_F` | Omits the second word, allowing the reference's malformed command framing. | Emits the complete pair. |
-| Backward Gecko label fixups | Adds the signed offset into the whole command, allowing borrowing into control bits. | Inserts the displacement into the low field and checks its range/alignment. |
-| `.ELSE`, `.ELSE_RESET` | Plain ELSE returns a bounded error; ELSE_RESET is omitted. | Emits both supported ELSE forms. |
-| Missing branch labels | Emits a zero-displacement branch rather than reporting an unresolved symbol. Bare decimal branch targets also follow the old label interpretation. | Diagnoses missing symbols. Additional numeric forms require the separate `extensions.branch_expressions` opt-in. |
-| Unknown/misspelled instructions | Preserves known reference acceptance: unknown instructions can emit `ffffffff`; conditional-register names can emit `4c000000`; floating arithmetic prefix matching can accept a misspelling such as `fmulls`. | Requires a recognized instruction name. |
-| Invalid operands | Permits extra operands, unchecked field overflow, invalid update-load register relationships, and masked branch ranges where the reference does. | Checks operand counts, widths, suffix legality, register relationships, and branch ranges/alignment. |
-| Broader PowerPC encoding (when `extensions.non_console_instructions = true`) | Retains the reference's encodings, including its DS displacement convention and discarded comparison L bits. | Uses aligned byte displacements for DS forms and encodes the comparison L bit. The target flag controls availability in both modes. |
-| Missing input/include status | Reports the missing file and produces no GCT, but returns status 0 like the reference. | Returns a nonzero failure status. |
-
-## Interaction with the other choices
-
-Corrections do not enable any category flag. Expanded expression syntax, `.op`,
-additional numeric branch forms, implicit sections and added console mnemonics
-are independent extensions. Duplicate-label checks, macro-call strictness,
-undefined-macro rejection, address-annotation rejection and data-overflow checks
-are independent validation policies. They all default off. Strict register
-prefixes are likewise optional, while illegal machine operands remain checked.
-
-The shared expression evaluator corrects lost terms/operators within the selected
-grammar. Adding parentheses, binary literals, shifts, or expression-capable fields
-is selected by `extensions.expression_syntax`; syntax and arithmetic interpretation
-are separate. Preserving native scanner/alias bugs can obscure enabled expression
-features, so historical full-expression comparisons explicitly enable fixes.
-
-GameCube/Wii restrictions apply by default. `extensions.non_console_instructions`
-permits the implemented broader forms when explicitly enabled; bug fixes never enable it.
-See [CONFIGURATION.md](CONFIGURATION.md) for all individual flags.
+Use `--set=bug_fixes.lha=false` for an individual CLI/INI override.
+`--bug-fixes=true|false` is a bulk CLI/INI convenience: it sets **every** option
+in this table, including `console_only`, at that point in option order. A later
+`--set` overrides just one choice. There is no master TOML boolean; old scalar
+`bug_fixes` and `extensions.non_console_instructions` keys are rejected.
 
 ```powershell
-# Corrections with GameCube/Wii target and reference language choices.
-.\bin\gctrm.exe --no-config -i source.asm
-# Characterized C++ encoding/parser quirks too.
-.\bin\gctrm.exe --no-config --bug-fixes=false -i source.asm
+# All corrections enabled, with just the lha correction disabled.
+.\bin\gctrm.exe --no-config --set=bug_fixes.lha=false -i source.asm
+# All characterized quirks, while still restricting the target to GameCube/Wii.
+.\bin\gctrm.exe --no-config --bug-fixes=false --set=bug_fixes.console_only=true -i source.asm
 ```
 
-## Compatibility boundary
+The following is the complete current list. Each key is independently selectable.
+Detailed C++ evidence remains in [CPP-BUGS.md](CPP-BUGS.md).
 
-Compatibility is measured against the pinned Windows C++ executable, not every
-fork, compiler, or possible undefined behavior. With fixes and the `.op` alias
-explicitly disabled, the compatibility path is tested
-without altering the source or patching the expected C++ words:
+## console_only
 
-- All 327 historical instruction words match with non-console support explicitly
-  enabled, including reference-only forms. The optional console-only policy rejects those broader forms.
-- All 66 source captures and both complete GCT fixtures match exactly.
-- The 57 defect probes, with non-console support explicitly enabled, match the reference's GCT/no-GCT outcomes; native crashes
-  and a hang become bounded errors rather than identical process termination.
-- The three captured CLI cases match their GCT/text/log files.
-- Seven additional fresh C++ captures check prefix acceptance, ignored record
-  suffixes/macros, address annotations, alias truncation, and odd-word text output.
-- All six unmodified Project+ entrypoints match the retained C++ GCTs byte for byte.
+**Default: true.** Restrict recognized instructions to GameCube/Wii. False permits implemented broader PowerPC forms; it does not make them Wii-compatible.
 
-Crashes, infinite loops, out-of-bounds accesses, and process-specific exception
-codes are **not** reproduced. Source/expansion limits, include-cycle detection,
-context cancellation, config validation, output-collision protection, and the
-noninteractive CLI remain in force. Diagnostics and console status text are not
-byte-for-byte copies of C++. A malformed input outside the characterized cases
-can still be rejected differently. Passing these comparisons is not a proof of
-equivalence for every possible input.
+Example: ld r3,8(r4) and cmpd r3,r4 are rejected with true and permitted with false. Raw word data is not decoded.
 
-The GNU/Dolphin correctness profiles explicitly enable **`bug_fixes = true`**
-and the syntax/instruction extensions required by their sources.
-Explicit compatibility mode intentionally retains invalid or unintended encodings;
-the prior hardware-correctness claim must not be applied to that mode. See
-[CONSOLE-VALIDATION.md](CONSOLE-VALIDATION.md) for the corrected-mode checks.
+## lha
+
+**Default: true.** Encode algebraic halfword loads instead of zero-extending loads.
+
+Example: lha r3,0(r4): false emits A0640000; true emits A8640000.
+
+## eqv
+
+**Default: true.** Use both supplied source registers instead of repeating the first.
+
+Example: eqv r3,r4,r5: false uses r4 twice; true uses r4 and r5.
+
+## crandc
+
+**Default: true.** Encode CR AND-complement rather than CR AND.
+
+Example: crandc 1,2,3: false encodes crand; true complements the second source.
+
+## crorc
+
+**Default: true.** Encode CR OR-complement rather than CR OR.
+
+Example: crorc 1,2,3: false encodes cror; true complements the second source.
+
+## overflow_suffix
+
+**Default: true.** Set OE/Rc bits instead of adding decimal 400/401.
+
+Example: addo r3,r4,r5: false emits 7C642BA4; true emits 7C642E14.
+
+## shift_right_zero
+
+**Default: true.** Prevent a zero-distance srwi from carrying into the destination field.
+
+Example: srwi r3,r4,0: false emits 5484003E; true emits 5483003E.
+
+## quantized_displacement
+
+**Default: true.** Insert only the signed 12-bit quantized displacement.
+
+Example: psq_l f0,-8(r3),0,0: false borrows into base/W/I fields; true preserves those fields.
+
+## indexed_quantized
+
+**Default: true.** Encode the existing indexed psq load/store forms and update selectors.
+
+Example: psq_lx f1,r3,r4,0,0: false reports a bounded failure; true assembles it.
+
+## paired_single_record
+
+**Default: true.** Honor supported paired-single record suffixes.
+
+Example: ps_add. f1,f2,f3: false ignores the dot; true sets Rc.
+
+## numeric_fields
+
+**Default: true.** Parse complete hexadecimal register and numeric fields instead of decimal prefixes.
+
+Example: cmpw r5,0xD: false selects register 0; true selects register 13.
+
+## comparisons
+
+**Default: true.** Correct generic comparison operand selection, cmpli routing, and comparison L encoding.
+
+Example: cmpli 0,0,r3,1: true compares r3 to immediate 1; false follows the incorrect register-comparison path. L=1 still requires console_only=false.
+
+## branch_prediction
+
+**Default: true.** Set the explicit BO prediction bit without carrying into another BO bit.
+
+Example: bc+ 13,2,0x10: false increments BO to 14; true keeps BO 13. The GNU hint convention is a separate option.
+
+## raw_data_eof
+
+**Default: true.** Flush pending raw bytes at the end of input.
+
+Example: A final byte 0x12 is dropped with false and padded/emitted with true. Section transitions flush in either mode.
+
+## scanner_multiply
+
+**Default: true.** Preserve multiplication operators in outer-scanned source.
+
+Example: A standalone .GR4 *= 00000002 loses its star with false; true emits the multiply operation. Inline op scanning is unchanged.
+
+## scanner_or
+
+**Default: true.** Preserve OR operators in aliases and GR directives.
+
+Example: A standalone .GR4 |= 00000002 is treated as continuation with false; true emits the OR operation. With unknown_instructions=true, the truncated directive is rejected.
+
+## alias_terms
+
+**Default: true.** Evaluate every alias term instead of losing later accumulator updates and partially parsing numbers.
+
+Example: .alias x = 2 + 3 + 4: false gives 5; true gives 9. Scanner fixes and expression extensions remain separate.
+
+## gr_index
+
+**Default: true.** Preserve the selected GR index in load/store directives.
+
+Example: .GR5 <-(16) $00001000: false omits index 5; true encodes GR5.
+
+## address_qualifiers
+
+**Default: true.** Parse the supported BA/PO and GR qualifiers correctly.
+
+Example: .BA = PO+$1000: false reports a bounded failure; true assembles it.
+
+## directive_bit31
+
+**Default: true.** Preserve the high bit of BA/PO/GR directive values.
+
+Example: .PO = $90000000: false stores 10000000; true stores 90000000.
+
+## mem2_writes
+
+**Default: true.** Split direct-write addresses into BA and the correct offset.
+
+Example: word 0x11223344 @ $90001000: false targets the wrong offset; true writes to 90001000.
+
+## mem2_hooks
+
+**Default: true.** Use BA and the correct offset for MEM2 hooks.
+
+Example: HOOK @ $90001000 with a blr body: false sets PO with zero hook offset; true targets 90001000.
+
+## psa_tags
+
+**Default: true.** Preserve bank/type tags in direct PSA writes.
+
+Example: RA_float 3 @ $80001000: false keeps only index 3; true preserves the RA/float tags. Block data is unchanged.
+
+## goto_false
+
+**Default: true.** Emit the second word of .GOTO_F commands.
+
+Example: .GOTO_F -> next emits a complete pair with true. False emits only its first word; other checks may reject the malformed result.
+
+## gecko_label_offsets
+
+**Default: true.** Insert Gecko label offsets into the low field and check their range/alignment.
+
+Example: A backward .GOTO -> back preserves command bits with true; false can borrow into them.
+
+## else_directives
+
+**Default: true.** Emit the supported .ELSE and .ELSE_RESET commands.
+
+Example: .ELSE fails safely with false; .ELSE_RESET is omitted. True emits the appropriate pair for either form.
+
+## missing_labels
+
+**Default: true.** Diagnose unresolved PPC and Gecko labels instead of retaining zero displacements.
+
+Example: b missing with no such label: false emits a zero-distance branch; true reports an error.
+
+## unknown_instructions
+
+**Default: true.** Require recognized instruction names rather than reference prefix/fallback acceptance.
+
+Example: garbage r3,r4,r5: false emits FFFFFFFF; true reports an error. This also covers fmulls and unknown CR-like names.
+
+## operand_counts
+
+**Default: true.** Reject extra machine-instruction operands instead of ignoring them.
+
+Example: add r3,r4,r5,r6: false ignores r6; true reports an error. Missing required operands always fail safely.
+
+## operand_ranges
+
+**Default: true.** Check encoded register/numeric field widths and immediate ranges.
+
+Example: add r32,r4,r5: false allows the field to overflow; true reports an error. Hex parsing is controlled by numeric_fields.
+
+## suffix_validation
+
+**Default: true.** Reject unsupported record/overflow suffixes.
+
+Example: addi. r3,r4,1: false ignores the dot; true reports an error. Legal OE and paired-single Rc encoding have separate fixes.
+
+## register_relationships
+
+**Default: true.** Reject statically invalid memory-register combinations and CTR branch conditions.
+
+Example: lwzu r3,4(r3): false accepts overlapping registers; true rejects them. bcctr with a BO that tests/decrements CTR is also rejected.
+
+## branch_ranges
+
+**Default: true.** Reject PPC branch displacements that are unaligned or out of range.
+
+Example: b 0x2000000: false masks the displacement; true rejects it.
+
+## address_alignment
+
+**Default: true.** Require word-aligned PPC write/block addresses.
+
+Example: op nop @ $80001001: false accepts it; true reports an alignment error.
+
+## psa_index_range
+
+**Default: true.** Check that PSA variable indices fit 24 bits.
+
+Example: RA_float 0x1000000 @ $80001000: false truncates the index; true rejects it.
+
+## gecko_line_framing
+
+**Default: true.** Reject sections with an incomplete eight-byte Gecko line.
+
+Example: With goto_false=false, a lone .GOTO_F can leave an odd word count: true rejects it; false permits that malformed framing.
+
+## ds_displacement
+
+**Default: true.** Encode DS-form offsets as aligned byte displacements rather than multiplying by four.
+
+Example: With console_only=false, ld r3,8(r4) emits E8640020 with false or E8640008 with true. Misaligned offsets are rejected with true.
+
+## missing_file_status
+
+**Default: true.** Return failure status for missing input/include files.
+
+Example: .include absent.asm produces no GCT either way: false returns status 0; true returns nonzero.
+
+## text_line_termination
+
+**Default: true.** Terminate a final odd word in text output before the section separator.
+
+Example: For a three-word section, false ends the last word with one newline; true adds its line terminator plus the blank separator. Such sections also require gecko_line_framing=false.
+
+## Interactions and compatibility
+
+Independent switches do not guarantee that every combination successfully
+assembles every input. Validation stays active until its own switch is disabled:
+for example, restoring truncated `.GOTO_F` output can trigger `gecko_label_offsets`
+or `gecko_line_framing`. Reproducing that malformed output requires disabling those
+checks too; `text_line_termination` affects only its text rendering. Restoring
+scanner operator loss can prevent the alias evaluator from receiving an expression.
+
+No correction enables a syntax extension, new console mnemonic, alternative
+numeric semantics, NaN representation, or optional source validation policy.
+Disabling `console_only` affects recognized instructions; raw words are never
+decoded to enforce a CPU target.
+
+The library uses `Options.Fixes` (`fixes.Policy`). `fixes.All()` enables the
+corrections; the zero policy preserves characterized quirks. Target availability
+remains `Options.AllowNonConsoleInstructions`: false corresponds to
+`bug_fixes.console_only=true`. The CLI additionally applies `missing_file_status`.
+
+All-off reference behavior and all-on corrected behavior remain covered by the
+existing instruction/source fixtures. Earlier GNU/Dolphin and Project+ reports
+record the executable and settings actually tested; they do not establish CPU
+correctness for arbitrary mixed configurations. Crashes, hangs, unsafe accesses,
+and process-specific exception codes are not reproduced. Resource limits,
+include-cycle detection, config validation, output protection, and cancellation
+remain active. See [CONSOLE-VALIDATION.md](CONSOLE-VALIDATION.md).

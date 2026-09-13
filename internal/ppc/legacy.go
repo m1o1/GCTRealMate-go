@@ -93,7 +93,7 @@ func legacyNumber(s string) (int64, error) {
 // legacySpecial contains reference-only operand selection for comparisons.
 func (e *encoder) legacySpecial(name string) (uint32, bool, error) {
 	if name == "cmp" || name == "cmpl" || name == "cmpli" {
-		if err := e.count(3); err != nil {
+		if err := e.count(3); err != nil && !(e.ctx.Fixes.OperandCounts && len(e.args) == 4) {
 			return 0, true, err
 		}
 		v := uint32(31<<26) + e.register(0, 'c')<<23 + e.register(1, 'g')<<16 + e.register(2, 'g')<<11

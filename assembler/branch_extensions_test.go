@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"testing"
+
+	"gctrm/fixes"
 )
 
 func TestBranchExtensionsInMacrosAndIncludes(t *testing.T) {
@@ -21,7 +23,7 @@ func TestBranchExtensionsInMacrosAndIncludes(t *testing.T) {
 					}
 					source := "Probe\n" + prefix + "CODE @ $80001000\n{\n" + body + "}\n"
 					r, err := Assemble(context.Background(), "probe.asm", []byte(source), Options{
-						BugFixes: fixed, BranchExpressions: enabled,
+						Fixes: fixes.FromBool(fixed), BranchExpressions: enabled,
 						ReadFile: func(string) ([]byte, error) { return []byte("b 20\n"), nil },
 					})
 					if !enabled && fixed {

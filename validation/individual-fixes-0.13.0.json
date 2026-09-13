@@ -1,0 +1,1101 @@
+{
+  "version": "0.13.0-go",
+  "assembler_sha256": "362485dd5f725ee877b30473832884047d957444ef1a479ef486460977609546",
+  "fixture": "internal/cli/testdata/individual-fixes.json",
+  "checks": 156,
+  "passed": 156,
+  "results": [
+    {
+      "key": "lha",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "lha",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "lha",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "lha",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "eqv",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "eqv",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "eqv",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "eqv",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crandc",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crandc",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crandc",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crandc",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crorc",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crorc",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crorc",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "crorc",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "overflow_suffix",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "overflow_suffix",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "overflow_suffix",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "overflow_suffix",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "shift_right_zero",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "shift_right_zero",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "shift_right_zero",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "shift_right_zero",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "quantized_displacement",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "quantized_displacement",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "quantized_displacement",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "quantized_displacement",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "indexed_quantized",
+      "enabled": false,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "indexed_quantized",
+      "enabled": false,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "indexed_quantized",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "indexed_quantized",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "paired_single_record",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "paired_single_record",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "paired_single_record",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "paired_single_record",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "numeric_fields",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "numeric_fields",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "numeric_fields",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "numeric_fields",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "comparisons",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "comparisons",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "comparisons",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "comparisons",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "raw_data_eof",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "raw_data_eof",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "raw_data_eof",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "raw_data_eof",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "scanner_multiply",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "scanner_multiply",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "scanner_multiply",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "scanner_multiply",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "scanner_or",
+      "enabled": false,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "scanner_or",
+      "enabled": false,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "scanner_or",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "scanner_or",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "alias_terms",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "alias_terms",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "alias_terms",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "alias_terms",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gr_index",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gr_index",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gr_index",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gr_index",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "address_qualifiers",
+      "enabled": false,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "address_qualifiers",
+      "enabled": false,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "address_qualifiers",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "address_qualifiers",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "directive_bit31",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "directive_bit31",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "directive_bit31",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "directive_bit31",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_writes",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_writes",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_writes",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_writes",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_hooks",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_hooks",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_hooks",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "mem2_hooks",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "psa_tags",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "psa_tags",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "psa_tags",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "psa_tags",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "goto_false",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "goto_false",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "goto_false",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "goto_false",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gecko_label_offsets",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gecko_label_offsets",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gecko_label_offsets",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gecko_label_offsets",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "else_directives",
+      "enabled": false,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "else_directives",
+      "enabled": false,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "else_directives",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "else_directives",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "missing_labels",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "missing_labels",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "missing_labels",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "missing_labels",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "unknown_instructions",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "unknown_instructions",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "unknown_instructions",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "unknown_instructions",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "operand_ranges",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "operand_ranges",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "operand_ranges",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "operand_ranges",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "register_relationships",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "register_relationships",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "register_relationships",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "register_relationships",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "branch_ranges",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "branch_ranges",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "branch_ranges",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "branch_ranges",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "branch_prediction",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "branch_prediction",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "branch_prediction",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "branch_prediction",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "operand_counts",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "operand_counts",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "operand_counts",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "operand_counts",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "suffix_validation",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "suffix_validation",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "suffix_validation",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "suffix_validation",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "ds_displacement",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "ds_displacement",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "ds_displacement",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "ds_displacement",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "console_only",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "console_only",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "console_only",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "console_only",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "address_alignment",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "address_alignment",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "address_alignment",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "address_alignment",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "psa_index_range",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "psa_index_range",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "psa_index_range",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "psa_index_range",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "gecko_line_framing",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gecko_line_framing",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "gecko_line_framing",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "gecko_line_framing",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "text_line_termination",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "text_line_termination",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "text_line_termination",
+      "enabled": true,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "text_line_termination",
+      "enabled": true,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "missing_file_status",
+      "enabled": false,
+      "cli_override": false,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "missing_file_status",
+      "enabled": false,
+      "cli_override": true,
+      "status": 0,
+      "passed": true
+    },
+    {
+      "key": "missing_file_status",
+      "enabled": true,
+      "cli_override": false,
+      "status": 1,
+      "passed": true
+    },
+    {
+      "key": "missing_file_status",
+      "enabled": true,
+      "cli_override": true,
+      "status": 1,
+      "passed": true
+    }
+  ]
+}

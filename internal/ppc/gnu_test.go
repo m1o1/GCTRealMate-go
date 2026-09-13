@@ -14,6 +14,7 @@ import (
 	"strings"
 	"testing"
 
+	"gctrm/fixes"
 	"gctrm/internal/dialect"
 )
 
@@ -31,14 +32,14 @@ func TestGNUCorpus(t *testing.T) {
 	}
 	failures := 0
 	for _, tc := range cases {
-		got, err := Encode(tc.Assembly, Context{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, BranchExpressions: true, Dialect: dialect.Modern})
+		got, err := Encode(tc.Assembly, Context{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, BranchExpressions: true, Dialect: dialect.Modern})
 		if got != tc.Word || err != nil {
 			if failures < 20 {
 				t.Errorf("%s: got %08x (%v), GNU %08x", tc.Assembly, got, err, tc.Word)
 			}
 			failures++
 		}
-		legacy, legacyErr := Encode(tc.Assembly, Context{BugFixes: true, ExpressionSyntax: true, AdditionalConsoleInstructions: true, BranchExpressions: true, Dialect: dialect.Legacy})
+		legacy, legacyErr := Encode(tc.Assembly, Context{Fixes: fixes.FromBool(true), ExpressionSyntax: true, AdditionalConsoleInstructions: true, BranchExpressions: true, Dialect: dialect.Legacy})
 		// GNU's hint convention differs from the legacy dialect. On backward
 		// conditional branches compare every bit except BO's prediction bit;
 		// the legacy prediction bit itself has independent C++ capture tests.
@@ -83,7 +84,7 @@ func TestConsoleInstructionInventory(t *testing.T) {
 	}
 	for _, name := range inventory.Instructions {
 		if slices.Contains(inventory.Unsupported, name) {
-			if _, err := Encode(name+" r3,r4", Context{BugFixes: true}); err == nil {
+			if _, err := Encode(name+" r3,r4", Context{Fixes: fixes.FromBool(true)}); err == nil {
 				t.Errorf("accepted unsupported inventory entry %s", name)
 			}
 			continue

@@ -17,7 +17,7 @@ func TestCategoryDefaults(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !defaults.bugFixes || defaults.dotOp || defaults.branchExpressions || defaults.expressionSyntax || defaults.implicitSections || defaults.additionalConsoleInstructions || defaults.allowNonConsoleInstructions || defaults.validation != (reflect.Zero(reflect.TypeOf(defaults.validation)).Interface()) || defaults.exactINI || defaults.flatLog || defaults.lf {
+	if !defaults.fixes.LHA || defaults.dotOp || defaults.branchExpressions || defaults.expressionSyntax || defaults.implicitSections || defaults.additionalConsoleInstructions || defaults.allowNonConsoleInstructions || defaults.validation != (reflect.Zero(reflect.TypeOf(defaults.validation)).Interface()) || defaults.exactINI || defaults.flatLog || defaults.lf {
 		t.Fatal(defaults)
 	}
 	for _, config := range []string{"[semantics]\nunknown=false", "[encoding]\nsign_extend_data_slots=1", "[validation]\nstrict_macro_calls='false'", "[cli]\nflat_logs=[]"} {
@@ -51,7 +51,7 @@ func TestOptionalSourcePoliciesIndependentOfFixes(t *testing.T) {
 					dir := t.TempDir()
 					cfg, src := filepath.Join(dir, "settings.toml"), filepath.Join(dir, "probe.asm")
 					group, key, _ := strings.Cut(tc.key, ".")
-					writeTestFile(t, cfg, fmt.Sprintf("bug_fixes=%t\n[%s]\n%s=%t", fixed, group, key, enabled))
+					writeTestFile(t, cfg, fixesTOML(fixed)+fmt.Sprintf("[%s]\n%s=%t", group, key, enabled))
 					writeTestFile(t, src, tc.source)
 					output := filepath.Join(dir, "probe.GCT")
 					writeTestFile(t, output, "keep previous output")

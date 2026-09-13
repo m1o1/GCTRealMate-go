@@ -189,7 +189,7 @@ set, carrying into another BO bit. GNU emits `41a20010` and `41a2fff0` in both
 console modes; see [the independent capture](validation/gnu-hints.json).
 With bug fixes enabled, the Go encoder sets only the prediction bit, with the legacy
 direction adjustment applied afterward (`41a20010` / `4182fff0`). This behavior
-is enabled by the current CLI/config default; explicit `bug_fixes = false`
+is enabled by the current CLI/config default; explicit `--bug-fixes=false`
 reproduces the C++ words. These particular BO values also
 contain CPU-ignored bits, so the extra changed bit is not by itself evidence
 that these two probes have different branch conditions. The known observable

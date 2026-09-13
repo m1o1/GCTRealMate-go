@@ -150,7 +150,7 @@ func encodeData(n node, inBlock bool, rules dialect.Rules) ([]byte, bool, error)
 				return nil, false, e
 			}
 			if strings.Contains(name, "_") && (strings.HasPrefix(name, "ic_") || strings.HasPrefix(name, "la_") || strings.HasPrefix(name, "ra_")) {
-				if rules.BugFixes && (v < 0 || v > 0xffffff) {
+				if rules.Fixes.PSAIndexRange && (v < 0 || v > 0xffffff) {
 					return nil, false, fmt.Errorf("PSA variable index outside 24-bit range")
 				}
 				base := uint32(0)
@@ -167,7 +167,7 @@ func encodeData(n node, inBlock bool, rules dialect.Rules) ([]byte, bool, error)
 					base |= 0x01000000
 				}
 				value = uint64(base | uint32(v)&0xffffff)
-				if !rules.BugFixes && !inBlock {
+				if !rules.Fixes.PSATags && !inBlock {
 					value = uint64(uint32(v) & 0xffffff)
 				}
 			} else {

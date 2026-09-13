@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"gctrm/fixes"
 	"gctrm/internal/dialect"
 )
 
@@ -12,7 +13,7 @@ func TestBranchExtensionsIndependentPolicy(t *testing.T) {
 		for _, extended := range []bool{false, true} {
 			for _, mode := range []dialect.Mode{dialect.Legacy, dialect.Modern} {
 				t.Run(fmt.Sprintf("fixed=%t/extended=%t/mode=%d", fixed, extended, mode), func(t *testing.T) {
-					ctx := Context{BugFixes: fixed, BranchExpressions: extended, ExpressionSyntax: true, Dialect: mode}
+					ctx := Context{Fixes: fixes.FromBool(fixed), BranchExpressions: extended, ExpressionSyntax: true, Dialect: mode}
 					for _, target := range []string{"20", "16+4", "0b10100", "024"} {
 						want := uint32(20)
 						if target == "024" && mode == dialect.Modern {

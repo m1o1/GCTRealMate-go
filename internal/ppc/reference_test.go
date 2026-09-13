@@ -11,6 +11,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"gctrm/fixes"
 )
 
 type goldenInstruction struct {
@@ -39,12 +41,12 @@ func TestReferenceCorpus(t *testing.T) {
 			name, _, _ := strings.Cut(source, " ")
 			bare := strings.TrimSuffix(name, ".")
 			if unsupportedInstructions[bare] || bare == "lmw" || bare == "lswi" {
-				if _, err := Encode(source, Context{BugFixes: true}); err == nil {
+				if _, err := Encode(source, Context{Fixes: fixes.FromBool(true)}); err == nil {
 					t.Fatalf("accepted historical non-console/invalid input %s", source)
 				}
 				return
 			}
-			word, err := Encode(source, Context{BugFixes: true})
+			word, err := Encode(source, Context{Fixes: fixes.FromBool(true)})
 			if err != nil || word != tc.Word {
 				t.Fatalf("got %08X (%v), C++ emitted %08X", word, err, tc.Word)
 			}
