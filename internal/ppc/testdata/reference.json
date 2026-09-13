@@ -1,0 +1,1310 @@
+[
+  {
+    "assembly": "add r3,r4,r5",
+    "word": 2086939156
+  },
+  {
+    "assembly": "add. r3,r4,r5",
+    "word": 2086939157
+  },
+  {
+    "assembly": "addc r3,r4,r5",
+    "word": 2086938644
+  },
+  {
+    "assembly": "addc. r3,r4,r5",
+    "word": 2086938645
+  },
+  {
+    "assembly": "adde r3,r4,r5",
+    "word": 2086938900
+  },
+  {
+    "assembly": "adde. r3,r4,r5",
+    "word": 2086938901
+  },
+  {
+    "assembly": "addi r3,r4,0x12",
+    "word": 946077714
+  },
+  {
+    "assembly": "addic r3,r4,0x12",
+    "word": 811859986
+  },
+  {
+    "assembly": "addic. r3,r4,0x12",
+    "word": 878968850
+  },
+  {
+    "assembly": "addis r3,r4,0x12",
+    "word": 1013186578
+  },
+  {
+    "assembly": "addme r3,r4",
+    "word": 2086928852
+  },
+  {
+    "assembly": "addme. r3,r4",
+    "word": 2086928853
+  },
+  {
+    "assembly": "addze r3,r4",
+    "word": 2086928788
+  },
+  {
+    "assembly": "addze. r3,r4",
+    "word": 2086928789
+  },
+  {
+    "assembly": "and r3,r4,r5",
+    "word": 2088970296
+  },
+  {
+    "assembly": "and. r3,r4,r5",
+    "word": 2088970297
+  },
+  {
+    "assembly": "andc r3,r4,r5",
+    "word": 2088970360
+  },
+  {
+    "assembly": "andc. r3,r4,r5",
+    "word": 2088970361
+  },
+  {
+    "assembly": "andi. r3,r4,0x12",
+    "word": 1887633426
+  },
+  {
+    "assembly": "andis. r3,r4,0x12",
+    "word": 1954742290
+  },
+  {
+    "assembly": "b 0x10",
+    "word": 1207959568
+  },
+  {
+    "assembly": "ba 0x1000",
+    "word": 1207963650
+  },
+  {
+    "assembly": "bctrl",
+    "word": 1317012513
+  },
+  {
+    "assembly": "bdnz -0x10",
+    "word": 1109458928
+  },
+  {
+    "assembly": "beq 0x10",
+    "word": 1099038736
+  },
+  {
+    "assembly": "beq+ 0x10",
+    "word": 1101135888
+  },
+  {
+    "assembly": "beqlr",
+    "word": 1300365344
+  },
+  {
+    "assembly": "bgt cr2,0x10",
+    "word": 1099497488
+  },
+  {
+    "assembly": "bl -0x10",
+    "word": 1275068401
+  },
+  {
+    "assembly": "bla 0x1000",
+    "word": 1207963651
+  },
+  {
+    "assembly": "blr",
+    "word": 1317011488
+  },
+  {
+    "assembly": "bne- -0x10",
+    "word": 1084424176
+  },
+  {
+    "assembly": "bnelr",
+    "word": 1283588128
+  },
+  {
+    "assembly": "cmplw cr2,r3,r4",
+    "word": 2097356864
+  },
+  {
+    "assembly": "cmplwi cr2,r4,0x1234",
+    "word": 688132660
+  },
+  {
+    "assembly": "cmpw r3,r4",
+    "word": 2080579584
+  },
+  {
+    "assembly": "cmpwi r3,-1",
+    "word": 738459647
+  },
+  {
+    "assembly": "cntlzd r3,r4",
+    "word": 2088960116
+  },
+  {
+    "assembly": "cntlzd. r3,r4",
+    "word": 2088960117
+  },
+  {
+    "assembly": "cntlzw r3,r4",
+    "word": 2088960052
+  },
+  {
+    "assembly": "cntlzw. r3,r4",
+    "word": 2088960053
+  },
+  {
+    "assembly": "crand 3,4,5",
+    "word": 1281632770
+  },
+  {
+    "assembly": "crclr 3",
+    "word": 1281563010
+  },
+  {
+    "assembly": "creqv 3,4,5",
+    "word": 1281632834
+  },
+  {
+    "assembly": "crmove 3,4",
+    "word": 1281631106
+  },
+  {
+    "assembly": "crnand 3,4,5",
+    "word": 1281632706
+  },
+  {
+    "assembly": "crnor 3,4,5",
+    "word": 1281632322
+  },
+  {
+    "assembly": "crnot 3,4",
+    "word": 1281630274
+  },
+  {
+    "assembly": "cror 3,4,5",
+    "word": 1281633154
+  },
+  {
+    "assembly": "crset 3",
+    "word": 1281563202
+  },
+  {
+    "assembly": "crxor 3,4,5",
+    "word": 1281632642
+  },
+  {
+    "assembly": "divd r3,r4,r5",
+    "word": 2086939602
+  },
+  {
+    "assembly": "divd. r3,r4,r5",
+    "word": 2086939603
+  },
+  {
+    "assembly": "divdu r3,r4,r5",
+    "word": 2086939538
+  },
+  {
+    "assembly": "divdu. r3,r4,r5",
+    "word": 2086939539
+  },
+  {
+    "assembly": "divw r3,r4,r5",
+    "word": 2086939606
+  },
+  {
+    "assembly": "divw. r3,r4,r5",
+    "word": 2086939607
+  },
+  {
+    "assembly": "divwu r3,r4,r5",
+    "word": 2086939542
+  },
+  {
+    "assembly": "divwu. r3,r4,r5",
+    "word": 2086939543
+  },
+  {
+    "assembly": "extsb r3,r4",
+    "word": 2088961908
+  },
+  {
+    "assembly": "extsb. r3,r4",
+    "word": 2088961909
+  },
+  {
+    "assembly": "extsh r3,r4",
+    "word": 2088961844
+  },
+  {
+    "assembly": "extsh. r3,r4",
+    "word": 2088961845
+  },
+  {
+    "assembly": "extsw r3,r4",
+    "word": 2088961972
+  },
+  {
+    "assembly": "extsw. r3,r4",
+    "word": 2088961973
+  },
+  {
+    "assembly": "fabs r3,r5",
+    "word": 4234160656
+  },
+  {
+    "assembly": "fabs. r3,r5",
+    "word": 4234160657
+  },
+  {
+    "assembly": "fadd r3,r4,r5",
+    "word": 4234422314
+  },
+  {
+    "assembly": "fadd. r3,r4,r5",
+    "word": 4234422315
+  },
+  {
+    "assembly": "fadds r3,r4,r5",
+    "word": 3965986858
+  },
+  {
+    "assembly": "fadds. r3,r4,r5",
+    "word": 3965986859
+  },
+  {
+    "assembly": "fcfid r3,r5",
+    "word": 4234161820
+  },
+  {
+    "assembly": "fcfid. r3,r5",
+    "word": 4234161821
+  },
+  {
+    "assembly": "fcmpo cr2,f4,f5",
+    "word": 4244908096
+  },
+  {
+    "assembly": "fcmpu cr2,f4,f5",
+    "word": 4244908032
+  },
+  {
+    "assembly": "fctid r3,r5",
+    "word": 4234161756
+  },
+  {
+    "assembly": "fctid. r3,r5",
+    "word": 4234161757
+  },
+  {
+    "assembly": "fctidz r3,r5",
+    "word": 4234161758
+  },
+  {
+    "assembly": "fctidz. r3,r5",
+    "word": 4234161759
+  },
+  {
+    "assembly": "fctiw r3,r5",
+    "word": 4234160156
+  },
+  {
+    "assembly": "fctiw. r3,r5",
+    "word": 4234160157
+  },
+  {
+    "assembly": "fctiwz r3,r5",
+    "word": 4234160158
+  },
+  {
+    "assembly": "fctiwz. r3,r5",
+    "word": 4234160159
+  },
+  {
+    "assembly": "fdiv r3,r4,r5",
+    "word": 4234422308
+  },
+  {
+    "assembly": "fdiv. r3,r4,r5",
+    "word": 4234422309
+  },
+  {
+    "assembly": "fdivs r3,r4,r5",
+    "word": 3965986852
+  },
+  {
+    "assembly": "fdivs. r3,r4,r5",
+    "word": 3965986853
+  },
+  {
+    "assembly": "fmadd f3,f4,f5,f6",
+    "word": 4234424698
+  },
+  {
+    "assembly": "fmadd. f3,f4,f5,f6",
+    "word": 4234424699
+  },
+  {
+    "assembly": "fmadds f3,f4,f5,f6",
+    "word": 3965989242
+  },
+  {
+    "assembly": "fmadds. f3,f4,f5,f6",
+    "word": 3965989243
+  },
+  {
+    "assembly": "fmr r3,r5",
+    "word": 4234160272
+  },
+  {
+    "assembly": "fmr. r3,r5",
+    "word": 4234160273
+  },
+  {
+    "assembly": "fmsub f3,f4,f5,f6",
+    "word": 4234424696
+  },
+  {
+    "assembly": "fmsub. f3,f4,f5,f6",
+    "word": 4234424697
+  },
+  {
+    "assembly": "fmsubs f3,f4,f5,f6",
+    "word": 3965989240
+  },
+  {
+    "assembly": "fmsubs. f3,f4,f5,f6",
+    "word": 3965989241
+  },
+  {
+    "assembly": "fmul f3,f4,f5",
+    "word": 4234412402
+  },
+  {
+    "assembly": "fmul. f3,f4,f5",
+    "word": 4234412403
+  },
+  {
+    "assembly": "fmuls f3,f4,f5",
+    "word": 3965976946
+  },
+  {
+    "assembly": "fmuls. f3,f4,f5",
+    "word": 3965976947
+  },
+  {
+    "assembly": "fnabs r3,r5",
+    "word": 4234160400
+  },
+  {
+    "assembly": "fnabs. r3,r5",
+    "word": 4234160401
+  },
+  {
+    "assembly": "fneg r3,r5",
+    "word": 4234160208
+  },
+  {
+    "assembly": "fneg. r3,r5",
+    "word": 4234160209
+  },
+  {
+    "assembly": "fnmadd f3,f4,f5,f6",
+    "word": 4234424702
+  },
+  {
+    "assembly": "fnmadd. f3,f4,f5,f6",
+    "word": 4234424703
+  },
+  {
+    "assembly": "fnmadds f3,f4,f5,f6",
+    "word": 3965989246
+  },
+  {
+    "assembly": "fnmadds. f3,f4,f5,f6",
+    "word": 3965989247
+  },
+  {
+    "assembly": "fnmsub f3,f4,f5,f6",
+    "word": 4234424700
+  },
+  {
+    "assembly": "fnmsub. f3,f4,f5,f6",
+    "word": 4234424701
+  },
+  {
+    "assembly": "fnmsubs f3,f4,f5,f6",
+    "word": 3965989244
+  },
+  {
+    "assembly": "fnmsubs. f3,f4,f5,f6",
+    "word": 3965989245
+  },
+  {
+    "assembly": "fres r3,r5",
+    "word": 3965724720
+  },
+  {
+    "assembly": "fres. r3,r5",
+    "word": 3965724721
+  },
+  {
+    "assembly": "fress r3,r5",
+    "word": 3965724720
+  },
+  {
+    "assembly": "fress. r3,r5",
+    "word": 3965724721
+  },
+  {
+    "assembly": "frsp r3,r5",
+    "word": 4234160152
+  },
+  {
+    "assembly": "frsp. r3,r5",
+    "word": 4234160153
+  },
+  {
+    "assembly": "frsqrte r3,r5",
+    "word": 4234160180
+  },
+  {
+    "assembly": "frsqrte. r3,r5",
+    "word": 4234160181
+  },
+  {
+    "assembly": "frsqrtes r3,r5",
+    "word": 3965724724
+  },
+  {
+    "assembly": "frsqrtes. r3,r5",
+    "word": 3965724725
+  },
+  {
+    "assembly": "fsel f3,f4,f5,f6",
+    "word": 4234424686
+  },
+  {
+    "assembly": "fsel. f3,f4,f5,f6",
+    "word": 4234424687
+  },
+  {
+    "assembly": "fsels f3,f4,f5,f6",
+    "word": 3965989230
+  },
+  {
+    "assembly": "fsels. f3,f4,f5,f6",
+    "word": 3965989231
+  },
+  {
+    "assembly": "fsqrt r3,r5",
+    "word": 4234160172
+  },
+  {
+    "assembly": "fsqrt. r3,r5",
+    "word": 4234160173
+  },
+  {
+    "assembly": "fsqrts r3,r5",
+    "word": 3965724716
+  },
+  {
+    "assembly": "fsqrts. r3,r5",
+    "word": 3965724717
+  },
+  {
+    "assembly": "fsub r3,r4,r5",
+    "word": 4234422312
+  },
+  {
+    "assembly": "fsub. r3,r4,r5",
+    "word": 4234422313
+  },
+  {
+    "assembly": "fsubs r3,r4,r5",
+    "word": 3965986856
+  },
+  {
+    "assembly": "fsubs. r3,r4,r5",
+    "word": 3965986857
+  },
+  {
+    "assembly": "icbi r3,r4",
+    "word": 2080581548
+  },
+  {
+    "assembly": "isync",
+    "word": 1275068716
+  },
+  {
+    "assembly": "lbz r3,0x20(r4)",
+    "word": 2288255008
+  },
+  {
+    "assembly": "lbzu r3,0x20(r4)",
+    "word": 2355363872
+  },
+  {
+    "assembly": "lbzux r3,r4,r5",
+    "word": 2086938862
+  },
+  {
+    "assembly": "lbzx r3,r4,r5",
+    "word": 2086938798
+  },
+  {
+    "assembly": "ld r3,0(r4)",
+    "word": 3898867712
+  },
+  {
+    "assembly": "ldu r3,0(r4)",
+    "word": 3898867713
+  },
+  {
+    "assembly": "ldux r3,r4,r5",
+    "word": 2086938730
+  },
+  {
+    "assembly": "ldx r3,r4,r5",
+    "word": 2086938666
+  },
+  {
+    "assembly": "lfd r3,0x20(r4)",
+    "word": 3361996832
+  },
+  {
+    "assembly": "lfdu r3,0x20(r4)",
+    "word": 3429105696
+  },
+  {
+    "assembly": "lfdux r3,r4,r5",
+    "word": 2086939886
+  },
+  {
+    "assembly": "lfdx r3,r4,r5",
+    "word": 2086939822
+  },
+  {
+    "assembly": "lfs r3,0x20(r4)",
+    "word": 3227779104
+  },
+  {
+    "assembly": "lfsu r3,0x20(r4)",
+    "word": 3294887968
+  },
+  {
+    "assembly": "lfsux r3,r4,r5",
+    "word": 2086939758
+  },
+  {
+    "assembly": "lfsx r3,r4,r5",
+    "word": 2086939694
+  },
+  {
+    "assembly": "lhau r3,0x20(r4)",
+    "word": 2892234784
+  },
+  {
+    "assembly": "lhaux r3,r4,r5",
+    "word": 2086939374
+  },
+  {
+    "assembly": "lhax r3,r4,r5",
+    "word": 2086939310
+  },
+  {
+    "assembly": "lhbrx r3,r4,r5",
+    "word": 2086940204
+  },
+  {
+    "assembly": "lhz r3,0x20(r4)",
+    "word": 2690908192
+  },
+  {
+    "assembly": "lhzu r3,0x20(r4)",
+    "word": 2758017056
+  },
+  {
+    "assembly": "lhzux r3,r4,r5",
+    "word": 2086939246
+  },
+  {
+    "assembly": "lhzx r3,r4,r5",
+    "word": 2086939182
+  },
+  {
+    "assembly": "li r3,0x12",
+    "word": 945815570
+  },
+  {
+    "assembly": "lis r3,0x12",
+    "word": 1012924434
+  },
+  {
+    "assembly": "lmw r3,0x20(r4)",
+    "word": 3093561376
+  },
+  {
+    "assembly": "lswi r3,r4,r5",
+    "word": 2086939818
+  },
+  {
+    "assembly": "lswx r3,r4,r5",
+    "word": 2086939690
+  },
+  {
+    "assembly": "lwa r3,0(r4)",
+    "word": 3898867714
+  },
+  {
+    "assembly": "lwaux r3,r4,r5",
+    "word": 2086939370
+  },
+  {
+    "assembly": "lwax r3,r4,r5",
+    "word": 2086939306
+  },
+  {
+    "assembly": "lwbrx r3,r4,r5",
+    "word": 2086939692
+  },
+  {
+    "assembly": "lwz r3,0x20(r4)",
+    "word": 2154037280
+  },
+  {
+    "assembly": "lwzu r3,0x20(r4)",
+    "word": 2221146144
+  },
+  {
+    "assembly": "lwzux r3,r4,r5",
+    "word": 2086938734
+  },
+  {
+    "assembly": "lwzx r3,r4,r5",
+    "word": 2086938670
+  },
+  {
+    "assembly": "mfcr r3",
+    "word": 2086666278
+  },
+  {
+    "assembly": "mffs r3",
+    "word": 4234151054
+  },
+  {
+    "assembly": "mffs. r3",
+    "word": 4234151055
+  },
+  {
+    "assembly": "mflr r3",
+    "word": 2087191206
+  },
+  {
+    "assembly": "mfspr r3,gqr2",
+    "word": 2087903910
+  },
+  {
+    "assembly": "mr r3,r4",
+    "word": 2088969080
+  },
+  {
+    "assembly": "mr. r3,r4",
+    "word": 2088969081
+  },
+  {
+    "assembly": "mtcr r3",
+    "word": 2087711008
+  },
+  {
+    "assembly": "mtcrf 255,r3",
+    "word": 2087711008
+  },
+  {
+    "assembly": "mtctr r4",
+    "word": 2089354150
+  },
+  {
+    "assembly": "mtspr ibat1l,r5",
+    "word": 2092139430
+  },
+  {
+    "assembly": "mulhd r3,r4,r5",
+    "word": 2086938770
+  },
+  {
+    "assembly": "mulhd. r3,r4,r5",
+    "word": 2086938771
+  },
+  {
+    "assembly": "mulhdu r3,r4,r5",
+    "word": 2086938642
+  },
+  {
+    "assembly": "mulhdu. r3,r4,r5",
+    "word": 2086938643
+  },
+  {
+    "assembly": "mulhw r3,r4,r5",
+    "word": 2086938774
+  },
+  {
+    "assembly": "mulhw. r3,r4,r5",
+    "word": 2086938775
+  },
+  {
+    "assembly": "mulhwu r3,r4,r5",
+    "word": 2086938646
+  },
+  {
+    "assembly": "mulhwu. r3,r4,r5",
+    "word": 2086938647
+  },
+  {
+    "assembly": "mulld r3,r4,r5",
+    "word": 2086939090
+  },
+  {
+    "assembly": "mulld. r3,r4,r5",
+    "word": 2086939091
+  },
+  {
+    "assembly": "mulli r3,r4,0x12",
+    "word": 476315666
+  },
+  {
+    "assembly": "mullw r3,r4,r5",
+    "word": 2086939094
+  },
+  {
+    "assembly": "mullw. r3,r4,r5",
+    "word": 2086939095
+  },
+  {
+    "assembly": "nand r3,r4,r5",
+    "word": 2088971192
+  },
+  {
+    "assembly": "nand. r3,r4,r5",
+    "word": 2088971193
+  },
+  {
+    "assembly": "neg r3,r4",
+    "word": 2086928592
+  },
+  {
+    "assembly": "neg. r3,r4",
+    "word": 2086928593
+  },
+  {
+    "assembly": "nop",
+    "word": 1610612736
+  },
+  {
+    "assembly": "nor r3,r4,r5",
+    "word": 2088970488
+  },
+  {
+    "assembly": "nor. r3,r4,r5",
+    "word": 2088970489
+  },
+  {
+    "assembly": "not r3,r4",
+    "word": 2088968440
+  },
+  {
+    "assembly": "not. r3,r4",
+    "word": 2088968441
+  },
+  {
+    "assembly": "or r3,r4,r5",
+    "word": 2088971128
+  },
+  {
+    "assembly": "or. r3,r4,r5",
+    "word": 2088971129
+  },
+  {
+    "assembly": "orc r3,r4,r5",
+    "word": 2088971064
+  },
+  {
+    "assembly": "orc. r3,r4,r5",
+    "word": 2088971065
+  },
+  {
+    "assembly": "ori r3,r4,0x12",
+    "word": 1619197970
+  },
+  {
+    "assembly": "oris r3,r4,0x12",
+    "word": 1686306834
+  },
+  {
+    "assembly": "ps_abs r3,r5",
+    "word": 274737680
+  },
+  {
+    "assembly": "ps_add r3,r4,r5",
+    "word": 274999338
+  },
+  {
+    "assembly": "ps_cmpo0 cr2,f4,f5",
+    "word": 285485120
+  },
+  {
+    "assembly": "ps_cmpo1 cr2,f4,f5",
+    "word": 285485248
+  },
+  {
+    "assembly": "ps_cmpu0 cr2,f4,f5",
+    "word": 285485056
+  },
+  {
+    "assembly": "ps_cmpu1 cr2,f4,f5",
+    "word": 285485184
+  },
+  {
+    "assembly": "ps_div r3,r4,r5",
+    "word": 274999332
+  },
+  {
+    "assembly": "ps_madd f3,f4,f5,f6",
+    "word": 275001722
+  },
+  {
+    "assembly": "ps_madds0 f3,f4,f5,f6",
+    "word": 275001692
+  },
+  {
+    "assembly": "ps_madds1 f3,f4,f5,f6",
+    "word": 275001694
+  },
+  {
+    "assembly": "ps_merge00 r3,r4,r5",
+    "word": 275000352
+  },
+  {
+    "assembly": "ps_merge01 r3,r4,r5",
+    "word": 275000416
+  },
+  {
+    "assembly": "ps_merge10 r3,r4,r5",
+    "word": 275000480
+  },
+  {
+    "assembly": "ps_merge11 r3,r4,r5",
+    "word": 275000544
+  },
+  {
+    "assembly": "ps_mr r3,r5",
+    "word": 274737296
+  },
+  {
+    "assembly": "ps_msub f3,f4,f5,f6",
+    "word": 275001720
+  },
+  {
+    "assembly": "ps_mul f3,f4,f5",
+    "word": 274989426
+  },
+  {
+    "assembly": "ps_muls0 f3,f4,f5",
+    "word": 274989400
+  },
+  {
+    "assembly": "ps_muls1 f3,f4,f5",
+    "word": 274989402
+  },
+  {
+    "assembly": "ps_nabs r3,r5",
+    "word": 274737424
+  },
+  {
+    "assembly": "ps_neg r3,r5",
+    "word": 274737232
+  },
+  {
+    "assembly": "ps_nmadd f3,f4,f5,f6",
+    "word": 275001726
+  },
+  {
+    "assembly": "ps_nmsub f3,f4,f5,f6",
+    "word": 275001724
+  },
+  {
+    "assembly": "ps_res r3,r5",
+    "word": 274737200
+  },
+  {
+    "assembly": "ps_rsqrte r3,r5",
+    "word": 274737204
+  },
+  {
+    "assembly": "ps_sel f3,f4,f5,f6",
+    "word": 275001710
+  },
+  {
+    "assembly": "ps_sub r3,r4,r5",
+    "word": 274999336
+  },
+  {
+    "assembly": "ps_sum0 f3,f4,f5,f6",
+    "word": 275001684
+  },
+  {
+    "assembly": "ps_sum1 f3,f4,f5,f6",
+    "word": 275001686
+  },
+  {
+    "assembly": "psq_l f3,0x20(r4),0,0",
+    "word": 3764650016
+  },
+  {
+    "assembly": "psq_stu f3,0x20(r4),1,2",
+    "word": 4100235296
+  },
+  {
+    "assembly": "rfi",
+    "word": 1275068516
+  },
+  {
+    "assembly": "rlwimi r3,r4,5,6,7",
+    "word": 1350773134
+  },
+  {
+    "assembly": "rlwimi. r3,r4,5,6,7",
+    "word": 1350773135
+  },
+  {
+    "assembly": "rlwinm r3,r4,5,6,7",
+    "word": 1417881998
+  },
+  {
+    "assembly": "rlwinm. r3,r4,5,6,7",
+    "word": 1417881999
+  },
+  {
+    "assembly": "rlwnm r3,r4,5,6,7",
+    "word": 1552099726
+  },
+  {
+    "assembly": "rlwnm. r3,r4,5,6,7",
+    "word": 1552099727
+  },
+  {
+    "assembly": "rotlw r3,r4,r5",
+    "word": 1552099390
+  },
+  {
+    "assembly": "sld r3,r4,r5",
+    "word": 2088970294
+  },
+  {
+    "assembly": "sld. r3,r4,r5",
+    "word": 2088970295
+  },
+  {
+    "assembly": "slw r3,r4,r5",
+    "word": 2088970288
+  },
+  {
+    "assembly": "slw. r3,r4,r5",
+    "word": 2088970289
+  },
+  {
+    "assembly": "slwi r3,r4,5",
+    "word": 1417881652
+  },
+  {
+    "assembly": "srad r3,r4,r5",
+    "word": 2088971828
+  },
+  {
+    "assembly": "srad. r3,r4,r5",
+    "word": 2088971829
+  },
+  {
+    "assembly": "sraw r3,r4,r5",
+    "word": 2088971824
+  },
+  {
+    "assembly": "sraw. r3,r4,r5",
+    "word": 2088971825
+  },
+  {
+    "assembly": "srawi r3,r4,r5",
+    "word": 2088971888
+  },
+  {
+    "assembly": "srawi. r3,r4,r5",
+    "word": 2088971889
+  },
+  {
+    "assembly": "srd r3,r4,r5",
+    "word": 2088971318
+  },
+  {
+    "assembly": "srd. r3,r4,r5",
+    "word": 2088971319
+  },
+  {
+    "assembly": "srw r3,r4,r5",
+    "word": 2088971312
+  },
+  {
+    "assembly": "srw. r3,r4,r5",
+    "word": 2088971313
+  },
+  {
+    "assembly": "srwi r3,r4,5",
+    "word": 1417927038
+  },
+  {
+    "assembly": "stb r3,0x20(r4)",
+    "word": 2556690464
+  },
+  {
+    "assembly": "stbu r3,0x20(r4)",
+    "word": 2623799328
+  },
+  {
+    "assembly": "stbux r3,r4,r5",
+    "word": 2086939118
+  },
+  {
+    "assembly": "stbx r3,r4,r5",
+    "word": 2086939054
+  },
+  {
+    "assembly": "std r3,0(r4)",
+    "word": 4167303168
+  },
+  {
+    "assembly": "stdu r3,0(r4)",
+    "word": 4167303169
+  },
+  {
+    "assembly": "stdux r3,r4,r5",
+    "word": 2086938986
+  },
+  {
+    "assembly": "stdx r3,r4,r5",
+    "word": 2086938922
+  },
+  {
+    "assembly": "stfd r3,0x20(r4)",
+    "word": 3630432288
+  },
+  {
+    "assembly": "stfdu r3,0x20(r4)",
+    "word": 3697541152
+  },
+  {
+    "assembly": "stfdux r3,r4,r5",
+    "word": 2086940142
+  },
+  {
+    "assembly": "stfdx r3,r4,r5",
+    "word": 2086940078
+  },
+  {
+    "assembly": "stfiwx r3,r4,r5",
+    "word": 2086940590
+  },
+  {
+    "assembly": "stfs r3,0x20(r4)",
+    "word": 3496214560
+  },
+  {
+    "assembly": "stfsu r3,0x20(r4)",
+    "word": 3563323424
+  },
+  {
+    "assembly": "stfsux r3,r4,r5",
+    "word": 2086940014
+  },
+  {
+    "assembly": "stfsx r3,r4,r5",
+    "word": 2086939950
+  },
+  {
+    "assembly": "sth r3,0x20(r4)",
+    "word": 2959343648
+  },
+  {
+    "assembly": "sthbrx r3,r4,r5",
+    "word": 2086940460
+  },
+  {
+    "assembly": "sthu r3,0x20(r4)",
+    "word": 3026452512
+  },
+  {
+    "assembly": "sthux r3,r4,r5",
+    "word": 2086939502
+  },
+  {
+    "assembly": "sthx r3,r4,r5",
+    "word": 2086939438
+  },
+  {
+    "assembly": "stmw r3,0x20(r4)",
+    "word": 3160670240
+  },
+  {
+    "assembly": "stswi r3,r4,r5",
+    "word": 2086940074
+  },
+  {
+    "assembly": "stswx r3,r4,r5",
+    "word": 2086939946
+  },
+  {
+    "assembly": "stw r3,0x20(r4)",
+    "word": 2422472736
+  },
+  {
+    "assembly": "stwbrx r3,r4,r5",
+    "word": 2086939948
+  },
+  {
+    "assembly": "stwu r3,0x20(r4)",
+    "word": 2489581600
+  },
+  {
+    "assembly": "stwux r3,r4,r5",
+    "word": 2086938990
+  },
+  {
+    "assembly": "stwx r3,r4,r5",
+    "word": 2086938926
+  },
+  {
+    "assembly": "sub r3,r4,r5",
+    "word": 2087002192
+  },
+  {
+    "assembly": "sub. r3,r4,r5",
+    "word": 2087002193
+  },
+  {
+    "assembly": "subc r3,r4,r5",
+    "word": 2087002128
+  },
+  {
+    "assembly": "subc. r3,r4,r5",
+    "word": 2087002129
+  },
+  {
+    "assembly": "sube r3,r4,r5",
+    "word": 2087002384
+  },
+  {
+    "assembly": "sube. r3,r4,r5",
+    "word": 2087002385
+  },
+  {
+    "assembly": "subf r3,r4,r5",
+    "word": 2086938704
+  },
+  {
+    "assembly": "subf. r3,r4,r5",
+    "word": 2086938705
+  },
+  {
+    "assembly": "subfc r3,r4,r5",
+    "word": 2086938640
+  },
+  {
+    "assembly": "subfc. r3,r4,r5",
+    "word": 2086938641
+  },
+  {
+    "assembly": "subfe r3,r4,r5",
+    "word": 2086938896
+  },
+  {
+    "assembly": "subfe. r3,r4,r5",
+    "word": 2086938897
+  },
+  {
+    "assembly": "subfic r3,r4,0x12",
+    "word": 543424530
+  },
+  {
+    "assembly": "subfme r3,r4",
+    "word": 2086928848
+  },
+  {
+    "assembly": "subfme. r3,r4",
+    "word": 2086928849
+  },
+  {
+    "assembly": "subfze r3,r4",
+    "word": 2086928784
+  },
+  {
+    "assembly": "subfze. r3,r4",
+    "word": 2086928785
+  },
+  {
+    "assembly": "subi r3,r4,0x12",
+    "word": 946143214
+  },
+  {
+    "assembly": "subic r3,r4,0x12",
+    "word": 811925486
+  },
+  {
+    "assembly": "subic. r3,r4,0x12",
+    "word": 879034350
+  },
+  {
+    "assembly": "subis r3,r4,0x12",
+    "word": 1013252078
+  },
+  {
+    "assembly": "td r3,r4,r5",
+    "word": 2086938760
+  },
+  {
+    "assembly": "tdi r3,r4,0x12",
+    "word": 140771346
+  },
+  {
+    "assembly": "tw r3,r4,r5",
+    "word": 2086938632
+  },
+  {
+    "assembly": "twi r3,r4,0x12",
+    "word": 207880210
+  },
+  {
+    "assembly": "xor r3,r4,r5",
+    "word": 2088970872
+  },
+  {
+    "assembly": "xor. r3,r4,r5",
+    "word": 2088970873
+  },
+  {
+    "assembly": "xori r3,r4,0x12",
+    "word": 1753415698
+  },
+  {
+    "assembly": "xoris r3,r4,0x12",
+    "word": 1820524562
+  }
+]

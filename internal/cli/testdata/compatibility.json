@@ -1,0 +1,65 @@
+{
+  "cpp_sha256": "6001f3cdaa944b9e68ae36549471e62d925bd00dcc4f9d15639a67e59b7712f1",
+  "cases": [
+    {
+      "name": "nested-text-log",
+      "files": {
+        "root.asm": "Root\nop nop @ $80001000\n.include parts/first.asm\nTail\nop blr @ $8000100c\n",
+        "parts/first.asm": "First\nop li r3,1 @ $80001004\n.include ./second.asm\n",
+        "parts/second.asm": "Second\nop li r4,2 @ $80001008\n"
+      },
+      "args": [
+        "-q",
+        "-i",
+        "-g",
+        "-l",
+        "root.asm"
+      ],
+      "outputs": {
+        "root.GCT": "00d0c0de00d0c0de0400100060000000040010043860000104001008388000020400100c4e800020f000000000000000",
+        "root_codeset.txt": "5253424530310d0a0d0a526f6f740d0a2a2030343030313030302036303030303030300d0a0d0a46697273740d0a2a2030343030313030342033383630303030310d0a0d0a5365636f6e640d0a2a2030343030313030382033383830303030320d0a0d0a5461696c0d0a2a2030343030313030432034453830303032300d0a0d0a",
+        "root_log.txt": "526f6f742040204f6666203078380d0a70617274732f66697273742e61736d0d0a0946697273742040204f666620307831300d0a092e2f7365636f6e642e61736d0d0a09095365636f6e642040204f666620307831380d0a5461696c2040204f666620307832300d0a"
+      }
+    },
+    {
+      "name": "ini-prefix",
+      "files": {
+        "root.asm": "Root\nop nop @ $80001000\n"
+      },
+      "ini": "root.asm.extra : -t -l\nroot.asm : -g\n",
+      "args": [
+        "-q",
+        "root.asm"
+      ],
+      "outputs": {
+        "root.GCT": "00d0c0de00d0c0de0400100060000000f000000000000000",
+        "root_codeset.txt": "526f6f740d0a30343030313030302036303030303030300d0a0d0a",
+        "root_log.txt": "526f6f742040204f6666203078380d0a"
+      }
+    },
+    {
+      "name": "scoped-flags",
+      "files": {
+        "a.asm": "A\nop nop @ $80001000\n",
+        "b.asm": "B\nop blr @ $80001004\n"
+      },
+      "args": [
+        "-q",
+        "-g",
+        "-l",
+        "a.asm",
+        "-g:0",
+        "-t",
+        "b.asm"
+      ],
+      "outputs": {
+        "a.GCT": "00d0c0de00d0c0de0400100060000000f000000000000000",
+        "a_codeset.txt": "5253424530310d0a0d0a410d0a2a2030343030313030302036303030303030300d0a0d0a",
+        "a_log.txt": "412040204f6666203078380d0a",
+        "b.GCT": "00d0c0de00d0c0de040010044e800020f000000000000000",
+        "b_codeset.txt": "420d0a30343030313030342034453830303032300d0a0d0a",
+        "b_log.txt": "422040204f6666203078380d0a"
+      }
+    }
+  ]
+}

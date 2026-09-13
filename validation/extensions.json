@@ -1,0 +1,217 @@
+{
+  "assembler_version": "0.9.0-go",
+  "assembler_sha256": "52039b4ab6bd45e955f4fa44ee2303444accf96bb7187d1114057e05c5ae44ea",
+  "extension_smoke_checks": 14,
+  "documented_toml_blocks": 9,
+  "checks": [
+    {
+      "name": "defaults-dot-op",
+      "config": "",
+      "source": "Probe\n.op lha r3,0(r4) @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de04001000a8640000f000000000000000"
+    },
+    {
+      "name": "defaults-branch",
+      "config": "",
+      "source": "Probe\nop b 20 @ $80001000\n",
+      "flags": [],
+      "exit_code": 1,
+      "diagnostic": "<workspace>\\work\\extensions-executable-checks\\001-defaults-branch\\probe.asm:2: numeric branch target \"20\" requires extensions.branch_expressions=true (or --branch-expressions=true)\n",
+      "gct_hex": null
+    },
+    {
+      "name": "defaults-target",
+      "config": "",
+      "source": "Probe\nop ld r3,8(r4) @ $80001000\n",
+      "flags": [],
+      "exit_code": 1,
+      "diagnostic": "<workspace>\\work\\extensions-executable-checks\\002-defaults-target\\probe.asm:2: ld is not supported by GameCube/Wii (Gekko/Broadway); non-console forms require allow_non_console_instructions=true\n",
+      "gct_hex": null
+    },
+    {
+      "name": "branches-enabled",
+      "config": "[extensions]\nbranch_expressions=true\n",
+      "source": "Probe\nop b 20 @ $80001000\nop b 16+4 @ $80001004\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de04001000480000140400100448000014f000000000000000"
+    },
+    {
+      "name": "branches-cli-off",
+      "config": "[extensions]\nbranch_expressions=true\n",
+      "source": "Probe\nop b 20 @ $80001000\n",
+      "flags": [
+        "--branch-expressions=false"
+      ],
+      "exit_code": 1,
+      "diagnostic": "<workspace>\\work\\extensions-executable-checks\\004-branches-cli-off\\probe.asm:2: numeric branch target \"20\" requires extensions.branch_expressions=true (or --branch-expressions=true)\n",
+      "gct_hex": null
+    },
+    {
+      "name": "grouped-dot-off",
+      "config": "[extensions]\ndot_op=false\n",
+      "source": "Probe\n.op nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0def000000000000000"
+    },
+    {
+      "name": "old-dot-off",
+      "config": "dot_op=false\n",
+      "source": "Probe\n.op nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0def000000000000000"
+    },
+    {
+      "name": "old-target-on",
+      "config": "allow_non_console_instructions=true\n",
+      "source": "Probe\nop ld r3,8(r4) @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de04001000e8640008f000000000000000"
+    },
+    {
+      "name": "grouped-target-on",
+      "config": "[extensions]\nallow_non_console_instructions=true\n",
+      "source": "Probe\nop ld r3,8(r4) @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de04001000e8640008f000000000000000"
+    },
+    {
+      "name": "mixed-keys-rejected",
+      "config": "dot_op=false\n[extensions]\ndot_op=false\n",
+      "source": "Probe\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 2,
+      "diagnostic": "gctrm: configuration <workspace>\\work\\extensions-executable-checks\\009-mixed-keys-rejected\\config.toml: specify extensions.dot_op only; remove the old top-level dot_op key\n",
+      "gct_hex": null
+    },
+    {
+      "name": "fixes-off-numeric-on",
+      "config": "bug_fixes=false\n[extensions]\nbranch_expressions=true\n",
+      "source": "Probe\nop b 20 @ $80001000\nop lha r3,0(r4) @ $80001004\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de040010004800001404001004a0640000f000000000000000"
+    },
+    {
+      "name": "fixes-off-original-branch",
+      "config": "bug_fixes=false\n",
+      "source": "Probe\nop b 20 @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100048000000f000000000000000"
+    },
+    {
+      "name": "missing-label-stays-error",
+      "config": "[extensions]\nbranch_expressions=true\n",
+      "source": "Probe\nop b missing @ $80001000\n",
+      "flags": [],
+      "exit_code": 1,
+      "diagnostic": "<workspace>\\work\\extensions-executable-checks\\012-missing-label-stays-error\\probe.asm:2: unknown symbol or invalid number \"missing\"\n",
+      "gct_hex": null
+    },
+    {
+      "name": "missing-label-compatibility",
+      "config": "bug_fixes=false\n[extensions]\nbranch_expressions=true\n",
+      "source": "Probe\nop b missing @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100048000000f000000000000000"
+    },
+    {
+      "name": "BUG-FIXES-0",
+      "config": "version = 1\nbug_fixes = true\ndialect = \"legacy\"\n[extensions]\ndot_op = true\nbranch_expressions = false\nallow_non_console_instructions = false\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "CONFIGURATION-0",
+      "config": "bug_fixes = true\ndialect = \"legacy\"\n\n[extensions]\ndot_op = true\nbranch_expressions = false\nallow_non_console_instructions = false\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "CONFIGURATION-1",
+      "config": "bug_fixes = true\n[extensions]\ndot_op = true\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "CONFIGURATION-2",
+      "config": "bug_fixes = true\ndialect = \"legacy\"\n[legacy]\noctal_literals = false\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "CONFIGURATION-3",
+      "config": "version = 1\nbug_fixes = true\ndialect = \"legacy\"\n\n[legacy]\noctal_literals = false\nfloat_nan = false\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "CONFIGURATION-4",
+      "config": "bug_fixes = true\ndialect = \"modern\"\n\n[legacy]\nregister_prefixes = true\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "CONFIGURATION-5",
+      "config": "version = 1\nbug_fixes = true\ndialect = \"modern\"\n\n[legacy]\nini_prefix_matching = false\ninclude_tree_logs = false\nnative_line_endings = false\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "NON-CONSOLE-0",
+      "config": "version = 1\nbug_fixes = true\ndialect = \"legacy\"\n[extensions]\nallow_non_console_instructions = false\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    },
+    {
+      "name": "README-0",
+      "config": "bug_fixes = true # Default: corrections; false preserves known C++ quirks.\ndialect = \"legacy\"\n[extensions]\ndot_op = true # Independent alias for op; false ignores .op like C++.\nbranch_expressions = false # Opt in for b 20 and b 16+4.\nallow_non_console_instructions = false # Explicit opt-in for broader PowerPC.\n[legacy]\noctal_literals = false\nfloat_nan = false\n# Omitted choices inherit the preset; double_nan remains legacy here.\n",
+      "source": "Documentation\nop nop @ $80001000\n",
+      "flags": [],
+      "exit_code": 0,
+      "diagnostic": "",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000"
+    }
+  ]
+}

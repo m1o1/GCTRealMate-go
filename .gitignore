@@ -1,0 +1,14 @@
+/bin/
+/reference/
+/coverage.out
+*.GCT
+*_codeset.txt
+*_log.txt
+__pycache__/
+*.py[cod]
+.env
+.env.*
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

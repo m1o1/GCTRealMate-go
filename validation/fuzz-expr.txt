@@ -1,0 +1,8 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/339 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 339/339 completed, now fuzzing with 2 workers
+fuzz: elapsed: 3s, execs: 144456 (48145/sec), new interesting: 7 (total: 346)
+fuzz: elapsed: 6s, execs: 254478 (36678/sec), new interesting: 13 (total: 352)
+fuzz: elapsed: 9s, execs: 340344 (28621/sec), new interesting: 17 (total: 356)
+fuzz: elapsed: 11s, execs: 361908 (10750/sec), new interesting: 18 (total: 357)
+PASS
+ok  	gctrm/internal/expr	11.345s

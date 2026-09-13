@@ -1,0 +1,636 @@
+{
+  "assembler_version": "0.10.0-go",
+  "assembler_sha256": "4ddc862660d61bbd9336e925fb2dbda052c67655b10feb73f2247d89d54df440",
+  "cpp_sha256": "6001f3cdaa944b9e68ae36549471e62d925bd00dcc4f9d15639a67e59b7712f1",
+  "cases": [
+    {
+      "name": "clrlwi",
+      "source": "Probe\nop clrlwi r0,r9,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010004c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010004c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\clrlwi-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "clrrwi",
+      "source": "Probe\nop clrrwi r0,r9,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010004c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010004c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\clrrwi-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbf",
+      "source": "Probe\nop dcbf 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbf-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbi",
+      "source": "Probe\nop dcbi 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbi-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbst",
+      "source": "Probe\nop dcbst 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbst-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbt",
+      "source": "Probe\nop dcbt 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbt-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbtst",
+      "source": "Probe\nop dcbtst 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbtst-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbz",
+      "source": "Probe\nop dcbz 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbz-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "dcbz_l",
+      "source": "Probe\nop dcbz_l 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\dcbz_l-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "eciwx",
+      "source": "Probe\nop eciwx 0,7,19 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\eciwx-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "ecowx",
+      "source": "Probe\nop ecowx 0,7,19 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\ecowx-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "eieio",
+      "source": "Probe\nop eieio @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\eieio-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "lwarx",
+      "source": "Probe\nop lwarx 0,7,19 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000e813001ef000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000e813001ef000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\lwarx-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mcrf",
+      "source": "Probe\nop mcrf 0,3 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mcrf-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mcrfs",
+      "source": "Probe\nop mcrfs 0,3 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mcrfs-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mcrxr",
+      "source": "Probe\nop mcrxr 0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mcrxr-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mfmsr",
+      "source": "Probe\nop mfmsr 0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mfmsr-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mfsr",
+      "source": "Probe\nop mfsr 0,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mfsr-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mfsrin",
+      "source": "Probe\nop mfsrin 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mfsrin-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mftb",
+      "source": "Probe\nop mftb r0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mftb-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mftbl",
+      "source": "Probe\nop mftbl r0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mftbl-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mftbu",
+      "source": "Probe\nop mftbu r0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mftbu-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtfsb0",
+      "source": "Probe\nop mtfsb0 0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtfsb0-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtfsb1",
+      "source": "Probe\nop mtfsb1 0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtfsb1-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtfsf",
+      "source": "Probe\nop mtfsf 0,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtfsf-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtfsfi",
+      "source": "Probe\nop mtfsfi 0,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtfsfi-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtmsr",
+      "source": "Probe\nop mtmsr 0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtmsr-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtsr",
+      "source": "Probe\nop mtsr 0,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtsr-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mtsrin",
+      "source": "Probe\nop mtsrin 0,7 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mtsrin-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mttbl",
+      "source": "Probe\nop mttbl r0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mttbl-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "mttbu",
+      "source": "Probe\nop mttbu r0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010007c000000f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\mttbu-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "rotlwi",
+      "source": "Probe\nop rotlwi r0,r9,0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010005d20003ef000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de040010005d20003ef000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\rotlwi-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "sc",
+      "source": "Probe\nop sc @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\sc-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "stwcx",
+      "source": "Probe\nop stwcx. 0,7,19 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de0400100090130007f000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de0400100090130007f000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\stwcx-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "sync",
+      "source": "Probe\nop sync @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\sync-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "tlbie",
+      "source": "Probe\nop tlbie 0 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\tlbie-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    },
+    {
+      "name": "tlbsync",
+      "source": "Probe\nop tlbsync @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "GCTRealMate v0.2.6\r\nProbe\r\nCompiling . . .\r\n8(0x8) bytes written of gecko code.\r\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000",
+        "stderr": "",
+        "stdout": "<workspace>\\work\\category-reference-checks\\tlbsync-go\\probe.GCT: 24 bytes, 1 code sections\n"
+      },
+      "match": true
+    }
+  ]
+}

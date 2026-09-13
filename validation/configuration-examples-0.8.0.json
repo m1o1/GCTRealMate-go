@@ -1,0 +1,540 @@
+{
+  "documented_switches": 11,
+  "source_table_runs": 76,
+  "total_executable_runs": 106,
+  "toml_recipes": 5,
+  "local_links_checked": 115,
+  "executable_unchanged_sha256": "2c541b63a1f57ccdf2dcf2a53e554998567703ae5d10afe1ffecf817ff309d7c",
+  "checks": [
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 077\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 077\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 08\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = true\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 08\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\noctal_literals = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 2 + 3 * 4\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 2 + 3 * 4\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 6 ^ 3 & 1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 6 ^ 3 & 1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 2 + 8 / 2\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 2 + 8 / 2\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword (2 + 3) * 4\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword (2 + 3) * 4\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 2 + 3 + 4\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nword 2 + 3 + 4\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nleft_to_right_expressions = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = 0xffffffff + 1\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = 0xffffffff + 1\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = (0 - 1) / 2\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = (0 - 1) / 2\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = ~0\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = ~0\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = (~0) >> 1\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = (~0) >> 1\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = 1 << 32\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = true\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\n.alias x = 1 << 32\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = 0x100000000\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = true\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\n.alias x = 0x100000000\nCODE @ $80001000\n{\nword (x >> 32) & 0xffffffff\nword x & 0xffffffff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nunsigned_32_bit_aliases = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbdnz -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbdnz -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbeq -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbeq -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbeq+ -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbeq+ -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbeq- -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbeq- -0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbc 13,2,-0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbc 13,2,-0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbc+ 13,2,-0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbc+ 13,2,-0x10\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nbranch_hints = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfadd r3,r4,r5\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfadd r3,r4,r5\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = false\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfadd f3,f4,f5\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfadd f3,f4,f5\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nadd f3,fr4,cr5\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nadd f3,fr4,cr5\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = false\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nrlwinm r3,r4,r2,r0,r31\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nrlwinm r3,r4,r2,r0,r31\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = false\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nrlwinm r3,r4,2,0,31\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nrlwinm r3,r4,2,0,31\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nregister_prefixes = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte -1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte -1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nhalf -1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nhalf -1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 128\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 128\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 0xff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 0xff\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte[1] -1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte[1] -1\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nhalf[2] -1,0\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nhalf[2] -1,0\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nzero_extended_data = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfloat NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nfloat_nan = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfloat NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nfloat_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfloat +NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nfloat_nan = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfloat +NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nfloat_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfloat -NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nfloat_nan = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nfloat -NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\nfloat_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\ndouble NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\ndouble_nan = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\ndouble NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\ndouble_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\ndouble +NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\ndouble_nan = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\ndouble +NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\ndouble_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\ndouble -NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\ndouble_nan = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\ndouble -NaN\n}\n",
+      "config": "bug_fixes=true\ndialect = \"legacy\"\n[legacy]\ndouble_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\nfloat NaN\ndouble NaN\n}\n",
+      "config": "bug_fixes = true\ndot_op = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\nfloat NaN\ndouble NaN\n}\n",
+      "config": "bug_fixes = true\ndialect = \"legacy\"\n[legacy]\noctal_literals = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\nfloat NaN\ndouble NaN\n}\n",
+      "config": "version = 1\nbug_fixes = true\ndialect = \"legacy\"\n\n[legacy]\noctal_literals = false\nfloat_nan = false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\nfloat NaN\ndouble NaN\n}\n",
+      "config": "bug_fixes = true\ndialect = \"modern\"\n\n[legacy]\nregister_prefixes = true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\nfloat NaN\ndouble NaN\n}\n",
+      "config": "version = 1\nbug_fixes = true\ndialect = \"modern\"\n\n[legacy]\nini_prefix_matching = false\ninclude_tree_logs = false\nnative_line_endings = false\n",
+      "status": 0
+    },
+    {
+      "source": "Direct\nbyte -1 @ $80001000\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=true\n",
+      "status": 0
+    },
+    {
+      "source": "Slot\nop byte -1 @ $80001000\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias negative = 0 - 1\nCODE @ $80001000\n{\nbyte negative\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=true\nunsigned_32_bit_aliases=true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias negative = 0 - 1\nCODE @ $80001000\n{\nbyte negative\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=true\nunsigned_32_bit_aliases=false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 256\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=true\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte -129\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=true\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 0xffffffff\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nunsigned_32_bit_aliases=true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias x = 1 / 0\nCODE @ $80001000\n{\nword x\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nunsigned_32_bit_aliases=true\n",
+      "status": 1
+    },
+    {
+      "source": "Direct\nbyte -1 @ $80001000\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=false\n",
+      "status": 0
+    },
+    {
+      "source": "Slot\nop byte -1 @ $80001000\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias negative = 0 - 1\nCODE @ $80001000\n{\nbyte negative\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=false\nunsigned_32_bit_aliases=true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\n.alias negative = 0 - 1\nCODE @ $80001000\n{\nbyte negative\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=false\nunsigned_32_bit_aliases=false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 256\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=false\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte -129\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nzero_extended_data=false\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nbyte 0xffffffff\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nunsigned_32_bit_aliases=false\n",
+      "status": 1
+    },
+    {
+      "source": "Documentation example\n.alias x = 1 / 0\nCODE @ $80001000\n{\nword x\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nunsigned_32_bit_aliases=false\n",
+      "status": 1
+    },
+    {
+      "source": "Root\nop nop @ $80001000\n.include parts/first.asm\n",
+      "config": "bug_fixes=true\n[legacy]\ninclude_tree_logs=true\nnative_line_endings=true\n",
+      "status": 0
+    },
+    {
+      "source": "Root\nop nop @ $80001000\n.include parts/first.asm\n",
+      "config": "bug_fixes=true\n[legacy]\ninclude_tree_logs=true\nnative_line_endings=false\n",
+      "status": 0
+    },
+    {
+      "source": "Root\nop nop @ $80001000\n.include parts/first.asm\n",
+      "config": "bug_fixes=true\n[legacy]\ninclude_tree_logs=false\nnative_line_endings=true\n",
+      "status": 0
+    },
+    {
+      "source": "Root\nop nop @ $80001000\n.include parts/first.asm\n",
+      "config": "bug_fixes=true\n[legacy]\ninclude_tree_logs=false\nnative_line_endings=false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nini_prefix_matching=true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nini_prefix_matching=false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nini_prefix_matching=true\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\n[legacy]\nini_prefix_matching=false\n",
+      "status": 0
+    },
+    {
+      "source": "Documentation example\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "config": "bug_fixes=true\n[legacy]\noctal_literals=false\n",
+      "status": 0
+    }
+  ]
+}

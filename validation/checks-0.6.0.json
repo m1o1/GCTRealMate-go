@@ -1,0 +1,186 @@
+{
+  "date": "2026-09-12",
+  "go": "go1.27.1 windows/amd64",
+  "assembler_version": "0.6.0-go",
+  "assembler_sha256": "2560459502aa805195166b4515ff2bfe33fccc66e2b3e67c1a43072a57ce42fb",
+  "default_dialect": "legacy",
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "cpp_compatibility": {
+    "bug_fixes": false,
+    "instruction_words": 327,
+    "source_cases": 66,
+    "source_exact_matches": 66,
+    "complete_gct_fixtures": 2,
+    "defect_probe_outcomes": 57,
+    "cli_cases": 3,
+    "additional_source_text_log_captures": 7,
+    "native_failure_policy": "bounded error and no GCT; do not reproduce crashes, hangs or native process status codes",
+    "allow_non_console_instructions": true,
+    "target_note": "Historical corpus includes non-console forms; requires explicit target opt-in. Default target rejection is checked separately."
+  },
+  "retained_audit_cases": {
+    "cases": 57,
+    "dialects": [
+      "legacy",
+      "modern"
+    ],
+    "result": "passed",
+    "bug_fixes": true
+  },
+  "gnu_matching_vectors": 14749,
+  "gnu_exact_dialect": "modern",
+  "gnu_additional_hint_vectors": 2,
+  "gnu_legacy_comparison": "14749 vectors; prediction bit excluded only on backward conditional branches, covered separately by C++ captures",
+  "gnu_targets": [
+    "gekko",
+    "broadway"
+  ],
+  "gnu_rejected_candidates_per_target": 500,
+  "independent_inventory": {
+    "covered_names": 236,
+    "unsupported": [
+      "dcba"
+    ],
+    "bug_fixes": true
+  },
+  "dolphin_passing_checks": {
+    "gamecube-interpreter": 47,
+    "gamecube-jit": 47,
+    "wii-interpreter": 62,
+    "wii-jit": 62
+  },
+  "dolphin_total": 218,
+  "dolphin_dialect": "legacy",
+  "fuzz": [
+    {
+      "target": "FuzzEncode",
+      "requested_seconds": 10,
+      "workers": 2,
+      "executions": 202154,
+      "result": "passed",
+      "bug_fixes": [
+        false,
+        true
+      ],
+      "dialects": [
+        "legacy",
+        "modern"
+      ],
+      "allow_non_console_instructions": [
+        false,
+        true
+      ],
+      "log": "fuzz-ppc.txt"
+    },
+    {
+      "target": "FuzzAssemble",
+      "requested_seconds": 10,
+      "workers": 2,
+      "executions": 209779,
+      "result": "passed",
+      "bug_fixes": [
+        false,
+        true
+      ],
+      "dialects": [
+        "legacy",
+        "modern"
+      ],
+      "allow_non_console_instructions": [
+        false,
+        true
+      ],
+      "log": "fuzz-assembler.txt"
+    }
+  ],
+  "cross_builds": {
+    "linux/amd64": "passed; not executed",
+    "darwin/arm64": "passed; not executed"
+  },
+  "project_plus": {
+    "compatibility": {
+      "bug_fixes": false,
+      "unmodified_exact_matches": 6,
+      "adapted_exact_matches": 6,
+      "source_unchanged": true,
+      "report": "project-plus-compatibility.json",
+      "allow_non_console_instructions": false
+    },
+    "corrected": {
+      "bug_fixes": true,
+      "unmodified_go_builds": 2,
+      "unmodified_go_diagnostics": 4,
+      "adapted_entrypoints": 6,
+      "differing_words": 84,
+      "unexplained_differences": 0,
+      "source_unchanged": true,
+      "report": "project-plus.json",
+      "allow_non_console_instructions": false,
+      "reference_kind": "Project+ bundled executable",
+      "runtime_note": "84 encoding differences categorized; practical effects of the 74 BA-store address words in Project+ remain unverified."
+    },
+    "bundled_reference": {
+      "unmodified_exact_matches": 6,
+      "source_unchanged": true,
+      "bug_fixes": false,
+      "reference_sha256": "05ec46d81d7598e5b011ac2eaef7a2fadfb904b7bb95aec1db8ce75ba94d412a",
+      "report": "project-plus-bundled.json",
+      "adapted_exact_matches": 6,
+      "allow_non_console_instructions": false
+    }
+  },
+  "physical_console_tested": false,
+  "project_plus_gameplay_tested": false,
+  "toml_configuration": {
+    "schema_version": 1,
+    "source_switches": 8,
+    "cli_switches": 3,
+    "source_combinations_checked": 256,
+    "cli_combinations_checked": 8,
+    "individual_source_switch_cli_checks": 16,
+    "cases": "precedence, missing/invalid config, explicit false, unknown/duplicate keys, file selection, output preservation, per-call isolation, full example, mixed executable output",
+    "module": "github.com/pelletier/go-toml/v2@v2.4.3",
+    "go_mod_verify": "passed",
+    "bug_fixes_default": false,
+    "bug_fixes_switches": 1,
+    "source_combinations_bug_fixes": true,
+    "independent_fix_preset_override_combinations": 18,
+    "bug_fixes_cases": "empty/default/template configs, true/false/schema errors, CLI and INI precedence, persistence and independence from dialect, missing include exit status",
+    "allow_non_console_instructions_default": false,
+    "target_switches": 1,
+    "independent_target_fix_preset_config_cli_combinations": 36,
+    "target_source_form_combinations": 24,
+    "target_cases": "defaults, schema errors, TOML/CLI/INI precedence, persistence, dialect/fix independence, macros/includes, raw-data exclusion, existing-output preservation"
+  },
+  "default_bug_fixes": false,
+  "historical_validation": "history/0.5.0/checks.json and checks-0.4.0.json record earlier measurements, not current-version runs.",
+  "gnu_bug_fixes": true,
+  "dolphin_bug_fixes": true,
+  "fuzz_scope_note": "Current instruction and assembler campaigns exercise all eight fix/dialect/target combinations. fuzz-expr.txt and fuzz-config.txt remain historical 0.4.0 logs.",
+  "documentation_examples": {
+    "local_links_checked": 108,
+    "result": "passed",
+    "source_table_runs": 76,
+    "toml_recipes": 4,
+    "executable_runs": 105,
+    "report": "configuration-examples.json"
+  },
+  "cli_example": {
+    "result": "passed",
+    "bug_fixes": true,
+    "bytes": 88,
+    "allow_non_console_instructions": false
+  },
+  "default_allow_non_console_instructions": false,
+  "dolphin_allow_non_console_instructions": false,
+  "gnu_allow_non_console_instructions": false,
+  "gnu_non_console": {
+    "matching_vectors": 83,
+    "bug_fixes": true,
+    "allow_non_console_instructions": true,
+    "flags": "-many -mregnames -mbig -a64",
+    "scope": "encoding only; no non-console execution tests",
+    "fixture": "../internal/ppc/testdata/non-console-gnu.json"
+  }
+}

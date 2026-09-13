@@ -1,0 +1,345 @@
+{
+  "generator": "GNU Binutils 2.37 powerpc-eabi-as",
+  "executable_sha256": "1803871ea124926c2063e22270b282a96af42bd9e1305783291264317e9fcf82",
+  "flags": [
+    "-many",
+    "-mregnames",
+    "-mbig",
+    "-a64"
+  ],
+  "note": "Encoding comparison only; these words are not claimed to execute on GameCube/Wii.",
+  "cases": [
+    {
+      "assembly": "ld r3,-32768(r4)",
+      "word": 3898900480
+    },
+    {
+      "assembly": "ld r3,-4(r4)",
+      "word": 3898933244
+    },
+    {
+      "assembly": "ld r3,0(r4)",
+      "word": 3898867712
+    },
+    {
+      "assembly": "ld r3,8(r4)",
+      "word": 3898867720
+    },
+    {
+      "assembly": "ld r3,32764(r4)",
+      "word": 3898900476
+    },
+    {
+      "assembly": "ldu r3,-32768(r4)",
+      "word": 3898900481
+    },
+    {
+      "assembly": "ldu r3,-4(r4)",
+      "word": 3898933245
+    },
+    {
+      "assembly": "ldu r3,0(r4)",
+      "word": 3898867713
+    },
+    {
+      "assembly": "ldu r3,8(r4)",
+      "word": 3898867721
+    },
+    {
+      "assembly": "ldu r3,32764(r4)",
+      "word": 3898900477
+    },
+    {
+      "assembly": "lwa r3,-32768(r4)",
+      "word": 3898900482
+    },
+    {
+      "assembly": "lwa r3,-4(r4)",
+      "word": 3898933246
+    },
+    {
+      "assembly": "lwa r3,0(r4)",
+      "word": 3898867714
+    },
+    {
+      "assembly": "lwa r3,8(r4)",
+      "word": 3898867722
+    },
+    {
+      "assembly": "lwa r3,32764(r4)",
+      "word": 3898900478
+    },
+    {
+      "assembly": "std r3,-32768(r4)",
+      "word": 4167335936
+    },
+    {
+      "assembly": "std r3,-4(r4)",
+      "word": 4167368700
+    },
+    {
+      "assembly": "std r3,0(r4)",
+      "word": 4167303168
+    },
+    {
+      "assembly": "std r3,8(r4)",
+      "word": 4167303176
+    },
+    {
+      "assembly": "std r3,32764(r4)",
+      "word": 4167335932
+    },
+    {
+      "assembly": "stdu r3,-32768(r4)",
+      "word": 4167335937
+    },
+    {
+      "assembly": "stdu r3,-4(r4)",
+      "word": 4167368701
+    },
+    {
+      "assembly": "stdu r3,0(r4)",
+      "word": 4167303169
+    },
+    {
+      "assembly": "stdu r3,8(r4)",
+      "word": 4167303177
+    },
+    {
+      "assembly": "stdu r3,32764(r4)",
+      "word": 4167335933
+    },
+    {
+      "assembly": "ldx r3,r4,r5",
+      "word": 2086938666
+    },
+    {
+      "assembly": "ldux r3,r4,r5",
+      "word": 2086938730
+    },
+    {
+      "assembly": "lwax r3,r4,r5",
+      "word": 2086939306
+    },
+    {
+      "assembly": "lwaux r3,r4,r5",
+      "word": 2086939370
+    },
+    {
+      "assembly": "stdx r3,r4,r5",
+      "word": 2086938922
+    },
+    {
+      "assembly": "stdux r3,r4,r5",
+      "word": 2086938986
+    },
+    {
+      "assembly": "mulld r3,r4,r5",
+      "word": 2086939090
+    },
+    {
+      "assembly": "mulld. r3,r4,r5",
+      "word": 2086939091
+    },
+    {
+      "assembly": "divd r3,r4,r5",
+      "word": 2086939602
+    },
+    {
+      "assembly": "divd. r3,r4,r5",
+      "word": 2086939603
+    },
+    {
+      "assembly": "divdu r3,r4,r5",
+      "word": 2086939538
+    },
+    {
+      "assembly": "divdu. r3,r4,r5",
+      "word": 2086939539
+    },
+    {
+      "assembly": "mulhd r3,r4,r5",
+      "word": 2086938770
+    },
+    {
+      "assembly": "mulhd. r3,r4,r5",
+      "word": 2086938771
+    },
+    {
+      "assembly": "mulhdu r3,r4,r5",
+      "word": 2086938642
+    },
+    {
+      "assembly": "mulhdu. r3,r4,r5",
+      "word": 2086938643
+    },
+    {
+      "assembly": "sld r3,r4,r5",
+      "word": 2088970294
+    },
+    {
+      "assembly": "sld. r3,r4,r5",
+      "word": 2088970295
+    },
+    {
+      "assembly": "srd r3,r4,r5",
+      "word": 2088971318
+    },
+    {
+      "assembly": "srd. r3,r4,r5",
+      "word": 2088971319
+    },
+    {
+      "assembly": "srad r3,r4,r5",
+      "word": 2088971828
+    },
+    {
+      "assembly": "srad. r3,r4,r5",
+      "word": 2088971829
+    },
+    {
+      "assembly": "mulldo r3,r4,r5",
+      "word": 2086940114
+    },
+    {
+      "assembly": "mulldo. r3,r4,r5",
+      "word": 2086940115
+    },
+    {
+      "assembly": "divdo r3,r4,r5",
+      "word": 2086940626
+    },
+    {
+      "assembly": "divdo. r3,r4,r5",
+      "word": 2086940627
+    },
+    {
+      "assembly": "divduo r3,r4,r5",
+      "word": 2086940562
+    },
+    {
+      "assembly": "divduo. r3,r4,r5",
+      "word": 2086940563
+    },
+    {
+      "assembly": "extsw r3,r4",
+      "word": 2088961972
+    },
+    {
+      "assembly": "extsw. r3,r4",
+      "word": 2088961973
+    },
+    {
+      "assembly": "cntlzd r3,r4",
+      "word": 2088960116
+    },
+    {
+      "assembly": "cntlzd. r3,r4",
+      "word": 2088960117
+    },
+    {
+      "assembly": "fctid f3,f4",
+      "word": 4234159708
+    },
+    {
+      "assembly": "fctid. f3,f4",
+      "word": 4234159709
+    },
+    {
+      "assembly": "fctidz f3,f4",
+      "word": 4234159710
+    },
+    {
+      "assembly": "fctidz. f3,f4",
+      "word": 4234159711
+    },
+    {
+      "assembly": "fcfid f3,f4",
+      "word": 4234159772
+    },
+    {
+      "assembly": "fcfid. f3,f4",
+      "word": 4234159773
+    },
+    {
+      "assembly": "fsqrt f3,f4",
+      "word": 4234158124
+    },
+    {
+      "assembly": "fsqrt. f3,f4",
+      "word": 4234158125
+    },
+    {
+      "assembly": "fsqrts f3,f4",
+      "word": 3965722668
+    },
+    {
+      "assembly": "fsqrts. f3,f4",
+      "word": 3965722669
+    },
+    {
+      "assembly": "frsqrtes f3,f4",
+      "word": 3965722676
+    },
+    {
+      "assembly": "frsqrtes. f3,f4",
+      "word": 3965722677
+    },
+    {
+      "assembly": "td 4,r3,r4",
+      "word": 2088968328
+    },
+    {
+      "assembly": "tdi 4,r3,-1",
+      "word": 142868479
+    },
+    {
+      "assembly": "cmpd r3,r4",
+      "word": 2082676736
+    },
+    {
+      "assembly": "cmpd cr7,r3,r4",
+      "word": 2141396992
+    },
+    {
+      "assembly": "cmpld r3,r4",
+      "word": 2082676800
+    },
+    {
+      "assembly": "cmpld cr7,r3,r4",
+      "word": 2141397056
+    },
+    {
+      "assembly": "cmpdi r3,4",
+      "word": 740491268
+    },
+    {
+      "assembly": "cmpdi cr7,r3,4",
+      "word": 799211524
+    },
+    {
+      "assembly": "cmpldi r3,4",
+      "word": 673382404
+    },
+    {
+      "assembly": "cmpldi cr7,r3,4",
+      "word": 732102660
+    },
+    {
+      "assembly": "cmp cr7,1,r3,r4",
+      "word": 2141396992
+    },
+    {
+      "assembly": "cmpl cr7,1,r3,r4",
+      "word": 2141397056
+    },
+    {
+      "assembly": "cmpi cr7,1,r3,4",
+      "word": 799211524
+    },
+    {
+      "assembly": "cmpli cr7,1,r3,4",
+      "word": 732102660
+    }
+  ]
+}

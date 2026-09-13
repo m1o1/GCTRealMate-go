@@ -1,0 +1,1334 @@
+{
+  "cpp_commit": "9115d23c65c9479e8822968786ac8eec55b7f515",
+  "tool_hashes": {
+    "cpp": "6001f3cdaa944b9e68ae36549471e62d925bd00dcc4f9d15639a67e59b7712f1",
+    "go": "13fbfa388316c03784f5e358671f499fac9f38c443022a003ad6730f423894d8"
+  },
+  "cases": [
+    {
+      "name": "lha",
+      "source": "Probe\nCODE @ $80001000\n{\nlha r3,0(r4)\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004a064000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "A0640000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\lha\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004a864000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "A8640000",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "A8640000",
+      "gnu_broadway": "A8640000"
+    },
+    {
+      "name": "eqv",
+      "source": "Probe\nCODE @ $80001000\n{\neqv r3,r4,r5\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c83223800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C832238",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\eqv\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c832a3800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C832A38",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "7C832A38",
+      "gnu_broadway": "7C832A38"
+    },
+    {
+      "name": "crandc",
+      "source": "Probe\nCODE @ $80001000\n{\ncrandc 1,2,3\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044c221a0200000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4C221A02",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\crandc\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044c22190200000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4C221902",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "4C221902",
+      "gnu_broadway": "4C221902"
+    },
+    {
+      "name": "crorc",
+      "source": "Probe\nCODE @ $80001000\n{\ncrorc 1,2,3\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044c221b8200000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4C221B82",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\crorc\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044c221b4200000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4C221B42",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "4C221B42",
+      "gnu_broadway": "4C221B42"
+    },
+    {
+      "name": "addo",
+      "source": "Probe\nCODE @ $80001000\n{\naddo r3,r4,r5\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c642ba400000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C642BA4",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\addo\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c642e1400000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C642E14",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "7C642E14",
+      "gnu_broadway": "7C642E14"
+    },
+    {
+      "name": "addo_record",
+      "source": "Probe\nCODE @ $80001000\n{\naddo. r3,r4,r5\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c642ba500000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C642BA5",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\addo_record\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c642e1500000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C642E15",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "7C642E15",
+      "gnu_broadway": "7C642E15"
+    },
+    {
+      "name": "srwi_zero",
+      "source": "Probe\nCODE @ $80001000\n{\nsrwi r3,r4,0\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000045484003e00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "5484003E",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\srwi_zero\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000045483003e00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "5483003E",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "5483003E",
+      "gnu_broadway": "5483003E"
+    },
+    {
+      "name": "psq_l_negative",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_l f0,-8(r3),0,0\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004e002fff800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "E002FFF8",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psq_l_negative\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004e0030ff800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "E0030FF8",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "E0030FF8",
+      "gnu_broadway": "E0030FF8"
+    },
+    {
+      "name": "psq_st_negative",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_st f0,-8(r3),0,0\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004f002fff800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "F002FFF8",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psq_st_negative\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004f0030ff800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "F0030FF8",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "F0030FF8",
+      "gnu_broadway": "F0030FF8"
+    },
+    {
+      "name": "ps_record",
+      "source": "Probe\nCODE @ $80001000\n{\nps_add. f1,f2,f3\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000041022182a00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "1022182A",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\ps_record\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000041022182b00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "1022182B",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "1022182B",
+      "gnu_broadway": "1022182B"
+    },
+    {
+      "name": "psq_lx",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_lx f1,r3,r4,0,0\n}\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psq_lx\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000041023200c00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "1023200C",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "1023200C",
+      "gnu_broadway": "1023200C"
+    },
+    {
+      "name": "psq_lux",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_lux f1,r3,r4,0,0\n}\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psq_lux\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000041023204c00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "1023204C",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "1023204C",
+      "gnu_broadway": "1023204C"
+    },
+    {
+      "name": "psq_stx",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_stx f1,r3,r4,0,0\n}\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psq_stx\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000041023200e00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "1023200E",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "1023200E",
+      "gnu_broadway": "1023200E"
+    },
+    {
+      "name": "psq_stux",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_stux f1,r3,r4,0,0\n}\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psq_stux\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000041023204e00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "1023204E",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "1023204E",
+      "gnu_broadway": "1023204E"
+    },
+    {
+      "name": "hex_register",
+      "source": "Probe\nCODE @ $80001000\n{\ncmpw r5,0xD\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c05000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C050000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\hex_register\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c05680000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C056800",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "7C056800",
+      "gnu_broadway": "7C056800"
+    },
+    {
+      "name": "hex_rotate",
+      "source": "Probe\nCODE @ $80001000\n{\nrlwinm r0,r0,0x3,0x0,0x1c\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000045400000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "54000000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\hex_rotate\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000045400183800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "54001838",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "54001838",
+      "gnu_broadway": "54001838"
+    },
+    {
+      "name": "cmpli",
+      "source": "Probe\nCODE @ $80001000\n{\ncmpli 0,0,r3,1\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000047c00184000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "7C001840",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\cmpli\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000042803000100000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "28030001",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "28030001",
+      "gnu_broadway": "28030001"
+    },
+    {
+      "name": "psa_direct",
+      "source": "Probe\nRA_float 3 @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0400100000000003f000000000000000",
+        "payload": [
+          "04001000",
+          "00000003"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psa_direct\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100021000003f000000000000000",
+        "payload": [
+          "04001000",
+          "21000003"
+        ]
+      }
+    },
+    {
+      "name": "psa_block",
+      "source": "Probe\nCODE @ $80001000\n{\nRA_float 3\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000042100000300000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "21000003",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\psa_block\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000042100000300000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "21000003",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "name": "mem2_hook",
+      "source": "Probe\nHOOK @ $90001000\n{\nblr\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n32(0x20) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de4a00000090001000c2000000000000014e80002000000000e000000080008000f000000000000000",
+        "payload": [
+          "4A000000",
+          "90001000",
+          "C2000000",
+          "00000001",
+          "4E800020",
+          "00000000",
+          "E0000000",
+          "80008000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\mem2_hook\\go\\probe.GCT: 48 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de4200000090000000c2001000000000014e80002000000000e000000080008000f000000000000000",
+        "payload": [
+          "42000000",
+          "90000000",
+          "C2001000",
+          "00000001",
+          "4E800020",
+          "00000000",
+          "E0000000",
+          "80008000"
+        ]
+      }
+    },
+    {
+      "name": "mem2_word",
+      "source": "Probe\nword 0x11223344 @ $90001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n24(0x18) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de42000000900010000400000011223344e000000080008000f000000000000000",
+        "payload": [
+          "42000000",
+          "90001000",
+          "04000000",
+          "11223344",
+          "E0000000",
+          "80008000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\mem2_word\\go\\probe.GCT: 40 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de42000000900000000400100011223344e000000080008000f000000000000000",
+        "payload": [
+          "42000000",
+          "90000000",
+          "04001000",
+          "11223344",
+          "E0000000",
+          "80008000"
+        ]
+      }
+    },
+    {
+      "name": "mem1_upper_word",
+      "source": "Probe\nword 0x11223344 @ $81001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0500100011223344f000000000000000",
+        "payload": [
+          "05001000",
+          "11223344"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\mem1_upper_word\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0500100011223344f000000000000000",
+        "payload": [
+          "05001000",
+          "11223344"
+        ]
+      }
+    },
+    {
+      "name": "mem2_code",
+      "source": "Probe\nCODE @ $90001000\n{\nnop\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n32(0x20) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de4a0000009000100016000000000000046000000000000000e000000080008000f000000000000000",
+        "payload": [
+          "4A000000",
+          "90001000",
+          "16000000",
+          "00000004",
+          "60000000",
+          "00000000",
+          "E0000000",
+          "80008000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\mem2_code\\go\\probe.GCT: 48 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de4a0000009000100016000000000000046000000000000000e000000080008000f000000000000000",
+        "payload": [
+          "4A000000",
+          "90001000",
+          "16000000",
+          "00000004",
+          "60000000",
+          "00000000",
+          "E0000000",
+          "80008000"
+        ]
+      }
+    },
+    {
+      "name": "full_width_po",
+      "source": "Probe\n.PO = $90000000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de4a00000010000000f000000000000000",
+        "payload": [
+          "4A000000",
+          "10000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\full_width_po\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de4a00000090000000f000000000000000",
+        "payload": [
+          "4A000000",
+          "90000000"
+        ]
+      }
+    },
+    {
+      "name": "full_width_gr",
+      "source": "Probe\n.GR3 = $ffffffff\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de800000037ffffffff000000000000000",
+        "payload": [
+          "80000003",
+          "7FFFFFFF"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\full_width_gr\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de80000003fffffffff000000000000000",
+        "payload": [
+          "80000003",
+          "FFFFFFFF"
+        ]
+      }
+    },
+    {
+      "name": "gr_multiply",
+      "source": "Probe\n.GR4 *= 00000002\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de8000000400000002f000000000000000",
+        "payload": [
+          "80000004",
+          "00000002"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\gr_multiply\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de8610000400000002f000000000000000",
+        "payload": [
+          "86100004",
+          "00000002"
+        ]
+      }
+    },
+    {
+      "name": "gr_or",
+      "source": "Probe\n.GR4 |= 00000002\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0000000000000000f000000000000000",
+        "payload": [
+          "00000000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\gr_or\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de8620000400000002f000000000000000",
+        "payload": [
+          "86200004",
+          "00000002"
+        ]
+      }
+    },
+    {
+      "name": "gr_load",
+      "source": "Probe\n.GR5 <-(16) $00001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de8210000000001000f000000000000000",
+        "payload": [
+          "82100000",
+          "00001000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\gr_load\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de8210000500001000f000000000000000",
+        "payload": [
+          "82100005",
+          "00001000"
+        ]
+      }
+    },
+    {
+      "name": "gr_store",
+      "source": "Probe\n.GR6 ->(8) PO+$00001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de9401000000001000f000000000000000",
+        "payload": [
+          "94010000",
+          "00001000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\gr_store\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de9401000600001000f000000000000000",
+        "payload": [
+          "94010006",
+          "00001000"
+        ]
+      }
+    },
+    {
+      "name": "ba_qualified_assign",
+      "source": "Probe\n.BA = PO+$00001000\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\ba_qualified_assign\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de5201000000001000f000000000000000",
+        "payload": [
+          "52010000",
+          "00001000"
+        ]
+      }
+    },
+    {
+      "name": "ba_qualified_gr_store",
+      "source": "Probe\n.BA -> GR3+$00001000\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\ba_qualified_gr_store\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de4400100300001000f000000000000000",
+        "payload": [
+          "44001003",
+          "00001000"
+        ]
+      }
+    },
+    {
+      "name": "goto_false",
+      "source": "Probe\n.GOTO_F->next\n* 04001000 60000000\nnext:\n* 04001004 60000000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n20(0x14) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de6610000004001000600000000400100460000000f000000000000000",
+        "payload": [
+          "66100000",
+          "04001000",
+          "60000000",
+          "04001004",
+          "60000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\goto_false\\go\\probe.GCT: 40 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de661000010000000004001000600000000400100460000000f000000000000000",
+        "payload": [
+          "66100001",
+          "00000000",
+          "04001000",
+          "60000000",
+          "04001004",
+          "60000000"
+        ]
+      }
+    },
+    {
+      "name": "goto_backward",
+      "source": "Probe\nback:\n* 04001000 60000000\n.GOTO->back\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0400100060000000661ffffe00000000f000000000000000",
+        "payload": [
+          "04001000",
+          "60000000",
+          "661FFFFE",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\goto_backward\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de04001000600000006620fffe00000000f000000000000000",
+        "payload": [
+          "04001000",
+          "60000000",
+          "6620FFFE",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "name": "else_reset",
+      "source": "Probe\n.ELSE_RESET\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n0(0x0) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0def000000000000000",
+        "payload": []
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\else_reset\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0dee210000180008000f000000000000000",
+        "payload": [
+          "E2100001",
+          "80008000"
+        ]
+      }
+    },
+    {
+      "name": "else_plain",
+      "source": "Probe\n.ELSE\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\else_plain\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0dee210000100000000f000000000000000",
+        "payload": [
+          "E2100001",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "name": "raw_eof",
+      "source": "Probe\nbyte 0x12\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n0(0x0) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0def000000000000000",
+        "payload": []
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\raw_eof\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de1200000000000000f000000000000000",
+        "payload": [
+          "12000000",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "name": "raw_section",
+      "source": "Probe\nbyte 0x12\nNext section\n* 04001000 60000000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nNext section\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de12000000000000000400100060000000f000000000000000",
+        "payload": [
+          "12000000",
+          "00000000",
+          "04001000",
+          "60000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\raw_section\\go\\probe.GCT: 32 bytes, 2 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de12000000000000000400100060000000f000000000000000",
+        "payload": [
+          "12000000",
+          "00000000",
+          "04001000",
+          "60000000"
+        ]
+      }
+    },
+    {
+      "name": "alias_multiply",
+      "source": "Probe\n.ALIAS x = 2 * 3\nop li r3,x @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600017f000000000000000",
+        "payload": [
+          "04001000",
+          "38600017"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\alias_multiply\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600006f000000000000000",
+        "payload": [
+          "04001000",
+          "38600006"
+        ]
+      }
+    },
+    {
+      "name": "alias_or",
+      "source": "Probe\n.ALIAS x = 2 | 1\nop li r3,x @ $80001000\n",
+      "cpp": {
+        "exit_code": 3221226505,
+        "output": "GCTRealMate v0.2.6\nProbe\n"
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\alias_or\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600003f000000000000000",
+        "payload": [
+          "04001000",
+          "38600003"
+        ]
+      }
+    },
+    {
+      "name": "precedence",
+      "source": "Probe\n.ALIAS x = 2 << 1 + 1\nop li r3,x @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600003f000000000000000",
+        "payload": [
+          "04001000",
+          "38600003"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\precedence\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600008f000000000000000",
+        "payload": [
+          "04001000",
+          "38600008"
+        ]
+      }
+    },
+    {
+      "name": "alias_chained_add",
+      "source": "Probe\n.ALIAS x = 2 + 3 + 4\nop li r3,x @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600005f000000000000000",
+        "payload": [
+          "04001000",
+          "38600005"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\alias_chained_add\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600009f000000000000000",
+        "payload": [
+          "04001000",
+          "38600009"
+        ]
+      }
+    },
+    {
+      "name": "alias_mixed_add_div",
+      "source": "Probe\n.ALIAS x = 2 + 8 / 2\nop li r3,x @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de040010003860000af000000000000000",
+        "payload": [
+          "04001000",
+          "3860000A"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\alias_mixed_add_div\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600006f000000000000000",
+        "payload": [
+          "04001000",
+          "38600006"
+        ]
+      }
+    },
+    {
+      "name": "alias_bitwise_precedence",
+      "source": "Probe\n.ALIAS x = 6 ^ 3 & 1\nop li r3,x @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600001f000000000000000",
+        "payload": [
+          "04001000",
+          "38600001"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\alias_bitwise_precedence\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100038600007f000000000000000",
+        "payload": [
+          "04001000",
+          "38600007"
+        ]
+      }
+    },
+    {
+      "name": "unclosed_macro",
+      "source": "Probe\n.macro Bad(<x>)\n{\nli r3,<x>\n}\nCODE @ $80001000\n{\n%Bad(1\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000043860000100000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "38600001",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\unclosed_macro\\go\\probe.asm:8: expected macro name(arguments)\n"
+      }
+    },
+    {
+      "name": "missing_op_address",
+      "source": "Probe\nop nop\n",
+      "cpp": {
+        "timeout": true
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\missing_op_address\\go\\probe.asm:2: op requires @ address\n"
+      }
+    },
+    {
+      "name": "missing_include",
+      "source": "Probe\n.include no-such-file.asm\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCould not find file: \"<workspace>\\\\work\\\\cpp-bug-probes\\\\missing_include\\\\cpp\\\\no-such-file.asm\"!!!\nCompiling . . .\n0(0x0) bytes written of gecko code.\nERROR parsing \"<workspace>\\\\work\\\\cpp-bug-probes\\\\missing_include\\\\cpp\\\\probe.asm\"!!\n"
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\missing_include\\go\\probe.asm:2: open <workspace>\\work\\cpp-bug-probes\\missing_include\\go\\no-such-file.asm: The system cannot find the file specified.\n"
+      }
+    },
+    {
+      "name": "branch_hint",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz -0x10\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044220fff000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4220FFF0",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\branch_hint\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044200fff000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4200FFF0",
+          "00000000"
+        ]
+      },
+      "gnu_gekko": "4200FFF0",
+      "gnu_broadway": "4200FFF0"
+    },
+    {
+      "name": "branch_radix",
+      "source": "Probe\nCODE @ $80001000\n{\nb 20\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044800000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "48000000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\branch_radix\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044800001400000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "48000014",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "name": "leading_zero_radix",
+      "source": "Probe\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000043860000800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "38600008",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\leading_zero_radix\\go\\probe.GCT: 32 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000043860000a00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "3860000A",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "name": "nan",
+      "source": "Probe\nfloat NaN @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n8(0x8) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de040010007ffffffff000000000000000",
+        "payload": [
+          "04001000",
+          "7FFFFFFF"
+        ]
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\nan\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de040010007fc00000f000000000000000",
+        "payload": [
+          "04001000",
+          "7FC00000"
+        ]
+      }
+    },
+    {
+      "name": "invalid_reg",
+      "source": "Probe\nCODE @ $80001000\n{\nadd r32,r4,r5\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de060010000000000480042a1400000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "80042A14",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\invalid_reg\\go\\probe.asm:4: operand \"r32\" outside 0..31\n"
+      }
+    },
+    {
+      "name": "invalid_unknown",
+      "source": "Probe\nCODE @ $80001000\n{\ngarbage r3,r4,r5\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "FFFFFFFF",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\invalid_unknown\\go\\probe.asm:4: unknown instruction \"garbage\"\n"
+      }
+    },
+    {
+      "name": "invalid_branch",
+      "source": "Probe\nCODE @ $80001000\n{\nb 0x2000000\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044a00000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "4A000000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\invalid_branch\\go\\probe.asm:4: branch displacement 33554432 is unaligned or outside signed 26-bit range\n"
+      }
+    },
+    {
+      "name": "invalid_update",
+      "source": "Probe\nCODE @ $80001000\n{\nlwzu r3,4(r3)\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000048463000400000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "84630004",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\invalid_update\\go\\probe.asm:4: update-form integer load requires different destination and base registers\n"
+      }
+    },
+    {
+      "name": "missing_label",
+      "source": "Probe\nCODE @ $80001000\n{\nb missing\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n16(0x10) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de06001000000000044800000000000000f000000000000000",
+        "payload": [
+          "06001000",
+          "00000004",
+          "48000000",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\missing_label\\go\\probe.asm:4: unknown symbol or invalid number \"missing\"\n"
+      }
+    },
+    {
+      "name": "duplicate_label",
+      "source": "Probe\nCODE @ $80001000\n{\nthere:\nnop\nthere:\nblr\nb there\n}\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n24(0x18) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0de060010000000000c600000004e8000204bfffff800000000f000000000000000",
+        "payload": [
+          "06001000",
+          "0000000C",
+          "60000000",
+          "4E800020",
+          "4BFFFFF8",
+          "00000000"
+        ]
+      },
+      "go": {
+        "exit_code": 1,
+        "output": "<workspace>\\work\\cpp-bug-probes\\duplicate_label\\go\\probe.asm:6: duplicate label \"there\"\n"
+      }
+    },
+    {
+      "name": "dot_op",
+      "source": "Probe\n.op nop @ $80001000\n",
+      "cpp": {
+        "exit_code": 0,
+        "output": "GCTRealMate v0.2.6\nProbe\nCompiling . . .\n0(0x0) bytes written of gecko code.\n",
+        "gct_hex": "00d0c0de00d0c0def000000000000000",
+        "payload": []
+      },
+      "go": {
+        "exit_code": 0,
+        "output": "<workspace>\\work\\cpp-bug-probes\\dot_op\\go\\probe.GCT: 24 bytes, 1 code sections\n",
+        "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000",
+        "payload": [
+          "04001000",
+          "60000000"
+        ]
+      }
+    }
+  ],
+  "gnu_sha256": "1803871ea124926c2063e22270b282a96af42bd9e1305783291264317e9fcf82"
+}

@@ -1,0 +1,416 @@
+[
+  {
+    "kind": "source",
+    "name": "immediate_010",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "data_010",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "immediate_00",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "data_00",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "immediate_077",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "data_077",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "immediate_0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "data_0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "immediate_-010",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "data_-010",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_6 ^ 3 & 1",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_010",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_0xffffffff / 2",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_0xffffffff % 2",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_0xffffffff + 1",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_0x80000000 / 2",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_0 - 1",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "alias_0xffffffff ^ 0x80000000",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_fadd r3,r4,r5",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_add f3,fr4,cr5",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_rlwinm r3,r4,r2,r0,r31",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_add r010,r011,r012",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_cmpw r2,r3,r4",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_psq_l r3,8(r4),r0,r2",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_bc 13,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_bc 12,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_beq -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_beq+ -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_beq- -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_bdnz -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "op_b 010",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "float_NaN",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "float_-NaN",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "float_+NaN",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "float_nanf",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "double_NaN",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "double_-NaN",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "double_+NaN",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "double_nanf",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_beq 0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_beq -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_beq+ 0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_beq+ -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_beq- 0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_beq- -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bdnz 0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bdnz -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bdnz+ 0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bdnz+ -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bdnz- 0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bdnz- -0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc 12,2,0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc 13,2,0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc 12,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc 13,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc+ 12,2,0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc+ 13,2,0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc+ 12,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc+ 13,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc- 12,2,0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc- 13,2,0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc- 12,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "branch_bc- 13,2,-0x10",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "narrow_alias_0",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "narrow_alias_2",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "source",
+    "name": "narrow_alias_3",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "cli",
+    "name": "nested-text-log",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "cli",
+    "name": "ini-prefix",
+    "passed": true,
+    "exit_code": 0
+  },
+  {
+    "kind": "cli",
+    "name": "scoped-flags",
+    "passed": true,
+    "exit_code": 0
+  }
+]

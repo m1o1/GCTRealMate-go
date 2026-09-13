@@ -1,0 +1,54 @@
+{
+  "cpp_sha256": "6001f3cdaa944b9e68ae36549471e62d925bd00dcc4f9d15639a67e59b7712f1",
+  "cases": [
+    {
+      "name": "ignored_immediate_record",
+      "source": "Probe\nop addi. r10,r10,0x3ffa @ $80001000\n",
+      "gct_hex": "00d0c0de00d0c0de04001000394a3ffaf000000000000000",
+      "text": "Probe\n04001000 394A3FFA\n\n",
+      "log": "Probe @ Off 0x8\n"
+    },
+    {
+      "name": "floating_prefix",
+      "source": "Probe\nop fmulls f1,f3,f3 @ $80001000\n",
+      "gct_hex": "00d0c0de00d0c0de04001000ec2300f2f000000000000000",
+      "text": "Probe\n04001000 EC2300F2\n\n",
+      "log": "Probe @ Off 0x8\n"
+    },
+    {
+      "name": "conditional_prefix",
+      "source": "Probe\nCODE @ $80001000\n{\ncanSlideOff\n}\n",
+      "gct_hex": "00d0c0de00d0c0de06001000000000044c00000000000000f000000000000000",
+      "text": "Probe\n06001000 00000004\n4C000000 00000000\n\n",
+      "log": "Probe @ Off 0x8\n"
+    },
+    {
+      "name": "undefined_macro",
+      "source": "Probe\n%missing(5)\nop nop @ $80001000\n",
+      "gct_hex": "00d0c0de00d0c0de0400100060000000f000000000000000",
+      "text": "Probe\n04001000 60000000\n\n",
+      "log": "Probe @ Off 0x8\n"
+    },
+    {
+      "name": "address_annotation",
+      "source": "Probe\nHOOK @ $80001000 8127ee50\n{\nnop\n}\n",
+      "gct_hex": "00d0c0de00d0c0dec2001000000000016000000000000000f000000000000000",
+      "text": "Probe\nC2001000 00000001\n60000000 00000000\n\n",
+      "log": "Probe @ Off 0x8\n"
+    },
+    {
+      "name": "odd_goto_text",
+      "source": "Probe\n.GOTO_F -> end\nend:\n.RESET\n",
+      "gct_hex": "00d0c0de00d0c0de66100000e000000080008000f000000000000000",
+      "text": "Probe\n66100000 E0000000\n80008000\n",
+      "log": "Probe @ Off 0x8\n"
+    },
+    {
+      "name": "dropped_alias_tail",
+      "source": "Probe\n.alias x=2+3+4\nop li r3,x @ $80001000\n",
+      "gct_hex": "00d0c0de00d0c0de0400100038600005f000000000000000",
+      "text": "Probe\n04001000 38600005\n\n",
+      "log": "Probe @ Off 0x8\n"
+    }
+  ]
+}

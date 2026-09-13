@@ -1,0 +1,52 @@
+{
+  "assembler_version": "0.8.0-go",
+  "assembler_sha256": "2c541b63a1f57ccdf2dcf2a53e554998567703ae5d10afe1ffecf817ff309d7c",
+  "default_dot_op": true,
+  "default_bug_fixes": true,
+  "default_allow_non_console_instructions": false,
+  "source_form_policy_combinations": 36,
+  "cli_config_override_combinations": 36,
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "windows_build": "passed",
+  "checks": [
+    {
+      "bug_fixes": false,
+      "dot_op": "default",
+      "gct_hex": "00d0c0de00d0c0de04001000a064000004001004a0640000f000000000000000",
+      "passed": true
+    },
+    {
+      "bug_fixes": false,
+      "dot_op": "true",
+      "gct_hex": "00d0c0de00d0c0de04001000a064000004001004a0640000f000000000000000",
+      "passed": true
+    },
+    {
+      "bug_fixes": false,
+      "dot_op": "false",
+      "gct_hex": "00d0c0de00d0c0de04001004a0640000f000000000000000",
+      "passed": true
+    },
+    {
+      "bug_fixes": true,
+      "dot_op": "default",
+      "gct_hex": "00d0c0de00d0c0de04001000a864000004001004a8640000f000000000000000",
+      "passed": true
+    },
+    {
+      "bug_fixes": true,
+      "dot_op": "true",
+      "gct_hex": "00d0c0de00d0c0de04001000a864000004001004a8640000f000000000000000",
+      "passed": true
+    },
+    {
+      "bug_fixes": true,
+      "dot_op": "false",
+      "gct_hex": "00d0c0de00d0c0de04001004a8640000f000000000000000",
+      "passed": true
+    }
+  ],
+  "cpu_encoder_changed": false,
+  "scope": "Independent .op alias selection; numeric branch syntax is unchanged pending user review. No new Dolphin or Project+ runs."
+}

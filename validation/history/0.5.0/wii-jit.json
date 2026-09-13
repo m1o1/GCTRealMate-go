@@ -1,0 +1,401 @@
+{
+  "bug_fixes": true,
+  "emulator_sha256": "2e521c324f78c2b651ed395f952cd588aeeb40a6285b7922784c56e9a836d1bc",
+  "assembler_sha256": "85f758066a61d13934e3e3c8ea1cb19f99adb2bcfde9941436d0d6a9d1e5d55d",
+  "cpu": "jit",
+  "console": "wii",
+  "processor_version": "00087102",
+  "format": "standalone DOL plus Gecko handler",
+  "checks": [
+    {
+      "check": "lha sign extension",
+      "expected": "FFFFFFFF",
+      "actual": "FFFFFFFF",
+      "passed": true
+    },
+    {
+      "check": "lhz zero extension",
+      "expected": "0000FFFF",
+      "actual": "0000FFFF",
+      "passed": true
+    },
+    {
+      "check": "eqv distinct operands",
+      "expected": "FFFFBBB3",
+      "actual": "FFFFBBB3",
+      "passed": true
+    },
+    {
+      "check": "crandc complement",
+      "expected": "C0000000",
+      "actual": "C0000000",
+      "passed": true
+    },
+    {
+      "check": "crorc complement",
+      "expected": "20000000",
+      "actual": "20000000",
+      "passed": true
+    },
+    {
+      "check": "addo result",
+      "expected": "80000000",
+      "actual": "80000000",
+      "passed": true
+    },
+    {
+      "check": "addo overflow flags",
+      "expected": "C0000000",
+      "actual": "C0000000",
+      "passed": true
+    },
+    {
+      "check": "srwi zero destination",
+      "expected": "00001234",
+      "actual": "00001234",
+      "passed": true
+    },
+    {
+      "check": "backward counted branch",
+      "expected": "00000007",
+      "actual": "00000007",
+      "passed": true
+    },
+    {
+      "check": "conditional label branch",
+      "expected": "0000002A",
+      "actual": "0000002A",
+      "passed": true
+    },
+    {
+      "check": "branch link and return",
+      "expected": "0000002B",
+      "actual": "0000002B",
+      "passed": true
+    },
+    {
+      "check": "paired add with negative/indexed loads PS0",
+      "expected": "40B00000",
+      "actual": "40B00000",
+      "passed": true
+    },
+    {
+      "check": "paired add with negative/indexed loads PS1",
+      "expected": "41240000",
+      "actual": "41240000",
+      "passed": true
+    },
+    {
+      "check": "paired multiply PS0",
+      "expected": "40C00000",
+      "actual": "40C00000",
+      "passed": true
+    },
+    {
+      "check": "paired multiply PS1",
+      "expected": "41900000",
+      "actual": "41900000",
+      "passed": true
+    },
+    {
+      "check": "paired multiply-add PS0",
+      "expected": "40F00000",
+      "actual": "40F00000",
+      "passed": true
+    },
+    {
+      "check": "paired multiply-add PS1",
+      "expected": "41A20000",
+      "actual": "41A20000",
+      "passed": true
+    },
+    {
+      "check": "paired record updates CR1",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "scalar floating add",
+      "expected": "40B00000",
+      "actual": "40B00000",
+      "passed": true
+    },
+    {
+      "check": "quantized byte load PS0",
+      "expected": "3F800000",
+      "actual": "3F800000",
+      "passed": true
+    },
+    {
+      "check": "quantized byte load PS1",
+      "expected": "40000000",
+      "actual": "40000000",
+      "passed": true
+    },
+    {
+      "check": "mcrf field copy",
+      "expected": "12345378",
+      "actual": "12345378",
+      "passed": true
+    },
+    {
+      "check": "mcrxr copies XER flags",
+      "expected": "0000E000",
+      "actual": "0000E000",
+      "passed": true
+    },
+    {
+      "check": "mcrxr clears XER flags",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "MSR read/write round trip",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "segment register direct read/write",
+      "expected": "00123456",
+      "actual": "00123456",
+      "passed": true
+    },
+    {
+      "check": "segment register indexed read",
+      "expected": "00123456",
+      "actual": "00123456",
+      "passed": true
+    },
+    {
+      "check": "segment register indexed restore",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "time-base upper selectors agree",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "time-base lower advances",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "mtfsfi sets rounding bits",
+      "expected": "00000003",
+      "actual": "00000003",
+      "passed": true
+    },
+    {
+      "check": "mtfsb0 clears FPSCR bit",
+      "expected": "00000002",
+      "actual": "00000002",
+      "passed": true
+    },
+    {
+      "check": "mtfsb1 sets FPSCR bit",
+      "expected": "00000003",
+      "actual": "00000003",
+      "passed": true
+    },
+    {
+      "check": "mcrfs copies FPSCR field",
+      "expected": "00000300",
+      "actual": "00000300",
+      "passed": true
+    },
+    {
+      "check": "mtfsf restores FPSCR",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "TLB invalidate/synchronize returns",
+      "expected": "00000001",
+      "actual": "00000001",
+      "passed": true
+    },
+    {
+      "check": "dcbz_l clears cache line in Dolphin",
+      "expected": "00000000",
+      "actual": "00000000",
+      "passed": true
+    },
+    {
+      "check": "external-control word read/write",
+      "expected": "00003456",
+      "actual": "00003456",
+      "passed": true
+    },
+    {
+      "check": "Gecko: word 0x89abcdef @ $80020000",
+      "address": "80020000",
+      "expected": "89ABCDEF",
+      "actual": "89ABCDEF",
+      "passed": true
+    },
+    {
+      "check": "Gecko: byte 0xab @ $80020004",
+      "address": "80020004",
+      "expected": "AB",
+      "actual": "AB",
+      "passed": true
+    },
+    {
+      "check": "Gecko: half 0xcdef @ $80020006",
+      "address": "80020006",
+      "expected": "CDEF",
+      "actual": "CDEF",
+      "passed": true
+    },
+    {
+      "check": "Gecko: byte[5] 1,2,3,4,5 @ $80020008",
+      "address": "80020008",
+      "expected": "0102030405",
+      "actual": "0102030405",
+      "passed": true
+    },
+    {
+      "check": "Gecko: RA_float 3 @ $80020010",
+      "address": "80020010",
+      "expected": "21000003",
+      "actual": "21000003",
+      "passed": true
+    },
+    {
+      "check": "Gecko: .GR3 ->(32) PO+$00000000",
+      "address": "80022000",
+      "expected": "FEDCBA98",
+      "actual": "FEDCBA98",
+      "passed": true
+    },
+    {
+      "check": "Gecko: CODE @ $80020020\n{\nli r3,77\nblr\n}",
+      "address": "80020020",
+      "expected": "3860004D4E800020",
+      "actual": "3860004D4E800020",
+      "passed": true
+    },
+    {
+      "check": "Gecko: word 0xdeadbeef @ $90020000",
+      "address": "90020000",
+      "expected": "DEADBEEF",
+      "actual": "DEADBEEF",
+      "passed": true
+    },
+    {
+      "check": "Gecko: half 0x1234 @ $92020004",
+      "address": "92020004",
+      "expected": "1234",
+      "actual": "1234",
+      "passed": true
+    },
+    {
+      "check": "Gecko: CODE @ $90020020\n{\nli r3,99\nblr\n}",
+      "address": "90020020",
+      "expected": "386000634E800020",
+      "actual": "386000634E800020",
+      "passed": true
+    },
+    {
+      "check": "Gecko: C2 hook and return branch",
+      "actual": "4BFE13B0",
+      "passed": true
+    },
+    {
+      "check": "Gecko: C2 payload executes and returns",
+      "expected": "0000002A",
+      "actual": "0000002A",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: word 0x89abcdef @ $80020000",
+      "address": "80020000",
+      "expected": "89ABCDEF",
+      "actual": "89ABCDEF",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: byte 0xab @ $80020004",
+      "address": "80020004",
+      "expected": "AB",
+      "actual": "AB",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: half 0xcdef @ $80020006",
+      "address": "80020006",
+      "expected": "CDEF",
+      "actual": "CDEF",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: byte[5] 1,2,3,4,5 @ $80020008",
+      "address": "80020008",
+      "expected": "0102030405",
+      "actual": "0102030405",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: RA_float 3 @ $80020010",
+      "address": "80020010",
+      "expected": "21000003",
+      "actual": "21000003",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: .GR3 ->(32) PO+$00000000",
+      "address": "80022000",
+      "expected": "FEDCBA98",
+      "actual": "FEDCBA98",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: CODE @ $80020020\n{\nli r3,77\nblr\n}",
+      "address": "80020020",
+      "expected": "3860004D4E800020",
+      "actual": "3860004D4E800020",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: word 0xdeadbeef @ $90020000",
+      "address": "90020000",
+      "expected": "DEADBEEF",
+      "actual": "DEADBEEF",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: half 0x1234 @ $92020004",
+      "address": "92020004",
+      "expected": "1234",
+      "actual": "1234",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: CODE @ $90020020\n{\nli r3,99\nblr\n}",
+      "address": "90020020",
+      "expected": "386000634E800020",
+      "actual": "386000634E800020",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: C2 hook and return branch",
+      "actual": "4BFE0090",
+      "passed": true
+    },
+    {
+      "check": "MEM2 codeset: Gecko: C2 payload executes and returns",
+      "expected": "0000002A",
+      "actual": "0000002A",
+      "passed": true
+    }
+  ]
+}

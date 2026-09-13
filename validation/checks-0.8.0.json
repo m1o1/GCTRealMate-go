@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-12",
+  "go": "go1.27.1 windows/amd64",
+  "assembler_version": "0.8.0-go",
+  "assembler_sha256": "2c541b63a1f57ccdf2dcf2a53e554998567703ae5d10afe1ffecf817ff309d7c",
+  "default_dialect": "legacy",
+  "default_bug_fixes": true,
+  "default_allow_non_console_instructions": false,
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "windows_build": "passed",
+  "scope": "Independent .op alias selection; numeric branch syntax is unchanged pending user review. No new Dolphin or Project+ runs.",
+  "toml_configuration": {
+    "report": "toml-configuration.json",
+    "result": "passed"
+  },
+  "documentation_examples": {
+    "report": "configuration-examples.json",
+    "result": "passed",
+    "source_table_runs": 76,
+    "toml_recipes": 5,
+    "executable_runs": 106,
+    "local_links_checked": 115
+  },
+  "prior_integration_validation": {
+    "assembler_version": "0.6.0-go",
+    "report": "checks-0.6.0.json",
+    "scope": "Dolphin, Project+, fuzz and cross-build evidence remains historical with its recorded executable hashes. Not rerun for this default-only change."
+  },
+  "physical_console_tested": false,
+  "project_plus_gameplay_tested": false,
+  "default_dot_op": true,
+  "alias_checks": {
+    "passed": 6,
+    "report": "dot-op.json"
+  },
+  "prior_cli_validation": {
+    "assembler_version": "0.7.0-go",
+    "report": "checks-0.7.0.json"
+  }
+}

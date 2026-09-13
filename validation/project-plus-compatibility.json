@@ -1,0 +1,711 @@
+{
+  "bug_fixes": false,
+  "allow_non_console_instructions": false,
+  "source_dir": "<project-plus>",
+  "source_manifest": {
+    "Source/CodeMenu/BigHeadMode.asm": "907a1ab580e6bd4efa7f3d8b71c0a694d6a8a58d579c68fd657d315c70c83420",
+    "Source/CodeMenu/CodeMenu.asm": "5163e57c80b25d3c16085a440bf27d45263969697a8d8c916c1061719e2f14d3",
+    "Source/CodeMenu/RandomAngleMode.asm": "cbbe00eb3e72d3abb6e4052e45247235b059229334be4002c8f225544b5a9f45",
+    "Source/Community/BarrelCannon.asm": "5a05243ea3bdbed63e11cd4db2a3e585005c998e01eabf99940a434fb501b259",
+    "Source/Community/DoubleCherry.asm": "92028a645142f334c1496557a4969ff14dca2b20b625ba9680d9032dd8d076ba",
+    "Source/Community/FSMeter.asm": "f0539ce54b1e0974b1814d492216635e065a286536f0fe8cbf539aebd7ed4822",
+    "Source/Community/Heritage.asm": "8bab195a0debe21bdc9c60cbb4b962ba0e7b326e48eaa22514851c0c05097e22",
+    "Source/Community/Hooktype.asm": "c282bca6e3c89aa6308f494faa2e4c56aab6de32825e91a6ada4d07a6c5f12f3",
+    "Source/Community/ItemEx.asm": "3f45725daeebfd53ba9681dd555dbc71e8f389111c399e84937271d5fa1d595b",
+    "Source/Community/lavaInjectLoader.asm": "ebc21b34bc044ad7993f41d49eee4ea36383fa1bbe7c05e771c44d71166cb5af",
+    "Source/Community/MusicSelect.asm": "8f2a0e36e057637b4d4f5845c4bb1c80b51a637b89a5e8d3f1b501fc022175a1",
+    "Source/Community/PassiveAnim.asm": "465823f48fe7a461e293cf63c93a60a7f41d57465c32b8192657bcf26f0974a9",
+    "Source/Community/PSA/Angle.asm": "01ed9a3745925e986ef5bc4853823fb911000bf52e76e9c293365baebd95a520",
+    "Source/Community/PSA/CreateAndThrowItem.asm": "4ac41eb41da54ca90989256b56f30b30b1afc4a0c3a1e9e13439cb9fcb327d5d",
+    "Source/Community/PSA/IC-Basics.asm": "a1005272afc2c973469e109548dbf05f588e088cd54fec4c848c31ef9d403b4c",
+    "Source/Community/PSA/Maths.asm": "832ca76691df32ce1ef9e95e382a6199f3ccfbee20ddc459168a679ea9933cb8",
+    "Source/Community/PSA/NewCommands.asm": "bc6ae730d9b824d55346968ab5d1a2e75b5c82cd012c0f3fd600dd90381a4dfa",
+    "Source/Community/PSA/PointerWizardry.asm": "dcfce928509460ca9a4a7192f89bd552dfaabe6c4ae59af986dce6cb385b510a",
+    "Source/Community/PSA/PSA.asm": "906cf9918354de0f43e65a047687a735d69f1e55529ba1498a494a20464bfe4b",
+    "Source/Community/PSA/VariableParameter.asm": "388a1e296f5ae2307272fc7daee056a9dbddad6c2e253d2116e28e6d73c2f568",
+    "Source/Community/Subspace.asm": "24f790b0d97d99553a889ef9bf1b38354e09c26b916f149097f1bfff6f39229e",
+    "Source/Community/SubspaceSwap.asm": "a5681249b460c72adb7824defc91c1a8418856a2f72abccf7f3c649ea72a413e",
+    "Source/Community/Syringe.asm": "cb3eef5ab8e2cef7c7c5d137537cc754f4d32e19753848e8d42d74b3f9626a1e",
+    "Source/Community/TrailEffects.asm": "1d566eb49463a77d4b490dccbc267d9249b3959ef2bdd4a11dc4a21f33af4437",
+    "Source/Community/WallAttach.asm": "b3e40f0dd3b3138606aae158701e60494f1c252de3b2f1cce18673efb4fb8967",
+    "Source/Community/WaveIDIntercept.asm": "63f7fdf124f9b76d63624a9d3b10a77c3700ac0bd643eb6b236852702b16e542",
+    "Source/Extras/AerialForbiddenSDI.asm": "23c0e9dc65b71037419b27174964d4f6eb050b1c4fefcd754c39c0598cb6faaa",
+    "Source/Extras/AiDebug.asm": "1d91e055766c23f2b4b0cba6bbcbb14b07397272561372ef311c2e5dd79b047a",
+    "Source/Extras/AnimationBlend.asm": "e3f8b996ac4c760bd6fa389a2dd8650ff014a85167539fa9e0d3609a98d4f5c8",
+    "Source/Extras/ASDImult.asm": "315db3d986259c84f5fb17bb874de0813f13cc03574cb43a1377c028e963ea68",
+    "Source/Extras/AutosaveWiiLight.asm": "4be0c356bb17b67ac64c4833b977638e9dd374de3b218db2417dc00dbf9c9cf0",
+    "Source/Extras/Console.asm": "341b8c543a16c748b2ca6057c8f30902d37bb60cf498090fb82ad8250c2fe531",
+    "Source/Extras/More.asm": "e6e45710e0408a8e65994b71669eb7ccaf4a25fc1a405912e7847102c3f2e4f6",
+    "Source/Extras/Netplay.asm": "dad7b55328b7f5fe1639ed16d067e6d0ebf8d8972c3dd78b70323393736ba251",
+    "Source/Extras/QuickStart.asm": "5da8763d8d7c9fc654fe3f0f23f684f875d08275717f38ee51f9f0620fddb801",
+    "Source/Extras/ShorthopMacro.asm": "c1df7380d1a68b069420bd1061459198a37fa376d4865270bdc70fc5f915a70b",
+    "Source/Extras/UncapDamageRatio.asm": "9c2af3138866c9ea6a48944ca9bdf2452128902feba2377e873fdaddbd9ba2c3",
+    "Source/Extras/USBGecko.asm": "35afc0cf1d6ee30519aa0f7de3c1b442f1539142e25296abc80492a6ec520c99",
+    "Source/Injects/DEFINE.txt": "d56876e2efae1856d17a7dce57998fc90ee89955f2254f4ff2ab99ef22e7e0f3",
+    "Source/Injects/Fighter/Constants.asm": "dd4db96bf5c5ee1eb6e382215f32b1bd9d725d53771e41aaf7c7156645938a82",
+    "Source/Injects/MDEF.txt": "425491c854c1884fc7630fce5c0c4b848cbfce3b17c3ba92917ea7349db1f6a3",
+    "Source/Injects/MoveDef/C-Stick.asm": "1b0564af7503ccaf8a0ef81e940a3aacb9b7a601529316077c6880b2917d5481",
+    "Source/Injects/MoveDef/Edge.asm": "48600de46a2e5e89f9f08a61ba3f0092f88109137c368094a1c964b179f91d53",
+    "Source/Injects/MoveDef/Effects.asm": "1f5929db5becd8f175376f248c7150dd176c9dbd9915a8d3762aa38789f8451f",
+    "Source/Injects/MoveDef/Glide.asm": "115c62244b030ca81ebc34f6ac2ca8974178bb673cf3cf2502d238e3963cf782",
+    "Source/Injects/MoveDef/Grabs.asm": "669e0d4d9b7a1ed87fc5a9d65d76c6ff7046b333197b1c296a27a6443132c79f",
+    "Source/Injects/MoveDef/Hitstun.asm": "8c3f90bdf2793935120f872c0aa08d3468d8010672bf6822df0764bef8d6c683",
+    "Source/Injects/MoveDef/Items.asm": "a42421ae0eb6054728916b3ae858713393d3ec9443d0573b24ead60e485b7f01",
+    "Source/Injects/MoveDef/MeteorCancel.asm": "5480202e6a4475c999c233ac9053d33cd920c823a318e6965796b2f9d2d4a03a",
+    "Source/Injects/MoveDef/Misc.asm": "14a2462e6ab63489655c9c826a2498d0d81c2aafa54c2b91f0dbaea059b53766",
+    "Source/Injects/MoveDef/Moonwalk.asm": "7989225645159415321d0c28582569ad8960a5ecb76c5055609deea6d916ffc5",
+    "Source/Injects/MoveDef/PowerShield.asm": "0fdcf59bb8a438301823a746ab58944802f3f2b270424d7ba475328d1380b5a4",
+    "Source/Injects/MoveDef/ScrewAttack.asm": "98edfb848d7e1105419fdd0eb25535f3a47cf297ab815ae0962e90df2d5d385c",
+    "Source/Injects/MoveDef/SlowTurn.asm": "01b78041142f796ea13c3afbc19fdd23ccfe5601c13d60b79511407e826b1486",
+    "Source/Injects/MoveDef/TauntCancel.asm": "e7a23762e37395cc5a1af551d3c606ee3291f278deda65277537f5eb9cdf539c",
+    "Source/Injects/MoveDef/Tethers.asm": "50acf147c427abaeb0318e41e4ff6f0a757d9e8431fcb11375ba04b527c28c71",
+    "Source/Injects/MoveDef/WallCling.asm": "0fb8c4527d51f1837f46df8aec64c1cf90059cbce3d85066a10ddc6e35aac3f9",
+    "Source/Injects/README.md": "782fd1c1fe80f5d0cba22a9986917833a068a0dc81ab12229f7a747020d385c6",
+    "Source/LegacyTE/50CC.asm": "0fcc3de8b1b24a1b8ce142ca802c2fbbee799a59755b5ec1490d1dc5e16458c2",
+    "Source/LegacyTE/AltCostume.asm": "9f503f3549ffb56f535fe7dada17eab5eedebb049d5e2d51ad4bb12de526d134",
+    "Source/LegacyTE/ASLHelper.asm": "8087d7de638f4f90f90943e415457c530955908bcf4eebc096e89ee8da3579f7",
+    "Source/LegacyTE/CPU.asm": "2fcae2b1b7d3aac1c8192ba4d2ff952d30ed794ecc29db2bcc733145a93a6394",
+    "Source/LegacyTE/CSSCustomControls.asm": "c782fd3c798370649cc744702015a787fc88601d3e78e2db8b65031a5fdff698",
+    "Source/LegacyTE/LoadFlags.asm": "0fc94f327ad39dddb54664cd9c18edde834fb7bd2163c8a4f754c1f8d25a5fbc",
+    "Source/LegacyTE/Masquerade.asm": "d7d9086e9974eb86efe3b18ecb513b5812710d98988441c67ff022bc8c60164b",
+    "Source/LegacyTE/Replays.asm": "bac4cc66c1b59d49631e1438997e47b17edabc4a708b53598cb361f301c54416",
+    "Source/LegacyTE/TagsControls.asm": "d969a36d93cd338441b616ff805a1057d6364dad1f20c4fbd7cb488681ae37ef",
+    "Source/LegacyTE/UnboundedTeamEngine.asm": "bcf9fe9b475d742d55931f6d23cf8b6ac2c56c8fae5eca20d5e65b3b9bf29293",
+    "Source/Netplay/Net-CodeMenu.asm": "dec44ce1b0d059f3bb3daa69d55e8dae451d24036e25af0518e9b90e67dce3cf",
+    "Source/Netplay/Net-MultiGCT.asm": "94f14afd328e6ae99a8a66eee51d0ce0885a46be19f1e8733ff5b7a89f74ac67",
+    "Source/Netplay/Net-Random.asm": "4f5f60297f78053f220b01b8f32d6c29619b678b2357fc26fe6032bf793f14ee",
+    "Source/Netplay/Net-StageFiles.asm": "a4ed7b1dd011959e980811987a05e7ebe817c1817c1b800b27ecec597ecb92ea",
+    "Source/Project+/AirDodge.asm": "c052fd0c4b5955d9a34782b0fd0be6b44580d0066b2654dd766f52dce895dc9b",
+    "Source/Project+/AnimatedCSS.asm": "0b09ae940c9e6d59272cbcc5f76054408eced927148ba2cba09691e87a45a826",
+    "Source/Project+/Articles.asm": "04d050d6eb9e7b857c011b449e43c50d2a4afe74812aebe043a772b80cc49249",
+    "Source/Project+/Attributes.asm": "cf6e57bc90f20761e149d4636dfcd63035f5aafe35ecf99b97d48b4ae0dbab7d",
+    "Source/Project+/BootToCSS.asm": "aa09cb8be492766a3c6553327e7969db05195819f974136e8f9faafe5ec2ef99",
+    "Source/Project+/Boss.asm": "c43ab3407bcc828b23b01d020869e9281ffbdf452786dbe824725c71f2c4f12a",
+    "Source/Project+/Camera.asm": "95f9afc1db34afc96648241b8ee252acd9484e03086929e70a5bfe15c885b662",
+    "Source/Project+/Co-OpSave.asm": "8dafc6e5b1a46fc08be7877993bc42959a2b84015fcfcd3dfe939a62f6c20c43",
+    "Source/Project+/Collision.asm": "fefec1b14382496550bc289b2eea69add55d00dfbc2aef70b6c2bfd76335c556",
+    "Source/Project+/CompressPAC.asm": "3341f0de75db462b96477394bd2ed059520dd30f26237b74be1c476f30f9ebd1",
+    "Source/Project+/CSE.asm": "50a1f1d09c3204249c985e6af5368e4c683f462995bee368254670c8ae2bf1ac",
+    "Source/Project+/CSSRender.asm": "2b27a2092184f27298f52fa38fcbb3437d1431c81248969a2454b534f9e1e9ba",
+    "Source/Project+/CStick.asm": "35b41c9a3943617efe920f05728900a7107bba6fcb62fb0dc115c1ab2beb5827",
+    "Source/Project+/CustomRequirements.asm": "59ee030071e3907660e8c1ce05fabeda89f68cc277341bb71f8e877d55fc259c",
+    "Source/Project+/Debug/Capsule Renderer.asm": "5bf719afb6e2387a4070f597b293adfefc29ce27fdad10217e392dc2a3e2e66a",
+    "Source/Project+/Debug/gfSceneRoot.asm": "855ff7065b2dca0b90abaf3d0fc32f70f8171a18fde2d60ebc114c1ddb57d378",
+    "Source/Project+/Debug/Hurtboxes Hitboxes.asm": "660e88aef6a01697029090dc06018ec33e04746c4a12b14962b8a0ed4e24175e",
+    "Source/Project+/Debug/modifiedDebug.asm": "45226abca77f7764fe4365387f98e0d2cb5a913941797112ed6209cf733bb6eb",
+    "Source/Project+/Debug/renderDebug.asm": "78f5bce315d287c948156a5d7d6478d768bd0a7d2c8c3865ee855a94d6e15817",
+    "Source/Project+/Debug/soGroundModule.asm": "409aa6b12ebb01d89a442411f767e2141017b20367feb40ad498d37224046f08",
+    "Source/Project+/Debug/Stage Collisions.asm": "e90198e7e0e492bd09ed596b01616b6a87b3f3f579f1075b7b0f68f8c8fca24b",
+    "Source/Project+/EffectCommands.asm": "a6fcc7cdc4661a74f5a163e484a9ea9bcefba5a4ade59f0ce9217df7674e61dd",
+    "Source/Project+/Effects.asm": "a37786e327599044ce8b77620fbac369465b80c19ac569b4164753ceae0f0686",
+    "Source/Project+/EffectsEX.asm": "9e855b34636558c253cf8413f7582c480a5bffcb93672bdb1d28ac00682b0565",
+    "Source/Project+/FilePatchCode.asm": "d3a279f5d6261ddd40ae8408df4ff85c555cd785d04d7741b1a27beb349f63c9",
+    "Source/Project+/Gimmick.asm": "6c2163672ed69c29559a5e1f2283b6893c276749986a6be782cce1dff167659b",
+    "Source/Project+/Hitbox.asm": "3be82524b5f69e86df1cad1e6798673e9e42a026da553eacc750a6447c13c54f",
+    "Source/Project+/Hurtbox.asm": "c218b0f6bae768a5f7ace19be608f6d96bb20a6d3a0f4295053e14013e938410",
+    "Source/Project+/IndependentSub.asm": "21285f3921a289c7f12e04093646caf3b79ecf904622810a52124e1bb3c8a334",
+    "Source/Project+/InputSystem.asm": "978f68559fc524bf388c3a5ea0bce2a7847fbb63358404483f294082a4361f6e",
+    "Source/Project+/Items.asm": "f66ff2df8ff0cce5d785cf8e5dcee7675b81e424c39da827be3668fd86dd465f",
+    "Source/Project+/L-Cancel.asm": "f900c478a858a19825ed61f27d825cc180b5763d0ab64ef2a548c0b0f0659a6a",
+    "Source/Project+/LedgeGrab.asm": "92b80cf974470abbcc954de1e8e77d2e53a83b1f95b5a64c6219bdd7abc2fc43",
+    "Source/Project+/Memory.asm": "67c0435e83dd90d6c07387380faf2756d3380d90b5df2fdf96e5e8a76efcb2fd",
+    "Source/Project+/MemoryLayout.asm": "3595e8407c1230133e0928c7117399806c749367aa64b5feedecbbe4358b835d",
+    "Source/Project+/MultiGCT.asm": "8bbcaa94b9e30e5842e2da33988d6d01e02a396ce8068c85f9ca517ab5a45fa0",
+    "Source/Project+/MyMusic.asm": "c844b57fbfb4a901ca6e4f1211d076e276966d2d3f0420373eb699b52c1f1953",
+    "Source/Project+/Pause.asm": "4705eab60ef2a3a6533daedf029adadc4f4d4953acc429e0252ffb79461b2e45",
+    "Source/Project+/Physics.asm": "b906c838b1dee29d8e309211fba8594ec6781cb4e889ef90f310a442e32f1d3a",
+    "Source/Project+/PokeTrainer.asm": "348bff91e5849db72e415469c1432a75cf1019dc97abe34211fe1882a9075fe0",
+    "Source/Project+/PSA.asm": "ef84f3109a4e9a00671257efe192609b4889add8b2f3459334bf9fa6338e5c49",
+    "Source/Project+/Random.asm": "b197266df5f434ed66b9011d350ccab016b002d204ebd8944b2cd84048d09445",
+    "Source/Project+/ReplacementSoundbankEngine.asm": "bb5f28619034a715c2f14fe45cb2903700a3a908f0e93ec1ae89f1052eef6a12",
+    "Source/Project+/ResultsMusic.asm": "3280cffe5b458ac516da4460c5f4319aec7116ea676accc4f57b0ded2d58afa8",
+    "Source/Project+/ResultsSkip.asm": "8d3fc8a76dec1f37756655d706afefa6f46a532d3d2f79637c6707dc9b9b32c4",
+    "Source/Project+/ScreenKO.asm": "3bcf22372805a689cd5b46bd2cf7ca4eceb32ed4659bf2d67c2565f17f910ee2",
+    "Source/Project+/SFXExpand.asm": "f86f60e566682603c05d9e34f750c5088bbbebde2bea86fd68376ad8cdbdd858",
+    "Source/Project+/Shake.asm": "ce2d7ae73edc1d31b28402d2908dd43665595816480bba5ce45bbee5530c1fa5",
+    "Source/Project+/Slippery.asm": "0acc6b6c52e3c9b1dc73f3b6162615cafa3a5717dbb543218fd67ae9a91bec29",
+    "Source/Project+/StageBuilderHijack.asm": "4319d9733f7a3eed5070263777cb49411b01c2a2d444f7974ed2b5ed6a6eb3c8",
+    "Source/Project+/StageEX.asm": "b612dbedbdf2521e4b49abd12e1e3537a648b698c63c35bf383cd4725e306c26",
+    "Source/Project+/StageFiles.asm": "6584ad5d83b14f0341913acaccb39db74779d10e5e1b87156dbe267b74d75bb1",
+    "Source/Project+/StageList.asm": "a8cccd3231d63f1dd97d06ab59e408c0704d20afe6eb37b036d30b4811a02fee",
+    "Source/Project+/Teams.asm": "f7cf24f7916b2d5b9ead83ecda6a3d6b5170086b4b8156183df04749d58a8b51",
+    "Source/Project+/TexFlags.asm": "98ce2516d6ff8cbadefeb16c1b5629d9fd94cd3065206a8b343baac1f5eb3e67",
+    "Source/Project+/Timeout.asm": "66f01b0affd9543370efaefa24a84b05ac323167dfbf795d3cc1165495a36703",
+    "Source/Project+/TrainingMode.asm": "4af5557969cdf9183c7f3512d6b4f280a3ca67a23dbaf2c32e86823a7004ef72",
+    "Source/Project+/TripRate.asm": "38d83dd869953bfa9c5b18cbc9a3460e0f0992957bea6fdc290dd677eded09eb",
+    "Source/Project+/UCF.asm": "a9f41360d4c157fe20d71c5370cc172a20469c513c18f931048d559b13072a36",
+    "Source/Project+/Unlocks.asm": "be7de6a5c82d6cea5908c2420cf03e454502967fb375d938fa0f8afb7d8bf98f",
+    "Source/Project+/VictoryCamera.asm": "488e3d9804779405bf6c109fce16660048a49d520bd47923619974deb0c5150d",
+    "Source/Project+/YoshiEggs.asm": "e3f2b62239d3982787ff9719109aec3d184196d94410f91b5f2ab85864c035f4",
+    "Source/ProjectM/ButtonPresses.asm": "c927c7a1f6b5d0f5f654b9a705307c6a96c4790f1625512eb8d2a70d927c15c0",
+    "Source/ProjectM/CloneEngine.asm": "d9b37f4bed45a8eb1babede1b90b651c0ceddc0cf928a4cfed7b509dcf55c7c3",
+    "Source/ProjectM/CSS.asm": "aea374c55a609832e7771ab369dee9dd89e0518393fdf686be48e668d445d208",
+    "Source/ProjectM/CustomAI.asm": "5bc506f72a03e878f41534b71fb00fec9eb246c739a78cc4bf305cb1feabb739",
+    "Source/ProjectM/Damage.asm": "a12e110ccdabe44c4c2193bec55540d97dbe2a1168f1cfdf0ea8084ae3f0b0cb",
+    "Source/ProjectM/DirectionalInfluence.asm": "3c9645440e39b7ed5aff396cde6a7535da60d28ca56524d862b764a0246768b3",
+    "Source/ProjectM/DirectionalInput.asm": "65ced9ef85d27e59785dd780c1cdf95ff45966d9244b0cb9370bebb0b0aa0812",
+    "Source/ProjectM/Elements.asm": "7e58514512ee1214efa2db39c44634dd8f72cfdb634d163de86703882c3bec20",
+    "Source/ProjectM/Events.asm": "4fd295d277b5e00d6030c2bd318c3125798a5d01e23cf1187c5e06726cf045d7",
+    "Source/ProjectM/Grab.asm": "f0d6725328628ec6060b361e5e41a50c3832ca72025bcd12b2b07393384f3b99",
+    "Source/ProjectM/Handicap.asm": "d4cb980d478dc9282f6138407c2b9f4283a2ebfed705ec35e1583dad250dc04a",
+    "Source/ProjectM/IdleAudioFade.asm": "2e6ac630f004a8eb90985568fb44fa0473ddb7120527de1c0dec83285d42fcee",
+    "Source/ProjectM/JabReset.asm": "e40f8f447c73ea67eb2bd6fb36b85c64f1dc976e9ad6e233713eed786cb9ad00",
+    "Source/ProjectM/Knockback.asm": "43043b4d9939c9d1d6eecfd0817921e3ebb8eb8a754f0285356ae734110d8425",
+    "Source/ProjectM/Ledge.asm": "e6651827efb7eeecc05979ee5d678efe90e69313363a6cd5949cbec31c3c1f23",
+    "Source/ProjectM/Modifier/Hitlag.asm": "8302d95d8aa018edbca430d8e2cd2513f8a05262114eb7e79a613235c5590d36",
+    "Source/ProjectM/Modifier/Physics.asm": "8add64a5788f551339d73c37ee6432e0f4a8e91d1be52e33a8ec6822bdd39518",
+    "Source/ProjectM/Modifier/ThrowRelease.asm": "a5d2106f0724a6001d905621ec14d2c8dbcfec0ab1c63e88413a79271454a6c8",
+    "Source/ProjectM/Modifier/VariableSet.asm": "3ea5f1dcad6706b7172fc00c8095ce3bba8b3316063f8ff1d2d8e1f929ed39b5",
+    "Source/ProjectM/Reflect.asm": "7c3c2ca89e20dda091eca44c4d47e00d4079b4448dbf67b68d6c16ac250def3b",
+    "Source/ProjectM/SpecialModes/AllStarVs.asm": "d7ee2e8f7120959b04f7bbe1e36bb1a461faa4be6197a6e2f1c5aa982aa163c9",
+    "Source/ProjectM/SpecialModes/BombRain.asm": "767273116ae0c2bd8e792505d0b9cf0819561145e28cd1d26105bd18b644c7f8",
+    "Source/ProjectM/SpecialModes/RandomElement.asm": "e0746f5ad080acdf74a9fc769acc40eca43de32a731b4c60862c9884e95d4c44",
+    "Source/ProjectM/SpecialModes/Rules.asm": "3bc24948c536298c719cd6b4f5c4a2aac6a0e858e69dd12cc2d73d0778140284",
+    "Source/ProjectM/SpecialModes/Stamina.asm": "2e6c3229da139c968f395100a7438ab578d41aecece2eea29a9f297f8fae7aef",
+    "Source/ProjectM/SpecialModes/Turbo.asm": "58a9aef733589ab1a348a4841712fd02fff005e3e153e292787d18903449a7ba",
+    "Source/ProjectM/SpecialModes/Wild.asm": "88c4026833e2e7f8920267b2b235771d1279d6e7885b67e0c2fcdf832cb6a51d",
+    "Source/ProjectM/SpecialModes/Zero2Death.asm": "0c86cc5efaaf6ebe723d0efb17a23960158687f1aa2a585f1cc83eacd5f15ee3",
+    "Source/ProjectM/SSS.asm": "b37150bbeaf96c5073bb038b246d78a4e1c47e2a5fd0f487e69123b8adae7815",
+    "Source/ProjectM/SSSButtons.asm": "c0f667f7b7d1edadfedc30672a71e1674606f3e216a676350f0ebe62f10aa613",
+    "RSBE01.txt": "f684a996dcd8469ba93d49d11df4e1a8d8b6ac008fd2cbbdfb2ad5fec4ac3133",
+    "BOOST.txt": "f141a3fda865ef786aaf5cd0f0b21ef163834cdda6f7be9247b17fe0f92e29a5",
+    "NETPLAY.txt": "3a255c3cf949911b157a935892952213e133d2035ce60fbeb6ecf88f3e0332c4",
+    "NETBOOST.txt": "1fb007fdaa24daa83c5bd94da9c8d2602fc79372af3b766b6b5d9adff2f91b92"
+  },
+  "assembler_sha256": "2560459502aa805195166b4515ff2bfe33fccc66e2b3e67c1a43072a57ce42fb",
+  "reference_sha256": "6001f3cdaa944b9e68ae36549471e62d925bd00dcc4f9d15639a67e59b7712f1",
+  "unmodified_builds": [
+    {
+      "implementation": "go",
+      "entry": "RSBE01.txt",
+      "exit_code": 0,
+      "diagnostic": "<workspace>\\work\\non-console-project-plus-reference\\unmodified\\go\\RSBE01.GCT: 101576 bytes, 466 code sections\n",
+      "output_exists": true,
+      "bytes": 101576,
+      "sha256": "a037062e70cac3b73e6bf54cf202430b8c007da96d52016ce98e7226e52fa98a",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "BOOST.txt",
+      "exit_code": 0,
+      "diagnostic": "<workspace>\\work\\non-console-project-plus-reference\\unmodified\\go\\BOOST.GCT: 63144 bytes, 215 code sections\n",
+      "output_exists": true,
+      "bytes": 63144,
+      "sha256": "4b93c770f5a82221159e5e6ec6387f94830f68d7e5dea07bdf0f4ab97cc1f06c",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "NETPLAY.txt",
+      "exit_code": 0,
+      "diagnostic": "<workspace>\\work\\non-console-project-plus-reference\\unmodified\\go\\NETPLAY.GCT: 101880 bytes, 466 code sections\n",
+      "output_exists": true,
+      "bytes": 101880,
+      "sha256": "dae3a5218b1516c5cf7c6f6d261274029f970b927c115eb010fc1dd85086883a",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "NETBOOST.txt",
+      "exit_code": 0,
+      "diagnostic": "<workspace>\\work\\non-console-project-plus-reference\\unmodified\\go\\NETBOOST.GCT: 63208 bytes, 217 code sections\n",
+      "output_exists": true,
+      "bytes": 63208,
+      "sha256": "bc3b32b7679bedfe4413bd1fc1656a9a4af7e430a0e06328c8604d1e3e9507ea",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "Source/Injects/MDEF.txt",
+      "exit_code": 0,
+      "diagnostic": "<workspace>\\work\\non-console-project-plus-reference\\unmodified\\go\\Source\\Injects\\MDEF.GCT: 15920 bytes, 87 code sections\n",
+      "output_exists": true,
+      "bytes": 15920,
+      "sha256": "d39160cb097375a5a3fb7a54422818a0e1de83060f332ebf3f873ea947835acb",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "Source/Injects/DEFINE.txt",
+      "exit_code": 0,
+      "diagnostic": "<workspace>\\work\\non-console-project-plus-reference\\unmodified\\go\\Source\\Injects\\DEFINE.GCT: 656 bytes, 78 code sections\n",
+      "output_exists": true,
+      "bytes": 656,
+      "sha256": "6b94f756df91d41c0e0092f8c172395b2ddd2f1ae6cb6062ebeaf4c42acb2dd0",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "RSBE01.txt",
+      "exit_code": 0,
+      "diagnostic": "\ndisplay/[clCapsule] [Eon] \ndisplay/[clSphere] [Eon]\nrenderDebug/[Stage] [Eon]\nrenderDebug/[grGimmick] [Eon]\nrenderDebug/[grCollisionManager] [Eon]\nDrawCollision(SegmentData, CollisionData) [Eon]\nFully transparent Shapes are not attempted to be drawn [Eon]\nclRectangle and gfAreaTriangle draws correct [Eon]\nCollision Debug Function [Arthur, Eon] \ndraw/[clRhombus2D] [Eon]\nDraw ECB adjustments [Eon]\nDraw Ledgegrab [Eon]\nDraw Touching Planes [Eon]\nrenderDebug/[gfSceneRoot] [Eon]\nDebug Start Input v1.2 [Magus, ???, Eon]\nDebug On the Fly Character Switcher v1.4 (Knuckles added by Eon) [Magus, Krisan Thyme, Eon]\n[Project+] Debug Controls v1.4 (Dolphin Fix v1.1) [Magus, ???, Eon] \n[Project+] Debug Camera, No HUD/Tags (Dolphin Fix v1.2) [Igglyboo, Link, Y.S, Phantom Wings, Magus, Eon]\nDebug Body Collision State, Armor, and Hitstun Overlays v1.2 [Magus]\nC-stick Smash Fixes + functional tilt stick (reverse ftilt included) v1.2 [camelot, Eon]\n[Project+] C-Stick Debug Mode and Slow Mode fix v4.3 [Fracture, DukeItOut, Eon]\n[Project+] Custom C-stick options [Eon]\n[Project+] C-stick mushing Fix [Eon]\n[Project+] C-Stick throws 2.0 [Eon, Dantarion, standardtoaster]\nCstick Neutral range = Cstick input range [Eon]\nC-Stick backwards fsmash bug fix [Eon]\nEffects spawn on hitting items [DukeItOut]\nMax Items Spawnable 8 -> 12 [DukeItOut]\nAdditional Item Switch Frequency Settings 'VERY HIGH', 'INTENSE', and 'BOMB RAIN' [DukeItOut]\n2P Co-Op Defaults to First Costume [DukeItOut]\nRefresh ECB Diamond Function [DukeItOut]\nMomentum Shifts Revert Physics [DukeItOut]\nRising Aerial Fix [DukeItOut]\nAir Dodges Calculate One Frame Earlier [DukeItOut, Fudgepop01, Eon]\nLanding Fix [Fudgepop01, DukeItOut]\nJumps Calculate One Frame Earlier [DukeItOut]\nShield Forward Angle Fix [DukeItOut]\nWindbox Stacking For Fighter Hitboxes [DukeItOut]\nDuo Sticky Object Fix [DukeItOut]\nInstant Fastfalls [Fudgepop01, DukeItOut]\nAerial/Onstage State 8 uses Momentum to Decide [DukeItOut]\nTeeter Trigger Tweak [DukeItOut]\nAccess Fighter Ancestor [DukeItOut]\nItemEx Clone Engine v2.52 [Sammi Husky, Kapedani]\nCherry Double v1.2 [Kapedani]\nDragoon Parts Drops like a Normal Item With Multiplier If Parts Have Dropped [Kapedani] \nTeam Healer Always Heals Teammates [Kapedani]\nTouch Items Notify Outside Event Get Item [Kapedani]\nEvery Item Can Have Collision v2 [Kapedani]\nEvery Item Can Have Physics [Kapedani]\nItem Mayhem Mode (Item Switch Edition) + Butterfingers [MarioDox, DukeItOut, Kapedani]\nPassive Aggressive Mode [Kapedani]\nAll Assists are Unlocked [Kapedani]\nItemEx Mayhem and Passive Aggression Modes default to Off on Boot [Kapedani]\nutArchivereqLoad 4th Parameter as 2 forces read instead of clone [DukeItOut, Kapedani]\nDon't clear memory on game launch [Sammi Husky]\nrun codehandler after initializing memory [Sammi Husky]\nrun codehandler after loading rels [Sammi Husky]\nSyringe Core Loader [Sammi Husky, DukeItOut]\nExpansion GCT Available [DukeItOut]\nCompiling . . .\n101560(0x18cb8) bytes written of gecko code.\n",
+      "output_exists": true,
+      "bytes": 101576,
+      "sha256": "a037062e70cac3b73e6bf54cf202430b8c007da96d52016ce98e7226e52fa98a",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "BOOST.txt",
+      "exit_code": 0,
+      "diagnostic": "0 lhs rhs[Bero]\nreq IsStage  0x1021 ID[Bero]\nCustom AI Command Loader[Bero]\nCustom AI Command Table[Bero]\ncmd RetrieveATKD  0x33 variable subaction opponent[Bero]\nCPU falls from respawn plane when Turbo[Bero]\nLedge hanging/Lying routine injection(ledge0x2060, lying0x2070)[Bero]\nCE AI Input Fix [ds22]\nCPU Airdodge Fix [Fudgepop01]\nFix Lv9 CPU oversight [(Mr AI) SLuigi123, Fudgepop01]\nEvent Status3 is Turbo [Bero]\nEvent Rule Fixes [ds22, Eternal Yoshi, mawwwk, Magus, Motobug]\nIgnore Handicap [Y.S.]\nHandicap = Stock Count v1.6 [InternetExplorer, wiiztec]\nAuto Handicap = Crew Mode v1.02 [InternetExplorer]\nSelect music for match on SSS v2 [Squidgy, mawwwk]\nCSS Selections Preserved in Special Versus [Squidgy]\nOnly Reset Team Setting Upon Entering Training [Squidgy, Kapedani]\nForce \"PassiveAnim\" Texture Animations To Play Indefinitely 1.2 [DukeItOut, QuickLava]\nSSEEx Levels [Kapedani]\nFix Behaviour After Vs Melee Fights in Subspace [Kapedani]\nTemporary Mewtwo Fix [KingJigglypuff]\nSubspace Extra Slots Sticker Fix [MarioDox]\nCode Menu can swap characters in SSE v2 [MarioDox]\nBarrels Don't Reset Jumps Outside of Subspace [DukeItOut, MarioDox]\nProjectiles and items can stick anywhere [MarioDox]\n[lavaInjectLoader] Inject Load Bootstrap v1.0.1 [QuickLava]\nFinal Smash Meter [MarioDox]\nSmash Balls can't break with a loaded FS and Smash Balls break immediately in training [MarioDox]\nSpecial Angles [Eon, Kapedani, DukeItOut]\nCustom Integer IC-Basics 1.1 [DukeItOut, Eon]\nCustom Float IC-Basics[DukeItOut]\nCustom IC-Variable Engine [Eon]\nTimestamp at IC-Basic[30000] [Eon]\nItem Custom IC-Basic[21021] = EmitterTask, IC-Basic[21022] = TeamOwnerTask [MarioDox, Kapedani]\nCharacter Team via IC-Basic (Eon IC-Variable Engine) v1.0.0 [QuickLava]\nNew Work Module Command Table [Eon]\nSin, Cos, aSin, aCos and aTan2 on Work Module 50, 51, 52, 53 and 54 [Eon]\nNew Motion Animation Commands [DukeItOut]\nPointer Wizardry v1.1 [Eon]\nClear Specific Transition Term Group PSA Command [Eon]\nNull GroundModule makes rayCheckTarget return false [Eon]\nRequirement 0 (Thread has ended) returns True if no args passed [Eon]\nConcurrent Infinite Loop accepts int types so you can point to arbitrary code [Eon]\nPSA Command 1F080200 (spawn item variant) [Sammi Husky]\nOn hit Action change through Trip Rate v1.31 [MarioDox, Eon (refactor)]\nv1.2 Automatized, trip rate is decimal action ID change\nv1.25 Added anti-lock behavior, can't change action if it's already in it\nv1.26 Anti-lock behavior works properly\nv1.27 Fixed corruption caused by f1 being overwritten\nv1.31 Update hook to prevent unsafe register usage\nCustom GenerateAndThrowItem PSA command [Sammi Husky]\nCreateThrowItem -1 For Direction Just Creates and Doesn't Throw [Kapedani]\nStore hit Task in LA/RA-Basic 6 [MarioDox]\nRaycast Requirement (0x19) Supports Variables for x,y,z [Eon]\nVariable 10xxxx range gets and sets projectile creator data [DukeItOut]\n480p Pixel Fix Patch [leseratte, Eon]\nCompiling . . .\n63128(0xf698) bytes written of gecko code.\n",
+      "output_exists": true,
+      "bytes": 63144,
+      "sha256": "4b93c770f5a82221159e5e6ec6387f94830f68d7e5dea07bdf0f4ab97cc1f06c",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "NETPLAY.txt",
+      "exit_code": 0,
+      "diagnostic": "\ndisplay/[clCapsule] [Eon] \ndisplay/[clSphere] [Eon]\nrenderDebug/[Stage] [Eon]\nrenderDebug/[grGimmick] [Eon]\nrenderDebug/[grCollisionManager] [Eon]\nDrawCollision(SegmentData, CollisionData) [Eon]\nFully transparent Shapes are not attempted to be drawn [Eon]\nclRectangle and gfAreaTriangle draws correct [Eon]\nCollision Debug Function [Arthur, Eon] \ndraw/[clRhombus2D] [Eon]\nDraw ECB adjustments [Eon]\nDraw Ledgegrab [Eon]\nDraw Touching Planes [Eon]\nrenderDebug/[gfSceneRoot] [Eon]\nDebug Start Input v1.2 [Magus, ???, Eon]\nDebug On the Fly Character Switcher v1.4 (Knuckles added by Eon) [Magus, Krisan Thyme, Eon]\n[Project+] Debug Controls v1.4 (Dolphin Fix v1.1) [Magus, ???, Eon] \n[Project+] Debug Camera, No HUD/Tags (Dolphin Fix v1.2) [Igglyboo, Link, Y.S, Phantom Wings, Magus, Eon]\nDebug Body Collision State, Armor, and Hitstun Overlays v1.2 [Magus]\nC-stick Smash Fixes + functional tilt stick (reverse ftilt included) v1.2 [camelot, Eon]\n[Project+] C-Stick Debug Mode and Slow Mode fix v4.3 [Fracture, DukeItOut, Eon]\n[Project+] Custom C-stick options [Eon]\n[Project+] C-stick mushing Fix [Eon]\n[Project+] C-Stick throws 2.0 [Eon, Dantarion, standardtoaster]\nCstick Neutral range = Cstick input range [Eon]\nC-Stick backwards fsmash bug fix [Eon]\nEffects spawn on hitting items [DukeItOut]\nMax Items Spawnable 8 -> 12 [DukeItOut]\nAdditional Item Switch Frequency Settings 'VERY HIGH', 'INTENSE', and 'BOMB RAIN' [DukeItOut]\n2P Co-Op Defaults to First Costume [DukeItOut]\nRefresh ECB Diamond Function [DukeItOut]\nMomentum Shifts Revert Physics [DukeItOut]\nRising Aerial Fix [DukeItOut]\nAir Dodges Calculate One Frame Earlier [DukeItOut, Fudgepop01, Eon]\nLanding Fix [Fudgepop01, DukeItOut]\nJumps Calculate One Frame Earlier [DukeItOut]\nShield Forward Angle Fix [DukeItOut]\nWindbox Stacking For Fighter Hitboxes [DukeItOut]\nDuo Sticky Object Fix [DukeItOut]\nInstant Fastfalls [Fudgepop01, DukeItOut]\nAerial/Onstage State 8 uses Momentum to Decide [DukeItOut]\nTeeter Trigger Tweak [DukeItOut]\nAccess Fighter Ancestor [DukeItOut]\nItemEx Clone Engine v2.52 [Sammi Husky, Kapedani]\nCherry Double v1.2 [Kapedani]\nDragoon Parts Drops like a Normal Item With Multiplier If Parts Have Dropped [Kapedani] \nTeam Healer Always Heals Teammates [Kapedani]\nTouch Items Notify Outside Event Get Item [Kapedani]\nEvery Item Can Have Collision v2 [Kapedani]\nEvery Item Can Have Physics [Kapedani]\nItem Mayhem Mode (Item Switch Edition) + Butterfingers [MarioDox, DukeItOut, Kapedani]\nPassive Aggressive Mode [Kapedani]\nAll Assists are Unlocked [Kapedani]\nItemEx Mayhem and Passive Aggression Modes default to Off on Boot [Kapedani]\nutArchivereqLoad 4th Parameter as 2 forces read instead of clone [DukeItOut, Kapedani]\nDon't clear memory on game launch [Sammi Husky]\nrun codehandler after initializing memory [Sammi Husky]\nrun codehandler after loading rels [Sammi Husky]\nSyringe Core Loader [Sammi Husky, DukeItOut]\nExpansion GCT Available [DukeItOut]\nCompiling . . .\n101864(0x18de8) bytes written of gecko code.\n",
+      "output_exists": true,
+      "bytes": 101880,
+      "sha256": "dae3a5218b1516c5cf7c6f6d261274029f970b927c115eb010fc1dd85086883a",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "NETBOOST.txt",
+      "exit_code": 0,
+      "diagnostic": " 0x33 variable subaction opponent[Bero]\nCPU falls from respawn plane when Turbo[Bero]\nLedge hanging/Lying routine injection(ledge0x2060, lying0x2070)[Bero]\nCE AI Input Fix [ds22]\nCPU Airdodge Fix [Fudgepop01]\nFix Lv9 CPU oversight [(Mr AI) SLuigi123, Fudgepop01]\nEvent Status3 is Turbo [Bero]\nEvent Rule Fixes [ds22, Eternal Yoshi, mawwwk, Magus, Motobug]\nIgnore Handicap [Y.S.]\nHandicap = Stock Count v1.6 [InternetExplorer, wiiztec]\nAuto Handicap = Crew Mode v1.02 [InternetExplorer]\nSelect music for match on SSS v2 [Squidgy, mawwwk]\nCSS Selections Preserved in Special Versus [Squidgy]\nOnly Reset Team Setting Upon Entering Training [Squidgy, Kapedani]\nForce \"PassiveAnim\" Texture Animations To Play Indefinitely 1.2 [DukeItOut, QuickLava]\nSSEEx Levels [Kapedani]\nFix Behaviour After Vs Melee Fights in Subspace [Kapedani]\nTemporary Mewtwo Fix [KingJigglypuff]\nSubspace Extra Slots Sticker Fix [MarioDox]\nCode Menu can swap characters in SSE v2 [MarioDox]\nBarrels Don't Reset Jumps Outside of Subspace [DukeItOut, MarioDox]\nProjectiles and items can stick anywhere [MarioDox]\n[lavaInjectLoader] Inject Load Bootstrap v1.0.1 [QuickLava]\nFinal Smash Meter [MarioDox]\nSmash Balls can't break with a loaded FS and Smash Balls break immediately in training [MarioDox]\nSpecial Angles [Eon, Kapedani, DukeItOut]\nCustom Integer IC-Basics 1.1 [DukeItOut, Eon]\nCustom Float IC-Basics[DukeItOut]\nCustom IC-Variable Engine [Eon]\nTimestamp at IC-Basic[30000] [Eon]\nItem Custom IC-Basic[21021] = EmitterTask, IC-Basic[21022] = TeamOwnerTask [MarioDox, Kapedani]\nCharacter Team via IC-Basic (Eon IC-Variable Engine) v1.0.0 [QuickLava]\nNew Work Module Command Table [Eon]\nSin, Cos, aSin, aCos and aTan2 on Work Module 50, 51, 52, 53 and 54 [Eon]\nNew Motion Animation Commands [DukeItOut]\nPointer Wizardry v1.1 [Eon]\nClear Specific Transition Term Group PSA Command [Eon]\nNull GroundModule makes rayCheckTarget return false [Eon]\nRequirement 0 (Thread has ended) returns True if no args passed [Eon]\nConcurrent Infinite Loop accepts int types so you can point to arbitrary code [Eon]\nPSA Command 1F080200 (spawn item variant) [Sammi Husky]\nOn hit Action change through Trip Rate v1.31 [MarioDox, Eon (refactor)]\nv1.2 Automatized, trip rate is decimal action ID change\nv1.25 Added anti-lock behavior, can't change action if it's already in it\nv1.26 Anti-lock behavior works properly\nv1.27 Fixed corruption caused by f1 being overwritten\nv1.31 Update hook to prevent unsafe register usage\nCustom GenerateAndThrowItem PSA command [Sammi Husky]\nCreateThrowItem -1 For Direction Just Creates and Doesn't Throw [Kapedani]\nStore hit Task in LA/RA-Basic 6 [MarioDox]\nRaycast Requirement (0x19) Supports Variables for x,y,z [Eon]\nVariable 10xxxx range gets and sets projectile creator data [DukeItOut]\n[Project+] Move v-sync call for Brawl/PM [hannesmann, Dan Salvato, Achilles]\nSkip prize unlock screen [mawwwk]\nFixed OSReport Syntax on File Reading [DukeItOut]\nCompiling . . .\n63192(0xf6d8) bytes written of gecko code.\n",
+      "output_exists": true,
+      "bytes": 63208,
+      "sha256": "bc3b32b7679bedfe4413bd1fc1656a9a4af7e430a0e06328c8604d1e3e9507ea",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "Source/Injects/MDEF.txt",
+      "exit_code": 0,
+      "diagnostic": "us, standardtoaster]\nMC Fail Window Fix V1.2 [ds22, Magus]\nRun Off Aerial Ground Jump Requires Holding Up [Magus]\nGrab During Jumpsquat (Jump-Canceled Grabs) v3.0 [Shanus, Magus]\nFootstool Action Exit Clears Auto-Footstool Bit [ds22]\nRebound Now has SFX [Shanus, Standardtoaster]\nBody Collisions Only Apply When Thrown v1.3 [Shanus, DukeItOut]\nLaunch Speed Sound + Graphic Effects [camelot]\nSlide Off Edges During Wait1 v4 [Shanus, Camelot]\nDash Cancel v3.1 [Yeroc, Shanus (Location Change), DukeItOut (Other Location Change)]\nDown on C-Stick does not Fastfall v2.1 [Magus]\nGrab Has Priority over Roll v1.2 [Shanus]\nTeching Now has SFX [Standardtoaster, Magus]\nWallJumps Require Smash Input Away Only and 0.8 Sensitivity, and WallCling is 0.945 [Magus, Shanus]\nTurn and Neutral-B out of SquatReverse [Shanus]\nShield Button while Laying Down goes into Get-up v5.1 [Standardtoaster, Magus]\nMonkey Flip DamageFace Fix [ds22]\nShield Button Uses Any Shield Press Requirements [Magus]\nRespawn Camera Zoom Refocus [ds22]\nSwim Jump uses JumpSquat instead of JumpF [camelot]\nShield Endlag is now 15 frames [Shanus]\nDACUS Window Is 2 Frames v2 [standardtoaster]\nRemove Dead Frame from Jump [Shanus]\nShield during Dash 3.0 [Yeroc, Wind Owl]\nDash Dancing v2.3 [Shanus, Magus]\nNo Impact Landing Replaces Light Landing [Magus]\nWiggle Out of Tumble in Action 45 v1.2 [Magus]\nTech Window Fixes, Floor Hit Delay Fix, & Tech in Certain Actions v1.2 [Magus]\nAction Changes Allowed During Hitlag and Edgeteching [Magus]\nSpecial Fall Depletes Jumps [Magus]\nZ now triggers aerials instead of air dodge v1.2 [Shanus, Wind Owl]\nF-Smash During Dash Window is 4 Frames and 1 in DD [Standardtoaster, Magus]\nShield Break Getup is 30 Frames and Ending Interruptible [Magus]\nWakeup from Sleep is Interruptible Frame 10+ [standardtoaster]\nFootstool with Only Taunt + Fail Window v1.3 [Magus, ds22]\nTeam Colour Shade Modifier [ds22]\nNo Autosweetspot Ledges v2.2 [Eon]\nSpecial Landing is Teeter-Capable [DukeItOut]\nMoonwalking v1.2 [Magus]\nNo Powershield Buffering and Powershield Reflect v4.1 [Shanus, Magus]\nPowershield Drop Allows Shield & Powershield SFX [Magus]\nScrew Jump Aerial (Action 0xB0) Enters Free-Fall if Entered Upon Being Hit [KingJigglypuff]\nSlow Turn is Able to Trigger a Fast Turn on 2nd Frame [Magus]\nSlow Turn Timer Used for JumpSquat and Fall [Magus]\nRunstop & Taunts Go into Teeter (Taunt Canceling v2.2) [Shanus, Camelot, Wind Owl]\nTaunt IASA While Running/Dashing & Slide off Edges while Dashing v3.0 [Wind Owl, Eon]\nTether Aiming Stores Jump Count [standardtoaster]\nOccupied Edge Tether Hopping v1.4.1 [Magus, Yeroc]\nZair Goes into Special Fall and Wavedash endlag v5.3 [Shanus]\nAerial Glide Toss & Air Dodge -> Zair Momentum Decay v5.2 [Shanus, standardtoaster]\nDisable Tether Canceling [standardtoaster]\nWallCling Can now enter Fall from Neutral Joystick [Shanus, Standardtoaster]\nWallcling Jump Is Walljump and up Does Nothing [standardtoaster]\nCompiling . . .\n15904(0x3e20) bytes written of gecko code.\n",
+      "output_exists": true,
+      "bytes": 15920,
+      "sha256": "d39160cb097375a5a3fb7a54422818a0e1de83060f332ebf3f873ea947835acb",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "Source/Injects/DEFINE.txt",
+      "exit_code": 0,
+      "diagnostic": "al Attack Landing Lag Modifier [0.35->0.1]\n3233 - Max Shield Strength [50->60]\n3242 - Shield Pushback Multiplier 1 [1.15->0.35]\n3243 - Shield Pushback Addition Constant [2->0.1]\n3245 - Maximum Shield Pushback [1.6->70]\n3249 - Shield Pushback ratio [0.7->0]\n3251 - Powershield Pushback Multiplier [0.15 -> 0.7]\n3252 - Attacker Shield Pushback Multiplier [0.04->0.07]\n3253 - Attacker Shield Pushback Minimum [0.025->0.02]\n3256 - Franklin Badge Reflected Damage Multiplier [1.3->0.75->1.0] (0.75 in PM, 1.0 in P+)\n3257 - Franklin Badge Reflected Speed Multiplier [1.3->1.0]\n3266 - Multiplier for Grab Held Time Added from Total Damage [1.7->2.2]\n3299 - Tumble Wiggle Sensitivity [0.8->0.75]\n3300 - Ceiling Corner Blast KO X Range Multiplier [0.2->0.01]\n3305 - Launch Distance Needed for Low KB SFX [80 -> infinity]\n3306 - Launch Distance Needed for Mid KB SFX [80 -> infinity]\n3307 - Launch Distance Needed for High KB SFX [80 -> infinity]\n3312 - Base Sleep Time [10 -> 3]\n3313 - Base Sleep Time3 [10 -> 7]\n3315 - Multiplier for sleep time added from KB [25 -> 15]\n3386 - Kirby Inhale Time Reduced per Input [10->12]\n3389 - Kirby Inhale Star reduction per Input [10 -> 0] \n3400 - DK Cargo Hold Base Time [100->90]\n3401 - DK Cargo Hold Increase per Damage [5->2.5 (was 0.592 in 2.0)]\n3402 - DK Cargo Hold Reduction per Input [10->8]\n3412 - Dedede Inhale Star Reduction per Input [12 -> 3 -> 0] \n3466 - Curry Run Animation Speed Multiplier [2->1]\n22001 - Lower Angle Threshold for Meteor Smash Range [230->260]\n22002 - Upper Angle Threshold for Meteor Smash Range [310->280]\n23033 - Frames between Consecutive Dashes [15->17]\n23037 - SpotDodge Input Window [4->3]\n23038 - Roll Input Window [4->3]\n23043 - Reversal Window (B Reversals) [3->4]\n23047 - Ledgesnap Duration [3->0]\n23050 - Frames between Ledgegrabs [30->29]\n23051 - Ledge Invincibility [23->31]\n23052 - Tech Window [16->20]\n23069 - WallJump Timer [130->20]\n23075 - Frames Between Consecutive Wallclings [60->n/a]\n23078 - Powershield Window [4(3)->3(2)]\n23079 - Powershield Drop Window to be Interruptible [4->5]\n23082 - Grab->TurnGrab Window [3->4]\n23085 - Base Held Time in Grabs [90->76]\n23087 - Frames After Landing Until KO Ownership is Lost [10800->60]\n23148 - Curry Effect Duration [780->1200]\n23149 - Frames Between Curry Flames [5->n/a]\nF-Smash Sensitivity uses IC-Basic 3220 [0.8->0.8]\nPivot Sensitivity [0.8->0.475]\nDash within Dash Uses Run Sensitivity [0.80->0.62]\nThreshold to begin tracking distance vs time on stick movements [0.25->0.35]\nD-Pad acceleration threshold for solo Wiimote movement [30->23.999]\nItem Ground Smash U-Throw Velocity [4.1->4.34]\nLink Has a Rapid Jab [Magus]\nSamus Has a Crawl\nGame & Watch Has 2 Jabs [Magus]\nLucario has no wallcling [Standardtoaster]\nLucas Has 2 Jabs [Magus]\nPit cannot glide from jumps [standardtoaster]\nZard Has 1 Jab [ds22]\nZard ThrownType is 2 [ds22]\nG-Alloy ThrownType is 1 [ds22]\nSnake has 2 Forward Smashes [KingJigglypuff]\nCompiling . . .\n640(0x280) bytes written of gecko code.\n",
+      "output_exists": true,
+      "bytes": 656,
+      "sha256": "6b94f756df91d41c0e0092f8c172395b2ddd2f1ae6cb6062ebeaf4c42acb2dd0",
+      "valid_container": true
+    }
+  ],
+  "unmodified_comparisons": [
+    {
+      "entry": "RSBE01.txt",
+      "identical": true
+    },
+    {
+      "entry": "BOOST.txt",
+      "identical": true
+    },
+    {
+      "entry": "NETPLAY.txt",
+      "identical": true
+    },
+    {
+      "entry": "NETBOOST.txt",
+      "identical": true
+    },
+    {
+      "entry": "Source/Injects/MDEF.txt",
+      "identical": true
+    },
+    {
+      "entry": "Source/Injects/DEFINE.txt",
+      "identical": true
+    }
+  ],
+  "builds": [
+    {
+      "implementation": "go",
+      "entry": "RSBE01.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 101600,
+      "sha256": "25325dda88ad2fe302414e3c4e3fb3ed3595f97870dbc9207dafd2fbf1ccf900",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "BOOST.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 63144,
+      "sha256": "89470bd2b87009888f2a69ad40dac26d3b73cd2d59f1cbd54cd0b81a2c29bf67",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "NETPLAY.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 101904,
+      "sha256": "c30a7f3732ef0b69faf65e2b2474bfad8c416520fc4bf111e17b555d75beb154",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "NETBOOST.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 63208,
+      "sha256": "385229e0840047faf6cc918e4dc4fff1bfd37256a6e76948d22f1ece65a03330",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "Source/Injects/MDEF.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 15920,
+      "sha256": "d39160cb097375a5a3fb7a54422818a0e1de83060f332ebf3f873ea947835acb",
+      "valid_container": true
+    },
+    {
+      "implementation": "go",
+      "entry": "Source/Injects/DEFINE.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 656,
+      "sha256": "6b94f756df91d41c0e0092f8c172395b2ddd2f1ae6cb6062ebeaf4c42acb2dd0",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "RSBE01.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 101600,
+      "sha256": "25325dda88ad2fe302414e3c4e3fb3ed3595f97870dbc9207dafd2fbf1ccf900",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "BOOST.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 63144,
+      "sha256": "89470bd2b87009888f2a69ad40dac26d3b73cd2d59f1cbd54cd0b81a2c29bf67",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "NETPLAY.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 101904,
+      "sha256": "c30a7f3732ef0b69faf65e2b2474bfad8c416520fc4bf111e17b555d75beb154",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "NETBOOST.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 63208,
+      "sha256": "385229e0840047faf6cc918e4dc4fff1bfd37256a6e76948d22f1ece65a03330",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "Source/Injects/MDEF.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 15920,
+      "sha256": "d39160cb097375a5a3fb7a54422818a0e1de83060f332ebf3f873ea947835acb",
+      "valid_container": true
+    },
+    {
+      "implementation": "cpp",
+      "entry": "Source/Injects/DEFINE.txt",
+      "exit_code": 0,
+      "output_exists": true,
+      "bytes": 656,
+      "sha256": "6b94f756df91d41c0e0092f8c172395b2ddd2f1ae6cb6062ebeaf4c42acb2dd0",
+      "valid_container": true
+    }
+  ],
+  "comparisons": [
+    {
+      "entry": "RSBE01.txt",
+      "identical": true,
+      "go_bytes": 101600,
+      "cpp_bytes": 101600,
+      "differing_word_count": 0,
+      "differences": []
+    },
+    {
+      "entry": "BOOST.txt",
+      "identical": true,
+      "go_bytes": 63144,
+      "cpp_bytes": 63144,
+      "differing_word_count": 0,
+      "differences": []
+    },
+    {
+      "entry": "NETPLAY.txt",
+      "identical": true,
+      "go_bytes": 101904,
+      "cpp_bytes": 101904,
+      "differing_word_count": 0,
+      "differences": []
+    },
+    {
+      "entry": "NETBOOST.txt",
+      "identical": true,
+      "go_bytes": 63208,
+      "cpp_bytes": 63208,
+      "differing_word_count": 0,
+      "differences": []
+    },
+    {
+      "entry": "Source/Injects/MDEF.txt",
+      "identical": true,
+      "go_bytes": 15920,
+      "cpp_bytes": 15920,
+      "differing_word_count": 0,
+      "differences": []
+    },
+    {
+      "entry": "Source/Injects/DEFINE.txt",
+      "identical": true,
+      "go_bytes": 656,
+      "cpp_bytes": 656,
+      "differing_word_count": 0,
+      "differences": []
+    }
+  ],
+  "staging_repairs": [
+    {
+      "implementation": "go",
+      "file": "RSBE01.txt",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 2,
+      "sha256": "c807345a5aeafbf8479e78b325385f0bacf1242183ad2f9cbe110165b4bb670a"
+    },
+    {
+      "implementation": "go",
+      "file": "NETPLAY.txt",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 2,
+      "sha256": "bc5bb88e5d4709cf40fc78337b3c67cb36fc2ed952d13ea58b476fd95b23b6fa"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/FilePatchCode.asm",
+      "change": "Close unterminated %LoadAddress macro invocation",
+      "sha256": "aa408319bb4a781652ce66288bd2b749589a7506c60be2a38f96af5661990223"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Community/PSA/PSA.asm",
+      "change": "Comment stray word after hook address",
+      "sha256": "d648b0d8b318c94074322eae88191be883faf7f35d2a728ed11b44bb8ac1815b"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/Debug/Stage Collisions.asm",
+      "change": "Use the defined storeAlpha macro for the non-collidable case",
+      "occurrences": 1,
+      "sha256": "505d926a941caec9412a228751734dabadfc31bf7aea565aa013f93ec6d08222"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/MyMusic.asm",
+      "change": "Preserve the original unaligned write as explicit raw data; its game-level intent needs review",
+      "occurrences": 1,
+      "sha256": "4cba564758758954d5f3ea58b0f0d6960a0414bbd42092f49c1760611b639a3e"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/ProjectM/Ledge.asm",
+      "change": "Restore missing branch mnemonic in the two crawl-direction checks; staged interpretation of surrounding logic",
+      "occurrences": 2,
+      "sha256": "fb60c893378c1877364048f6d8bcfa61b2f33acb5dd1d78f593f08b18ee888d0"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/ProjectM/Modifier/VariableSet.asm",
+      "change": "Define missing notFighter label at the existing register-restoring exit",
+      "occurrences": 1,
+      "sha256": "2e78c764e19ef40c0f3e21d7f7eed9425a2acd68857d72824167c8d08c1b1989"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Community/PSA/NewCommands.asm",
+      "change": "Define missing forceCorrection label at the documented command-28 block",
+      "occurrences": 1,
+      "sha256": "15b7ac64b09e83d13f77a93cb56876b8a5dc8865e2853ecde49198cf6b4769d4"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/CSE.asm",
+      "change": "Remove duplicate didNotFind label; retain the default-info block named by the branch comments",
+      "occurrences": 1,
+      "sha256": "c51f4b3544b0d82ce957d821b82e2f9c79d58ec24120c4c40cf2f9ea3d642396"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/Debug/Capsule Renderer.asm",
+      "change": "Correct misspelled floating multiply mnemonic",
+      "occurrences": 8,
+      "sha256": "7506a8a0c686d7f520f4c6f8100c5f4089972278ab9de2e2a82b7b4aed941e1d"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/Debug/modifiedDebug.asm",
+      "change": "Preserve an invalid overlapping lmw as explicit raw data for comparison only; not hardware-validated",
+      "occurrences": 2,
+      "sha256": "2a9a9fade7f2e5c64d119b3aaf47500b0c71abef0c3e7a3e0fbeec795a5962ce"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/Debug/modifiedDebug.asm",
+      "change": "Use addic. for the requested immediate add with CR0 update; staged interpretation",
+      "occurrences": 2,
+      "sha256": "b7bd974034bd80c155428d388d223cad5d2ceaaa5c3294777db6fc0f9264b056"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/Debug/modifiedDebug.asm",
+      "change": "Normalize the .op alias for the C++ reference, which otherwise silently drops these writes",
+      "occurrences": 2,
+      "sha256": "1d0de2d38792baec08a5a111793d8f3f92d6c7f8e2cb8adfd5bc1344e3630ed7"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Community/ItemEx.asm",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 3,
+      "sha256": "a2b78985c2e603bc9975d66bc8f546d284f7cec7439c8597142ebeb4fbceb237"
+    },
+    {
+      "implementation": "go",
+      "file": "Source/Project+/TexFlags.asm",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 1,
+      "sha256": "ab0e9a438991fa62ecc05507ff302999fcf944029ba0093682b7e5a03d9a1d6a"
+    },
+    {
+      "implementation": "cpp",
+      "file": "RSBE01.txt",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 2,
+      "sha256": "c807345a5aeafbf8479e78b325385f0bacf1242183ad2f9cbe110165b4bb670a"
+    },
+    {
+      "implementation": "cpp",
+      "file": "NETPLAY.txt",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 2,
+      "sha256": "bc5bb88e5d4709cf40fc78337b3c67cb36fc2ed952d13ea58b476fd95b23b6fa"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/FilePatchCode.asm",
+      "change": "Close unterminated %LoadAddress macro invocation",
+      "sha256": "aa408319bb4a781652ce66288bd2b749589a7506c60be2a38f96af5661990223"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Community/PSA/PSA.asm",
+      "change": "Comment stray word after hook address",
+      "sha256": "d648b0d8b318c94074322eae88191be883faf7f35d2a728ed11b44bb8ac1815b"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/Debug/Stage Collisions.asm",
+      "change": "Use the defined storeAlpha macro for the non-collidable case",
+      "occurrences": 1,
+      "sha256": "505d926a941caec9412a228751734dabadfc31bf7aea565aa013f93ec6d08222"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/MyMusic.asm",
+      "change": "Preserve the original unaligned write as explicit raw data; its game-level intent needs review",
+      "occurrences": 1,
+      "sha256": "4cba564758758954d5f3ea58b0f0d6960a0414bbd42092f49c1760611b639a3e"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/ProjectM/Ledge.asm",
+      "change": "Restore missing branch mnemonic in the two crawl-direction checks; staged interpretation of surrounding logic",
+      "occurrences": 2,
+      "sha256": "fb60c893378c1877364048f6d8bcfa61b2f33acb5dd1d78f593f08b18ee888d0"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/ProjectM/Modifier/VariableSet.asm",
+      "change": "Define missing notFighter label at the existing register-restoring exit",
+      "occurrences": 1,
+      "sha256": "2e78c764e19ef40c0f3e21d7f7eed9425a2acd68857d72824167c8d08c1b1989"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Community/PSA/NewCommands.asm",
+      "change": "Define missing forceCorrection label at the documented command-28 block",
+      "occurrences": 1,
+      "sha256": "15b7ac64b09e83d13f77a93cb56876b8a5dc8865e2853ecde49198cf6b4769d4"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/CSE.asm",
+      "change": "Remove duplicate didNotFind label; retain the default-info block named by the branch comments",
+      "occurrences": 1,
+      "sha256": "c51f4b3544b0d82ce957d821b82e2f9c79d58ec24120c4c40cf2f9ea3d642396"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/Debug/Capsule Renderer.asm",
+      "change": "Correct misspelled floating multiply mnemonic",
+      "occurrences": 8,
+      "sha256": "7506a8a0c686d7f520f4c6f8100c5f4089972278ab9de2e2a82b7b4aed941e1d"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/Debug/modifiedDebug.asm",
+      "change": "Preserve an invalid overlapping lmw as explicit raw data for comparison only; not hardware-validated",
+      "occurrences": 2,
+      "sha256": "2a9a9fade7f2e5c64d119b3aaf47500b0c71abef0c3e7a3e0fbeec795a5962ce"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/Debug/modifiedDebug.asm",
+      "change": "Use addic. for the requested immediate add with CR0 update; staged interpretation",
+      "occurrences": 2,
+      "sha256": "b7bd974034bd80c155428d388d223cad5d2ceaaa5c3294777db6fc0f9264b056"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/Debug/modifiedDebug.asm",
+      "change": "Normalize the .op alias for the C++ reference, which otherwise silently drops these writes",
+      "occurrences": 2,
+      "sha256": "1d0de2d38792baec08a5a111793d8f3f92d6c7f8e2cb8adfd5bc1344e3630ed7"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Community/ItemEx.asm",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 3,
+      "sha256": "a2b78985c2e603bc9975d66bc8f546d284f7cec7439c8597142ebeb4fbceb237"
+    },
+    {
+      "implementation": "cpp",
+      "file": "Source/Project+/TexFlags.asm",
+      "change": "Remove redundant second operand of crclr",
+      "occurrences": 1,
+      "sha256": "ab0e9a438991fa62ecc05507ff302999fcf944029ba0093682b7e5a03d9a1d6a"
+    }
+  ],
+  "difference_categories": {},
+  "comparison_passed": true,
+  "source_unchanged": true,
+  "reference_kind": "locally built C++ v0.2.6"
+}

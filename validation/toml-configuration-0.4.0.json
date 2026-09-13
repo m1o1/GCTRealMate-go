@@ -1,0 +1,13 @@
+{
+  "assembler_sha256": "1416e339bae635b7d1fe4486f81a29952acda4c13f93beb9ae96cfad075b5458",
+  "schema_version": 1,
+  "source_switches": 8,
+  "cli_switches": 3,
+  "source_combinations_checked": 256,
+  "cli_combinations_checked": 8,
+  "individual_source_switch_cli_checks": 16,
+  "cases": "precedence, missing/invalid config, explicit false, unknown/duplicate keys, file selection, output preservation, per-call isolation, full example, mixed executable output",
+  "module": "github.com/pelletier/go-toml/v2@v2.4.3",
+  "go_mod_verify": "passed",
+  "default_project_outputs_unchanged": true
+}

@@ -1,0 +1,263 @@
+--- a/NETPLAY.txt
++++ b/NETPLAY.txt
+@@ -415,7 +415,7 @@
+   addi r29, r1, 0x8
+   mr r3, r29
+   addi r4, r28, 0x174
+-  crclr 6, 6
++  crclr 6
+   lis r12, 0x803F
+   ori r12, r12, 0x89FC
+   mtctr r12
+@@ -431,7 +431,7 @@
+   lwz r7, 4(r25)
+   addi r4, r28, 0x19C
+   mr r3, r29
+-  crclr 6, 6
++  crclr 6
+   lis r12, 0x803F
+   ori r12, r12, 0x89FC
+   mtctr r12
+--- a/RSBE01.txt
++++ b/RSBE01.txt
+@@ -407,7 +407,7 @@
+   addi r29, r1, 0x8
+   mr r3, r29
+   addi r4, r28, 0x174
+-  crclr 6, 6
++  crclr 6
+   lis r12, 0x803F
+   ori r12, r12, 0x89FC
+   mtctr r12
+@@ -423,7 +423,7 @@
+   lwz r7, 4(r25)
+   addi r4, r28, 0x19C
+   mr r3, r29
+-  crclr 6, 6
++  crclr 6
+   lis r12, 0x803F
+   ori r12, r12, 0x89FC
+   mtctr r12
+--- a/Source/Community/ItemEx.asm
++++ b/Source/Community/ItemEx.asm
+@@ -673,7 +673,7 @@
+     addi r6, r31, 0x1A44    # "item"
+     add r7, r31, r12        # OVERRIDE_STR_ADDR
+ notOverride:
+-    crclr 6,6
++    crclr 6
+     %call (snprintf)
+ skipBrres:
+     addi r12, r31, 6919 # \
+@@ -716,7 +716,7 @@
+     addi r5, r31, 6807      # "/%s/%s/%s/%s%s%02d%s%02d.%s"
+     rlwinm r12,r19,24,24,31 # \
+     stw r12, 0x10(r1)       # / Costume id from fourth parameter
+-    crclr 6,6
++    crclr 6
+     %call (snprintf)
+ brresItemPathObtained:
+     li r3, 0x0
+@@ -738,7 +738,7 @@
+ 
+     li r4, 0xff
+     add r3, r1, r22
+-    crclr 6,6
++    crclr 6
+     %call (snprintf)
+     cmpwi r22, 0x24
+     li r22, 0x24            # Formulate common param path
+--- a/Source/Community/PSA/NewCommands.asm
++++ b/Source/Community/PSA/NewCommands.asm
+@@ -42,6 +42,7 @@
+ 	############
+ 	# 041C0000 # Fix position of model relative to the world
+ 	############
++forceCorrection:
+ resetAnimInfo:
+ 	mr r3, r24			# \
+ 	lwz r12, 0x0(r3)	# | get motion info
+--- a/Source/Community/PSA/PSA.asm
++++ b/Source/Community/PSA/PSA.asm
+@@ -211,7 +211,7 @@
+ }
+ #get soValueAccesser into place
+ #X
+-HOOK @ $807838B4 8127ee50
++HOOK @ $807838B4 # 8127ee50
+ {
+ orig:
+     fdivs f31, f1, f0
+--- a/Source/Project+/CSE.asm
++++ b/Source/Project+/CSE.asm
+@@ -372,7 +372,6 @@
+ 	ori r5, r5, 0xF4E9			# |
+ 	stw r5, -0x228(r12)			# /
+ hasFilename:
+-didNotFind:
+ 
+   addi r3, r1, 0x30 
+   stw r3, 0x8(r29)	# filename pointer for later  
+--- a/Source/Project+/Debug/Capsule Renderer.asm
++++ b/Source/Project+/Debug/Capsule Renderer.asm
+@@ -459,14 +459,14 @@
+   	fsubs f5, f2, f1
+   	stfs f5, 0x8(diffPos)
+ 
+-  	fmulls f1, f3, f3 #x^2
+-  	fmulls f2, f4, f4 #y^2
++  	fmuls f1, f3, f3 #x^2
++  	fmuls f2, f4, f4 #y^2
+   	fadds f1, f1, f2
+-  	fmulls f2, f5, f5 #z^2
++  	fmuls f2, f5, f5 #z^2
+   	fadds f1, f1, f2
+   	fmr distance, f1  #x^2 + y^2 + z^2
+   	%rsqrtf()
+-  	fmulls distance, distance, f1 #sqrt(x^2 + y^2 + z^2)
++  	fmuls distance, distance, f1 #sqrt(x^2 + y^2 + z^2)
+ 
+ checkDistanceZero:
+ 	#if absolute distance is neglibly small, draw a sphere
+@@ -481,7 +481,7 @@
+ 
+ 	#set basis2 to perpendicular of diffPos
+ 	lfs f0, minusOne(dataBlock) #-1
+-	fmulls f0, f0, f3
++	fmuls f0, f0, f3
+ 	stfs f0, 0x4(basis2)
+ 	stfs f4, 0x0(basis2)
+ 
+@@ -615,9 +615,9 @@
+ 	lfs f0, 0x8(Pos2)
+ 	fadds f3, f0, f3
+ 	lfs f0, half(dataBlock) #0.5
+-	fmulls f1, f1, f0
+-	fmulls f2, f2, f0
+-	fmulls f3, f3, f0
++	fmuls f1, f1, f0
++	fmuls f2, f2, f0
++	fmuls f3, f3, f0
+ 	addi r3, r1, TempMatrixOffset
+ 	%PSMTXTrans()
+ 	addi r3, r1, TempMatrixOffset
+--- a/Source/Project+/Debug/Stage Collisions.asm
++++ b/Source/Project+/Debug/Stage Collisions.asm
+@@ -394,7 +394,7 @@
+ 	%isPlayerCollidable()
+ 	bne playerCollidable
+ notCollidable:
+-	%setAlpha(notCollidableAlpha)
++	%storeAlpha(notCollidableAlpha)
+ 	b startColours
+ playerCollidable:
+ 	%isSuperSoft()
+--- a/Source/Project+/Debug/modifiedDebug.asm
++++ b/Source/Project+/Debug/modifiedDebug.asm
+@@ -236,7 +236,7 @@
+ 
+   lwz r0, 0x104(r1)
+   mtlr r0
+-  lmw r0, 0x20(r1)
++  word 0xb8010020
+   addi r1, r1, 0x100
+   blr 
+ }
+@@ -280,7 +280,7 @@
+ 
+   lwz r0, 0x104(r1)
+   mtlr r0
+-  lmw r0, 0x20(r1)
++  word 0xb8010020
+   addi r1, r1, 0x100
+   blr 
+ }
+@@ -400,7 +400,7 @@
+ HOOK @ $800AA840
+ {
+ lis r10, 0x8058
+-addi. r10, r10, 0x3FFA
++addic. r10, r10, 0x3FFA
+ lhz r10, 0(r10)
+ cmpwi r10, 0
+ bne _end
+@@ -433,13 +433,13 @@
+ stfs	f2, 0x0074 (r30)
+ _end:
+ }
+-.op nop @ $800AA878
+-.op nop @ $800AA87C
++op nop @ $800AA878
++op nop @ $800AA87C
+ 
+ HOOK @ $800A0690
+ {
+ lis r10, 0x8058
+-addi. r10, r10, 0x3FFA
++addic. r10, r10, 0x3FFA
+ lhz r10, 0(r10)
+ cmpwi r10, 0
+ bne _end
+--- a/Source/Project+/FilePatchCode.asm
++++ b/Source/Project+/FilePatchCode.asm
+@@ -674,7 +674,7 @@
+ }
+ .macro MakeJump(<arg1>,<arg2>)		// Simple jump directly to an address
+ {
+-	%LoadAddress(<arg1>,<arg2>
++	%LoadAddress(<arg1>,<arg2>)
+ 	mtctr <arg1>
+ 	bctr
+ }
+--- a/Source/Project+/MyMusic.asm
++++ b/Source/Project+/MyMusic.asm
+@@ -149,7 +149,7 @@
+ ### Check if the song matches the RNG range
+ op li r27, 0 @ $80079300					# Tracklists are no longer offset from each other
+ op mr 0, r27 @ $8007932C					# Get an offset to the next song
+-op addi r27, r27, tlstSongSize @ $8007935A	# Songs are separated by 0x10, not 0x8 
++word 0x3b7b0010 @ $8007935A	# Songs are separated by 0x10, not 0x8 
+ 
+ ### Obtain the song that RNG suggests via the frequencies brought up, above
+ op b -0x68  @ $80079370		# Optimizes out a loop for easier reading
+--- a/Source/Project+/TexFlags.asm
++++ b/Source/Project+/TexFlags.asm
+@@ -109,7 +109,7 @@
+ 	lis r7, 0x80B0			# \ "tex.pac" instead of ".pac"
+ 	ori r7, r7, 0xA6F0		# /
+ notTex:
+-	crclr 6, 6		# Original operation
++	crclr 6		# Original operation
+ }
+ HOOK @ $8084D004
+ {	
+--- a/Source/ProjectM/Ledge.asm
++++ b/Source/ProjectM/Ledge.asm
+@@ -112,7 +112,7 @@
+ 	lwz r3, 0x7C(r5)	# \ Get the previous action.
+ 	lhz r3, 0x06(r3) 	# /
+ 	cmpwi r3, 0x13; beq- noSlidingOff			# \ If attempting to swap crawl directions
+-	cmpwi r3, 0x14; canSlideOff					# / don't slide off!
++	cmpwi r3, 0x14; bne- canSlideOff					# / don't slide off!
+ noSlidingOff:
+   	li r4, 0x2	# Don't slide off.
+   	b finish	
+@@ -202,7 +202,7 @@
+ 	lwz r3, 0x7C(r5)	# \ Get the previous action.
+ 	lhz r3, 0x06(r3) 	# /
+ 	cmpwi r3, 0x13; beq- noSlidingOff			# \ If attempting to swap crawl directions
+-	cmpwi r3, 0x14; canSlideOff					# / don't slide off!
++	cmpwi r3, 0x14; bne- canSlideOff					# / don't slide off!
+ noSlidingOff:
+   	li r4, 0x2	# Don't slide off.
+   	b finish	
+--- a/Source/ProjectM/Modifier/VariableSet.asm
++++ b/Source/ProjectM/Modifier/VariableSet.asm
+@@ -78,6 +78,7 @@
+   stw r0, 0(r7)
+   b loc_0x34
+ 
++notFighter:
+ loc_0xD8:
+   
+   lwz r3, 0x08(r1)

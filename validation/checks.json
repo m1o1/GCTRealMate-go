@@ -1,0 +1,75 @@
+{
+  "date": "2026-09-13",
+  "go": "go1.27.1 windows/amd64",
+  "assembler_version": "0.11.0-go",
+  "assembler_sha256": "83d4c5877e3b4ade7fbaf09eabac640da0511dff53e231a942832649732ab147",
+  "default_bug_fixes": true,
+  "category_defaults": {
+    "extensions.dot_op": false,
+    "extensions.branch_expressions": false,
+    "extensions.expression_syntax": false,
+    "extensions.implicit_sections": false,
+    "extensions.additional_console_instructions": false,
+    "semantics.decimal_leading_zeros": false,
+    "semantics.c_operator_precedence": false,
+    "semantics.signed_64_bit_aliases": false,
+    "encoding.gnu_branch_hints": false,
+    "encoding.sign_extend_data_slots": false,
+    "encoding.alternative_float_nan": false,
+    "encoding.alternative_double_nan": false,
+    "validation.strict_register_prefixes": false,
+    "validation.reject_duplicate_labels": false,
+    "validation.strict_macro_calls": false,
+    "validation.reject_undefined_macros": false,
+    "validation.reject_address_annotations": false,
+    "validation.reject_data_overflow": false,
+    "validation.console_only": false,
+    "cli.exact_ini_matching": false,
+    "cli.flat_logs": false,
+    "cli.lf_line_endings": false
+  },
+  "default_cpp_instruction_availability": true,
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "windows_build": "passed",
+  "scope": "Removed Go config migration aliases, CLI dialect presets and old schema support. C++ compatibility policies and defaults retained. No new Dolphin or Project+ runs.",
+  "toml_configuration": {
+    "report": "toml-configuration.json",
+    "result": "passed"
+  },
+  "documentation_examples": {
+    "report": "configuration-examples.json",
+    "result": "passed",
+    "executable_checks": 45,
+    "source_setting_pairs": 19,
+    "toml_recipes": 3,
+    "local_links_checked": 87
+  },
+  "rejected_obsolete_settings": {
+    "report": "configuration-rejections.json",
+    "result": "passed",
+    "executable_checks": 59,
+    "toml_cases": 31,
+    "cli_cases": 14,
+    "ini_cases": 14,
+    "prior_outputs_preserved": true
+  },
+  "cpp_fixture_replay": "Passed in go test ./...; saved oracle inputs and expected bytes unchanged.",
+  "prior_live_cpp_comparisons": {
+    "report": "category-reference.json",
+    "assembler_version": "0.10.0-go",
+    "cases": 37,
+    "mismatches": 0
+  },
+  "prior_cli_validation": {
+    "assembler_version": "0.10.0-go",
+    "report": "checks-0.10.0.json"
+  },
+  "prior_integration_validation": {
+    "assembler_version": "0.6.0-go",
+    "report": "checks-0.6.0.json",
+    "scope": "Historical emulator and Project+ evidence retains its original hashes."
+  },
+  "physical_console_tested": false,
+  "project_plus_gameplay_tested": false
+}

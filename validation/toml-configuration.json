@@ -1,0 +1,41 @@
+{
+  "assembler_version": "0.11.0-go",
+  "assembler_sha256": "83d4c5877e3b4ade7fbaf09eabac640da0511dff53e231a942832649732ab147",
+  "schema_version": 2,
+  "accepted_schema_versions": [
+    2
+  ],
+  "canonical_flags": [
+    "extensions.dot_op",
+    "extensions.branch_expressions",
+    "extensions.expression_syntax",
+    "extensions.implicit_sections",
+    "extensions.additional_console_instructions",
+    "semantics.decimal_leading_zeros",
+    "semantics.c_operator_precedence",
+    "semantics.signed_64_bit_aliases",
+    "encoding.gnu_branch_hints",
+    "encoding.sign_extend_data_slots",
+    "encoding.alternative_float_nan",
+    "encoding.alternative_double_nan",
+    "validation.strict_register_prefixes",
+    "validation.reject_duplicate_labels",
+    "validation.strict_macro_calls",
+    "validation.reject_undefined_macros",
+    "validation.reject_address_annotations",
+    "validation.reject_data_overflow",
+    "validation.console_only",
+    "cli.exact_ini_matching",
+    "cli.flat_logs",
+    "cli.lf_line_endings"
+  ],
+  "bug_fixes_default": true,
+  "all_category_flag_defaults": false,
+  "source_combination_checks": 256,
+  "cli_combination_checks": 8,
+  "source_validation_independence_cases": 40,
+  "obsolete_settings_rejected": 59,
+  "rejection_report": "configuration-rejections.json",
+  "generic_cli_override": "TOML < matching INI < CLI; persistence and pre-lookup INI matching verified",
+  "validation": "go test ./... and current executable probes passed"
+}

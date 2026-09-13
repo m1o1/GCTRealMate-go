@@ -1,0 +1,164 @@
+{
+  "assembler_version": "0.7.0-go",
+  "assembler_sha256": "79ed160d16b93be554c42282479e7dcc2e217b3f86384eb1731c4f5650bbbc07",
+  "default_bug_fixes": true,
+  "default_allow_non_console_instructions": false,
+  "library_option": "Explicit plain boolean; zero-value BugFixes remains false.",
+  "executable_checks": [
+    {
+      "name": "missing-automatic",
+      "flags": [
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 0,
+      "word": "a8640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "empty-config",
+      "flags": [
+        "--config",
+        "<workspace>\\work\\default-fixes-executable-checks\\empty-config\\settings.toml",
+        "-i"
+      ],
+      "config": "",
+      "exit_status": 0,
+      "word": "a8640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "omitted-key",
+      "flags": [
+        "--config",
+        "<workspace>\\work\\default-fixes-executable-checks\\omitted-key\\settings.toml",
+        "-i"
+      ],
+      "config": "dialect=\"modern\"\n",
+      "exit_status": 0,
+      "word": "a8640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "supplied-template",
+      "flags": [
+        "--config",
+        "<workspace>\\outputs\\GCTRealMate-go\\gctrm.toml",
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 0,
+      "word": "a8640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "explicit-toml-false",
+      "flags": [
+        "--config",
+        "<workspace>\\work\\default-fixes-executable-checks\\explicit-toml-false\\settings.toml",
+        "-i"
+      ],
+      "config": "bug_fixes=false\n",
+      "exit_status": 0,
+      "word": "a0640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "cli-false-overrides-true",
+      "flags": [
+        "--config",
+        "<workspace>\\work\\default-fixes-executable-checks\\cli-false-overrides-true\\settings.toml",
+        "--bug-fixes=false",
+        "-i"
+      ],
+      "config": "bug_fixes=true\n",
+      "exit_status": 0,
+      "word": "a0640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "cli-true-overrides-false",
+      "flags": [
+        "--config",
+        "<workspace>\\work\\default-fixes-executable-checks\\cli-true-overrides-false\\settings.toml",
+        "--bug-fixes=true",
+        "-i"
+      ],
+      "config": "bug_fixes=false\n",
+      "exit_status": 0,
+      "word": "a8640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "automatic-explicit-false",
+      "flags": [
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 0,
+      "word": "a0640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "no-config-skips-false",
+      "flags": [
+        "--no-config",
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 0,
+      "word": "a8640000",
+      "diagnostic": "",
+      "passed": true
+    },
+    {
+      "name": "target-still-restricted",
+      "flags": [
+        "--no-config",
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 1,
+      "word": null,
+      "diagnostic": "<workspace>\\work\\default-fixes-executable-checks\\target-still-restricted\\probe.asm:2: fsqrt is not supported by GameCube/Wii (Gekko/Broadway); non-console forms require allow_non_console_instructions=true",
+      "passed": true
+    },
+    {
+      "name": "missing-include-default-status",
+      "flags": [
+        "--no-config",
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 1,
+      "word": null,
+      "diagnostic": "<workspace>\\work\\default-fixes-executable-checks\\missing-include-default-status\\probe.asm:2: open <workspace>\\work\\default-fixes-executable-checks\\missing-include-default-status\\absent.asm: The system cannot find the file specified.",
+      "passed": true
+    },
+    {
+      "name": "unknown-instruction-default",
+      "flags": [
+        "--no-config",
+        "-i"
+      ],
+      "config": null,
+      "exit_status": 1,
+      "word": null,
+      "diagnostic": "<workspace>\\work\\default-fixes-executable-checks\\unknown-instruction-default\\probe.asm:2: unknown instruction \"garbage\"",
+      "passed": true
+    }
+  ],
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "windows_build": "passed",
+  "encoding_code_changed": false,
+  "prior_integration_validation": "0.6.0-go reports retain their original hashes; no new Dolphin or Project+ runs for this CLI/config-only change."
+}

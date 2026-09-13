@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-12",
+  "go": "go1.27.1 windows/amd64",
+  "assembler_version": "0.7.0-go",
+  "assembler_sha256": "79ed160d16b93be554c42282479e7dcc2e217b3f86384eb1731c4f5650bbbc07",
+  "default_dialect": "legacy",
+  "default_bug_fixes": true,
+  "default_allow_non_console_instructions": false,
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "windows_build": "passed",
+  "scope": "CLI/config default selection, help, documentation, tests, and executable only; encoder and library option semantics unchanged.",
+  "executable_default_checks": {
+    "passed": 12,
+    "report": "default-bug-fixes.json"
+  },
+  "toml_configuration": {
+    "report": "toml-configuration.json",
+    "result": "passed"
+  },
+  "documentation_examples": {
+    "report": "configuration-examples.json",
+    "result": "passed",
+    "source_table_runs": 76,
+    "toml_recipes": 4,
+    "executable_runs": 105,
+    "local_links_checked": 110
+  },
+  "prior_integration_validation": {
+    "assembler_version": "0.6.0-go",
+    "report": "checks-0.6.0.json",
+    "scope": "Dolphin, Project+, fuzz and cross-build evidence remains historical with its recorded executable hashes. Not rerun for this default-only change."
+  },
+  "physical_console_tested": false,
+  "project_plus_gameplay_tested": false
+}

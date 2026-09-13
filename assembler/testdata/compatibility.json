@@ -1,0 +1,405 @@
+{
+  "cpp_commit": "9115d23c65c9479e8822968786ac8eec55b7f515",
+  "cpp_sha256": "6001f3cdaa944b9e68ae36549471e62d925bd00dcc4f9d15639a67e59b7712f1",
+  "cases": [
+    {
+      "name": "immediate_010",
+      "source": "Probe\nCODE @ $80001000\n{\nli r3,010\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000043860000800000000f000000000000000"
+    },
+    {
+      "name": "data_010",
+      "source": "Probe\nword 010 @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0400100000000008f000000000000000"
+    },
+    {
+      "name": "immediate_00",
+      "source": "Probe\nCODE @ $80001000\n{\nli r3,00\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000043860000000000000f000000000000000"
+    },
+    {
+      "name": "data_00",
+      "source": "Probe\nword 00 @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0400100000000000f000000000000000"
+    },
+    {
+      "name": "immediate_077",
+      "source": "Probe\nCODE @ $80001000\n{\nli r3,077\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000043860003f00000000f000000000000000"
+    },
+    {
+      "name": "data_077",
+      "source": "Probe\nword 077 @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de040010000000003ff000000000000000"
+    },
+    {
+      "name": "immediate_0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nli r3,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000043860001000000000f000000000000000"
+    },
+    {
+      "name": "data_0x10",
+      "source": "Probe\nword 0x10 @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0400100000000010f000000000000000"
+    },
+    {
+      "name": "immediate_-010",
+      "source": "Probe\nCODE @ $80001000\n{\nli r3,-010\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000043860fff800000000f000000000000000"
+    },
+    {
+      "name": "data_-010",
+      "source": "Probe\nword -010 @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de04001000fffffff8f000000000000000"
+    },
+    {
+      "name": "alias_6 ^ 3 & 1",
+      "source": "Probe\n.alias x = 6 ^ 3 & 1\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000040000000100000000f000000000000000"
+    },
+    {
+      "name": "alias_010",
+      "source": "Probe\n.alias x = 010\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000040000000800000000f000000000000000"
+    },
+    {
+      "name": "alias_0xffffffff / 2",
+      "source": "Probe\n.alias x = 0xffffffff / 2\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000047fffffff00000000f000000000000000"
+    },
+    {
+      "name": "alias_0xffffffff % 2",
+      "source": "Probe\n.alias x = 0xffffffff % 2\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000040000000100000000f000000000000000"
+    },
+    {
+      "name": "alias_0xffffffff + 1",
+      "source": "Probe\n.alias x = 0xffffffff + 1\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000040000000000000000f000000000000000"
+    },
+    {
+      "name": "alias_0x80000000 / 2",
+      "source": "Probe\n.alias x = 0x80000000 / 2\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044000000000000000f000000000000000"
+    },
+    {
+      "name": "alias_0 - 1",
+      "source": "Probe\n.alias x = 0 - 1\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0600100000000004ffffffff00000000f000000000000000"
+    },
+    {
+      "name": "alias_0xffffffff ^ 0x80000000",
+      "source": "Probe\n.alias x = 0xffffffff ^ 0x80000000\nCODE @ $80001000\n{\nword x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000047fffffff00000000f000000000000000"
+    },
+    {
+      "name": "op_fadd r3,r4,r5",
+      "source": "Probe\nCODE @ $80001000\n{\nfadd r3,r4,r5\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0600100000000004fc64282a00000000f000000000000000"
+    },
+    {
+      "name": "op_add f3,fr4,cr5",
+      "source": "Probe\nCODE @ $80001000\n{\nadd f3,fr4,cr5\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000047c642a1400000000f000000000000000"
+    },
+    {
+      "name": "op_rlwinm r3,r4,r2,r0,r31",
+      "source": "Probe\nCODE @ $80001000\n{\nrlwinm r3,r4,r2,r0,r31\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000045483103e00000000f000000000000000"
+    },
+    {
+      "name": "op_add r010,r011,r012",
+      "source": "Probe\nCODE @ $80001000\n{\nadd r010,r011,r012\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000047d4b621400000000f000000000000000"
+    },
+    {
+      "name": "op_cmpw r2,r3,r4",
+      "source": "Probe\nCODE @ $80001000\n{\ncmpw r2,r3,r4\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000047d03200000000000f000000000000000"
+    },
+    {
+      "name": "op_psq_l r3,8(r4),r0,r2",
+      "source": "Probe\nCODE @ $80001000\n{\npsq_l r3,8(r4),r0,r2\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0600100000000004e064200800000000f000000000000000"
+    },
+    {
+      "name": "op_bc 13,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc 13,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182fff000000000f000000000000000"
+    },
+    {
+      "name": "op_bc 12,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc 12,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "op_beq -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "op_beq+ -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq+ -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182fff000000000f000000000000000"
+    },
+    {
+      "name": "op_beq- -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq- -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "op_bdnz -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044220fff000000000f000000000000000"
+    },
+    {
+      "name": "op_b 010",
+      "source": "Probe\nCODE @ $80001000\n{\nb 010\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044800000000000000f000000000000000",
+      "exception": "unresolved numeric label silently becomes a self branch in C++; Go parses an octal displacement"
+    },
+    {
+      "name": "float_NaN",
+      "source": "Probe\nfloat NaN @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de040010007ffffffff000000000000000"
+    },
+    {
+      "name": "float_-NaN",
+      "source": "Probe\nfloat -NaN @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de04001000fffffffff000000000000000"
+    },
+    {
+      "name": "float_+NaN",
+      "source": "Probe\nfloat +NaN @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de040010007ffffffff000000000000000"
+    },
+    {
+      "name": "float_nanf",
+      "source": "Probe\nfloat nanf @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de040010007ffffffff000000000000000"
+    },
+    {
+      "name": "double_NaN",
+      "source": "Probe\ndouble NaN @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000087ffffffffffffffff000000000000000"
+    },
+    {
+      "name": "double_-NaN",
+      "source": "Probe\ndouble -NaN @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0600100000000008fffffffffffffffff000000000000000"
+    },
+    {
+      "name": "double_+NaN",
+      "source": "Probe\ndouble +NaN @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000087ffffffffffffffff000000000000000"
+    },
+    {
+      "name": "double_nanf",
+      "source": "Probe\ndouble nanf @ $80001000\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000087ffffffffffffffff000000000000000"
+    },
+    {
+      "name": "branch_beq 0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq 0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182001000000000f000000000000000"
+    },
+    {
+      "name": "branch_beq -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_beq+ 0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq+ 0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2001000000000f000000000000000"
+    },
+    {
+      "name": "branch_beq+ -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq+ -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_beq- 0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq- 0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182001000000000f000000000000000"
+    },
+    {
+      "name": "branch_beq- -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbeq- -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bdnz 0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz 0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044200001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bdnz -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044220fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bdnz+ 0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz+ 0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044220001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bdnz+ -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz+ -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044200fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bdnz- 0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz- 0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044200001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bdnz- -0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbdnz- -0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044220fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc 12,2,0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc 12,2,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc 13,2,0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc 13,2,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc 12,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc 12,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc 13,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc 13,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc+ 12,2,0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc+ 12,2,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc+ 13,2,0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc+ 13,2,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441c2001000000000f000000000000000",
+      "exception": "C++ adds the hint to an already-set BO bit, changing BO beyond the prediction field"
+    },
+    {
+      "name": "branch_bc+ 12,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc+ 12,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc+ 13,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc+ 13,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441e2fff000000000f000000000000000",
+      "exception": "C++ adds the hint to an already-set BO bit, changing BO beyond the prediction field"
+    },
+    {
+      "name": "branch_bc- 12,2,0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc- 12,2,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc- 13,2,0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc- 13,2,0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2001000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc- 12,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc- 12,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de060010000000000441a2fff000000000f000000000000000"
+    },
+    {
+      "name": "branch_bc- 13,2,-0x10",
+      "source": "Probe\nCODE @ $80001000\n{\nbc- 13,2,-0x10\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000044182fff000000000f000000000000000"
+    },
+    {
+      "name": "narrow_alias_0",
+      "source": "Probe\n.alias x=0-1\nCODE @ $80001000\n{\nbyte x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de0600100000000004000000ff00000000f000000000000000"
+    },
+    {
+      "name": "narrow_alias_2",
+      "source": "Probe\n.alias x=0-128\nCODE @ $80001000\n{\nbyte x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000040000008000000000f000000000000000"
+    },
+    {
+      "name": "narrow_alias_3",
+      "source": "Probe\n.alias x=0-32768\nCODE @ $80001000\n{\nhalf x\n}\n",
+      "exit_code": 0,
+      "gct_hex": "00d0c0de00d0c0de06001000000000040000800000000000f000000000000000"
+    }
+  ]
+}

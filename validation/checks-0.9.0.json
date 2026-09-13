@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-12",
+  "go": "go1.27.1 windows/amd64",
+  "assembler_version": "0.9.0-go",
+  "assembler_sha256": "52039b4ab6bd45e955f4fa44ee2303444accf96bb7187d1114057e05c5ae44ea",
+  "default_dialect": "legacy",
+  "default_bug_fixes": true,
+  "default_extensions": {
+    "dot_op": true,
+    "branch_expressions": false,
+    "allow_non_console_instructions": false
+  },
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "windows_build": "passed",
+  "scope": "Grouped extension configuration and independently selected numeric branch syntax; no new Dolphin or Project+ runs.",
+  "toml_configuration": {
+    "report": "toml-configuration.json",
+    "result": "passed"
+  },
+  "extension_checks": {
+    "report": "extensions.json",
+    "result": "passed",
+    "executable_smoke_checks": 14,
+    "documented_toml_blocks": 9
+  },
+  "documentation_examples": {
+    "report": "configuration-examples.json",
+    "result": "passed",
+    "source_table_runs": 76,
+    "toml_recipes": 6,
+    "executable_runs": 107,
+    "local_links_checked": 123
+  },
+  "prior_cli_validation": {
+    "assembler_version": "0.8.0-go",
+    "report": "checks-0.8.0.json"
+  },
+  "prior_integration_validation": {
+    "assembler_version": "0.6.0-go",
+    "report": "checks-0.6.0.json",
+    "scope": "Historical Dolphin, Project+, fuzz and cross-build evidence retains its recorded executable hashes; not rerun for the extension configuration change."
+  },
+  "physical_console_tested": false,
+  "project_plus_gameplay_tested": false
+}

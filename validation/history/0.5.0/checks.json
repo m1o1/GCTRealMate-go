@@ -1,0 +1,152 @@
+{
+  "date": "2026-09-12",
+  "go": "go1.27.1 windows/amd64",
+  "assembler_version": "0.5.0-go",
+  "assembler_sha256": "85f758066a61d13934e3e3c8ea1cb19f99adb2bcfde9941436d0d6a9d1e5d55d",
+  "default_dialect": "legacy",
+  "unit_regression_suite": "passed",
+  "go_vet": "passed",
+  "cpp_compatibility": {
+    "bug_fixes": false,
+    "instruction_words": 327,
+    "source_cases": 66,
+    "source_exact_matches": 66,
+    "complete_gct_fixtures": 2,
+    "defect_probe_outcomes": 57,
+    "cli_cases": 3,
+    "additional_source_text_log_captures": 7,
+    "native_failure_policy": "bounded error and no GCT; do not reproduce crashes, hangs or native process status codes"
+  },
+  "retained_audit_cases": {
+    "cases": 57,
+    "dialects": [
+      "legacy",
+      "modern"
+    ],
+    "result": "passed",
+    "bug_fixes": true
+  },
+  "gnu_matching_vectors": 14749,
+  "gnu_exact_dialect": "modern",
+  "gnu_additional_hint_vectors": 2,
+  "gnu_legacy_comparison": "14749 vectors; prediction bit excluded only on backward conditional branches, covered separately by C++ captures",
+  "gnu_targets": [
+    "gekko",
+    "broadway"
+  ],
+  "gnu_rejected_candidates_per_target": 500,
+  "independent_inventory": {
+    "covered_names": 236,
+    "unsupported": [
+      "dcba"
+    ],
+    "bug_fixes": true
+  },
+  "dolphin_passing_checks": {
+    "gamecube-interpreter": 47,
+    "gamecube-jit": 47,
+    "wii-interpreter": 62,
+    "wii-jit": 62
+  },
+  "dolphin_total": 218,
+  "dolphin_dialect": "legacy",
+  "fuzz": [
+    {
+      "target": "FuzzEncode",
+      "requested_seconds": 15,
+      "workers": 2,
+      "executions": 458456,
+      "result": "passed",
+      "bug_fixes": [
+        false,
+        true
+      ],
+      "dialects": [
+        "legacy",
+        "modern"
+      ]
+    },
+    {
+      "target": "FuzzAssemble",
+      "requested_seconds": 15,
+      "workers": 2,
+      "executions": 379980,
+      "result": "passed",
+      "bug_fixes": [
+        false,
+        true
+      ],
+      "dialects": [
+        "legacy",
+        "modern"
+      ]
+    }
+  ],
+  "cross_builds": {
+    "linux/amd64": "passed; not executed",
+    "darwin/arm64": "passed; not executed"
+  },
+  "project_plus": {
+    "compatibility": {
+      "bug_fixes": false,
+      "unmodified_exact_matches": 6,
+      "adapted_exact_matches": 6,
+      "source_unchanged": true,
+      "report": "project-plus-compatibility.json"
+    },
+    "corrected": {
+      "bug_fixes": true,
+      "unmodified_go_builds": 2,
+      "unmodified_go_diagnostics": 4,
+      "adapted_entrypoints": 6,
+      "differing_words": 84,
+      "unexplained_differences": 0,
+      "source_unchanged": true,
+      "report": "project-plus.json"
+    },
+    "bundled_reference": {
+      "unmodified_exact_matches": 6,
+      "source_unchanged": true,
+      "bug_fixes": false,
+      "reference_sha256": "05ec46d81d7598e5b011ac2eaef7a2fadfb904b7bb95aec1db8ce75ba94d412a",
+      "report": "project-plus-bundled.json",
+      "adapted_exact_matches": 6
+    }
+  },
+  "physical_console_tested": false,
+  "project_plus_gameplay_tested": false,
+  "toml_configuration": {
+    "schema_version": 1,
+    "source_switches": 8,
+    "cli_switches": 3,
+    "source_combinations_checked": 256,
+    "cli_combinations_checked": 8,
+    "individual_source_switch_cli_checks": 16,
+    "cases": "precedence, missing/invalid config, explicit false, unknown/duplicate keys, file selection, output preservation, per-call isolation, full example, mixed executable output",
+    "module": "github.com/pelletier/go-toml/v2@v2.4.3",
+    "go_mod_verify": "passed",
+    "bug_fixes_default": false,
+    "bug_fixes_switches": 1,
+    "source_combinations_bug_fixes": true,
+    "independent_fix_preset_override_combinations": 18,
+    "bug_fixes_cases": "empty/default/template configs, true/false/schema errors, CLI and INI precedence, persistence and independence from dialect, missing include exit status"
+  },
+  "default_bug_fixes": false,
+  "historical_validation": "checks-0.4.0.json records prior coverage and fuzz runs; not current-version measurements",
+  "gnu_bug_fixes": true,
+  "dolphin_bug_fixes": true,
+  "fuzz_scope_note": "Campaigns ran after compatibility implementation; subsequent change only adjusted odd-word Result.Text final newlines and added its independent capture test. Existing validation/fuzz-*.txt logs belong to the prior 0.4.0 runs.",
+  "documentation_examples": {
+    "local_links_checked": 92,
+    "result": "passed",
+    "source_table_runs": 76,
+    "toml_recipes": 4,
+    "executable_runs": 105,
+    "report": "configuration-examples.json"
+  },
+  "cli_example": {
+    "result": "passed",
+    "bug_fixes": true,
+    "bytes": 88
+  }
+}
